@@ -4,30 +4,11 @@
   
     
     <entry>
-      <title>第三篇文章</title>
-      <link href="/2023/11/23/%E7%AC%AC%E4%B8%89%E7%AF%87%E6%96%87%E7%AB%A0/"/>
-      <url>/2023/11/23/%E7%AC%AC%E4%B8%89%E7%AF%87%E6%96%87%E7%AB%A0/</url>
+      <title>Mind思维</title>
+      <link href="/2023/11/23/Mind-1/"/>
+      <url>/2023/11/23/Mind-1/</url>
       
-        <content type="html"><![CDATA[<h1 id="第三篇文章"><a href="#第三篇文章" class="headerlink" title="第三篇文章"></a>第三篇文章</h1><p>这是我的第三篇文章！！</p><p><img src="https://ooo.0x0.ooo/2023/11/23/OrrhpG.jpg"></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> hexo.github </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>第二篇文章</title>
-      <link href="/2023/11/23/%E7%AC%AC%E4%BA%8C%E7%AF%87%E6%96%87%E7%AB%A0/"/>
-      <url>/2023/11/23/%E7%AC%AC%E4%BA%8C%E7%AF%87%E6%96%87%E7%AB%A0/</url>
-      
-        <content type="html"><![CDATA[<h1 id="第二篇文章"><a href="#第二篇文章" class="headerlink" title="第二篇文章"></a>第二篇文章</h1><p>这是我的第二篇文章！！</p><p><img src="https://ooo.0x0.ooo/2023/11/23/Orrx8r.jpg"></p>]]></content>
+        <content type="html"><![CDATA[<p>进行每日的思维总结！</p><p><img src="https://ooo.0x0.ooo/2023/11/23/OrrR0S.webp"></p>]]></content>
       
       
       <categories>
@@ -42,16 +23,73 @@
     
     
     <entry>
-      <title>第一篇文章</title>
-      <link href="/2023/11/23/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/"/>
-      <url>/2023/11/23/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
+      <title>Java基础</title>
+      <link href="/2023/11/23/Java-1/"/>
+      <url>/2023/11/23/Java-1/</url>
       
-        <content type="html"><![CDATA[<p>这是我的第一篇文章！！</p><p><img src="https://ooo.0x0.ooo/2023/11/23/OrrkDc.jpg"></p>]]></content>
+        <content type="html"><![CDATA[<p>这个文章帮你把所有的java规范再复习一遍。</p><p><img src="https://ooo.0x0.ooo/2023/11/23/Orr4MN.png"></p>]]></content>
       
       
       <categories>
           
-          <category> hexo.github </category>
+          <category> java </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Window10延长更新</title>
+      <link href="/2023/11/23/Win10-1/"/>
+      <url>/2023/11/23/Win10-1/</url>
+      
+        <content type="html"><![CDATA[<p>今天教你如何把更新时间推迟到2099年！外星人来了都不更新！！</p><p><img src="https://ooo.0x0.ooo/2023/11/23/OrrhpG.jpg"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> win10 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Html基础标签</title>
+      <link href="/2023/11/23/Html-1/"/>
+      <url>/2023/11/23/Html-1/</url>
+      
+        <content type="html"><![CDATA[<p>这个文章帮你回顾以下所有的基础标签。</p><p><img src="https://ooo.0x0.ooo/2023/11/23/Orrx8r.jpg"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> html </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Linux基础</title>
+      <link href="/2023/11/23/Linux-1/"/>
+      <url>/2023/11/23/Linux-1/</url>
+      
+        <content type="html"><![CDATA[<p>此文章是关于Linux基础的一些要点</p><p><img src="https://ooo.0x0.ooo/2023/11/23/OrrkDc.jpg"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
           
       </categories>
       
@@ -111,6 +149,39 @@
       <title>tags</title>
       <link href="/tags/index.html"/>
       <url>/tags/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/css/custom.css"/>
+      <url>/css/custom.css</url>
+      
+        <content type="html"><![CDATA[/* 页脚与头图透明 */#footer {  background: transparent !important;}#page-header {  background: transparent !important;}/* 白天模式遮罩透明 */#footer::before {  background: transparent !important;}#page-header::before {  background: transparent !important;}/* 夜间模式遮罩透明 */[data-theme="dark"] #footer::before {  background: transparent !important;}[data-theme="dark"] #page-header::before {  background: transparent !important;}]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/js/runtime.js"/>
+      <url>/js/runtime.js</url>
+      
+        <content type="html"><![CDATA[var now=new Date;function createtime(){now.setTime(now.getTime()+1e3);var e=new Date("11/23/2023 00:10:00"),t=Math.trunc(234e8+(now-e)/1e3*17),a=(t/1496e5).toFixed(6),o=new Date("11/23/2023 00:10:00"),n=(now-o)/1e3/60/60/24,r=Math.floor(n),i=(now-o)/1e3/60/60-24*r,s=Math.floor(i);1==String(s).length&&(s="0"+s);var d=(now-o)/1e3/60-1440*r-60*s,l=Math.floor(d);1==String(l).length&&(l="0"+l);var g=(now-o)/1e3-86400*r-3600*s-60*l,b=Math.round(g);1==String(b).length&&(b="0"+b);let c="";c=s<18&&s>=9?`<img class='boardsign' src='https://sourcebucket.s3.ladydaily.com/badge/F小屋-科研摸鱼中.svg' title='什么时候能够实现财富自由呀~'><br> <div style="font-size:13px;font-weight:bold">本站居然运行了 ${r} 天 ${s} 小时 ${l} 分 ${b} 秒 <i id="heartbeat" class='fas fa-heartbeat'></i> <br> 旅行者 1 号当前距离地球 ${t} 千米，约为 ${a} 个天文单位 🚀</div>`:`<img class='boardsign' src='https://sourcebucket.s3.ladydaily.com/badge/F小屋-下班休息啦.svg' title='下班了就该开开心心地玩耍~'><br> <div style="font-size:13px;font-weight:bold">本站居然运行了 ${r} 天 ${s} 小时 ${l} 分 ${b} 秒 <i id="heartbeat" class='fas fa-heartbeat'></i> <br> 旅行者 1 号当前距离地球 ${t} 千米，约为 ${a} 个天文单位 🚀</div>`,document.getElementById("workboard")&&(document.getElementById("workboard").innerHTML=c)}setInterval((()=>{createtime()}),1e3);]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>categories</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
