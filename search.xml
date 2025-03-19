@@ -20,6 +20,71 @@
 ]]></content>
   </entry>
   <entry>
+    <title>外挂标签演示</title>
+    <url>/2025/02/28/%E5%A4%96%E6%8C%82%E6%A0%87%E7%AD%BE%E6%BC%94%E7%A4%BA/</url>
+    <content><![CDATA[<h2 id="外挂标签">外挂标签</h2>
+<p>Butterfly 主题是 Hexo 中非常受欢迎的一款主题，支持丰富的自定义功能，尤其是通过外挂标签（Tag Plugins）可以实现更多样化的内容展示效果。以下是关于 Butterfly 外挂标签的详细教程，涵盖基本概念、使用方法以及一些实用示例。</p>
+<hr>
+<h2 id="Butterfly-外挂标签简介">Butterfly 外挂标签简介</h2>
+<p>外挂标签是 Butterfly 主题提供的一种扩展功能，允许用户在 Markdown 文件中通过特定的语法插入自定义内容，例如彩色文字、提示框、超链接卡片等。这些标签通过简单的语法即可实现复杂的样式效果，非常适合美化博客内容。</p>
+<hr>
+<h2 id="外挂标签的基本使用方法">外挂标签的基本使用方法</h2>
+<h3 id="1-标签语法">1. 标签语法</h3>
+<p>Butterfly 外挂标签的基本语法格式为：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% 标签名 参数 %&#125;</span><br><span class="line">内容</span><br><span class="line">&#123;% end标签名 %&#125;</span><br></pre></td></tr></table></figure>
+<p>部分标签不需要 <code>end</code> 结束符，具体取决于标签的定义。</p>
+<h3 id="2-常用标签示例">2. 常用标签示例</h3>
+<p>以下是一些常用的外挂标签及其效果：</p>
+<h4 id="（1）行内文本样式">（1）行内文本样式</h4>
+<ul>
+<li><strong>下划线</strong>：<u>文本内容</u></li>
+<li><strong>着重号</strong>：<emp>文本内容</emp></li>
+<li><strong>波浪线</strong>：<wavy>文本内容</wavy></li>
+<li><strong>删除线</strong>：<del>文本内容</del></li>
+<li><strong>键盘样式</strong>：<kbd>文本内容</kbd></li>
+<li><strong>密码样式</strong>：<psw>文本内容</psw></li>
+</ul>
+<h4 id="（2）彩色文字">（2）彩色文字</h4>
+<p>使用 <code>span</code> 标签可以实现彩色文字效果：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% span 颜色, 文本内容 %&#125;</span><br></pre></td></tr></table></figure>
+<p>支持的颜色参数：<code>red</code>、<code>yellow</code>、<code>green</code>、<code>cyan</code>、<code>blue</code>、<code>gray</code> 等。</p>
+<p>示例：</p>
+<p>彩色文字：<span class='p red'>红色</span>、<span class='p yellow'>黄色</span>、<span class='p green'>绿色</span></p>
+<p>超大号文字：<span class='p center logo large'>Volantis</span></p>
+<h4 id="（3）提示框（Note）">（3）提示框（Note）</h4>
+<p>Butterfly 提供了多种样式的提示框，可以通过 <code>note</code> 标签实现：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note [class] [no-icon] [style] %&#125;</span><br><span class="line">提示内容</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>class</code>：可选参数，支持 <code>default</code>、<code>primary</code>、<code>success</code>、<code>info</code>、<code>warning</code>、<code>danger</code> 等样式。</li>
+<li><code>no-icon</code>：可选参数，隐藏图标。</li>
+<li><code>style</code>：可选参数，支持 <code>simple</code>、<code>modern</code>、<code>flat</code> 等样式。</li>
+</ul>
+<p>示例：</p>
+<div class="note success"><p>这是一个成功的提示框！</p>
+</div>
+<h4 id="（4）超链接卡片">（4）超链接卡片</h4>
+<p>通过自定义标签可以实现超链接卡片效果，显示网站的 Favicon 和标题：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% link 标题, 网站名, 链接 %&#125;</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<div class="tag link"><a class="link-card" title="获取网站的Favicon图标并显示在你的网页上" href="owen0o0"><div class="left"><img src="https://github.com/owen0o0/getFavicon"/></div><div class="right"><p class="text">获取网站的Favicon图标并显示在你的网页上</p><p class="url">owen0o0</p></div></a></div>
+<hr>
+<h2 id="自定义外挂标签">自定义外挂标签</h2>
+<p>如果默认的标签无法满足需求，可以通过自定义标签实现更多功能。以下是自定义标签的基本步骤：</p>
+<h3 id="1-创建标签脚本">1. 创建标签脚本</h3>
+<p>在 <code>themes/butterfly/scripts/tag/</code> 目录下新建一个 JavaScript 文件，例如 <code>link.js</code>，并编写标签逻辑：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">link</span>(<span class="params">args</span>) &#123;</span><br><span class="line">    args = args.<span class="title function_">join</span>(<span class="string">&#x27; &#x27;</span>).<span class="title function_">split</span>(<span class="string">&#x27;,&#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> title = args[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">let</span> sitename = args[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">let</span> link = args[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">let</span> imgUrl = <span class="string">&quot;https://api.iowen.cn/favicon/&quot;</span> + link.<span class="title function_">replace</span>(<span class="regexp">/^https?\:\/\//i</span>, <span class="string">&quot;&quot;</span>) + <span class="string">&quot;.png&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`&lt;a class=&quot;tag-Link&quot; target=&quot;_blank&quot; href=&quot;<span class="subst">$&#123;link&#125;</span>&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;div class=&quot;tag-link-tips&quot;&gt;引用站外地址&lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;div class=&quot;tag-link-bottom&quot;&gt;</span></span><br><span class="line"><span class="string">            &lt;div class=&quot;tag-link-left&quot; style=&quot;background-image: url(<span class="subst">$&#123;imgUrl&#125;</span>);&quot;&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;div class=&quot;tag-link-right&quot;&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&quot;tag-link-title&quot;&gt;<span class="subst">$&#123;title&#125;</span>&lt;/div&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&quot;tag-link-sitename&quot;&gt;<span class="subst">$&#123;sitename&#125;</span>&lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;/a&gt;`</span>;</span><br><span class="line">&#125;</span><br><span class="line">hexo.<span class="property">extend</span>.<span class="property">tag</span>.<span class="title function_">register</span>(<span class="string">&#x27;link&#x27;</span>, link, &#123; <span class="attr">ends</span>: <span class="literal">false</span> &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="2-添加-CSS-样式">2. 添加 CSS 样式</h3>
+<p>在 <code>themes/butterfly/source/css/</code> 目录下新建 CSS 文件，例如 <code>tag-link.css</code>，并编写样式：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.tag-Link</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ddd</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">text-decoration</span>: none;</span><br><span class="line">    <span class="attribute">color</span>: inherit;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-bottom</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-left</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">background-size</span>: cover;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-right</span> &#123;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-引用-CSS-文件">3. 引用 CSS 文件</h3>
+<p>在主题配置文件 <code>_config.butterfly.yml</code> 中引用 CSS 文件：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">inject:</span></span><br><span class="line">  <span class="attr">head:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&lt;link</span> <span class="string">rel=&quot;stylesheet&quot;</span> <span class="string">href=&quot;/css/tag-link.css&quot;&gt;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>butterfly</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>英语听力测试1</title>
     <url>/2025/03/05/%E8%8B%B1%E8%AF%AD%E5%90%AC%E5%8A%9B%E6%B5%8B%E8%AF%951/</url>
     <content><![CDATA[<h2 id="听力技巧">听力技巧</h2>
@@ -133,71 +198,6 @@ D. the elephant was given medical treatment for many days.</p>
 ]]></content>
       <tags>
         <tag>英语</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>外挂标签演示</title>
-    <url>/2025/02/28/%E5%A4%96%E6%8C%82%E6%A0%87%E7%AD%BE%E6%BC%94%E7%A4%BA/</url>
-    <content><![CDATA[<h2 id="外挂标签">外挂标签</h2>
-<p>Butterfly 主题是 Hexo 中非常受欢迎的一款主题，支持丰富的自定义功能，尤其是通过外挂标签（Tag Plugins）可以实现更多样化的内容展示效果。以下是关于 Butterfly 外挂标签的详细教程，涵盖基本概念、使用方法以及一些实用示例。</p>
-<hr>
-<h2 id="Butterfly-外挂标签简介">Butterfly 外挂标签简介</h2>
-<p>外挂标签是 Butterfly 主题提供的一种扩展功能，允许用户在 Markdown 文件中通过特定的语法插入自定义内容，例如彩色文字、提示框、超链接卡片等。这些标签通过简单的语法即可实现复杂的样式效果，非常适合美化博客内容。</p>
-<hr>
-<h2 id="外挂标签的基本使用方法">外挂标签的基本使用方法</h2>
-<h3 id="1-标签语法">1. 标签语法</h3>
-<p>Butterfly 外挂标签的基本语法格式为：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% 标签名 参数 %&#125;</span><br><span class="line">内容</span><br><span class="line">&#123;% end标签名 %&#125;</span><br></pre></td></tr></table></figure>
-<p>部分标签不需要 <code>end</code> 结束符，具体取决于标签的定义。</p>
-<h3 id="2-常用标签示例">2. 常用标签示例</h3>
-<p>以下是一些常用的外挂标签及其效果：</p>
-<h4 id="（1）行内文本样式">（1）行内文本样式</h4>
-<ul>
-<li><strong>下划线</strong>：<u>文本内容</u></li>
-<li><strong>着重号</strong>：<emp>文本内容</emp></li>
-<li><strong>波浪线</strong>：<wavy>文本内容</wavy></li>
-<li><strong>删除线</strong>：<del>文本内容</del></li>
-<li><strong>键盘样式</strong>：<kbd>文本内容</kbd></li>
-<li><strong>密码样式</strong>：<psw>文本内容</psw></li>
-</ul>
-<h4 id="（2）彩色文字">（2）彩色文字</h4>
-<p>使用 <code>span</code> 标签可以实现彩色文字效果：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% span 颜色, 文本内容 %&#125;</span><br></pre></td></tr></table></figure>
-<p>支持的颜色参数：<code>red</code>、<code>yellow</code>、<code>green</code>、<code>cyan</code>、<code>blue</code>、<code>gray</code> 等。</p>
-<p>示例：</p>
-<p>彩色文字：<span class='p red'>红色</span>、<span class='p yellow'>黄色</span>、<span class='p green'>绿色</span></p>
-<p>超大号文字：<span class='p center logo large'>Volantis</span></p>
-<h4 id="（3）提示框（Note）">（3）提示框（Note）</h4>
-<p>Butterfly 提供了多种样式的提示框，可以通过 <code>note</code> 标签实现：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note [class] [no-icon] [style] %&#125;</span><br><span class="line">提示内容</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>class</code>：可选参数，支持 <code>default</code>、<code>primary</code>、<code>success</code>、<code>info</code>、<code>warning</code>、<code>danger</code> 等样式。</li>
-<li><code>no-icon</code>：可选参数，隐藏图标。</li>
-<li><code>style</code>：可选参数，支持 <code>simple</code>、<code>modern</code>、<code>flat</code> 等样式。</li>
-</ul>
-<p>示例：</p>
-<div class="note success"><p>这是一个成功的提示框！</p>
-</div>
-<h4 id="（4）超链接卡片">（4）超链接卡片</h4>
-<p>通过自定义标签可以实现超链接卡片效果，显示网站的 Favicon 和标题：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% link 标题, 网站名, 链接 %&#125;</span><br></pre></td></tr></table></figure>
-<p>示例：</p>
-<div class="tag link"><a class="link-card" title="获取网站的Favicon图标并显示在你的网页上" href="owen0o0"><div class="left"><img src="https://github.com/owen0o0/getFavicon"/></div><div class="right"><p class="text">获取网站的Favicon图标并显示在你的网页上</p><p class="url">owen0o0</p></div></a></div>
-<hr>
-<h2 id="自定义外挂标签">自定义外挂标签</h2>
-<p>如果默认的标签无法满足需求，可以通过自定义标签实现更多功能。以下是自定义标签的基本步骤：</p>
-<h3 id="1-创建标签脚本">1. 创建标签脚本</h3>
-<p>在 <code>themes/butterfly/scripts/tag/</code> 目录下新建一个 JavaScript 文件，例如 <code>link.js</code>，并编写标签逻辑：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">link</span>(<span class="params">args</span>) &#123;</span><br><span class="line">    args = args.<span class="title function_">join</span>(<span class="string">&#x27; &#x27;</span>).<span class="title function_">split</span>(<span class="string">&#x27;,&#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> title = args[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">let</span> sitename = args[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">let</span> link = args[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">let</span> imgUrl = <span class="string">&quot;https://api.iowen.cn/favicon/&quot;</span> + link.<span class="title function_">replace</span>(<span class="regexp">/^https?\:\/\//i</span>, <span class="string">&quot;&quot;</span>) + <span class="string">&quot;.png&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`&lt;a class=&quot;tag-Link&quot; target=&quot;_blank&quot; href=&quot;<span class="subst">$&#123;link&#125;</span>&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;div class=&quot;tag-link-tips&quot;&gt;引用站外地址&lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;div class=&quot;tag-link-bottom&quot;&gt;</span></span><br><span class="line"><span class="string">            &lt;div class=&quot;tag-link-left&quot; style=&quot;background-image: url(<span class="subst">$&#123;imgUrl&#125;</span>);&quot;&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;div class=&quot;tag-link-right&quot;&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&quot;tag-link-title&quot;&gt;<span class="subst">$&#123;title&#125;</span>&lt;/div&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&quot;tag-link-sitename&quot;&gt;<span class="subst">$&#123;sitename&#125;</span>&lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;/a&gt;`</span>;</span><br><span class="line">&#125;</span><br><span class="line">hexo.<span class="property">extend</span>.<span class="property">tag</span>.<span class="title function_">register</span>(<span class="string">&#x27;link&#x27;</span>, link, &#123; <span class="attr">ends</span>: <span class="literal">false</span> &#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="2-添加-CSS-样式">2. 添加 CSS 样式</h3>
-<p>在 <code>themes/butterfly/source/css/</code> 目录下新建 CSS 文件，例如 <code>tag-link.css</code>，并编写样式：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.tag-Link</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ddd</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">text-decoration</span>: none;</span><br><span class="line">    <span class="attribute">color</span>: inherit;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-bottom</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-left</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">background-size</span>: cover;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-right</span> &#123;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="3-引用-CSS-文件">3. 引用 CSS 文件</h3>
-<p>在主题配置文件 <code>_config.butterfly.yml</code> 中引用 CSS 文件：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">inject:</span></span><br><span class="line">  <span class="attr">head:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&lt;link</span> <span class="string">rel=&quot;stylesheet&quot;</span> <span class="string">href=&quot;/css/tag-link.css&quot;&gt;</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>butterfly</tag>
       </tags>
   </entry>
   <entry>
@@ -477,6 +477,170 @@ D. They might be less adversely impacted by failure to achieve a purpose.</p>
   <source src="https://img.zero02.space/6level007.m4a" type="audio/mpeg">
   您的浏览器不支持音频播放。
 </audio>]]></content>
+      <tags>
+        <tag>英语</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>英语词汇文章1~3</title>
+    <url>/2025/02/19/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A01/</url>
+    <content><![CDATA[<h2 id="Passage-1">Passage 1</h2>
+<blockquote>
+<p>According to the World Health Organization, over a billion adults around the world suffer from high blood pressure. It is now taking steps to fight against what is called a silent killer. High blood pressure can lead to strokes and a heart attack.</p>
+</blockquote>
+<p>over = more than</p>
+<p>billion - million - trillion</p>
+<p>high blood pressure - hypertension</p>
+<p>taking steps to - take measures to</p>
+<p>what is called</p>
+<p>attack - defend</p>
+<blockquote>
+<p>Almost 10 million people die of these two disease every year. They are the number one causes of death globally. High blood pressure also leads to kidney failure. blindness and other illnesses. it often <strong>goes hand in hand with</strong> diabetes and obesity, which increase health risks even further.</p>
+</blockquote>
+<p>Almost - nearly</p>
+<p>disease - illness - sickness</p>
+<p>cancer - tumor - plague - pandemic - epidemic</p>
+<p>kidney - lung - heart - guts - liver - spleen</p>
+<p>go hand in hand with - has a close relationship with</p>
+<p>obesity - fat - fatty</p>
+<blockquote>
+<p>As the WHO reports, people in developing countries in Africa suffer more from high blood pressure than people in developed countries. The <strong>reason</strong> is that health care in the developed world is much better organized and people go to the doctor soon enough.</p>
+</blockquote>
+<p>cause - reason</p>
+<blockquote>
+<p>High blood pressure should never be <strong>ignored</strong> and always taken <strong>seriously</strong>. It is a warning sign from your body that something is not OK. Although people may live with high blood pressure for years without even knowing it, it is important to check your blood pressure regularly and take the necessary steps.</p>
+</blockquote>
+<p>ignore - neglect</p>
+<p>serious - seriously</p>
+<p>Although - while - Even though - despite - in spite of</p>
+<blockquote>
+<p>The WHO says that you can reduce your blood pressure by changing your living habits. Eating a balanced diet, exercising regularly, avoiding alcohol and <strong>nicotine</strong> are some things that you can do without consulting a doctor.</p>
+</blockquote>
+<p>nicotine - cigar - cigarette - tobacco - vaping</p>
+<h2 id="Passage-2">Passage 2</h2>
+<p><strong>Malnutrition is a disorder of your food intake.</strong></p>
+<blockquote>
+<p>It occurs when a person eat too little or too much, or has an unbalanced diet. In most cases <strong>malnutrition</strong> means <strong>undernourishment</strong>, a lack of food and not enough calories. It is widespread in developing countries.</p>
+</blockquote>
+<p>occur = happen</p>
+<p>malnutrition = undernourishment</p>
+<blockquote>
+<p>On the other side obesity occurs in developed countries where people eat too much. According to the World Health Organization malnutrition is one of the greatest dangers of global health. Currently, about one billion people around the world do not have enough to eat.</p>
+</blockquote>
+<p>Currently - today - nowadays - these days - at present</p>
+<p><strong>When does malnutrition occur</strong></p>
+<blockquote>
+<p>Malnutrition happen when people lack nutrients, vitamins and minerals. Not enough proteins can have negative effects on a person’s growth and lead to physical problems. Vitamins are important for good health and the <strong>functioning</strong> of your body. A lack of them can cause major problems。 Vitamin A deficiency may lead to eye problem and blindness. A lack of <strong>calcium</strong> leads to a bad growth of bones and teeth. Iron deficiency can affect the brain and lead to a low IQ rate. It can make children less active and not able to concentrate.</p>
+</blockquote>
+<p>negative - pessimistic</p>
+<p>positive - optimistic</p>
+<p>physical - physics - physician - surgeon</p>
+<p>functioning 功能 运转</p>
+<p>affect - effect</p>
+<p>concentrate = focus</p>
+<blockquote>
+<p>Malnutrition increases the risk of diseases and weakens the immune system. It affects the <strong>transmission</strong> of viruses. including HIV. it is especially widespread among women,  children and older people. Children can be at risk even before birth because they <strong>depend on</strong> the mother’s nutrition.</p>
+</blockquote>
+<p>transmission = spread</p>
+<p>depend on = rely on - dependence = reliance</p>
+<p>dependent - independent - independence</p>
+<p>One in ten people around the world is malnourished. Eating disorders <strong>account for</strong> 60 million deaths a year, including six million children. It is the main cause of child mortality.</p>
+<p>one in ten = one tenths</p>
+<p>account for 导致 占比 …是…解释 …是…原因</p>
+<p>mortal - mortality - immortal</p>
+<p><strong>Causes of malnutrition</strong></p>
+<blockquote>
+<p>One of the major causes of malnutrition in developing countries is <strong>famine</strong> and drought which lead to the unavailability of food. Many countries in the Third World to not have enough land to grow food on or do not know how to use it. They do not have the money to <strong>afford</strong> <strong>imported</strong> food. In other countries the government neglects the importance of <strong>agriculture</strong> and does not help farmers.</p>
+</blockquote>
+<p>famine 饥荒</p>
+<p>afford - affordable</p>
+<p>import - export</p>
+<p>agriculture 农业</p>
+<blockquote>
+<p>In places with a lack of or dirty drinking water diseases, like diarrhea, lead to <strong>indigestion</strong> of food. Digestive disorders may also be causes of malnutrition. People eat properly but their body cannot digest the food. In the Third World many mothers do not <strong>breastfeed</strong> their children, thus weakening the immune system.</p>
+</blockquote>
+<p>diarrhea 痢疾</p>
+<p>indigestion 消化不良</p>
+<p>breastfeed 母乳</p>
+<p><strong>sign of malnutrition</strong></p>
+<ul>
+<li>tiredness and not enough energy</li>
+<li>decaying teeth</li>
+<li>poor growth</li>
+<li>weight loss</li>
+<li><strong>fragile</strong> bones that break easily</li>
+<li>weakening of muscles</li>
+<li>diarrhea</li>
+<li>dizziness</li>
+</ul>
+<hr>
+<p>fragile - vulnerable - delicate</p>
+<p>dizziness - dizzy</p>
+<p><strong>Depression Obesity</strong></p>
+<blockquote>
+<p>In developed countries obesity is the most widespread form of malnutrition. Obese people consume more calories than they need. This may lead to diabetes and contribute to heat problems and high blood pressure. Too many fats in your diet an lead to high <strong>cholesterol</strong> levels.</p>
+</blockquote>
+<p>Obese = too fat</p>
+<p>consume - consumer - consumption</p>
+<p>cholesterol 胆固醇</p>
+<p><strong>Solution and Treatment</strong></p>
+<blockquote>
+<p>One way to help avoid malnutrition is to <strong>enrich</strong> food with vitamins. For example, milk is <strong>enriched</strong> with Vitamin D. In Third World Countries schools must try to teach children the right eating habits and <strong>emphasize</strong> vegetables and fruit. Governments and other institutions must do their part in educating the population to eat the right things. The World Health Organization and other groups try to help the poorest of these countries with <strong>financial</strong> aid and other support.</p>
+</blockquote>
+<p>enrich 丰富，富有</p>
+<p>emphasize = stress 强调，重点</p>
+<p>financial 财务</p>
+<p>aid = assistance</p>
+<h2 id="Passage-3">Passage 3</h2>
+<p><strong><a href="http://Amazon.com">Amazon.com</a> - The World’s largest Internet Company</strong></p>
+<blockquote>
+<p><a href="http://Amazon.com">Amazon.com</a> is the world’s largest Internet company. It <strong>started out</strong> as an online bookstore in the middle of the 1990s and grew gradually over the years. Today Amazon sells almost everything <u><em>from</em> CDs and DVDs <em>to</em></u> <strong>sportswear</strong> and electrical appliances. The company also produces its own tablets and <strong>e-readers</strong> and lets users upload their own photos and other files to the Amazon-based cloud.</p>
+</blockquote>
+<p>started out 开创，起家</p>
+<p>gradually - eventually</p>
+<p>from … to</p>
+<p>e-reader -&gt; electric reader</p>
+<p>sportswear 运动服</p>
+<blockquote>
+<p>Amazon offers its services all over the world. It <strong>operates</strong> its own websites in the UK. Germany, China, Australia, as well as many South American and Asian countries.</p>
+</blockquote>
+<p>operate - operation - operator</p>
+<blockquote>
+<p><a href="http://Amazon.com">Amazon.com</a> <strong>was founded by</strong> by Jeff Bezos in 1994, It first operated out of a small garage in Washington state. Within a year Amazon offered hundreds of thousands of books. People could <u><em>not only</em> order books from an online catalogue <em>but also</em></u> write their own <strong>reviews</strong>. In 1997 <a href="http://Amazon.com">Amazon.com</a> started trading <strong>shares</strong> on the NASDAQ stock exchange. By 2000 it made over a billion dollars <strong>in sales</strong>.</p>
+</blockquote>
+<p>was founded by 创立</p>
+<p>review = comment</p>
+<p>shares 股份</p>
+<p>exchange 交易</p>
+<p>in sales 销售额</p>
+<blockquote>
+<p><strong>As time went on</strong> <a href="http://Amazon.com">Amazon.com</a> grew gradually. It bought many of its <strong>rivals</strong> and today <strong>cooperates</strong> with other companies and lets them sell their products via the Amazon website.</p>
+</blockquote>
+<p>as time went on 随着时间的推移</p>
+<p>rival 竞争者 -&gt; rivalry 竞争</p>
+<p>cooperate 合作 -&gt; coworker 同事 -&gt; colleague 同事</p>
+<blockquote>
+<p>In 2007 Amazon <strong>went a step further</strong>. It surprised the electronics world with  a revolutionary eBook reader, the Kindle, which today <strong>dominates</strong> the market. In 2011 a tablet computer followed, the Amazon Fire. In the following years the company started selling music downloads and videos <strong>on demand</strong>. Amazon customers can store everything they buy on their private cloud and download it anytime they want.</p>
+</blockquote>
+<p>went a step further 更进一步</p>
+<p>dominate 主宰，统治</p>
+<p>on demand 按需</p>
+<p>store 存储</p>
+<blockquote>
+<p>Today, <a href="http://Amazon.com">Amazon.com</a> serves 20 million customers every day. Its annual income is over 34 billion dollars. There are a number of reasons <strong>for</strong> Amazon’s success. One of them is company founder Jeff Bezos himself. <em>TIME</em> magazine’s Man of the Year of 1999 is a visionary, an ambitious businessman who is not afraid of taking risks, even if it means a <strong>downturn</strong> for the company at first. Amazon’s website tries to <strong>personalize</strong> the buying experience for its customers. It knows what you want you are interested in.</p>
+</blockquote>
+<p>Annual = every year -&gt; Annually</p>
+<p>customer -&gt; consumer</p>
+<p>downturn</p>
+<p>personalize - individualize -&gt; urbanize</p>
+<blockquote>
+<p>Although <a href="http://Amazon.com">Amazon.com</a> is the biggest internet <strong>retailer</strong> in the world it is often criticized. Economic experts say that Amazon is turning Internet business into a <strong>monopoly</strong>. Others point out the bad working conditions for Amazon employees. Amazon is a business <strong>empire</strong> that sells almost everything cheaper and faster than anyone else.</p>
+</blockquote>
+<p>retailer 零售商</p>
+<p>expect - expectation</p>
+<p>monopoly 垄断</p>
+<p>empire 帝国</p>
+]]></content>
       <tags>
         <tag>英语</tag>
       </tags>
@@ -930,170 +1094,6 @@ Privatize      <psw>私有化</psw><br>
 Intervention   <psw>干预</psw><br>
 Bias           <psw>偏见</psw></p>
 </blockquote>
-]]></content>
-      <tags>
-        <tag>英语</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>英语词汇文章1~3</title>
-    <url>/2025/02/19/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A01/</url>
-    <content><![CDATA[<h2 id="Passage-1">Passage 1</h2>
-<blockquote>
-<p>According to the World Health Organization, over a billion adults around the world suffer from high blood pressure. It is now taking steps to fight against what is called a silent killer. High blood pressure can lead to strokes and a heart attack.</p>
-</blockquote>
-<p>over = more than</p>
-<p>billion - million - trillion</p>
-<p>high blood pressure - hypertension</p>
-<p>taking steps to - take measures to</p>
-<p>what is called</p>
-<p>attack - defend</p>
-<blockquote>
-<p>Almost 10 million people die of these two disease every year. They are the number one causes of death globally. High blood pressure also leads to kidney failure. blindness and other illnesses. it often <strong>goes hand in hand with</strong> diabetes and obesity, which increase health risks even further.</p>
-</blockquote>
-<p>Almost - nearly</p>
-<p>disease - illness - sickness</p>
-<p>cancer - tumor - plague - pandemic - epidemic</p>
-<p>kidney - lung - heart - guts - liver - spleen</p>
-<p>go hand in hand with - has a close relationship with</p>
-<p>obesity - fat - fatty</p>
-<blockquote>
-<p>As the WHO reports, people in developing countries in Africa suffer more from high blood pressure than people in developed countries. The <strong>reason</strong> is that health care in the developed world is much better organized and people go to the doctor soon enough.</p>
-</blockquote>
-<p>cause - reason</p>
-<blockquote>
-<p>High blood pressure should never be <strong>ignored</strong> and always taken <strong>seriously</strong>. It is a warning sign from your body that something is not OK. Although people may live with high blood pressure for years without even knowing it, it is important to check your blood pressure regularly and take the necessary steps.</p>
-</blockquote>
-<p>ignore - neglect</p>
-<p>serious - seriously</p>
-<p>Although - while - Even though - despite - in spite of</p>
-<blockquote>
-<p>The WHO says that you can reduce your blood pressure by changing your living habits. Eating a balanced diet, exercising regularly, avoiding alcohol and <strong>nicotine</strong> are some things that you can do without consulting a doctor.</p>
-</blockquote>
-<p>nicotine - cigar - cigarette - tobacco - vaping</p>
-<h2 id="Passage-2">Passage 2</h2>
-<p><strong>Malnutrition is a disorder of your food intake.</strong></p>
-<blockquote>
-<p>It occurs when a person eat too little or too much, or has an unbalanced diet. In most cases <strong>malnutrition</strong> means <strong>undernourishment</strong>, a lack of food and not enough calories. It is widespread in developing countries.</p>
-</blockquote>
-<p>occur = happen</p>
-<p>malnutrition = undernourishment</p>
-<blockquote>
-<p>On the other side obesity occurs in developed countries where people eat too much. According to the World Health Organization malnutrition is one of the greatest dangers of global health. Currently, about one billion people around the world do not have enough to eat.</p>
-</blockquote>
-<p>Currently - today - nowadays - these days - at present</p>
-<p><strong>When does malnutrition occur</strong></p>
-<blockquote>
-<p>Malnutrition happen when people lack nutrients, vitamins and minerals. Not enough proteins can have negative effects on a person’s growth and lead to physical problems. Vitamins are important for good health and the <strong>functioning</strong> of your body. A lack of them can cause major problems。 Vitamin A deficiency may lead to eye problem and blindness. A lack of <strong>calcium</strong> leads to a bad growth of bones and teeth. Iron deficiency can affect the brain and lead to a low IQ rate. It can make children less active and not able to concentrate.</p>
-</blockquote>
-<p>negative - pessimistic</p>
-<p>positive - optimistic</p>
-<p>physical - physics - physician - surgeon</p>
-<p>functioning 功能 运转</p>
-<p>affect - effect</p>
-<p>concentrate = focus</p>
-<blockquote>
-<p>Malnutrition increases the risk of diseases and weakens the immune system. It affects the <strong>transmission</strong> of viruses. including HIV. it is especially widespread among women,  children and older people. Children can be at risk even before birth because they <strong>depend on</strong> the mother’s nutrition.</p>
-</blockquote>
-<p>transmission = spread</p>
-<p>depend on = rely on - dependence = reliance</p>
-<p>dependent - independent - independence</p>
-<p>One in ten people around the world is malnourished. Eating disorders <strong>account for</strong> 60 million deaths a year, including six million children. It is the main cause of child mortality.</p>
-<p>one in ten = one tenths</p>
-<p>account for 导致 占比 …是…解释 …是…原因</p>
-<p>mortal - mortality - immortal</p>
-<p><strong>Causes of malnutrition</strong></p>
-<blockquote>
-<p>One of the major causes of malnutrition in developing countries is <strong>famine</strong> and drought which lead to the unavailability of food. Many countries in the Third World to not have enough land to grow food on or do not know how to use it. They do not have the money to <strong>afford</strong> <strong>imported</strong> food. In other countries the government neglects the importance of <strong>agriculture</strong> and does not help farmers.</p>
-</blockquote>
-<p>famine 饥荒</p>
-<p>afford - affordable</p>
-<p>import - export</p>
-<p>agriculture 农业</p>
-<blockquote>
-<p>In places with a lack of or dirty drinking water diseases, like diarrhea, lead to <strong>indigestion</strong> of food. Digestive disorders may also be causes of malnutrition. People eat properly but their body cannot digest the food. In the Third World many mothers do not <strong>breastfeed</strong> their children, thus weakening the immune system.</p>
-</blockquote>
-<p>diarrhea 痢疾</p>
-<p>indigestion 消化不良</p>
-<p>breastfeed 母乳</p>
-<p><strong>sign of malnutrition</strong></p>
-<ul>
-<li>tiredness and not enough energy</li>
-<li>decaying teeth</li>
-<li>poor growth</li>
-<li>weight loss</li>
-<li><strong>fragile</strong> bones that break easily</li>
-<li>weakening of muscles</li>
-<li>diarrhea</li>
-<li>dizziness</li>
-</ul>
-<hr>
-<p>fragile - vulnerable - delicate</p>
-<p>dizziness - dizzy</p>
-<p><strong>Depression Obesity</strong></p>
-<blockquote>
-<p>In developed countries obesity is the most widespread form of malnutrition. Obese people consume more calories than they need. This may lead to diabetes and contribute to heat problems and high blood pressure. Too many fats in your diet an lead to high <strong>cholesterol</strong> levels.</p>
-</blockquote>
-<p>Obese = too fat</p>
-<p>consume - consumer - consumption</p>
-<p>cholesterol 胆固醇</p>
-<p><strong>Solution and Treatment</strong></p>
-<blockquote>
-<p>One way to help avoid malnutrition is to <strong>enrich</strong> food with vitamins. For example, milk is <strong>enriched</strong> with Vitamin D. In Third World Countries schools must try to teach children the right eating habits and <strong>emphasize</strong> vegetables and fruit. Governments and other institutions must do their part in educating the population to eat the right things. The World Health Organization and other groups try to help the poorest of these countries with <strong>financial</strong> aid and other support.</p>
-</blockquote>
-<p>enrich 丰富，富有</p>
-<p>emphasize = stress 强调，重点</p>
-<p>financial 财务</p>
-<p>aid = assistance</p>
-<h2 id="Passage-3">Passage 3</h2>
-<p><strong><a href="http://Amazon.com">Amazon.com</a> - The World’s largest Internet Company</strong></p>
-<blockquote>
-<p><a href="http://Amazon.com">Amazon.com</a> is the world’s largest Internet company. It <strong>started out</strong> as an online bookstore in the middle of the 1990s and grew gradually over the years. Today Amazon sells almost everything <u><em>from</em> CDs and DVDs <em>to</em></u> <strong>sportswear</strong> and electrical appliances. The company also produces its own tablets and <strong>e-readers</strong> and lets users upload their own photos and other files to the Amazon-based cloud.</p>
-</blockquote>
-<p>started out 开创，起家</p>
-<p>gradually - eventually</p>
-<p>from … to</p>
-<p>e-reader -&gt; electric reader</p>
-<p>sportswear 运动服</p>
-<blockquote>
-<p>Amazon offers its services all over the world. It <strong>operates</strong> its own websites in the UK. Germany, China, Australia, as well as many South American and Asian countries.</p>
-</blockquote>
-<p>operate - operation - operator</p>
-<blockquote>
-<p><a href="http://Amazon.com">Amazon.com</a> <strong>was founded by</strong> by Jeff Bezos in 1994, It first operated out of a small garage in Washington state. Within a year Amazon offered hundreds of thousands of books. People could <u><em>not only</em> order books from an online catalogue <em>but also</em></u> write their own <strong>reviews</strong>. In 1997 <a href="http://Amazon.com">Amazon.com</a> started trading <strong>shares</strong> on the NASDAQ stock exchange. By 2000 it made over a billion dollars <strong>in sales</strong>.</p>
-</blockquote>
-<p>was founded by 创立</p>
-<p>review = comment</p>
-<p>shares 股份</p>
-<p>exchange 交易</p>
-<p>in sales 销售额</p>
-<blockquote>
-<p><strong>As time went on</strong> <a href="http://Amazon.com">Amazon.com</a> grew gradually. It bought many of its <strong>rivals</strong> and today <strong>cooperates</strong> with other companies and lets them sell their products via the Amazon website.</p>
-</blockquote>
-<p>as time went on 随着时间的推移</p>
-<p>rival 竞争者 -&gt; rivalry 竞争</p>
-<p>cooperate 合作 -&gt; coworker 同事 -&gt; colleague 同事</p>
-<blockquote>
-<p>In 2007 Amazon <strong>went a step further</strong>. It surprised the electronics world with  a revolutionary eBook reader, the Kindle, which today <strong>dominates</strong> the market. In 2011 a tablet computer followed, the Amazon Fire. In the following years the company started selling music downloads and videos <strong>on demand</strong>. Amazon customers can store everything they buy on their private cloud and download it anytime they want.</p>
-</blockquote>
-<p>went a step further 更进一步</p>
-<p>dominate 主宰，统治</p>
-<p>on demand 按需</p>
-<p>store 存储</p>
-<blockquote>
-<p>Today, <a href="http://Amazon.com">Amazon.com</a> serves 20 million customers every day. Its annual income is over 34 billion dollars. There are a number of reasons <strong>for</strong> Amazon’s success. One of them is company founder Jeff Bezos himself. <em>TIME</em> magazine’s Man of the Year of 1999 is a visionary, an ambitious businessman who is not afraid of taking risks, even if it means a <strong>downturn</strong> for the company at first. Amazon’s website tries to <strong>personalize</strong> the buying experience for its customers. It knows what you want you are interested in.</p>
-</blockquote>
-<p>Annual = every year -&gt; Annually</p>
-<p>customer -&gt; consumer</p>
-<p>downturn</p>
-<p>personalize - individualize -&gt; urbanize</p>
-<blockquote>
-<p>Although <a href="http://Amazon.com">Amazon.com</a> is the biggest internet <strong>retailer</strong> in the world it is often criticized. Economic experts say that Amazon is turning Internet business into a <strong>monopoly</strong>. Others point out the bad working conditions for Amazon employees. Amazon is a business <strong>empire</strong> that sells almost everything cheaper and faster than anyone else.</p>
-</blockquote>
-<p>retailer 零售商</p>
-<p>expect - expectation</p>
-<p>monopoly 垄断</p>
-<p>empire 帝国</p>
 ]]></content>
       <tags>
         <tag>英语</tag>
