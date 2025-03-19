@@ -2569,6 +2569,41 @@ header.header {
 .post-body h3 {
   border-bottom: 1px dotted #eee;
 }
+.post-body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #333;
+}
+.post-title {
+  font-family: "Georgia", serif;
+  font-size: 28px;
+  font-weight: bold;
+  color: #222;
+}
+.highlight {
+  font-family: "Consolas", "Monaco", monospace;
+  font-size: 18px;
+}
+body {
+  background: url("https://img.zero02.space/bg1.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+.footer {
+  color: #fff;
+  font-size: 0.975em;
+  background: rgba(255,255,255,0.3);
+}
+.sidebar-panel-container {
+  font-size: 18px;
+  font-family: "Georgia", serif;
+  line-height: 18px;
+}
+.back-to-top.back-to-top-on {
+  bottom: 50px;
+  padding: 20px;
+  border-radius: 15px;
+}
 @media (min-width: 768px) and (max-width: 991px) {
   .main-inner {
     padding: 10px;
@@ -2596,4 +2631,10 @@ header.header {
   .comments {
     padding: 10px 12px;
   }
+}
+.fireworks {
+  left: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
 }
