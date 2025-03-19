@@ -1,90 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2025/03/19/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start">Quick Start</h2>
-<h3 id="Create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>外挂标签演示</title>
-    <url>/2025/02/28/%E5%A4%96%E6%8C%82%E6%A0%87%E7%AD%BE%E6%BC%94%E7%A4%BA/</url>
-    <content><![CDATA[<h2 id="外挂标签">外挂标签</h2>
-<p>Butterfly 主题是 Hexo 中非常受欢迎的一款主题，支持丰富的自定义功能，尤其是通过外挂标签（Tag Plugins）可以实现更多样化的内容展示效果。以下是关于 Butterfly 外挂标签的详细教程，涵盖基本概念、使用方法以及一些实用示例。</p>
-<hr>
-<h2 id="Butterfly-外挂标签简介">Butterfly 外挂标签简介</h2>
-<p>外挂标签是 Butterfly 主题提供的一种扩展功能，允许用户在 Markdown 文件中通过特定的语法插入自定义内容，例如彩色文字、提示框、超链接卡片等。这些标签通过简单的语法即可实现复杂的样式效果，非常适合美化博客内容。</p>
-<hr>
-<h2 id="外挂标签的基本使用方法">外挂标签的基本使用方法</h2>
-<h3 id="1-标签语法">1. 标签语法</h3>
-<p>Butterfly 外挂标签的基本语法格式为：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% 标签名 参数 %&#125;</span><br><span class="line">内容</span><br><span class="line">&#123;% end标签名 %&#125;</span><br></pre></td></tr></table></figure>
-<p>部分标签不需要 <code>end</code> 结束符，具体取决于标签的定义。</p>
-<h3 id="2-常用标签示例">2. 常用标签示例</h3>
-<p>以下是一些常用的外挂标签及其效果：</p>
-<h4 id="（1）行内文本样式">（1）行内文本样式</h4>
-<ul>
-<li><strong>下划线</strong>：<u>文本内容</u></li>
-<li><strong>着重号</strong>：<emp>文本内容</emp></li>
-<li><strong>波浪线</strong>：<wavy>文本内容</wavy></li>
-<li><strong>删除线</strong>：<del>文本内容</del></li>
-<li><strong>键盘样式</strong>：<kbd>文本内容</kbd></li>
-<li><strong>密码样式</strong>：<psw>文本内容</psw></li>
-</ul>
-<h4 id="（2）彩色文字">（2）彩色文字</h4>
-<p>使用 <code>span</code> 标签可以实现彩色文字效果：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% span 颜色, 文本内容 %&#125;</span><br></pre></td></tr></table></figure>
-<p>支持的颜色参数：<code>red</code>、<code>yellow</code>、<code>green</code>、<code>cyan</code>、<code>blue</code>、<code>gray</code> 等。</p>
-<p>示例：</p>
-<p>彩色文字：<span class='p red'>红色</span>、<span class='p yellow'>黄色</span>、<span class='p green'>绿色</span></p>
-<p>超大号文字：<span class='p center logo large'>Volantis</span></p>
-<h4 id="（3）提示框（Note）">（3）提示框（Note）</h4>
-<p>Butterfly 提供了多种样式的提示框，可以通过 <code>note</code> 标签实现：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note [class] [no-icon] [style] %&#125;</span><br><span class="line">提示内容</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>class</code>：可选参数，支持 <code>default</code>、<code>primary</code>、<code>success</code>、<code>info</code>、<code>warning</code>、<code>danger</code> 等样式。</li>
-<li><code>no-icon</code>：可选参数，隐藏图标。</li>
-<li><code>style</code>：可选参数，支持 <code>simple</code>、<code>modern</code>、<code>flat</code> 等样式。</li>
-</ul>
-<p>示例：</p>
-<div class="note success"><p>这是一个成功的提示框！</p>
-</div>
-<h4 id="（4）超链接卡片">（4）超链接卡片</h4>
-<p>通过自定义标签可以实现超链接卡片效果，显示网站的 Favicon 和标题：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% link 标题, 网站名, 链接 %&#125;</span><br></pre></td></tr></table></figure>
-<p>示例：</p>
-<div class="tag link"><a class="link-card" title="获取网站的Favicon图标并显示在你的网页上" href="owen0o0"><div class="left"><img src="https://github.com/owen0o0/getFavicon"/></div><div class="right"><p class="text">获取网站的Favicon图标并显示在你的网页上</p><p class="url">owen0o0</p></div></a></div>
-<hr>
-<h2 id="自定义外挂标签">自定义外挂标签</h2>
-<p>如果默认的标签无法满足需求，可以通过自定义标签实现更多功能。以下是自定义标签的基本步骤：</p>
-<h3 id="1-创建标签脚本">1. 创建标签脚本</h3>
-<p>在 <code>themes/butterfly/scripts/tag/</code> 目录下新建一个 JavaScript 文件，例如 <code>link.js</code>，并编写标签逻辑：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">link</span>(<span class="params">args</span>) &#123;</span><br><span class="line">    args = args.<span class="title function_">join</span>(<span class="string">&#x27; &#x27;</span>).<span class="title function_">split</span>(<span class="string">&#x27;,&#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> title = args[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">let</span> sitename = args[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">let</span> link = args[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">let</span> imgUrl = <span class="string">&quot;https://api.iowen.cn/favicon/&quot;</span> + link.<span class="title function_">replace</span>(<span class="regexp">/^https?\:\/\//i</span>, <span class="string">&quot;&quot;</span>) + <span class="string">&quot;.png&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`&lt;a class=&quot;tag-Link&quot; target=&quot;_blank&quot; href=&quot;<span class="subst">$&#123;link&#125;</span>&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;div class=&quot;tag-link-tips&quot;&gt;引用站外地址&lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;div class=&quot;tag-link-bottom&quot;&gt;</span></span><br><span class="line"><span class="string">            &lt;div class=&quot;tag-link-left&quot; style=&quot;background-image: url(<span class="subst">$&#123;imgUrl&#125;</span>);&quot;&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;div class=&quot;tag-link-right&quot;&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&quot;tag-link-title&quot;&gt;<span class="subst">$&#123;title&#125;</span>&lt;/div&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&quot;tag-link-sitename&quot;&gt;<span class="subst">$&#123;sitename&#125;</span>&lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;/a&gt;`</span>;</span><br><span class="line">&#125;</span><br><span class="line">hexo.<span class="property">extend</span>.<span class="property">tag</span>.<span class="title function_">register</span>(<span class="string">&#x27;link&#x27;</span>, link, &#123; <span class="attr">ends</span>: <span class="literal">false</span> &#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="2-添加-CSS-样式">2. 添加 CSS 样式</h3>
-<p>在 <code>themes/butterfly/source/css/</code> 目录下新建 CSS 文件，例如 <code>tag-link.css</code>，并编写样式：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.tag-Link</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ddd</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">text-decoration</span>: none;</span><br><span class="line">    <span class="attribute">color</span>: inherit;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-bottom</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-left</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">background-size</span>: cover;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-right</span> &#123;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="3-引用-CSS-文件">3. 引用 CSS 文件</h3>
-<p>在主题配置文件 <code>_config.butterfly.yml</code> 中引用 CSS 文件：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">inject:</span></span><br><span class="line">  <span class="attr">head:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&lt;link</span> <span class="string">rel=&quot;stylesheet&quot;</span> <span class="string">href=&quot;/css/tag-link.css&quot;&gt;</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>butterfly</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>英语听力测试2</title>
     <url>/2025/03/08/%E8%8B%B1%E8%AF%AD%E5%90%AC%E5%8A%9B%E6%B5%8B%E8%AF%952/</url>
     <content><![CDATA[<h2 id="听力题1">听力题1</h2>
@@ -238,6 +154,90 @@ D. They cannot match humans in <strong>arranging</strong> <strong>meticulous</st
       <tags>
         <tag>英语</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>外挂标签演示</title>
+    <url>/2025/02/28/%E5%A4%96%E6%8C%82%E6%A0%87%E7%AD%BE%E6%BC%94%E7%A4%BA/</url>
+    <content><![CDATA[<h2 id="外挂标签">外挂标签</h2>
+<p>Butterfly 主题是 Hexo 中非常受欢迎的一款主题，支持丰富的自定义功能，尤其是通过外挂标签（Tag Plugins）可以实现更多样化的内容展示效果。以下是关于 Butterfly 外挂标签的详细教程，涵盖基本概念、使用方法以及一些实用示例。</p>
+<hr>
+<h2 id="Butterfly-外挂标签简介">Butterfly 外挂标签简介</h2>
+<p>外挂标签是 Butterfly 主题提供的一种扩展功能，允许用户在 Markdown 文件中通过特定的语法插入自定义内容，例如彩色文字、提示框、超链接卡片等。这些标签通过简单的语法即可实现复杂的样式效果，非常适合美化博客内容。</p>
+<hr>
+<h2 id="外挂标签的基本使用方法">外挂标签的基本使用方法</h2>
+<h3 id="1-标签语法">1. 标签语法</h3>
+<p>Butterfly 外挂标签的基本语法格式为：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% 标签名 参数 %&#125;</span><br><span class="line">内容</span><br><span class="line">&#123;% end标签名 %&#125;</span><br></pre></td></tr></table></figure>
+<p>部分标签不需要 <code>end</code> 结束符，具体取决于标签的定义。</p>
+<h3 id="2-常用标签示例">2. 常用标签示例</h3>
+<p>以下是一些常用的外挂标签及其效果：</p>
+<h4 id="（1）行内文本样式">（1）行内文本样式</h4>
+<ul>
+<li><strong>下划线</strong>：<u>文本内容</u></li>
+<li><strong>着重号</strong>：<emp>文本内容</emp></li>
+<li><strong>波浪线</strong>：<wavy>文本内容</wavy></li>
+<li><strong>删除线</strong>：<del>文本内容</del></li>
+<li><strong>键盘样式</strong>：<kbd>文本内容</kbd></li>
+<li><strong>密码样式</strong>：<psw>文本内容</psw></li>
+</ul>
+<h4 id="（2）彩色文字">（2）彩色文字</h4>
+<p>使用 <code>span</code> 标签可以实现彩色文字效果：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% span 颜色, 文本内容 %&#125;</span><br></pre></td></tr></table></figure>
+<p>支持的颜色参数：<code>red</code>、<code>yellow</code>、<code>green</code>、<code>cyan</code>、<code>blue</code>、<code>gray</code> 等。</p>
+<p>示例：</p>
+<p>彩色文字：<span class='p red'>红色</span>、<span class='p yellow'>黄色</span>、<span class='p green'>绿色</span></p>
+<p>超大号文字：<span class='p center logo large'>Volantis</span></p>
+<h4 id="（3）提示框（Note）">（3）提示框（Note）</h4>
+<p>Butterfly 提供了多种样式的提示框，可以通过 <code>note</code> 标签实现：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note [class] [no-icon] [style] %&#125;</span><br><span class="line">提示内容</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>class</code>：可选参数，支持 <code>default</code>、<code>primary</code>、<code>success</code>、<code>info</code>、<code>warning</code>、<code>danger</code> 等样式。</li>
+<li><code>no-icon</code>：可选参数，隐藏图标。</li>
+<li><code>style</code>：可选参数，支持 <code>simple</code>、<code>modern</code>、<code>flat</code> 等样式。</li>
+</ul>
+<p>示例：</p>
+<div class="note success"><p>这是一个成功的提示框！</p>
+</div>
+<h4 id="（4）超链接卡片">（4）超链接卡片</h4>
+<p>通过自定义标签可以实现超链接卡片效果，显示网站的 Favicon 和标题：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% link 标题, 网站名, 链接 %&#125;</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<div class="tag link"><a class="link-card" title="获取网站的Favicon图标并显示在你的网页上" href="owen0o0"><div class="left"><img src="https://github.com/owen0o0/getFavicon"/></div><div class="right"><p class="text">获取网站的Favicon图标并显示在你的网页上</p><p class="url">owen0o0</p></div></a></div>
+<hr>
+<h2 id="自定义外挂标签">自定义外挂标签</h2>
+<p>如果默认的标签无法满足需求，可以通过自定义标签实现更多功能。以下是自定义标签的基本步骤：</p>
+<h3 id="1-创建标签脚本">1. 创建标签脚本</h3>
+<p>在 <code>themes/butterfly/scripts/tag/</code> 目录下新建一个 JavaScript 文件，例如 <code>link.js</code>，并编写标签逻辑：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">link</span>(<span class="params">args</span>) &#123;</span><br><span class="line">    args = args.<span class="title function_">join</span>(<span class="string">&#x27; &#x27;</span>).<span class="title function_">split</span>(<span class="string">&#x27;,&#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> title = args[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">let</span> sitename = args[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">let</span> link = args[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">let</span> imgUrl = <span class="string">&quot;https://api.iowen.cn/favicon/&quot;</span> + link.<span class="title function_">replace</span>(<span class="regexp">/^https?\:\/\//i</span>, <span class="string">&quot;&quot;</span>) + <span class="string">&quot;.png&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`&lt;a class=&quot;tag-Link&quot; target=&quot;_blank&quot; href=&quot;<span class="subst">$&#123;link&#125;</span>&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;div class=&quot;tag-link-tips&quot;&gt;引用站外地址&lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;div class=&quot;tag-link-bottom&quot;&gt;</span></span><br><span class="line"><span class="string">            &lt;div class=&quot;tag-link-left&quot; style=&quot;background-image: url(<span class="subst">$&#123;imgUrl&#125;</span>);&quot;&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;div class=&quot;tag-link-right&quot;&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&quot;tag-link-title&quot;&gt;<span class="subst">$&#123;title&#125;</span>&lt;/div&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&quot;tag-link-sitename&quot;&gt;<span class="subst">$&#123;sitename&#125;</span>&lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;/a&gt;`</span>;</span><br><span class="line">&#125;</span><br><span class="line">hexo.<span class="property">extend</span>.<span class="property">tag</span>.<span class="title function_">register</span>(<span class="string">&#x27;link&#x27;</span>, link, &#123; <span class="attr">ends</span>: <span class="literal">false</span> &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="2-添加-CSS-样式">2. 添加 CSS 样式</h3>
+<p>在 <code>themes/butterfly/source/css/</code> 目录下新建 CSS 文件，例如 <code>tag-link.css</code>，并编写样式：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.tag-Link</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ddd</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">text-decoration</span>: none;</span><br><span class="line">    <span class="attribute">color</span>: inherit;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-bottom</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-left</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">background-size</span>: cover;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-right</span> &#123;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-引用-CSS-文件">3. 引用 CSS 文件</h3>
+<p>在主题配置文件 <code>_config.butterfly.yml</code> 中引用 CSS 文件：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">inject:</span></span><br><span class="line">  <span class="attr">head:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&lt;link</span> <span class="string">rel=&quot;stylesheet&quot;</span> <span class="string">href=&quot;/css/tag-link.css&quot;&gt;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>butterfly</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2025/03/19/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start">Quick Start</h2>
+<h3 id="Create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
   </entry>
   <entry>
     <title>英语听力测试3</title>
@@ -646,130 +646,6 @@ D. the elephant was given medical treatment for many days.</p>
       </tags>
   </entry>
   <entry>
-    <title>英语词汇文章4~6</title>
-    <url>/2025/02/19/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A02/</url>
-    <content><![CDATA[<h2 id="Passage-4">Passage 4</h2>
-<p>OPEC is the Organization of Petroleum Exporting Countries.</p>
-<p>Petroleum - oil</p>
-<blockquote>
-<p>It was founded in <strong>Bagdad</strong> in 1960 and has currently 11 members. OPEC’s aim is to <strong>regulate</strong> the amount of oil that member nations produce and to keep prices at a <strong>steady rate</strong>. The countries get together twice a year and <strong>agree on</strong> how much oil each country is allowed to produce. OPEC’ s <strong>headquarters</strong> are in Vienna, the capital of Austria.</p>
-</blockquote>
-<p>Bagdad 巴格达</p>
-<p>regulate 规划，控制</p>
-<p>agree on 达成一致</p>
-<p>headquarters 总部</p>
-<p>Vienna 维尼亚</p>
-<p>Austria 奥地利</p>
-<blockquote>
-<p>Before OPEC was created, there were large oil companies that controlled the world’s oil production. They wanted to sell as much oil as possible and did not let governments influence their decisions. Oil-rich countries, especially in the Middle East, wanted more control over the oil that they produce, <strong>As a result,</strong> Iran, Iraq, Saudi Arabia, Kuwait and Venezuela founded OPEC. In the following years Qatar, Indonesia, Libya, Algeria, Nigeria, Ecuador, Angola and the United Arab Emirates also become members.</p>
-</blockquote>
-<p>As a result 结果 - consequence - consequently</p>
-<p>In the 1960s, OPEC did not have much power. This changed in 1973 when the third Arab-Israeli war started. The United States and a few European countries supported Israel. As a form <strong>punishment</strong>. OPEC nations, <strong>influenced</strong> by the Arab countries, stopped selling oil to the West. Within the next six years oil prices rose to ten times the price of the early 1970s. OPEC countries became rich with so-called <strong>petrodollars</strong>; the West <strong>sank into</strong> deep <strong>recession</strong> because they needed OPEC’s oil.</p>
-<p>Arab-Israeli war 阿拉伯以色列战争</p>
-<p>punishment 惩罚</p>
-<p>influenced 影响</p>
-<p>petrodollars 石油美刀 （Portmanteau)</p>
-<p>sank into 陷入</p>
-<p>recession 衰退</p>
-<blockquote>
-<p>In the <strong>aftermath</strong> of the energy crisis of the 1970s, western countries started looking for <strong>alternative</strong> forms of energy in order to become more independent from OPEC and the oil-producing nations. In 1986, oil prices <strong>dropped</strong> to the lowest rate in history. Oil-producing nations lost much of their income. In the 80s and 90s OPEC’s power <strong>diminished</strong>, often because of conflicts and internal arguments and because member states could not agree on <strong>production quotas</strong>. Some OPEC countries did not keep <strong>agreements</strong> and produced more oil, thus lowering prices.</p>
-</blockquote>
-<p>aftermath 创伤</p>
-<p>alternative 可替换的</p>
-<p>dropped 下降</p>
-<p>diminish 减少</p>
-<p>production quotas 生产定额</p>
-<p>agreement 协议</p>
-<blockquote>
-<p>After 2000, oil prices began to rise again and reached an <strong>all-time high</strong> in 2007. The <strong>financial crisis</strong> of 2007 and 2008 hit world economy hard and oil prices fell once again. Sine the Arab Spring of 20011, prices have gone up and down several times. Today OPEC still controls about 60% of the world’s oil reserves and produces 40% of the world’s oil. Saudi Arabia is the most powerful member of the group, because it has the largest reserves. Even though there have been <strong>quarrels</strong> in the <strong>cartel</strong> in the last 5 decades it remains a powerful organization.</p>
-</blockquote>
-<p>all-time high 历史最高点</p>
-<p>financial crisis 经济危机</p>
-<p>quarrel 争论</p>
-<p>cartel 卡特尔</p>
-<h2 id="Passage-5">Passage 5</h2>
-<blockquote>
-<p>A research reports says that virtual worlds can be important places where children <strong>practice</strong> what they will do in real life. They are also a powerful and <strong>attractive</strong> alternative to more passive <strong>adventures</strong> like watching TV. The research was done with children using the BBC’s Adventure Rock virtual world, <strong>aimed</strong> at those aged 6-12. It <strong>surveyed</strong> and interviewed children who were the first to <strong>test the game</strong>.</p>
-</blockquote>
-<p>practice v. 练习；n. 措施，手段</p>
-<p>attractive 有吸引力的</p>
-<p>adventures 娱乐方式</p>
-<p>aim 目标</p>
-<p>survey = investigate</p>
-<p>test the game  内测</p>
-<blockquote>
-<p>The online world is the theme island built for the BBC’s children channel by Belgian game maker Larian. Children <strong>explore</strong> the world alone but they use message boards to share what they find and what they do in the different creative studios they find around the virtual space.</p>
-</blockquote>
-<p>explore 探索 exploration</p>
-<blockquote>
-<p><strong>At times</strong> children were explorers and at other they were <strong>social climbers</strong> eager to connect with other players. Some were power users looking for more information about how the virtual space really worked. The children could try all kinds of things without having to be afraid of the <strong>consequences</strong> that would follow if they tried them in the real world. They learned many useful social skills and played around with their identity <strong>in ways</strong> that would be much more difficult in real life.</p>
-</blockquote>
-<p>at times 很多时候</p>
-<p>social climber 社交达人</p>
-<p>work 工作，运转，起作用，作品</p>
-<p>consequence = result</p>
-<p>in ways 在某些方面</p>
-<blockquote>
-<p>According to the study what children liked about virtual worlds was the chance to create content such as music, cartoons and videos. The publishers of the reports say that virtual worlds can be a powerful, <strong>engaging</strong> and real <strong>interactive</strong> alternative to more passive media. They urged creators of virtual spaces for children to get young people <strong>involved</strong> very early on because they really do have good ideas to add and they are very good critical friends.</p>
-</blockquote>
-<p>interactive 互动的</p>
-<p>engaging = participate = involved</p>
-<h2 id="Passage-6">Passage 6</h2>
-<p><strong>Do whale sleep?</strong></p>
-<ul>
-<li>Like all mammals, whales breathe air</li>
-<li>They are warm-blooded</li>
-<li>They <strong>nurse</strong> their young with milk</li>
-<li>they have body hair.</li>
-<li>Whales have a four-chambered hearted.</li>
-</ul>
-<p>nurse 滋养</p>
-<blockquote>
-<p>Whales are mammals, so in many ways, They are just like human beings. The most important difference is that humans and whales live in different environments and whales have a special <strong>respiratory system</strong> that enables them to stay underwater for several minutes without breathing oxygen. For this reason, they are said to be <strong>voluntary</strong> breathers. That is, because of whales underwater environment, they must be <strong>conscious</strong> breathers. They think about every breath they take and come up to the surface of the water to breathe through <strong>blowholes</strong> on top of their heads.</p>
-</blockquote>
-<p>voluntary 自发性的</p>
-<p>conscious 有意识的 - consciousness - subconsciousness 潜意识的 - conscientious 有良知的</p>
-<p>blowholes 呼吸孔</p>
-<blockquote>
-<p>What is <strong>outstanding</strong> about whales is the way they can sleep. While all mammals sleep, whales cannot afford to <strong>become</strong> unconscious for long because they may <strong>drown</strong>. They only way they can sleep is by remaining partially conscious. It is believed that only one hemisphere of the whale’s brain sleeps at a time, so they rest but are never completely sleep. They can do so most probably near the surface so that they can come up for air easily.</p>
-</blockquote>
-<p>outstanding - dwarf 相形见拙，矮人 - overshadow 相形见拙</p>
-<p>drown - drought - dry</p>
-<p>afford 承担，支付得起</p>
-<p>part -  partial  - partially - potential 潜在的</p>
-<ul>
-<li>Whales are like fish in the way they breathe. true or false? ×</li>
-<li>Whales don’t sleep at all. true or false? ×</li>
-<li>Whales sleep by letting the <strong>whole</strong> brain rest for a <strong>lapse</strong> of time. true or false? ×</li>
-</ul>
-<p>complete - whole - entire - all - total - overall</p>
-<p>lapse 流逝（一段时间）</p>
-<blockquote>
-<p>Mammal      <psw>哺乳动物</psw><br>
-Whale       <psw>鲸鱼</psw><br>
-Conscious   <psw>有意识的</psw><br>
-Chamber     <psw>腔室</psw><br>
-Partially   <psw>部分地</psw><br>
-Nurse       <psw>护理</psw><br>
-Drown       <psw>溺水</psw><br>
-Oxygen      <psw>氧气</psw><br>
-Outstanding <psw>杰出的</psw><br>
-Respiratory <psw>呼吸的</psw><br>
-Hemisphere  <psw>半球</psw><br>
-Surface     <psw>表面</psw><br>
-Voluntary   <psw>自愿的</psw><br>
-Asleep      <psw>睡着的</psw><br>
-Breath      <psw>呼吸</psw></p>
-</blockquote>
-<blockquote>
-<p>mamlma wlahe inuoccsso rahmebc aiyatlrpl rsuen dnwro onxyge onttsdnaugi yeosrraritp smepeihhre sucaefr tlrnuaoyv eaeslp ehtbra</p>
-</blockquote>
-]]></content>
-      <tags>
-        <tag>英语</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>英语词汇文章7~9</title>
     <url>/2025/02/24/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A03/</url>
     <content><![CDATA[<h2 id="Passage-7">Passage 7</h2>
@@ -1100,6 +976,306 @@ Bias           <psw>偏见</psw></p>
       </tags>
   </entry>
   <entry>
+    <title>英语词汇文章4~6</title>
+    <url>/2025/02/19/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A02/</url>
+    <content><![CDATA[<h2 id="Passage-4">Passage 4</h2>
+<p>OPEC is the Organization of Petroleum Exporting Countries.</p>
+<p>Petroleum - oil</p>
+<blockquote>
+<p>It was founded in <strong>Bagdad</strong> in 1960 and has currently 11 members. OPEC’s aim is to <strong>regulate</strong> the amount of oil that member nations produce and to keep prices at a <strong>steady rate</strong>. The countries get together twice a year and <strong>agree on</strong> how much oil each country is allowed to produce. OPEC’ s <strong>headquarters</strong> are in Vienna, the capital of Austria.</p>
+</blockquote>
+<p>Bagdad 巴格达</p>
+<p>regulate 规划，控制</p>
+<p>agree on 达成一致</p>
+<p>headquarters 总部</p>
+<p>Vienna 维尼亚</p>
+<p>Austria 奥地利</p>
+<blockquote>
+<p>Before OPEC was created, there were large oil companies that controlled the world’s oil production. They wanted to sell as much oil as possible and did not let governments influence their decisions. Oil-rich countries, especially in the Middle East, wanted more control over the oil that they produce, <strong>As a result,</strong> Iran, Iraq, Saudi Arabia, Kuwait and Venezuela founded OPEC. In the following years Qatar, Indonesia, Libya, Algeria, Nigeria, Ecuador, Angola and the United Arab Emirates also become members.</p>
+</blockquote>
+<p>As a result 结果 - consequence - consequently</p>
+<p>In the 1960s, OPEC did not have much power. This changed in 1973 when the third Arab-Israeli war started. The United States and a few European countries supported Israel. As a form <strong>punishment</strong>. OPEC nations, <strong>influenced</strong> by the Arab countries, stopped selling oil to the West. Within the next six years oil prices rose to ten times the price of the early 1970s. OPEC countries became rich with so-called <strong>petrodollars</strong>; the West <strong>sank into</strong> deep <strong>recession</strong> because they needed OPEC’s oil.</p>
+<p>Arab-Israeli war 阿拉伯以色列战争</p>
+<p>punishment 惩罚</p>
+<p>influenced 影响</p>
+<p>petrodollars 石油美刀 （Portmanteau)</p>
+<p>sank into 陷入</p>
+<p>recession 衰退</p>
+<blockquote>
+<p>In the <strong>aftermath</strong> of the energy crisis of the 1970s, western countries started looking for <strong>alternative</strong> forms of energy in order to become more independent from OPEC and the oil-producing nations. In 1986, oil prices <strong>dropped</strong> to the lowest rate in history. Oil-producing nations lost much of their income. In the 80s and 90s OPEC’s power <strong>diminished</strong>, often because of conflicts and internal arguments and because member states could not agree on <strong>production quotas</strong>. Some OPEC countries did not keep <strong>agreements</strong> and produced more oil, thus lowering prices.</p>
+</blockquote>
+<p>aftermath 创伤</p>
+<p>alternative 可替换的</p>
+<p>dropped 下降</p>
+<p>diminish 减少</p>
+<p>production quotas 生产定额</p>
+<p>agreement 协议</p>
+<blockquote>
+<p>After 2000, oil prices began to rise again and reached an <strong>all-time high</strong> in 2007. The <strong>financial crisis</strong> of 2007 and 2008 hit world economy hard and oil prices fell once again. Sine the Arab Spring of 20011, prices have gone up and down several times. Today OPEC still controls about 60% of the world’s oil reserves and produces 40% of the world’s oil. Saudi Arabia is the most powerful member of the group, because it has the largest reserves. Even though there have been <strong>quarrels</strong> in the <strong>cartel</strong> in the last 5 decades it remains a powerful organization.</p>
+</blockquote>
+<p>all-time high 历史最高点</p>
+<p>financial crisis 经济危机</p>
+<p>quarrel 争论</p>
+<p>cartel 卡特尔</p>
+<h2 id="Passage-5">Passage 5</h2>
+<blockquote>
+<p>A research reports says that virtual worlds can be important places where children <strong>practice</strong> what they will do in real life. They are also a powerful and <strong>attractive</strong> alternative to more passive <strong>adventures</strong> like watching TV. The research was done with children using the BBC’s Adventure Rock virtual world, <strong>aimed</strong> at those aged 6-12. It <strong>surveyed</strong> and interviewed children who were the first to <strong>test the game</strong>.</p>
+</blockquote>
+<p>practice v. 练习；n. 措施，手段</p>
+<p>attractive 有吸引力的</p>
+<p>adventures 娱乐方式</p>
+<p>aim 目标</p>
+<p>survey = investigate</p>
+<p>test the game  内测</p>
+<blockquote>
+<p>The online world is the theme island built for the BBC’s children channel by Belgian game maker Larian. Children <strong>explore</strong> the world alone but they use message boards to share what they find and what they do in the different creative studios they find around the virtual space.</p>
+</blockquote>
+<p>explore 探索 exploration</p>
+<blockquote>
+<p><strong>At times</strong> children were explorers and at other they were <strong>social climbers</strong> eager to connect with other players. Some were power users looking for more information about how the virtual space really worked. The children could try all kinds of things without having to be afraid of the <strong>consequences</strong> that would follow if they tried them in the real world. They learned many useful social skills and played around with their identity <strong>in ways</strong> that would be much more difficult in real life.</p>
+</blockquote>
+<p>at times 很多时候</p>
+<p>social climber 社交达人</p>
+<p>work 工作，运转，起作用，作品</p>
+<p>consequence = result</p>
+<p>in ways 在某些方面</p>
+<blockquote>
+<p>According to the study what children liked about virtual worlds was the chance to create content such as music, cartoons and videos. The publishers of the reports say that virtual worlds can be a powerful, <strong>engaging</strong> and real <strong>interactive</strong> alternative to more passive media. They urged creators of virtual spaces for children to get young people <strong>involved</strong> very early on because they really do have good ideas to add and they are very good critical friends.</p>
+</blockquote>
+<p>interactive 互动的</p>
+<p>engaging = participate = involved</p>
+<h2 id="Passage-6">Passage 6</h2>
+<p><strong>Do whale sleep?</strong></p>
+<ul>
+<li>Like all mammals, whales breathe air</li>
+<li>They are warm-blooded</li>
+<li>They <strong>nurse</strong> their young with milk</li>
+<li>they have body hair.</li>
+<li>Whales have a four-chambered hearted.</li>
+</ul>
+<p>nurse 滋养</p>
+<blockquote>
+<p>Whales are mammals, so in many ways, They are just like human beings. The most important difference is that humans and whales live in different environments and whales have a special <strong>respiratory system</strong> that enables them to stay underwater for several minutes without breathing oxygen. For this reason, they are said to be <strong>voluntary</strong> breathers. That is, because of whales underwater environment, they must be <strong>conscious</strong> breathers. They think about every breath they take and come up to the surface of the water to breathe through <strong>blowholes</strong> on top of their heads.</p>
+</blockquote>
+<p>voluntary 自发性的</p>
+<p>conscious 有意识的 - consciousness - subconsciousness 潜意识的 - conscientious 有良知的</p>
+<p>blowholes 呼吸孔</p>
+<blockquote>
+<p>What is <strong>outstanding</strong> about whales is the way they can sleep. While all mammals sleep, whales cannot afford to <strong>become</strong> unconscious for long because they may <strong>drown</strong>. They only way they can sleep is by remaining partially conscious. It is believed that only one hemisphere of the whale’s brain sleeps at a time, so they rest but are never completely sleep. They can do so most probably near the surface so that they can come up for air easily.</p>
+</blockquote>
+<p>outstanding - dwarf 相形见拙，矮人 - overshadow 相形见拙</p>
+<p>drown - drought - dry</p>
+<p>afford 承担，支付得起</p>
+<p>part -  partial  - partially - potential 潜在的</p>
+<ul>
+<li>Whales are like fish in the way they breathe. true or false? ×</li>
+<li>Whales don’t sleep at all. true or false? ×</li>
+<li>Whales sleep by letting the <strong>whole</strong> brain rest for a <strong>lapse</strong> of time. true or false? ×</li>
+</ul>
+<p>complete - whole - entire - all - total - overall</p>
+<p>lapse 流逝（一段时间）</p>
+<blockquote>
+<p>Mammal      <psw>哺乳动物</psw><br>
+Whale       <psw>鲸鱼</psw><br>
+Conscious   <psw>有意识的</psw><br>
+Chamber     <psw>腔室</psw><br>
+Partially   <psw>部分地</psw><br>
+Nurse       <psw>护理</psw><br>
+Drown       <psw>溺水</psw><br>
+Oxygen      <psw>氧气</psw><br>
+Outstanding <psw>杰出的</psw><br>
+Respiratory <psw>呼吸的</psw><br>
+Hemisphere  <psw>半球</psw><br>
+Surface     <psw>表面</psw><br>
+Voluntary   <psw>自愿的</psw><br>
+Asleep      <psw>睡着的</psw><br>
+Breath      <psw>呼吸</psw></p>
+</blockquote>
+<blockquote>
+<p>mamlma wlahe inuoccsso rahmebc aiyatlrpl rsuen dnwro onxyge onttsdnaugi yeosrraritp smepeihhre sucaefr tlrnuaoyv eaeslp ehtbra</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>英语</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>英语词汇文章14~16</title>
+    <url>/2025/02/25/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A05/</url>
+    <content><![CDATA[<h2 id="UNICEF">UNICEF</h2>
+<blockquote>
+<p>UNICEF <strong>stands for</strong> United Nations International Children’s Emergency Fund. It was created by the United Nations <u>General <strong>Assembly</strong></u> on December 11,1946, to provide emergency food and health care to children in countries that had been <strong>devastated</strong> by World War II In 1954, UNICEF became a <strong>permanent</strong> part of the United Nations System. UNICEF relies on <strong>contributions</strong> from governments and private donors. Governments contribute <strong>two thirds</strong> of the<br>
+organization’s resources; private groups and <strong>some</strong> 6 million individuals contribute the rest through the National Committee. Most of UNICEF’s work is <strong>in the field</strong>, with staff in over 190 countries and territories. More than 200 country offices carry out UNICEF’s mission through a program developed with host governments. Seven <strong>regional</strong> offices provide technical assistance to country offices as needed.</p>
+</blockquote>
+<p>emergency 紧急</p>
+<p>fund = finance = donate</p>
+<p>assembly 集会</p>
+<p>general assembly 全体大会</p>
+<p>devastate = destroy = damage</p>
+<p>permanent = forever</p>
+<p>contribute to</p>
+<p>two thirds = two in three</p>
+<p>some 大概，大约</p>
+<p>in the field 在基层</p>
+<blockquote>
+<p>UNICEF’s programs emphasize developing community-level services to promote the health and well-being of children. UNICEF was awarded the Nobel Peace Prize in 1965 and the Prince of Asturias Award of Concord in 2006.</p>
+</blockquote>
+<p>emphasize = focus on</p>
+<p>well-being 福祉</p>
+<blockquote>
+<p>Contribution    <psw>贡献</psw><br>
+Assistance      <psw>援助</psw><br>
+Establish       <psw>建立</psw><br>
+Technical       <psw>技术的</psw><br>
+Community       <psw>社区</psw><br>
+Stand           <psw>代表</psw><br>
+Well-being      <psw>福祉</psw><br>
+Permanent       <psw>永久的</psw><br>
+Territory       <psw>领土</psw><br>
+Emergency       <psw>紧急的</psw><br>
+Resource        <psw>资源</psw><br>
+Mission         <psw>使命</psw><br>
+Headquarter     <psw>总部</psw><br>
+Emphasize       <psw>强调</psw><br>
+Devastate       <psw>摧毁</psw><br>
+Assembly        <psw>集会</psw><br>
+Promote         <psw>促进</psw><br>
+Donor           <psw>捐赠者</psw><br>
+Host            <psw>主办</psw></p>
+</blockquote>
+<h2 id="Obesity">Obesity</h2>
+<blockquote>
+<p>Obesity is a medical <strong>condition</strong> in which excess body fat has accumulated to the extent that it may have an <strong>adverse</strong> effect on health, leading to reduced life expectancy and/or increased health problems. Body mass index(BMI), a <strong>measurement</strong> which compares weight and height, defines people as overweight (pre-obese) when their BMI is between 25kg/m2 and 30kg/m2, and obese when it is greater than 30kg/m2.</p>
+</blockquote>
+<p>fat - protein - vitamin</p>
+<p>condition - disease - illness - sickness</p>
+<p>adverse - bad - opposite</p>
+<p>more and more = an increasing number of</p>
+<p>measure v.测量 n.手段，措施</p>
+<p>Obesity increases the <strong>likelihood</strong> of various diseases, particularly heart disease, type 2 diabetes, breathing difficulties during sleep, certain types of cancer, and <strong>osteoarthritis</strong>. Obesity is most commonly caused by a combination of excessive dietary calories, lack of physical activity, and genetic <strong>susceptibility</strong>, although a few cases are caused primarily by genes, <strong>endocrine</strong> disorders, <strong>medications</strong> or <strong>psychiatric</strong> illness. Evidence to support the view that some obese people eat little yet gain weight due to a slow <strong>metabolism</strong> is limited;on average obese people have a greater energy expenditure than their thin <strong>counterparts</strong> due to the energy required to maintain an increased body mass.</p>
+<p>likelihood = possibility = potential</p>
+<p>particularly = especially</p>
+<p>endocrine 内分泌</p>
+<p>medication 药物</p>
+<p>psychiatric 精神学的</p>
+<p>susceptible - vulnerable - fragile - susceptibility 易受影响</p>
+<p>metabolism 新陈代谢</p>
+<p>on average = generally</p>
+<p>The primary treatment for obesity is dieting and physical exercise. To <strong>supplement</strong> this, or in case of failure, anti-obesity drugs may be taken to <strong>reduce appetite</strong> or inhibit fat absorption. In severe cases, surgery is performed or an intragastric balloon is placed to reduce stomach volume and/or bowel length, leading to earlier <strong>satiation</strong> and reduced ability to absorb nutrients from food.</p>
+<p>dieting 节食</p>
+<p>reduce appetite 减少食欲</p>
+<p>supplement v. 补充</p>
+<p>satiation 饱足感</p>
+<p>Obesity is a leading preventable cause of death worldwide, with increasing prevalence in adults and children, and authorities <u>view it as</u> one of the most serious public health problems of the 21st century. Obesity is <strong>stigmatized</strong> in much of the modern world (particularly in the Western world), though it <u>was widely perceived as</u> a symbol of wealth and <strong>fertility</strong> at other times in history, and still is in some parts of the world.</p>
+<p>stigma - stigmatize 污名化</p>
+<p>fertility 多产 - fertile 肥沃 - fertilizer 肥料</p>
+<ul>
+<li>The statistics state that (although obesity is prevalent, it is not considered  as a serious illness.)</li>
+<li>Obese people (may suffer from severe illnesses.)</li>
+<li>Modern medicine (can cure obesity.)</li>
+<li>The best treatment for obesity is (related to individuals lifestyle.)</li>
+</ul>
+<blockquote>
+<p>Extent          <psw>程度</psw><br>
+Symbol          <psw>象征</psw><br>
+Likelihood      <psw>可能性</psw><br>
+Susceptibility  <psw>易受影响的</psw><br>
+Dietary         <psw>饮食的</psw><br>
+Gene            <psw>基因</psw><br>
+Excess          <psw>过量</psw><br>
+Obesity         <psw>肥胖</psw><br>
+Fertility       <psw>肥沃</psw><br>
+Psychiatric     <psw>精神病的</psw><br>
+Supplement      <psw>补充</psw><br>
+Accumulate      <psw>积累</psw><br>
+Wealth          <psw>财富</psw><br>
+Define          <psw>定义</psw><br>
+Calories        <psw>卡路里</psw><br>
+Evidence        <psw>证据</psw><br>
+Excessive       <psw>过度的</psw><br>
+Measurement     <psw>测量</psw><br>
+Dieting         <psw>节食</psw><br>
+Expenditure     <psw>支出</psw><br>
+Stigmatized     <psw>被污名化的</psw><br>
+Statistics      <psw>统计</psw><br>
+Disorder        <psw>紊乱</psw><br>
+Genetic         <psw>遗传的</psw></p>
+</blockquote>
+<h2 id="Climate-change">Climate change</h2>
+<blockquote>
+<p>Climate <strong>encompasses</strong> the statistics of temperature, humidity, <strong>atmospheric</strong> pressure, wind, rainfall, atmospheric particle count and other <strong>meteorological</strong> elements in a given region over a long period of time. Climate can be contrasted to weather, which is the present condition of these same elements and their <strong>variations</strong> over shorter time periods.</p>
+</blockquote>
+<p>encompass - include</p>
+<p>atmosphere - atmospheric 大气的</p>
+<p>meteor - meteorological 大气现象的</p>
+<p>vary - variation</p>
+<blockquote>
+<p>Climate may be <strong>inherently</strong> variable <strong>as evidenced by</strong> the irregularity of the<br>
+seasons from one year to another. This variability is normal and may remain <strong>partially</strong> understood. It <strong>is related to</strong> changes in ocean <strong>currents</strong>, volcanic eruptions, solar radiation and other components of the climate system. In addition, our climate also has its extremes (such as floods, droughts, <strong>hail</strong>, <strong>tornadoes</strong> and hurricanes), which can be <strong>devastating</strong>. However, in recent decades, a number of <strong>indicators</strong> and studies show more and more evidence of climate warming across the globe. A <strong>disturbing</strong> phenomenon that challenges human habits and activities which are responsible for greenhouse gas emissions.</p>
+</blockquote>
+<p>inherently 固有的，不断的</p>
+<p>as evidence by 作为…的证据</p>
+<p>partially 部分地</p>
+<p>is related to = have something to do with …相关</p>
+<p>current 流动</p>
+<p>devastating 毁灭性的</p>
+<p>indicate 指出 - indictor 指标</p>
+<p>disturbing 令人不安的</p>
+<p><strong>Consequences of global warming</strong></p>
+<blockquote>
+<p>There are two major effects of global warming: the increase of temperature on the earth by about 3° to 5°C (5.4° to 9° Fahrenheit) by the year 2100 and Rise of sea levels by at least 25 meters (82 feet) by the year 2100. Other consequences are listed below:</p>
+</blockquote>
+<ul>
+<li>Sea levels are rising due to <strong>thermal</strong> expansion of the ocean, in addition to melting of land ice.</li>
+<li>Amounts and patterns of <strong>precipitation</strong> and changing.</li>
+<li>The total annual power of hurricanes has already increased markedly since 1975 because their average intensity and average duration have increased.</li>
+<li>Changes in temperature and precipitation patterns increase the frequency, duration, and intensity of other extreme weather events, such as floods, droughts, heat waves, and tornadoes.</li>
+<li>Higher and lower agricultural <strong>yields</strong>, further <strong>glacial</strong> retreat, reduced summer stream flows, species extinctions.</li>
+<li>Diseases like <strong>malaria</strong> are returning into areas where they have been extinguished earlier.</li>
+</ul>
+<p>thermal 热量</p>
+<p>precipitation 降水</p>
+<p>yield 产出</p>
+<p>glacier - glacial</p>
+<p>malaria 疟疾</p>
+<ul>
+<li>Climate is by definition variable. true</li>
+<li>greenhouse effects have no impacts on our health. false</li>
+</ul>
+<blockquote>
+<p>Variability <psw>变化性</psw><br>
+Agricultural <psw>农业的</psw><br>
+Melt <psw>融化</psw><br>
+Volcanic <psw>火山的</psw><br>
+Component <psw>组成部分</psw><br>
+Radiation <psw>辐射</psw><br>
+Contrast <psw>对比</psw><br>
+Glacial <psw>冰川的</psw><br>
+Humidity <psw>湿度</psw><br>
+Variable <psw>变量的 / 可变的</psw><br>
+Encompass <psw>包含 / 涵盖</psw><br>
+Sea level <psw>海平面</psw><br>
+Current <psw>洋流 / 当前的</psw><br>
+Consequence <psw>结果 / 后果</psw><br>
+Atmosphere <psw>大气 / 氛围</psw><br>
+Extinction <psw>灭绝</psw><br>
+Solar <psw>太阳的</psw><br>
+Major <psw>主要的</psw><br>
+Thermal <psw>热的 / 热量的</psw><br>
+Eruption <psw>喷发</psw><br>
+Intensity <psw>强度</psw><br>
+Yield <psw>产量 / 产出</psw><br>
+Extreme <psw>极端的</psw><br>
+Meteorological <psw>气象的</psw><br>
+Devastating <psw>毁灭性的</psw><br>
+Extinguish <psw>熄灭 / 消灭</psw></p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>英语</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>英语词汇文章17~19</title>
     <url>/2025/02/26/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A06/</url>
     <content><![CDATA[<h2 id="Ozone-layer-depletion">Ozone layer depletion</h2>
@@ -1287,342 +1463,177 @@ Broad <psw>广泛的 / 宽广的</psw></p>
       </tags>
   </entry>
   <entry>
-    <title>英语词汇文章14~16</title>
-    <url>/2025/02/25/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A05/</url>
-    <content><![CDATA[<h2 id="UNICEF">UNICEF</h2>
+    <title>英语词汇文章26~28</title>
+    <url>/2025/03/09/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A09/</url>
+    <content><![CDATA[<h2 id="The-World-Wide-Web">The World Wide Web</h2>
 <blockquote>
-<p>UNICEF <strong>stands for</strong> United Nations International Children’s Emergency Fund. It was created by the United Nations <u>General <strong>Assembly</strong></u> on December 11,1946, to provide emergency food and health care to children in countries that had been <strong>devastated</strong> by World War II In 1954, UNICEF became a <strong>permanent</strong> part of the United Nations System. UNICEF relies on <strong>contributions</strong> from governments and private donors. Governments contribute <strong>two thirds</strong> of the<br>
-organization’s resources; private groups and <strong>some</strong> 6 million individuals contribute the rest through the National Committee. Most of UNICEF’s work is <strong>in the field</strong>, with staff in over 190 countries and territories. More than 200 country offices carry out UNICEF’s mission through a program developed with host governments. Seven <strong>regional</strong> offices provide technical assistance to country offices as needed.</p>
+<p>The World Wide Web, The WWW or the Web <strong>refers to</strong> an information space <strong>where</strong> documents and other web resources are identified by Uniform Resource Locators (URLs), <strong>interlinked</strong> by hypertext links, and can be accessed via the Internet. It <strong>was invented by</strong> the English scientist Tim Berners-Lee in 1989. He wrote the first web browser computer program in 1990. The World Wide Web has been central to the development of the Information Age and is the <strong>primary</strong> tool billions of people use to interact on the Internet.</p>
 </blockquote>
-<p>emergency 紧急</p>
-<p>fund = finance = donate</p>
-<p>assembly 集会</p>
-<p>general assembly 全体大会</p>
-<p>devastate = destroy = damage</p>
-<p>permanent = forever</p>
-<p>contribute to</p>
-<p>two thirds = two in three</p>
-<p>some 大概，大约</p>
-<p>in the field 在基层</p>
+<p>Website 网站</p>
+<p>refer to 代指的是</p>
+<p>where = in which</p>
+<p>interlink 相互连接</p>
+<p>hypertext 超文本 - hypertension</p>
+<p>was invent by 被…发明</p>
+<p>primary 首要的</p>
 <blockquote>
-<p>UNICEF’s programs emphasize developing community-level services to promote the health and well-being of children. UNICEF was awarded the Nobel Peace Prize in 1965 and the Prince of Asturias Award of Concord in 2006.</p>
+<p>Web pages are primarily text documents formatted and <strong>annotated</strong> with Hypertext Markup Language (HTML). <strong>In addition to</strong> formatted text, web pages may contain images, video, audio, and software components that are <strong>rendered</strong> in the user’s web browser as <strong>coherent</strong> pages of multimedia content. <strong>Embedded</strong> hyperlinks <strong>permit</strong> users to navigate between web pages. Multiple web pages with a common domain name make up a website. Website content can largely be provided by the publisher or by users who contribute content online.</p>
 </blockquote>
-<p>emphasize = focus on</p>
-<p>well-being 福祉</p>
+<p>annotate 解释，注释</p>
+<p>in addition to 除了</p>
+<p>render 提取，提供，渲染</p>
+<p>coherent 一致的，连贯的</p>
+<p>embed 嵌入，内置</p>
+<p>permit 允许</p>
 <blockquote>
-<p>Contribution    <psw>贡献</psw><br>
-Assistance      <psw>援助</psw><br>
-Establish       <psw>建立</psw><br>
-Technical       <psw>技术的</psw><br>
-Community       <psw>社区</psw><br>
-Stand           <psw>代表</psw><br>
-Well-being      <psw>福祉</psw><br>
-Permanent       <psw>永久的</psw><br>
-Territory       <psw>领土</psw><br>
-Emergency       <psw>紧急的</psw><br>
-Resource        <psw>资源</psw><br>
-Mission         <psw>使命</psw><br>
-Headquarter     <psw>总部</psw><br>
-Emphasize       <psw>强调</psw><br>
-Devastate       <psw>摧毁</psw><br>
-Assembly        <psw>集会</psw><br>
-Promote         <psw>促进</psw><br>
-Donor           <psw>捐赠者</psw><br>
-Host            <psw>主办</psw></p>
+<p>Recently, many people have criticized today’s <strong>misuse</strong> of the web. The inventor of the World Wide Web, Tim Berners-Lee himself has warned of the dangers of the Internet. According to him, the web has become a tool in the <strong>hand of the powerful</strong> to get what they want. For example, he warns that fake news is <strong>disseminated</strong> either to generate a lot of money or to attempt to <strong>manipulate</strong> people’s opinions. Another worry was the <strong>gross</strong> <strong>invasion</strong> of privacy. Tim Berners-Lee is also concerned about governments’ misuse of the Internet to collect personal data to manipulate or <strong>oppress</strong> people.</p>
 </blockquote>
-<h2 id="Obesity">Obesity</h2>
+<p>misuse - abuse</p>
+<p>hand of the powerful 掌权者</p>
+<p>disseminate 散播</p>
+<p>manipulate - control</p>
+<p>gross 严重的，大的，总体的</p>
+<p>invade - invasion</p>
+<p>oppress 镇压</p>
 <blockquote>
-<p>Obesity is a medical <strong>condition</strong> in which excess body fat has accumulated to the extent that it may have an <strong>adverse</strong> effect on health, leading to reduced life expectancy and/or increased health problems. Body mass index(BMI), a <strong>measurement</strong> which compares weight and height, defines people as overweight (pre-obese) when their BMI is between 25kg/m2 and 30kg/m2, and obese when it is greater than 30kg/m2.</p>
+<p>central access oppress via navigate interact manipulate invent criticize misuse browser multiple generate permit audio warn embed content gross scientist primary invasion contribute page</p>
 </blockquote>
-<p>fat - protein - vitamin</p>
-<p>condition - disease - illness - sickness</p>
-<p>adverse - bad - opposite</p>
-<p>more and more = an increasing number of</p>
-<p>measure v.测量 n.手段，措施</p>
-<p>Obesity increases the <strong>likelihood</strong> of various diseases, particularly heart disease, type 2 diabetes, breathing difficulties during sleep, certain types of cancer, and <strong>osteoarthritis</strong>. Obesity is most commonly caused by a combination of excessive dietary calories, lack of physical activity, and genetic <strong>susceptibility</strong>, although a few cases are caused primarily by genes, <strong>endocrine</strong> disorders, <strong>medications</strong> or <strong>psychiatric</strong> illness. Evidence to support the view that some obese people eat little yet gain weight due to a slow <strong>metabolism</strong> is limited;on average obese people have a greater energy expenditure than their thin <strong>counterparts</strong> due to the energy required to maintain an increased body mass.</p>
-<p>likelihood = possibility = potential</p>
-<p>particularly = especially</p>
-<p>endocrine 内分泌</p>
-<p>medication 药物</p>
-<p>psychiatric 精神学的</p>
-<p>susceptible - vulnerable - fragile - susceptibility 易受影响</p>
-<p>metabolism 新陈代谢</p>
-<p>on average = generally</p>
-<p>The primary treatment for obesity is dieting and physical exercise. To <strong>supplement</strong> this, or in case of failure, anti-obesity drugs may be taken to <strong>reduce appetite</strong> or inhibit fat absorption. In severe cases, surgery is performed or an intragastric balloon is placed to reduce stomach volume and/or bowel length, leading to earlier <strong>satiation</strong> and reduced ability to absorb nutrients from food.</p>
-<p>dieting 节食</p>
-<p>reduce appetite 减少食欲</p>
-<p>supplement v. 补充</p>
-<p>satiation 饱足感</p>
-<p>Obesity is a leading preventable cause of death worldwide, with increasing prevalence in adults and children, and authorities <u>view it as</u> one of the most serious public health problems of the 21st century. Obesity is <strong>stigmatized</strong> in much of the modern world (particularly in the Western world), though it <u>was widely perceived as</u> a symbol of wealth and <strong>fertility</strong> at other times in history, and still is in some parts of the world.</p>
-<p>stigma - stigmatize 污名化</p>
-<p>fertility 多产 - fertile 肥沃 - fertilizer 肥料</p>
-<ul>
-<li>The statistics state that (although obesity is prevalent, it is not considered  as a serious illness.)</li>
-<li>Obese people (may suffer from severe illnesses.)</li>
-<li>Modern medicine (can cure obesity.)</li>
-<li>The best treatment for obesity is (related to individuals lifestyle.)</li>
-</ul>
+<h2 id="Friendship">Friendship</h2>
 <blockquote>
-<p>Extent          <psw>程度</psw><br>
-Symbol          <psw>象征</psw><br>
-Likelihood      <psw>可能性</psw><br>
-Susceptibility  <psw>易受影响的</psw><br>
-Dietary         <psw>饮食的</psw><br>
-Gene            <psw>基因</psw><br>
-Excess          <psw>过量</psw><br>
-Obesity         <psw>肥胖</psw><br>
-Fertility       <psw>肥沃</psw><br>
-Psychiatric     <psw>精神病的</psw><br>
-Supplement      <psw>补充</psw><br>
-Accumulate      <psw>积累</psw><br>
-Wealth          <psw>财富</psw><br>
-Define          <psw>定义</psw><br>
-Calories        <psw>卡路里</psw><br>
-Evidence        <psw>证据</psw><br>
-Excessive       <psw>过度的</psw><br>
-Measurement     <psw>测量</psw><br>
-Dieting         <psw>节食</psw><br>
-Expenditure     <psw>支出</psw><br>
-Stigmatized     <psw>被污名化的</psw><br>
-Statistics      <psw>统计</psw><br>
-Disorder        <psw>紊乱</psw><br>
-Genetic         <psw>遗传的</psw></p>
+<p>Friendship <strong>is defined as</strong> a bond of affection between two people. People are referred to as best friends if the friendship is really strong. This relationship is characterized by positive <strong>interpersonal</strong> qualities such as kindness, <strong>generosity</strong>, loyalty, and honesty. True friends choose to be with one another, enjoy time spent together, and can engage in a positive and supportive role to one another.</p>
 </blockquote>
-<h2 id="Climate-change">Climate change</h2>
+<p>is define as 被定义为</p>
+<p>generosity 慷慨</p>
+<p>interpersonal 人际间的</p>
+<p>positive - optimisitic - negative</p>
+<p><strong>What are the different types of friends?</strong></p>
+<p><strong>Acquaintances</strong></p>
 <blockquote>
-<p>Climate <strong>encompasses</strong> the statistics of temperature, humidity, <strong>atmospheric</strong> pressure, wind, rainfall, atmospheric particle count and other <strong>meteorological</strong> elements in a given region over a long period of time. Climate can be contrasted to weather, which is the present condition of these same elements and their <strong>variations</strong> over shorter time periods.</p>
+<p>It’s easy to classify acquaintances. They’re the people you meet frequently at casual places but don’t truly know each other. These are people we know well enough to <strong>strike up</strong> a conversation with from time to time, but not people we’d ask to a dinner party or contact for help.</p>
 </blockquote>
-<p>encompass - include</p>
-<p>atmosphere - atmospheric 大气的</p>
-<p>meteor - meteorological 大气现象的</p>
-<p>vary - variation</p>
+<p>Acquaintance - stranger</p>
+<p>be acquainted with - familiar</p>
+<p>strike up 开启</p>
+<p>time to time 时而不时</p>
+<p><strong>Close friends</strong></p>
 <blockquote>
-<p>Climate may be <strong>inherently</strong> variable <strong>as evidenced by</strong> the irregularity of the<br>
-seasons from one year to another. This variability is normal and may remain <strong>partially</strong> understood. It <strong>is related to</strong> changes in ocean <strong>currents</strong>, volcanic eruptions, solar radiation and other components of the climate system. In addition, our climate also has its extremes (such as floods, droughts, <strong>hail</strong>, <strong>tornadoes</strong> and hurricanes), which can be <strong>devastating</strong>. However, in recent decades, a number of <strong>indicators</strong> and studies show more and more evidence of climate warming across the globe. A <strong>disturbing</strong> phenomenon that challenges human habits and activities which are responsible for greenhouse gas emissions.</p>
+<p>You’re more inclined to seek help or support from a close <strong>buddy</strong>. There is not only a high level of trust amongst close friends but also a great deal of genuine love and affection. Even if you disagree with a close friend’s decisions, you would protect his or her freedom to make them.</p>
 </blockquote>
-<p>inherently 固有的，不断的</p>
-<p>as evidence by 作为…的证据</p>
-<p>partially 部分地</p>
-<p>is related to = have something to do with …相关</p>
-<p>current 流动</p>
-<p>devastating 毁灭性的</p>
-<p>indicate 指出 - indictor 指标</p>
-<p>disturbing 令人不安的</p>
-<p><strong>Consequences of global warming</strong></p>
+<p><strong>Best friends</strong></p>
 <blockquote>
-<p>There are two major effects of global warming: the increase of temperature on the earth by about 3° to 5°C (5.4° to 9° Fahrenheit) by the year 2100 and Rise of sea levels by at least 25 meters (82 feet) by the year 2100. Other consequences are listed below:</p>
+<p>Although best friends are quite rare, they are people whom we need in our lives. Your best friend understands you without much explanation and is always there for you. Your relationship with your best friend is not dependent on the time you spend together. You may not meet your best friends for a long time. But once you get in touch with them, you feel <strong>as if</strong> nothing has changed in your friendship. These connections are <strong>distinct</strong> in their ability to adapt the the environment and endure despite the <strong>vagaries</strong> of life.</p>
 </blockquote>
-<ul>
-<li>Sea levels are rising due to <strong>thermal</strong> expansion of the ocean, in addition to melting of land ice.</li>
-<li>Amounts and patterns of <strong>precipitation</strong> and changing.</li>
-<li>The total annual power of hurricanes has already increased markedly since 1975 because their average intensity and average duration have increased.</li>
-<li>Changes in temperature and precipitation patterns increase the frequency, duration, and intensity of other extreme weather events, such as floods, droughts, heat waves, and tornadoes.</li>
-<li>Higher and lower agricultural <strong>yields</strong>, further <strong>glacial</strong> retreat, reduced summer stream flows, species extinctions.</li>
-<li>Diseases like <strong>malaria</strong> are returning into areas where they have been extinguished earlier.</li>
-</ul>
-<p>thermal 热量</p>
-<p>precipitation 降水</p>
-<p>yield 产出</p>
-<p>glacier - glacial</p>
-<p>malaria 疟疾</p>
-<ul>
-<li>Climate is by definition variable. true</li>
-<li>greenhouse effects have no impacts on our health. false</li>
-</ul>
+<p>as if 仿佛</p>
+<p>distinct 不同的</p>
+<p>vagaries 变换莫测</p>
+<p><strong>Virtual friends</strong></p>
 <blockquote>
-<p>Variability <psw>变化性</psw><br>
-Agricultural <psw>农业的</psw><br>
-Melt <psw>融化</psw><br>
-Volcanic <psw>火山的</psw><br>
-Component <psw>组成部分</psw><br>
-Radiation <psw>辐射</psw><br>
-Contrast <psw>对比</psw><br>
-Glacial <psw>冰川的</psw><br>
-Humidity <psw>湿度</psw><br>
-Variable <psw>变量的 / 可变的</psw><br>
-Encompass <psw>包含 / 涵盖</psw><br>
-Sea level <psw>海平面</psw><br>
-Current <psw>洋流 / 当前的</psw><br>
-Consequence <psw>结果 / 后果</psw><br>
-Atmosphere <psw>大气 / 氛围</psw><br>
-Extinction <psw>灭绝</psw><br>
-Solar <psw>太阳的</psw><br>
-Major <psw>主要的</psw><br>
-Thermal <psw>热的 / 热量的</psw><br>
-Eruption <psw>喷发</psw><br>
-Intensity <psw>强度</psw><br>
-Yield <psw>产量 / 产出</psw><br>
-Extreme <psw>极端的</psw><br>
-Meteorological <psw>气象的</psw><br>
-Devastating <psw>毁灭性的</psw><br>
-Extinguish <psw>熄灭 / 消灭</psw></p>
+<p>Virtual friendship is a relatively new type of friendship. It <strong>refers to</strong> friendship that takes place on the internet and is unlikely to be connected to real-life interaction. It is <strong>contrasted with</strong> the traditional friendships that we have listed above. The latter is a form of relationship that requires a lot of face-to-face connection.</p>
+<p>This type of friendship developed <strong>as a result of</strong> advances in technology. The internet, especially social media, played an <strong>undeniable</strong> role in connecting people worldwide.</p>
 </blockquote>
-]]></content>
-      <tags>
-        <tag>英语</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>英语词汇文章20~21, 11课（补）</title>
-    <url>/2025/02/27/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A07/</url>
-    <content><![CDATA[<h2 id="Computer-addiction">Computer addiction</h2>
-<blockquote>
-<p>computer addiction can be defined as the excessive or compulsive use of the computer which persists despite serious negative consequences for personal, social or <strong>occupational</strong> fuction. The addiction involves online and / or offline computer usage and <strong>consists of</strong> at least three <strong>subtypes</strong>: excessive gaming, sexual <strong>preoccupations</strong>, and e-mail/text messaging.</p>
-</blockquote>
-<p>define - definition</p>
-<p>compulsive - compulsory</p>
-<p>occupation = work = job = career</p>
-<p>consist of …组成</p>
-<p>subtypes 附属种类</p>
-<p>preoccupation 全身投入</p>
-<p><strong>Offline and online computer addiction</strong></p>
-<blockquote>
-<p>The concept of computer addiction is broadly divided into two types, namely offline and online computer addiction. The <strong>term</strong> offline computer addiction is generally used when speaking about excessive gaming behavior, which can <strong>be practiced</strong> both offline and online. Online computer addiction, <strong>also known as</strong> Internet addiction, gets more attention in general from secientific research than offline computer addiction, mainly because most cases of computer addiction are related to the excessive use of the internet.</p>
-</blockquote>
-<p>term 术语</p>
-<p>also known as 又称为</p>
-<p>be pracitced 被进行，被实施</p>
-<p>The symptoms of computer addiction include:</p>
-<ul>
-<li>Being drawn by the computer as soon as one wakes up and before one goes to bed.</li>
-<li><u>Replacing old hobbies with excessive use of the computer</u> and using the computer as one’s primary source of entertainment and <strong>procrastination</strong>.</li>
-<li>Lacking physical exercise and/or outdoor exposure because of constant use of the computer. This could <strong>contribute to</strong> many health problems such as obesity.</li>
-</ul>
-<p>Repaceing B with A 用A替换B</p>
-<p>procrastinate 拖延</p>
-<p>contribute to 有助于，导致</p>
-<p><strong>Cause and Effects</strong></p>
-<blockquote>
-<p>Researchers link internet/computer addiction with existing mental health issues, most <strong>notably</strong> depression. Studies showed that the majority of those who met the requirements of internet/computer addiction <strong>suffered from</strong> <strong>interpersonal</strong> difficulties and stress and that those addicted to online games specifically responded that they hoped to avoid reality.</p>
-</blockquote>
-<p>notable - notably</p>
-<p>suffered from 遭受</p>
-<p>interpersonal 人际关系的</p>
-<blockquote>
-<p>There are many consequences <strong>resulting from</strong> computer addiction. For example, excessive computer use may <strong>result in</strong> lack of face to face social interaction. It may also lead to Computer Vision <strong>Syndrome</strong> (CVS), a condition that results in headaches, blurred vision, neck pain, fatigue, eye strain, dry eyes, <strong>irritated</strong> eyes, double vision, <strong>vertigo</strong> or dizziness.</p>
-</blockquote>
-<p>result from 由…导致 跟原因</p>
-<p>result in 导致了…结果 跟结果</p>
-<p>sydrome 综合症</p>
-<p>irritate 恼怒，愤怒</p>
-<p>vertigo 晕头转向</p>
-<blockquote>
-<p>Notably <psw>显著地 / 尤其</psw><br>
-Suffer <psw>遭受 / 受苦</psw><br>
-Negative <psw>消极的 / 负面的</psw><br>
-Condition <psw>状况 / 条件</psw><br>
-Exist <psw>存在</psw><br>
-Depression <psw>抑郁</psw><br>
-Excessive <psw>过度的</psw><br>
-Exposure <psw>暴露</psw><br>
-Interaction <psw>互动 / 交流</psw><br>
-Addiction <psw>成瘾</psw><br>
-Persist <psw>持续 / 坚持</psw><br>
-Contribute <psw>贡献 / 促成</psw><br>
-Define <psw>定义</psw><br>
-Symptom <psw>症状</psw><br>
-Preoccupation <psw>关注 / 忧心忡忡</psw><br>
-Dizziness <psw>头晕</psw><br>
-Fatigue <psw>疲劳</psw><br>
-Occupational <psw>职业的</psw><br>
-Irritated <psw>易怒的 / 恼怒的</psw><br>
-Function <psw>功能 / 运作</psw><br>
-Blurred <psw>模糊的</psw><br>
-Procrastination <psw>拖延</psw></p>
-</blockquote>
-<h2 id="Christmas">Christmas</h2>
-<blockquote>
-<p>Christmas which is celebrated on December 25th is an important Christian holiday. The origin of the world “Christmas” comes from “Christ” and the “Holy Mass”. It is believed that the day <strong>commemorates</strong> the birth of Jesus Christ although a lot of people doubt that the Day corresponds to the actual date of birth. In spite of its Christian origin, Christmas is also celebrated by a lot of non Christian countries and the celebration includes a lot of non religious customs. People exchange gifts and <strong>greeting cards</strong>. Homes are decorated with Christmas trees, light and <strong>garlands</strong>. Dinners are planned with special food and all the families gather to have a lot of fun.</p>
-</blockquote>
-<p>Christ - Christmas - Christian - Christianity</p>
-<p>Religious - Religious people</p>
-<p>Islam - Buddhism</p>
-<p>commemorate - honor</p>
-<p>greeting card 贺卡</p>
-<p>garlands 花环</p>
-<blockquote>
-<p>A Central imaginary figure in Christmas is Father Christmas, also called Santa Claus, He is believed to fly on his <strong>sleigh</strong> bringing gifts for children. Christmas is also an opportunity for economic growth. It has become an important period for business activity. Shops make a lot of profit and a lot of countries realized this economic impact.</p>
-</blockquote>
-<p>sleigh 雪橇</p>
-<p>shopping carnival 购物节</p>
-<p><strong>What Does Christmas Mean Today?</strong></p>
-<blockquote>
-<p>Today, Christmas is still connected to its religious background although it has gained some <strong>secular</strong> <strong>characteristics</strong>. For many people, Christmas is spending extra time with family, expressing thanks and love, sharing and making others happy, and commemorating the birth of the central figure of Christianity, Jesus Christ.</p>
-</blockquote>
-<p>secular 世俗的，现期的</p>
-<p>characteristics = feature = trait</p>
-<blockquote>
-<p>Christmas is also a worldwide cultural and economic phenomenon. It is considered the most significant economic boost for many countries worldwide since sales in particularly all retail <strong>categories</strong> <strong>surge</strong> considerably. People buy and exchange gifts, decorate Christmas trees, enjoy meals with family and friends, and of course, wait for Santa Claus to arrive.</p>
-</blockquote>
-<p>surge = soar 增长</p>
-<p>category 类别</p>
+<p>contrast 相反的</p>
+<p>as a result of 作为…的结果</p>
+<p>undeniable 无法否认的</p>
 <ol>
-<li>Christmas celebration on December 25.</li>
-<li>Jesus Christ’s Date of birth we are not sure about the exactly date.</li>
-<li>Santa Claus comes on a flying sleigh</li>
+<li>There are different levels of friendship. True</li>
+<li>Best friends are necessarily people we always meet. False</li>
+<li>Virtual friendship is an old type of relationships. False</li>
 </ol>
-<h2 id="Culture-Shock">Culture Shock</h2>
-<p><strong>what is the culture shock</strong>?</p>
 <blockquote>
-<p>Culture shock <strong>refers to</strong> the feeling of <strong>disorientation</strong> experienced by people when they move to an unfamiliar cultural environment or when they are suddenly exposed to a different way of life or set of attitudes. This can be the result of immigration or a visit to a new country, a move between social environments, or simply a transition to another type of life.</p>
+<p>distinct characterize adapt engage freedom seek strike up traditional undeniable dependent affection contact incline endure aquaintance bond generosity genuine loyalty honesty</p>
 </blockquote>
-<p>shock 冲击，震惊</p>
-<p>refer to 指的是</p>
-<p>orient - disorientation 迷失</p>
-<p><strong>Culture shock stages</strong></p>
+<h2 id="Independence-Day">Independence Day</h2>
 <blockquote>
-<p>Culture shock consists of four distinct stages: honeymoon, <strong>negotiation</strong>, adjustment, and adaption, The honeymoon stage occurs when the individual sees the difference between the old and new culture in a romantic light. In negotiation stage, the differences between the old and new culture become <strong>apparent</strong> and may create <strong>anxiety</strong>. The adjustment stage refers to the period when the individuals grows accustomed to the new culture and develop <strong>routines</strong>. Finally, in the adaption stage, individuals are able to participate fully and comfortably in the host culture. Adaption or acceptance does not mean total conversion; people often keep many traits from their earlier culture, such as accents and languages. It is often referred to as <strong>bicultural</strong> stage.</p>
+<p>Independence Day, <strong>also referred to as</strong> the Fourth of July or July Fourth, is an American federal holiday <strong>commemorating</strong> the adoption of the Declaration of Independence on July 4, 1776. The Continental Congress declared that the thirteen American <strong>colonies</strong> were no longer under the rule of the <strong>monarch</strong> of Britain (George III), and they were united, free, and independent states.</p>
 </blockquote>
-<p>negotiate - negotiation 协商</p>
-<p>apparent = obvious</p>
-<p>anxiety - anxious</p>
-<p>routine 日常</p>
-<p>bicultural 双重文化的 bilingual 双重语言者</p>
-<p><strong>Homesickness</strong></p>
+<p>also refer to as = also known as</p>
+<p>FBI = Federal Bureau of Investigation</p>
+<p>commemorate 纪念</p>
+<p>colony 殖民地</p>
+<p>monarch 君主 - monarchy 君主制</p>
 <blockquote>
-<p>Culture shock may cause homesickness. This refers to the feeling of longing for one’s home. People suffering from culture shock typically experience a <strong>combination</strong> of <strong>depressive</strong> and anxious <strong>symptoms</strong> related to homesickness. Ways of coping with homesickness include developing a hobby, thinking positively and feeling grateful about what one has, and building new relationships.</p>
+<p>Independence Day is the national day of the United States and is associated with many activities. Public and private events celebrating the history, government, and traditions of the United States are organized. It is also generally associated with fireworks, family gatherings, <strong>carnivals</strong>, fairs picnics, and concerts.</p>
 </blockquote>
-<p>depressive 压抑</p>
-<p>typically 典型的</p>
-<p>combination 组合</p>
-<p>symptoms 症状</p>
-<p>cope with = deal with</p>
-<p>grateful 感激</p>
+<p>9 Interesting facts about Independence Day</p>
+<p>Here are 9 interesting facts about Independence Day:</p>
+<ol>
+<li>Congress had voted for the declaration of independence on July 2, but it was not declared until July 4.</li>
+<li>On June 11, 1776, Congress appointed a “Committee of Five”, consisting of John Adams, Benjamin Franklin, Thomas Jefferson, Robert R. Livingston, and Roger Sherman, to <strong>draft</strong> the declaration. Jefferson wrote the first draft which was then edited by the others and then edited again by the whole Congress.</li>
+<li>Fifty-six members of Congress signed the declaration.</li>
+<li>By a striking coincidence, Thomas Jefferson and John Adams, the only two signatories of the Declaration of Independence later to serve as presidents of the United States, died on the same day: July 4, 1826, which was the 50th anniversary of the Declaration.</li>
+<li>Although not a signatory of the Declaration of Independence, James Monroe, another Founding Father who was elected as president, also died on July 4, 1831, making him the third President who died on the anniversary of independence.</li>
+<li>The only U.S. president to have been born on Independence Day was Calvin Coolidge, who was born on July 4, 1872.</li>
+<li>Almost 100 years after the Declaration of Independence, in 1870, July 4 was made an official holiday by Congress.</li>
+<li>Every 4th of July, the Liberty Bell in Philadelphia is tapped thirteen times <strong>in honor of</strong> the original 13 American colonies.</li>
+<li>fireworks are an important part of the holiday because the first Independence Day celebration on July 4, 1777, witnessed Americans <strong>meeting</strong> to watch as the sky <strong>illuminated</strong> to commemorate the new nation.</li>
+</ol>
 <blockquote>
-<p>Cultural shock is a natural phenomenon that <strong>occurs</strong> when one has a cross-cultural experience. Going through the different stages can take weeks, months or years, But ultimately, the experience can be enriching and may end up with either adaption with the new culture or a return home.</p>
-</blockquote>
-<p>occur = happen</p>
-<blockquote>
-<p>Enrich <psw>丰富 / 提升</psw><br>
-Suddenly <psw>突然地</psw><br>
-Disorientation <psw>迷失方向 / 迷茫</psw><br>
-Ultimately <psw>最终 / 归根结底</psw><br>
-Longing <psw>渴望 / 思念</psw><br>
-Phenomenon <psw>现象</psw><br>
-Accustomed <psw>习惯的 / 适应的</psw><br>
-Apparent <psw>明显的 / 显而易见的</psw><br>
-Shock <psw>震惊 / 休克</psw><br>
-Unfamiliar <psw>不熟悉的 / 陌生的</psw><br>
-Expose <psw>暴露 / 接触</psw><br>
-Attitude <psw>态度</psw><br>
-Occur <psw>发生</psw><br>
-Grateful <psw>感激的</psw><br>
-Adjustment <psw>调整 / 适应</psw><br>
-Adaption <psw>适应 / 改编</psw><br>
-Repressive <psw>压制的 / 镇压的</psw><br>
-Routine <psw>常规 / 例行公事</psw><br>
-Transition <psw>过渡 / 转变</psw><br>
-Negotiation <psw>谈判 / 协商</psw><br>
-Trait <psw>特征 / 品质</psw><br>
-Participate <psw>参与</psw><br>
-Conversion <psw>转变 / 转换</psw></p>
+<p>draft 起稿</p>
+<p>meeting = gathering</p>
+<p>in honor of = commemorate</p>
+<p>illuminate 照亮</p>
 </blockquote>
 <ol>
-<li>Culture shock occurs only as a result of immigration. true</li>
-<li>The adaptation stage means that there is a complete change of personality. false</li>
-<li>Homesickness and culture shock refer to the same thing. false</li>
-<li>culture shock has also positive effects on people experiencing it. true</li>
+<li>The <strong>downsizing</strong> or the <strong>restructuring</strong> of an organization.</li>
+<li>New challenges or opportunities that arise.</li>
+<li>Poor or ineffective leadership.</li>
+<li>Having a poor relationship with a manager.</li>
+<li>For the improvement of a better work/life balance.</li>
+<li>Contributions are not being recognized.</li>
+<li>For better compensation and benefits.</li>
+<li>For better <strong>alignment</strong> with personal and organizational values.</li>
+<li>Personal strengths and capabilities.</li>
+<li>The financial instability of an organization.</li>
+<li>An organization relocated.</li>
 </ol>
+<blockquote>
+<p>Downsize 缩减</p>
+<p>restructuring 重新调整</p>
+<p>alignment 配合</p>
+</blockquote>
+<p>Because the world has become so competitive, you will have to do your best to secure your share of success. The following are tips to get you ahead in your career.</p>
+<ol>
+<li>Priority and goals</li>
+</ol>
+<p>What are your priorities of the day? Make a list and of your priorities and plan your day. The tasks of the day must be outlined with the most important and urgent ones on top.</p>
+<p>Likewise determine your short-term and long-term goals and evaluate your progress frequently.</p>
+<ol start="2">
+<li>Be focused</li>
+</ol>
+<p>Are you really present physically and mentally. Try to block out all distractions so that you have the time to truly focus on your tasks and career.</p>
+<ol start="3">
+<li>Broaden your skills</li>
+</ol>
+<p>Nothing remains the same and so do job requirements. Update your knowledge and skills. Seek improvement of your <strong>know-hows</strong>. Attend seminars, conferences, read books, be an eternal learner.</p>
+<p>know-hows = expertise</p>
+<ol start="4">
+<li>Socialize</li>
+</ol>
+<p>Be ready to participate in social functions .Be open to new acquaintances. Meet new people and deal with them respectfully and enthusiastically. Be an active listener; you will surely learn something new…</p>
+<ol start="5">
+<li>Know your <strong>merits</strong></li>
+</ol>
+<p>Know your strengths and weaknesses. If you think you deserve a position or promotion, claim it.</p>
+<ol start="6">
+<li>Accept challenge</li>
+</ol>
+<p>Through challenge you will reach areas of your personality you have never discovered before. It is a good idea to step away from you <strong>comfort zone</strong> to explore new horizons. If you settle into a routine and play it safe all the time, you will never get ahead in your career. If you always do what you’ve always done, you’ll only get what you’ve already got’</p>
+<ol start="7">
+<li>Communication</li>
+</ol>
+<p>Learn to communicate effectively. Listen to what others are saying and focus on how to give and receive constructive feedback, to persuade effectively and to ask for help and collect information.</p>
+<ol start="8">
+<li>Avoid <strong>gossip</strong></li>
+</ol>
+<p>Avoid office gossip about colleagues and the boss. Be respectful and work for the good of the company.</p>
+<ol start="9">
+<li>Relax</li>
+</ol>
+<p>Relax and do something different, a hobby that you love doing. Take time off for yourself. This will help boost your productivity during week days.</p>
+<ol start="10">
+<li>Seek satisfaction</li>
+</ol>
+<p>If you are disappointed with what you are doing, try to transform it into something you love. If you fail, it might be a good idea to do something different. As Confucius said: 'Choose a job you love, and you will never have to work a day in your life. ’</p>
 ]]></content>
       <tags>
         <tag>英语</tag>
@@ -1799,177 +1810,166 @@ Inaccurate       <psw>不准确的</psw></p>
       </tags>
   </entry>
   <entry>
-    <title>英语词汇文章26~28</title>
-    <url>/2025/03/09/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A09/</url>
-    <content><![CDATA[<h2 id="The-World-Wide-Web">The World Wide Web</h2>
+    <title>英语词汇文章20~21, 11课（补）</title>
+    <url>/2025/02/27/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A07/</url>
+    <content><![CDATA[<h2 id="Computer-addiction">Computer addiction</h2>
 <blockquote>
-<p>The World Wide Web, The WWW or the Web <strong>refers to</strong> an information space <strong>where</strong> documents and other web resources are identified by Uniform Resource Locators (URLs), <strong>interlinked</strong> by hypertext links, and can be accessed via the Internet. It <strong>was invented by</strong> the English scientist Tim Berners-Lee in 1989. He wrote the first web browser computer program in 1990. The World Wide Web has been central to the development of the Information Age and is the <strong>primary</strong> tool billions of people use to interact on the Internet.</p>
+<p>computer addiction can be defined as the excessive or compulsive use of the computer which persists despite serious negative consequences for personal, social or <strong>occupational</strong> fuction. The addiction involves online and / or offline computer usage and <strong>consists of</strong> at least three <strong>subtypes</strong>: excessive gaming, sexual <strong>preoccupations</strong>, and e-mail/text messaging.</p>
 </blockquote>
-<p>Website 网站</p>
-<p>refer to 代指的是</p>
-<p>where = in which</p>
-<p>interlink 相互连接</p>
-<p>hypertext 超文本 - hypertension</p>
-<p>was invent by 被…发明</p>
-<p>primary 首要的</p>
+<p>define - definition</p>
+<p>compulsive - compulsory</p>
+<p>occupation = work = job = career</p>
+<p>consist of …组成</p>
+<p>subtypes 附属种类</p>
+<p>preoccupation 全身投入</p>
+<p><strong>Offline and online computer addiction</strong></p>
 <blockquote>
-<p>Web pages are primarily text documents formatted and <strong>annotated</strong> with Hypertext Markup Language (HTML). <strong>In addition to</strong> formatted text, web pages may contain images, video, audio, and software components that are <strong>rendered</strong> in the user’s web browser as <strong>coherent</strong> pages of multimedia content. <strong>Embedded</strong> hyperlinks <strong>permit</strong> users to navigate between web pages. Multiple web pages with a common domain name make up a website. Website content can largely be provided by the publisher or by users who contribute content online.</p>
+<p>The concept of computer addiction is broadly divided into two types, namely offline and online computer addiction. The <strong>term</strong> offline computer addiction is generally used when speaking about excessive gaming behavior, which can <strong>be practiced</strong> both offline and online. Online computer addiction, <strong>also known as</strong> Internet addiction, gets more attention in general from secientific research than offline computer addiction, mainly because most cases of computer addiction are related to the excessive use of the internet.</p>
 </blockquote>
-<p>annotate 解释，注释</p>
-<p>in addition to 除了</p>
-<p>render 提取，提供，渲染</p>
-<p>coherent 一致的，连贯的</p>
-<p>embed 嵌入，内置</p>
-<p>permit 允许</p>
+<p>term 术语</p>
+<p>also known as 又称为</p>
+<p>be pracitced 被进行，被实施</p>
+<p>The symptoms of computer addiction include:</p>
+<ul>
+<li>Being drawn by the computer as soon as one wakes up and before one goes to bed.</li>
+<li><u>Replacing old hobbies with excessive use of the computer</u> and using the computer as one’s primary source of entertainment and <strong>procrastination</strong>.</li>
+<li>Lacking physical exercise and/or outdoor exposure because of constant use of the computer. This could <strong>contribute to</strong> many health problems such as obesity.</li>
+</ul>
+<p>Repaceing B with A 用A替换B</p>
+<p>procrastinate 拖延</p>
+<p>contribute to 有助于，导致</p>
+<p><strong>Cause and Effects</strong></p>
 <blockquote>
-<p>Recently, many people have criticized today’s <strong>misuse</strong> of the web. The inventor of the World Wide Web, Tim Berners-Lee himself has warned of the dangers of the Internet. According to him, the web has become a tool in the <strong>hand of the powerful</strong> to get what they want. For example, he warns that fake news is <strong>disseminated</strong> either to generate a lot of money or to attempt to <strong>manipulate</strong> people’s opinions. Another worry was the <strong>gross</strong> <strong>invasion</strong> of privacy. Tim Berners-Lee is also concerned about governments’ misuse of the Internet to collect personal data to manipulate or <strong>oppress</strong> people.</p>
+<p>Researchers link internet/computer addiction with existing mental health issues, most <strong>notably</strong> depression. Studies showed that the majority of those who met the requirements of internet/computer addiction <strong>suffered from</strong> <strong>interpersonal</strong> difficulties and stress and that those addicted to online games specifically responded that they hoped to avoid reality.</p>
 </blockquote>
-<p>misuse - abuse</p>
-<p>hand of the powerful 掌权者</p>
-<p>disseminate 散播</p>
-<p>manipulate - control</p>
-<p>gross 严重的，大的，总体的</p>
-<p>invade - invasion</p>
-<p>oppress 镇压</p>
+<p>notable - notably</p>
+<p>suffered from 遭受</p>
+<p>interpersonal 人际关系的</p>
 <blockquote>
-<p>central access oppress via navigate interact manipulate invent criticize misuse browser multiple generate permit audio warn embed content gross scientist primary invasion contribute page</p>
+<p>There are many consequences <strong>resulting from</strong> computer addiction. For example, excessive computer use may <strong>result in</strong> lack of face to face social interaction. It may also lead to Computer Vision <strong>Syndrome</strong> (CVS), a condition that results in headaches, blurred vision, neck pain, fatigue, eye strain, dry eyes, <strong>irritated</strong> eyes, double vision, <strong>vertigo</strong> or dizziness.</p>
 </blockquote>
-<h2 id="Friendship">Friendship</h2>
+<p>result from 由…导致 跟原因</p>
+<p>result in 导致了…结果 跟结果</p>
+<p>sydrome 综合症</p>
+<p>irritate 恼怒，愤怒</p>
+<p>vertigo 晕头转向</p>
 <blockquote>
-<p>Friendship <strong>is defined as</strong> a bond of affection between two people. People are referred to as best friends if the friendship is really strong. This relationship is characterized by positive <strong>interpersonal</strong> qualities such as kindness, <strong>generosity</strong>, loyalty, and honesty. True friends choose to be with one another, enjoy time spent together, and can engage in a positive and supportive role to one another.</p>
+<p>Notably <psw>显著地 / 尤其</psw><br>
+Suffer <psw>遭受 / 受苦</psw><br>
+Negative <psw>消极的 / 负面的</psw><br>
+Condition <psw>状况 / 条件</psw><br>
+Exist <psw>存在</psw><br>
+Depression <psw>抑郁</psw><br>
+Excessive <psw>过度的</psw><br>
+Exposure <psw>暴露</psw><br>
+Interaction <psw>互动 / 交流</psw><br>
+Addiction <psw>成瘾</psw><br>
+Persist <psw>持续 / 坚持</psw><br>
+Contribute <psw>贡献 / 促成</psw><br>
+Define <psw>定义</psw><br>
+Symptom <psw>症状</psw><br>
+Preoccupation <psw>关注 / 忧心忡忡</psw><br>
+Dizziness <psw>头晕</psw><br>
+Fatigue <psw>疲劳</psw><br>
+Occupational <psw>职业的</psw><br>
+Irritated <psw>易怒的 / 恼怒的</psw><br>
+Function <psw>功能 / 运作</psw><br>
+Blurred <psw>模糊的</psw><br>
+Procrastination <psw>拖延</psw></p>
 </blockquote>
-<p>is define as 被定义为</p>
-<p>generosity 慷慨</p>
-<p>interpersonal 人际间的</p>
-<p>positive - optimisitic - negative</p>
-<p><strong>What are the different types of friends?</strong></p>
-<p><strong>Acquaintances</strong></p>
+<h2 id="Christmas">Christmas</h2>
 <blockquote>
-<p>It’s easy to classify acquaintances. They’re the people you meet frequently at casual places but don’t truly know each other. These are people we know well enough to <strong>strike up</strong> a conversation with from time to time, but not people we’d ask to a dinner party or contact for help.</p>
+<p>Christmas which is celebrated on December 25th is an important Christian holiday. The origin of the world “Christmas” comes from “Christ” and the “Holy Mass”. It is believed that the day <strong>commemorates</strong> the birth of Jesus Christ although a lot of people doubt that the Day corresponds to the actual date of birth. In spite of its Christian origin, Christmas is also celebrated by a lot of non Christian countries and the celebration includes a lot of non religious customs. People exchange gifts and <strong>greeting cards</strong>. Homes are decorated with Christmas trees, light and <strong>garlands</strong>. Dinners are planned with special food and all the families gather to have a lot of fun.</p>
 </blockquote>
-<p>Acquaintance - stranger</p>
-<p>be acquainted with - familiar</p>
-<p>strike up 开启</p>
-<p>time to time 时而不时</p>
-<p><strong>Close friends</strong></p>
+<p>Christ - Christmas - Christian - Christianity</p>
+<p>Religious - Religious people</p>
+<p>Islam - Buddhism</p>
+<p>commemorate - honor</p>
+<p>greeting card 贺卡</p>
+<p>garlands 花环</p>
 <blockquote>
-<p>You’re more inclined to seek help or support from a close <strong>buddy</strong>. There is not only a high level of trust amongst close friends but also a great deal of genuine love and affection. Even if you disagree with a close friend’s decisions, you would protect his or her freedom to make them.</p>
+<p>A Central imaginary figure in Christmas is Father Christmas, also called Santa Claus, He is believed to fly on his <strong>sleigh</strong> bringing gifts for children. Christmas is also an opportunity for economic growth. It has become an important period for business activity. Shops make a lot of profit and a lot of countries realized this economic impact.</p>
 </blockquote>
-<p><strong>Best friends</strong></p>
+<p>sleigh 雪橇</p>
+<p>shopping carnival 购物节</p>
+<p><strong>What Does Christmas Mean Today?</strong></p>
 <blockquote>
-<p>Although best friends are quite rare, they are people whom we need in our lives. Your best friend understands you without much explanation and is always there for you. Your relationship with your best friend is not dependent on the time you spend together. You may not meet your best friends for a long time. But once you get in touch with them, you feel <strong>as if</strong> nothing has changed in your friendship. These connections are <strong>distinct</strong> in their ability to adapt the the environment and endure despite the <strong>vagaries</strong> of life.</p>
+<p>Today, Christmas is still connected to its religious background although it has gained some <strong>secular</strong> <strong>characteristics</strong>. For many people, Christmas is spending extra time with family, expressing thanks and love, sharing and making others happy, and commemorating the birth of the central figure of Christianity, Jesus Christ.</p>
 </blockquote>
-<p>as if 仿佛</p>
-<p>distinct 不同的</p>
-<p>vagaries 变换莫测</p>
-<p><strong>Virtual friends</strong></p>
+<p>secular 世俗的，现期的</p>
+<p>characteristics = feature = trait</p>
 <blockquote>
-<p>Virtual friendship is a relatively new type of friendship. It <strong>refers to</strong> friendship that takes place on the internet and is unlikely to be connected to real-life interaction. It is <strong>contrasted with</strong> the traditional friendships that we have listed above. The latter is a form of relationship that requires a lot of face-to-face connection.</p>
-<p>This type of friendship developed <strong>as a result of</strong> advances in technology. The internet, especially social media, played an <strong>undeniable</strong> role in connecting people worldwide.</p>
+<p>Christmas is also a worldwide cultural and economic phenomenon. It is considered the most significant economic boost for many countries worldwide since sales in particularly all retail <strong>categories</strong> <strong>surge</strong> considerably. People buy and exchange gifts, decorate Christmas trees, enjoy meals with family and friends, and of course, wait for Santa Claus to arrive.</p>
 </blockquote>
-<p>contrast 相反的</p>
-<p>as a result of 作为…的结果</p>
-<p>undeniable 无法否认的</p>
+<p>surge = soar 增长</p>
+<p>category 类别</p>
 <ol>
-<li>There are different levels of friendship. True</li>
-<li>Best friends are necessarily people we always meet. False</li>
-<li>Virtual friendship is an old type of relationships. False</li>
+<li>Christmas celebration on December 25.</li>
+<li>Jesus Christ’s Date of birth we are not sure about the exactly date.</li>
+<li>Santa Claus comes on a flying sleigh</li>
 </ol>
+<h2 id="Culture-Shock">Culture Shock</h2>
+<p><strong>what is the culture shock</strong>?</p>
 <blockquote>
-<p>distinct characterize adapt engage freedom seek strike up traditional undeniable dependent affection contact incline endure aquaintance bond generosity genuine loyalty honesty</p>
+<p>Culture shock <strong>refers to</strong> the feeling of <strong>disorientation</strong> experienced by people when they move to an unfamiliar cultural environment or when they are suddenly exposed to a different way of life or set of attitudes. This can be the result of immigration or a visit to a new country, a move between social environments, or simply a transition to another type of life.</p>
 </blockquote>
-<h2 id="Independence-Day">Independence Day</h2>
+<p>shock 冲击，震惊</p>
+<p>refer to 指的是</p>
+<p>orient - disorientation 迷失</p>
+<p><strong>Culture shock stages</strong></p>
 <blockquote>
-<p>Independence Day, <strong>also referred to as</strong> the Fourth of July or July Fourth, is an American federal holiday <strong>commemorating</strong> the adoption of the Declaration of Independence on July 4, 1776. The Continental Congress declared that the thirteen American <strong>colonies</strong> were no longer under the rule of the <strong>monarch</strong> of Britain (George III), and they were united, free, and independent states.</p>
+<p>Culture shock consists of four distinct stages: honeymoon, <strong>negotiation</strong>, adjustment, and adaption, The honeymoon stage occurs when the individual sees the difference between the old and new culture in a romantic light. In negotiation stage, the differences between the old and new culture become <strong>apparent</strong> and may create <strong>anxiety</strong>. The adjustment stage refers to the period when the individuals grows accustomed to the new culture and develop <strong>routines</strong>. Finally, in the adaption stage, individuals are able to participate fully and comfortably in the host culture. Adaption or acceptance does not mean total conversion; people often keep many traits from their earlier culture, such as accents and languages. It is often referred to as <strong>bicultural</strong> stage.</p>
 </blockquote>
-<p>also refer to as = also known as</p>
-<p>FBI = Federal Bureau of Investigation</p>
-<p>commemorate 纪念</p>
-<p>colony 殖民地</p>
-<p>monarch 君主 - monarchy 君主制</p>
+<p>negotiate - negotiation 协商</p>
+<p>apparent = obvious</p>
+<p>anxiety - anxious</p>
+<p>routine 日常</p>
+<p>bicultural 双重文化的 bilingual 双重语言者</p>
+<p><strong>Homesickness</strong></p>
 <blockquote>
-<p>Independence Day is the national day of the United States and is associated with many activities. Public and private events celebrating the history, government, and traditions of the United States are organized. It is also generally associated with fireworks, family gatherings, <strong>carnivals</strong>, fairs picnics, and concerts.</p>
+<p>Culture shock may cause homesickness. This refers to the feeling of longing for one’s home. People suffering from culture shock typically experience a <strong>combination</strong> of <strong>depressive</strong> and anxious <strong>symptoms</strong> related to homesickness. Ways of coping with homesickness include developing a hobby, thinking positively and feeling grateful about what one has, and building new relationships.</p>
 </blockquote>
-<p>9 Interesting facts about Independence Day</p>
-<p>Here are 9 interesting facts about Independence Day:</p>
+<p>depressive 压抑</p>
+<p>typically 典型的</p>
+<p>combination 组合</p>
+<p>symptoms 症状</p>
+<p>cope with = deal with</p>
+<p>grateful 感激</p>
+<blockquote>
+<p>Cultural shock is a natural phenomenon that <strong>occurs</strong> when one has a cross-cultural experience. Going through the different stages can take weeks, months or years, But ultimately, the experience can be enriching and may end up with either adaption with the new culture or a return home.</p>
+</blockquote>
+<p>occur = happen</p>
+<blockquote>
+<p>Enrich <psw>丰富 / 提升</psw><br>
+Suddenly <psw>突然地</psw><br>
+Disorientation <psw>迷失方向 / 迷茫</psw><br>
+Ultimately <psw>最终 / 归根结底</psw><br>
+Longing <psw>渴望 / 思念</psw><br>
+Phenomenon <psw>现象</psw><br>
+Accustomed <psw>习惯的 / 适应的</psw><br>
+Apparent <psw>明显的 / 显而易见的</psw><br>
+Shock <psw>震惊 / 休克</psw><br>
+Unfamiliar <psw>不熟悉的 / 陌生的</psw><br>
+Expose <psw>暴露 / 接触</psw><br>
+Attitude <psw>态度</psw><br>
+Occur <psw>发生</psw><br>
+Grateful <psw>感激的</psw><br>
+Adjustment <psw>调整 / 适应</psw><br>
+Adaption <psw>适应 / 改编</psw><br>
+Repressive <psw>压制的 / 镇压的</psw><br>
+Routine <psw>常规 / 例行公事</psw><br>
+Transition <psw>过渡 / 转变</psw><br>
+Negotiation <psw>谈判 / 协商</psw><br>
+Trait <psw>特征 / 品质</psw><br>
+Participate <psw>参与</psw><br>
+Conversion <psw>转变 / 转换</psw></p>
+</blockquote>
 <ol>
-<li>Congress had voted for the declaration of independence on July 2, but it was not declared until July 4.</li>
-<li>On June 11, 1776, Congress appointed a “Committee of Five”, consisting of John Adams, Benjamin Franklin, Thomas Jefferson, Robert R. Livingston, and Roger Sherman, to <strong>draft</strong> the declaration. Jefferson wrote the first draft which was then edited by the others and then edited again by the whole Congress.</li>
-<li>Fifty-six members of Congress signed the declaration.</li>
-<li>By a striking coincidence, Thomas Jefferson and John Adams, the only two signatories of the Declaration of Independence later to serve as presidents of the United States, died on the same day: July 4, 1826, which was the 50th anniversary of the Declaration.</li>
-<li>Although not a signatory of the Declaration of Independence, James Monroe, another Founding Father who was elected as president, also died on July 4, 1831, making him the third President who died on the anniversary of independence.</li>
-<li>The only U.S. president to have been born on Independence Day was Calvin Coolidge, who was born on July 4, 1872.</li>
-<li>Almost 100 years after the Declaration of Independence, in 1870, July 4 was made an official holiday by Congress.</li>
-<li>Every 4th of July, the Liberty Bell in Philadelphia is tapped thirteen times <strong>in honor of</strong> the original 13 American colonies.</li>
-<li>fireworks are an important part of the holiday because the first Independence Day celebration on July 4, 1777, witnessed Americans <strong>meeting</strong> to watch as the sky <strong>illuminated</strong> to commemorate the new nation.</li>
+<li>Culture shock occurs only as a result of immigration. true</li>
+<li>The adaptation stage means that there is a complete change of personality. false</li>
+<li>Homesickness and culture shock refer to the same thing. false</li>
+<li>culture shock has also positive effects on people experiencing it. true</li>
 </ol>
-<blockquote>
-<p>draft 起稿</p>
-<p>meeting = gathering</p>
-<p>in honor of = commemorate</p>
-<p>illuminate 照亮</p>
-</blockquote>
-<ol>
-<li>The <strong>downsizing</strong> or the <strong>restructuring</strong> of an organization.</li>
-<li>New challenges or opportunities that arise.</li>
-<li>Poor or ineffective leadership.</li>
-<li>Having a poor relationship with a manager.</li>
-<li>For the improvement of a better work/life balance.</li>
-<li>Contributions are not being recognized.</li>
-<li>For better compensation and benefits.</li>
-<li>For better <strong>alignment</strong> with personal and organizational values.</li>
-<li>Personal strengths and capabilities.</li>
-<li>The financial instability of an organization.</li>
-<li>An organization relocated.</li>
-</ol>
-<blockquote>
-<p>Downsize 缩减</p>
-<p>restructuring 重新调整</p>
-<p>alignment 配合</p>
-</blockquote>
-<p>Because the world has become so competitive, you will have to do your best to secure your share of success. The following are tips to get you ahead in your career.</p>
-<ol>
-<li>Priority and goals</li>
-</ol>
-<p>What are your priorities of the day? Make a list and of your priorities and plan your day. The tasks of the day must be outlined with the most important and urgent ones on top.</p>
-<p>Likewise determine your short-term and long-term goals and evaluate your progress frequently.</p>
-<ol start="2">
-<li>Be focused</li>
-</ol>
-<p>Are you really present physically and mentally. Try to block out all distractions so that you have the time to truly focus on your tasks and career.</p>
-<ol start="3">
-<li>Broaden your skills</li>
-</ol>
-<p>Nothing remains the same and so do job requirements. Update your knowledge and skills. Seek improvement of your <strong>know-hows</strong>. Attend seminars, conferences, read books, be an eternal learner.</p>
-<p>know-hows = expertise</p>
-<ol start="4">
-<li>Socialize</li>
-</ol>
-<p>Be ready to participate in social functions .Be open to new acquaintances. Meet new people and deal with them respectfully and enthusiastically. Be an active listener; you will surely learn something new…</p>
-<ol start="5">
-<li>Know your <strong>merits</strong></li>
-</ol>
-<p>Know your strengths and weaknesses. If you think you deserve a position or promotion, claim it.</p>
-<ol start="6">
-<li>Accept challenge</li>
-</ol>
-<p>Through challenge you will reach areas of your personality you have never discovered before. It is a good idea to step away from you <strong>comfort zone</strong> to explore new horizons. If you settle into a routine and play it safe all the time, you will never get ahead in your career. If you always do what you’ve always done, you’ll only get what you’ve already got’</p>
-<ol start="7">
-<li>Communication</li>
-</ol>
-<p>Learn to communicate effectively. Listen to what others are saying and focus on how to give and receive constructive feedback, to persuade effectively and to ask for help and collect information.</p>
-<ol start="8">
-<li>Avoid <strong>gossip</strong></li>
-</ol>
-<p>Avoid office gossip about colleagues and the boss. Be respectful and work for the good of the company.</p>
-<ol start="9">
-<li>Relax</li>
-</ol>
-<p>Relax and do something different, a hobby that you love doing. Take time off for yourself. This will help boost your productivity during week days.</p>
-<ol start="10">
-<li>Seek satisfaction</li>
-</ol>
-<p>If you are disappointed with what you are doing, try to transform it into something you love. If you fail, it might be a good idea to do something different. As Confucius said: 'Choose a job you love, and you will never have to work a day in your life. ’</p>
 ]]></content>
       <tags>
         <tag>英语</tag>
