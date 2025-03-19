@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hello World</title>
+    <url>/2025/03/19/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start">Quick Start</h2>
+<h3 id="Create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>外挂标签演示</title>
     <url>/2025/02/28/%E5%A4%96%E6%8C%82%E6%A0%87%E7%AD%BE%E6%BC%94%E7%A4%BA/</url>
     <content><![CDATA[<h2 id="外挂标签">外挂标签</h2>
@@ -66,23 +85,246 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2025/03/19/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start">Quick Start</h2>
-<h3 id="Create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <title>英语听力测试1</title>
+    <url>/2025/03/05/%E8%8B%B1%E8%AF%AD%E5%90%AC%E5%8A%9B%E6%B5%8B%E8%AF%951/</url>
+    <content><![CDATA[<h2 id="听力技巧">听力技巧</h2>
+<p>1.听前–读题(预测题目)选项不同之处是重点 过读音</p>
+<p>2.听中-放音-- 盯着题目 勾画你听到的内容-匹配程度高 为正确确选项(概率大)80%</p>
+<p>3.听后-念题目–不听题目往下读选项</p>
+<p>常见问题：</p>
+<ul>
+<li>没时间读题；</li>
+<li>熟词生义-题目听不懂；</li>
+<li>思考和听力不能同时进行</li>
+<li>不知道怎么记笔记</li>
+</ul>
+<p>词汇量不够 - 熟练度</p>
+<p>目标：把题做对，把文章听懂</p>
+<p>听前：预读，猜测，过读音</p>
+<h3 id="听力题1">听力题1</h3>
+<p>A)They will see a 27% higher price to buy natural gas.<br>
+B)They will have insufficient heating oil to keep warm.<br>
+C)They will have a costly bill to pay to heat their homes. ×<br>
+D)They will experience the coldest winter in four decades.</p>
+<p>A)<strong>Provided additional funding</strong> to Low Income Home Energy Assistance Program √<br>
+B)<strong>Assured</strong> U.S citizens of an increase in energy supplies by the end of this year.<br>
+C)Predicted a 10% jump in heating bills for most U.S households this winter<br>
+D)Decided on this year’s energy assistance package of$8 billion in total.</p>
+<blockquote>
+<p>funding = money</p>
+<p>assure = promise</p>
+<p>jump 涨价</p>
+</blockquote>
+<h3 id="原文1">原文1</h3>
+<p>Across the U.S, families are looking to the winter with fear as energy costs soar. A number of factors are creating a bad <strong>situation</strong>, global energy consumption is up but the supplies have been reduced. the energy department <strong>projects</strong> heat bill will jump 28 percent this winter for those who rely on natural gas. Natural gas is used by nearly half of U.S households for heat. Heating oil is <strong>projected</strong> to be 27 percent higher. And electricity 10 percent higher. That comes against the inflation rates that accelerated last month with consumer prices growing 6.6 percent. that’s the fastest pace in 4 decades. The pain will be especially <strong>acute</strong> in part of the country that heavily rely on heating oil to keep homes warm. It is <strong>projected</strong> to cost more than 2300 dollars to heat a typical home with the heating oil this winter. last month, the federal government added one billion dollars in funding to low income energy  assistance program. bringing the total to 4.8 billion dollars but that represents a reduction from last energy assistance package of over 8 billion dollars.</p>
+<blockquote>
+<p>project 预估</p>
+<p>acute 严重</p>
+</blockquote>
+<audio controls id="music">
+  <source src="https://img.zero02.space/NewsReport1.mp3" type="audio/mpeg">
+  您的浏览器不支持音频播放。
+</audio>
+<h3 id="听力题2">听力题2</h3>
+<p>Questions 1 to 4 are based on the conversation you have just heard</p>
+<p>A)Preparing for a job interview.<br>
+B)Writing a work report together.<br>
+C)Going through a couple of <strong>issues</strong> the company faces.<br>
+D)Discussing the woman’s <strong>annual performance review.</strong> ×</p>
+<p>A)The overall culture of the company.<br>
+B)The honesty of the manager.<br>
+C)The <strong>instruction</strong> from her supervisor.<br>
+D)The recognition of her <strong>merits</strong>.</p>
+<p>A)Her <strong>inadequate</strong> language <strong>proficiency</strong>.<br>
+B)Her <strong>inability</strong> to to interact with colleagues properly.<br>
+C)Her inappropriate behavior at company meetings<br>
+D)Her simplistic approach to dealing with others.</p>
+<p>A)To avoid <strong>offending</strong> the <strong>recipients</strong>.<br>
+B)To show her unique writing style.<br>
+C)To be frank.			D)To save time.</p>
+<blockquote>
+<p>annual performance review 年度绩效评审</p>
+<p>issue 问题</p>
+<p>instruction 指示</p>
+<p>merit 优点</p>
+<p>inadequate 不充足的 - insufficient</p>
+<p>proficiency 熟练程度，流利度 - fluency</p>
+<p>inability 无能力的 - cannot</p>
+<p>offend 冒犯</p>
+<p>recipient 收件人</p>
+</blockquote>
+<h3 id="原文2">原文2</h3>
+<p>Ok then, this here is your yearly performance review. you’ve been with the company for three years. <u>Under my direct <strong>supervision</strong> for the past 12 months. your report is mostly good.</u> But there are a couple of issues we must to discuss. The report is yours to take with you. We’ll go through the main points together now, and you can <strong>come through</strong> it in greater detail later. Do you have any question before we start? No sir. I’ll get <strong>straight to it</strong> then. <u>It is evident that you’re a hard worker. You are punctual and industrious.</u> Furthermore, you have strong <strong>analytical</strong> skills and attention to detail. The company might self included a happy with your productivity and overall performance. Thank you, I appreciate the recognition. Do you agree then with this the <strong>depiction</strong> so far? Yeah, It’s a little simplistic perhaps. But that’s to be expected from this kind of evaluation. Sure, would you want to add anything? Your comments can be added to the report if you wish. Oh, there’s no need. It’s a <strong>flattering</strong> for <strong>portrayal</strong> really. Thank you, though. Ok, This leads me to the not so good part. <u>This mostly <strong>centers around</strong> one behavior aspect you ability to work with others.</u> I see. Yes, as you’ve already known, over the last several months. <u>There have been some complained raised about your communication style.</u> Of course, we’ve already have like 3 meetings about this. Look, I’m going to say is that it was never mind intention to offending anyone, simply put, <u>I don’t like to write long email. Because frankly I think they’re a waste of time.</u> <strong>conciseness</strong> is an efficiency. I feel that writing long emails hurts that same productivity you <strong>phrased</strong> me just a minute ago. and I already apologized if anyone was offended. But to be perfectly honest I think anyone who was offended was being a little to sensitive.</p>
+<audio controls id="music">
+  <source src="https://img.zero02.space/6level001.mp3" type="audio/mpeg">
+  您的浏览器不支持音频播放。
+</audio>
+<blockquote>
+<p>supervision  <psw>监视 ，监督</psw></p>
+<p>come through  <psw>经历困难后成功；传来；接通（电话）等意思</psw></p>
+<p>analytical  <psw>分析的；善于分析的</psw></p>
+<p>straight to it  <psw>直接着手做某事；直截了当地做</psw></p>
+<p>depiction  <psw>描绘；描述；刻画</psw></p>
+<p>flattering  <psw>奉承的；讨好的；使显得更漂亮的</psw></p>
+<p>portrayal  <psw>描绘；描写；扮演；表现</psw></p>
+<p>center around  <psw>以……为中心；围绕……</psw></p>
+<p>conciseness  <psw>简洁；简明</psw></p>
+<p>phrased  <psw>表达；措辞（phrase的过去式和过去分词形式）</psw></p>
+</blockquote>
+<h3 id="听力题3">听力题3</h3>
+<p>A. They experienced a <strong>heartbreaking</strong> moment.<br>
+B. They gathered together to rescue a elephant.<br>
+C. They heard a noise from the bottom of a <strong>well</strong>.<br>
+D. They found an elephant wandering around a well.</p>
+<p>A. to borrow their <strong>crane</strong><br>
+B. to ask them for help<br>
+C. to report the strange noise<br>
+D. to get food for the elephant</p>
+<p>A. the elephant was able to return to the jungle<br>
+B. the army officers were examined for injuries.<br>
+C. the army officers were rewarded for their rescue efforts<br>
+D. the elephant was given medical treatment for many days.</p>
+<blockquote>
+<p>heartbreaking 心痛的</p>
+<p>well 井</p>
+<p>crane 吊车，鹤</p>
+</blockquote>
+<h3 id="原文3">原文3</h3>
+<p><u>It was a <strong>heartwarming</strong> moment that dozens of Indians rescuers <strong>rally together</strong> to use a crane In order to save an elephant trapped at a bottom of a twenty feet well.</u> The massive rescue efforts took place last week close to an army camp. The elephant wandered out of the jungle and fell into the well. The army officers heard a noise and coming from well and realized an elephant was trapped deep inside. <u>The officers then throw in some food for the creature and call the local forest department for help.</u> Video of the rescue operation shows how the team used a crane to life up the huge animal out of the well and onto back of the truck. It was then taken into an examining room for the evaluation of any injuries. <u>The elephant was kept under close supervision for a few days.</u> <u>Before it was successfully <strong>released back into</strong> the wild.</u></p>
+<audio controls id="music">
+  <source src="https://img.zero02.space/4level001.mp3" type="audio/mpeg">
+  您的浏览器不支持音频播放。
+</audio>
 ]]></content>
+      <tags>
+        <tag>英语</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>英语听力测试3</title>
+    <url>/2025/03/11/%E8%8B%B1%E8%AF%AD%E5%90%AC%E5%8A%9B%E6%B5%8B%E8%AF%953/</url>
+    <content><![CDATA[<h2 id="听力题1">听力题1</h2>
+<p>A. All societies are built upon the cornerstones of basic values.<br>
+B. Everyone everywhere demonstrates seven character <strong>traits</strong>.<br>
+C. All societies are kept together by seven basic moral rules.<br>
+D. Everyone every where shares a universal moral standard.</p>
+<p>A. <strong>Accertain</strong> whether deferring to authority was confined to <strong>right-wing</strong> people<br>
+B. <strong>Find out</strong> whether different societies had different versions of morality<br>
+C. <strong>Make clear</strong> whether all societies faced the same moral isssues.<br>
+D. <strong>Find out</strong> whether <strong>left-wing</strong> people still had a group loyalty.</p>
+<p>A. Make independent descriptions of cultures around the world.<br>
+B. Strive to understand the basic differences between peoples.<br>
+C. Appreciate the foundational value of the existing data.<br>
+D. Carry out <strong>systematic</strong> field studies to gather new data.</p>
+<blockquote>
+<p>trait = feature</p>
+<p>left-wing 激进派</p>
+<p>right-wing 保守派</p>
+<p>systematic 成体系的</p>
+</blockquote>
+<h3 id="问题">问题</h3>
+<ol>
+<li>What do we learn from the Oxford university researchers?</li>
+<li>What did the new study by Oxford researchers aim to do?</li>
+<li>What does Harvey White House think social scientists should do?</li>
+</ol>
+<h3 id="原文">原文</h3>
+<p>All societies are held together by seven universal moral rules, which include <strong>deferring</strong> to superiors and respecting the property of others. Oxford university has concluded that although many cultures are moving towards more liberal, less <strong>hierarchical</strong> organizations, the new research suggests that traditional power structures and basic values of <strong>charity</strong> and brotherhood are the cornerstones of successful societies. The huge study of sixty different cultures around the world found that all communities operate under seven basic moral codes. Those universal rules are: help your family, help your group, return <strong>favors</strong>, be brave, defer to superiors, divide resources fairly and respect the property of others. The character traits held for every kind of community, be they traditional hunter gatherers or advanced civilizations, helping to uphold civilized society and foster social cooperation. <u>Researchers found everyone everywhere shares a common moral code. Said Dr Oliver Scott Curry, lead author and senior researcher at Oxford, “These seven moral rules appear to be universal across cultures because people face the same social problems.</u>” Even if some of these traits look right wing or conservative, for example deferring to authority, left wing people will still have a group loyalty and deference to someone or something. This shows there really is more that unites us than divides us. <u>The study published in <em>Current Anthropology</em> is the largest and most comprehensive and widespread survey of morals ever conducted and aimed to find out whether different societies had different versions of morality</u>. The team accessed the world’s best archives to analyze accounts from more than six hundred sources of sixty societies around the world. They found that the seven rules were considered morally good in all societies and were observed across all continents, religions and politics. However, some communities valued certain rules more highly than others. Dr Curry hopes that this research helps to promote mutual understanding between people of different cultures and appreciation of what we have in common and how and why we differ. Co-author Professor Harvey White House said, “Social scientists should now set about testing the theory in the field rather than relying on old data. This study was based on historical descriptions of cultures around the world. He said these descriptions were made independent of and prior to the theory. <u>We’re testing in future. If social scientists are serious about testing theories of morality, they will need to gather new data more systematically out in the field.”</u></p>
+<blockquote>
+<p>defer 遵从，服从</p>
+<p>hierarchy - hierarchical</p>
+<p>charity 慈善</p>
+<p>favor 恩惠</p>
+</blockquote>
+<h3 id="译文">译文</h3>
+<p>所有社会都由七条普遍的道德准则维系在一起，其中包括服从上级和尊重他人的财产。牛津大学得出的结论是，尽管许多文化正在朝着更加自由、<strong>等级制度</strong>更少的组织发展，但新的研究表明，传统的权力结构以及<strong>慈善</strong>和兄弟情谊的基本价值观是成功社会的基石。对世界各地60种不同文化的大规模研究发现，所有社区都在七条基本道德准则下运作。这些普遍的规则是：帮助你的家庭，帮助你的群体，回报恩惠，勇敢，服从上级，公平分配资源和尊重他人的财产。每一种社区的性格特征，无论是传统的狩猎采集者还是先进的文明，都有助于维护文明社会和促进社会合作。研究人员发现，世界各地的每个人都有共同的道德准则。牛津大学的首席作者兼高级研究员奥利弗·斯科特·库里博士说：“这七条道德规则似乎在不同文化中都是普遍的，因为人们面临着同样的社会问题。”即使其中一些特征看起来像右翼或保守派，例如服从权威，左翼人士仍然会对某人或某事有集体的忠诚和尊重。这表明，真正团结我们的东西比分裂我们的东西多。发表在《当代人类学》上的这项研究是有史以来规模最大、最全面、最广泛的道德调查，旨在找出不同社会是否有不同版本的道德。该团队访问了世界上最好的档案，分析了来自世界各地60个社会的600多个来源的账户。他们发现，这七条规则在所有社会都被认为是道德良好的，并且在所有大陆、宗教和政治中都得到遵守。然而，一些社区比其他社区更重视某些规则。库里博士希望这项研究有助于促进不同文化的人之间的相互理解，并欣赏我们的共同点以及我们如何以及为什么不同。合著者哈维·白宫教授说：“社会科学家现在应该开始在这个领域测试这个理论，而不是依赖旧数据。这项研究基于对世界各地文化的历史描述。他说这些描述是独立于理论之前的。我们将来会进行测试。如果社会科学家认真对待道德理论的测试，他们需要在这个领域更系统地收集新的数据。”</p>
+<h3 id="听力">听力</h3>
+<audio controls id="music">
+  <source src="https://img.zero02.space/6level005.m4a" type="audio/mpeg">
+  您的浏览器不支持音频播放。
+</audio>
+<h2 id="听力题2">听力题2</h2>
+<p>A. The might be the most important part of out eating experience.<br>
+B. They can activate our brain functions in a most direct <strong>fashion</strong>.<br>
+C. They can be reviewed as the windows to out soul.<br>
+D. They can mislead us in more ways than one.</p>
+<p>A. It attracts food companies’ growing attention.<br>
+B. It <strong>invariably</strong> determines how food sells.<br>
+C. It adversely impacts one’s eating experience.<br>
+D. It changes the way people taste food.</p>
+<p>A. Enhance the taste<br>
+B. Make predictions<br>
+C. <strong>Identify</strong> distinct flavors<br>
+D. Enrich the eating experience</p>
+<blockquote>
+<p>invariably 不变的</p>
+<p>fashion = way</p>
+<p>identify 识别</p>
+</blockquote>
+<h3 id="原文-2">原文</h3>
+<p>When it comes to food, color is money. Food companies know that better color gives better prices. So they ensure that their products are attractive in color to bolster earnings. Oranges, for example, have to meet specific color standards. And oranges are just the beginning. There are color standards for foods, including French fries, tomatoes, pumpkins, olives, honey and cherries. The attention to color is for good reason. <strong>For all the talk of the tongue</strong>, our eyes really might be the most important part of the eating experience. A great number of our brain functions are dedicated to processing vision, while only one or two percent is given over to taste faculties. And the result is that color actually changes how we taste food. Scientists have demonstrated many times the importance of color to taste. In a nineteen eighties study, for example, test participants were asked to name the flavor of the beverage they were drinking without being able to see that beverage. Only one in five was able to identify it as orange. But when they were allowed to see what they were drinking, which was orange in color, each of them identified the orange flavor. And when a drink that was lime flavor was colored orange, nearly half of respondents identified the flavor of the beverage as orange. None made that mistake when the beverage was green in color. What’s happening when someone fails to identify the flavor of a beverage? They can’t see or that has an abnormal color. Is it that participants can’t discern what the flavor is and so rely on visual cues? Or does color actually change the experience of taste? The key to these questions is the effect of color on expectation. The brain makes predictions using color. These predictions rely on expectations that come from experience. Research shows that we’re all born liking sweet things and desire to eat them. But we aren’t born knowing what the sweet things we crave look like. So we need to learn this over time. The brain gets information from the environment. And we learn, for example, that fruits go from green and sour to red and ripe and sweet. Thus, if we see a green berry, we equate its color with a sour taste. And just looking at a red fruit will activate our expectations that it will taste sweet and delicious.</p>
+<h3 id="问题-2">问题</h3>
+<p>What does the speaker say about our eyes?</p>
+<p>What does color actually do? According to this lecture.</p>
+<p>What does the brain use color to do?</p>
+<h3 id="译文-2">译文</h3>
+<p>谈到食物，颜色就是金钱。食品公司知道更好的颜色能带来更高的价格。所以他们确保自己的产品颜色诱人，以提高收益。例如，橙子必须符合特定的颜色标准。而橙子只是个开始。包括炸薯条、西红柿、南瓜、橄榄、蜂蜜和樱桃在内的食品都有颜色标准。对颜色的关注是有充分理由的。尽管人们总在谈论舌头，但我们的眼睛可能确实是饮食体验中最重要的部分。我们大脑的大量功能都致力于处理视觉，而只有百分之一或二用于味觉功能。结果是颜色实际上改变了我们对食物的味觉。科学家多次证明了颜色对味觉的重要性。例如，在 20 世纪 80 年代的一项研究中，测试参与者被要求在看不到他们正在饮用的饮料的情况下说出饮料的味道。只有五分之一的人能够识别出它是橙子味。但是当他们被允许看到他们正在喝的饮料，而饮料是橙色的时候，他们每个人都识别出了橙子的味道。当一种酸橙味的饮料被染成橙色时，近一半的受访者认为饮料的味道是橙子味。当饮料是绿色的时候，没有人犯这个错误。当有人无法识别饮料的味道时会发生什么呢？他们看不到饮料或者饮料的颜色不正常。是参与者无法辨别味道，所以依赖视觉线索吗？还是颜色实际上改变了味觉体验？这些问题的关键是颜色对期望的影响。大脑利用颜色进行预测。这些预测依赖于来自经验的期望。研究表明，我们生来就喜欢甜食并渴望吃它们。但我们并不是生来就知道我们渴望的甜食是什么样子。所以我们需要随着时间的推移来学习这一点。大脑从环境中获取信息。例如，我们了解到水果从绿色和酸变成红色、成熟和甜。因此，如果我们看到一个绿色的浆果，我们会把它的颜色等同于酸味。而仅仅看着一个红色的水果就会激活我们对它味道甜美可口的期望。</p>
+<h3 id="听力-2">听力</h3>
+<audio controls id="music">
+  <source src="https://img.zero02.space/6level006.m4a" type="audio/mpeg">
+  您的浏览器不支持音频播放。
+</audio>
+<h2 id="听力题3">听力题3</h2>
+<p>A. Social Status<br>
+B. Financial resources<br>
+C. Meaning<br>
+D. Happiness</p>
+<p>A. Their effect on people’s happiness has long been <strong>overstated</strong>.<br>
+B. Their influence on people’s life varies with social <strong>contexts</strong>.<br>
+C. They can affect people’s experience of meaning.<br>
+D. They can ensure people’s overall <strong>well-being</strong>.</p>
+<p>A. It used questioned totally different from those <strong>in their first study</strong>.<br>
+B. It focused on the sense of meaning of French participants.<br>
+C. It analyzed cases from a daily <strong>poll</strong> of US residents.<br>
+D. It examined data collected from multiple countries.</p>
+<p>A. They might have more access to external sources of happiness.<br>
+B. They might focus on an individual sense of satisfaction or meaning.<br>
+C. They might be less easily affected by a community’s overall feeling.<br>
+D. They might be less adversely impacted by failure to achieve a purpose.</p>
+<blockquote>
+<p>overstate 过度陈述</p>
+<p>poll 民意调查，投票</p>
+<p>context 背景，上下文</p>
+<p>well-being 幸福感，福祉</p>
+</blockquote>
+<h3 id="原文-3">原文</h3>
+<p><u>Searching for meaning is something many of us experience throughout our lives.</u> For some, this meaning is religious, some political, and some <strong>interpersonal</strong>. And having a sense of meaning can bring us happiness. A new study looks at the relationship between meaning and happiness in the <strong>context</strong> of financial resources. <u>Ria Caterpano from the University of Toronto and colleagues find meaning is a far weaker predictor of happiness for rich people than poorer people, <strong>suggesting</strong> economic resources can impact how we experience meaning.</u> The team analyzed data from over five hundred thousand people across one hundred and twenty-three countries. The first study used data from a daily poll of US residents collected between 2013 and 2015. Well-being was tracked using measures of positive effect, whether during the day before they were surveyed, participants had smiled or laughed a lot or experienced a lot of happiness. Meaning was measured through a daily purpose index, which explored the extent to which participants felt that they like what they do every day and are motivated to achieve their goals. Finally, income levels were <strong>assessed</strong>. The results showed that the <strong>correlation</strong> between meaning and happiness was strongest among those in lower <strong>income brackets</strong>, but as <strong>income levels</strong> increased, the correlation became weaker. <u>The second study looked at worldwide data.</u> Happiness was measured using the same questions as in the first study, while meaning was measured using the single question “Do you feel your life has an important purpose or meaning?”. The strength of the relationship between meaning and happiness depended on participants’ income. Meaning had a greater influence on happiness for those on lower incomes compared to those in higher brackets. In the final study, French participants <strong>indicated</strong> the extent to which they felt they led a <strong>purposeful</strong> and meaningful life and how much they considered themselves a happy person. Finally, rather than using specific income brackets, they placed themselves on a social ladder representing where they stand in society with regard to wealth, education, and career. <u>The results from the study <strong>duplicated</strong> those of the first, two. Overall, meaning and happiness had a stronger relationship in those with fewer resources than those with more. This might be the case because richer individuals have more access to other sources of happiness, many of which will be external, like lack of stress or community.</u> Thus, a focus on an internal sense of satisfaction, purpose, or meaning is less important.</p>
+<blockquote>
+<p>interpersonal 人际的</p>
+<p>context 背景</p>
+<p>suggesting 表明 = indicate</p>
+<p>assess = estimate = evaluate</p>
+<p>correlation 相互关系性</p>
+<p>income bracket 收入阶层</p>
+<p>income level 收入水平</p>
+<p>purposeful 有意愿的，有目的的</p>
+<p>duplicate 复制</p>
+</blockquote>
+<h3 id="问题-3">问题</h3>
+<p>What does the speaker say many of us search for throughout our lives?</p>
+<p>What do Ria Caterpano and colleagues find about economic resources?</p>
+<p>What do we learn about Ria Caterpano and colleagues’ second study?</p>
+<p>Why do meaning and happiness have a weaker relationship in those with more resources?</p>
+<h3 id="译文-3">译文</h3>
+<p><u>寻找意义是我们许多人一生中都会经历的事情</u>。对一些人来说，这个含义是宗教的，有些是政治的，有些是<strong>人际的</strong>。而拥有意义感可以给我们带来快乐。一项新的研究着眼于财务资源<strong>背景</strong>下意义与幸福之间的关系。<u>多伦多大学的 Ria Caterpano 及其同事发现，富人比穷人更弱地预测了幸福感的意义，这<strong>表明</strong>经济资源会影响我们体验意义的方式。</u>该团队分析了来自 123 个国家/地区的 50 多万人的数据。第一项研究使用了 2013 年至 2015 年间收集的美国居民每日民意调查的数据。使用积极影响的衡量标准来跟踪幸福感，无论是在接受调查的前一天，参与者是否经常微笑或大笑，或者体验到很多快乐。意义是通过每日目的指数来衡量的，该指数探讨了参与者在多大程度上觉得他们喜欢自己每天所做的事情，并有动力实现自己的目标。最后，<strong>评估</strong>了收入水平。结果显示，意义与幸福之间的<strong>相关性</strong>在低<strong>收入阶层</strong>中最强，但随着收入水平的提高，相关性变得更弱。<u>第二项研究着眼于全球数据</u>。幸福感是使用与第一项研究相同的问题来衡量的，而意义是使用单个问题“你觉得你的生活有重要的目的或意义吗？意义和幸福之间的关系强度取决于参与者的收入。与高收入阶层的人相比，意义对低收入人群的幸福感影响更大。在最后一项研究中，法国参与者表示他们认为自己过着有目的和有意义的生活的程度，以及他们认为自己是一个快乐的人的程度。最后，他们没有使用特定的收入等级，而是将自己置于一个社会阶梯上，代表他们在财富、教育和职业方面的社会地位。<u>该研究的结果与前两项的结果相同。总体而言，意义和幸福感在资源较少的人中比在资源较多的人中具有更强的关系。这可能是因为较富裕的人有更多机会获得其他快乐来源，其中许多是外部的，例如缺乏压力或社区。</u>因此，关注内在的满足感、目标或意义就不那么重要了。</p>
+<h3 id="听力-3">听力</h3>
+<audio controls id="music">
+  <source src="https://img.zero02.space/6level007.m4a" type="audio/mpeg">
+  您的浏览器不支持音频播放。
+</audio>]]></content>
+      <tags>
+        <tag>英语</tag>
+      </tags>
   </entry>
   <entry>
     <title>英语听力测试2</title>
@@ -235,122 +477,6 @@ D. They cannot match humans in <strong>arranging</strong> <strong>meticulous</st
   <source src="https://img.zero02.space/6level004.m4a" type="audio/mpeg">
   您的浏览器不支持音频播放。
 </audio>]]></content>
-      <tags>
-        <tag>英语</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>英语听力测试1</title>
-    <url>/2025/03/05/%E8%8B%B1%E8%AF%AD%E5%90%AC%E5%8A%9B%E6%B5%8B%E8%AF%951/</url>
-    <content><![CDATA[<h2 id="听力技巧">听力技巧</h2>
-<p>1.听前–读题(预测题目)选项不同之处是重点 过读音</p>
-<p>2.听中-放音-- 盯着题目 勾画你听到的内容-匹配程度高 为正确确选项(概率大)80%</p>
-<p>3.听后-念题目–不听题目往下读选项</p>
-<p>常见问题：</p>
-<ul>
-<li>没时间读题；</li>
-<li>熟词生义-题目听不懂；</li>
-<li>思考和听力不能同时进行</li>
-<li>不知道怎么记笔记</li>
-</ul>
-<p>词汇量不够 - 熟练度</p>
-<p>目标：把题做对，把文章听懂</p>
-<p>听前：预读，猜测，过读音</p>
-<h3 id="听力题1">听力题1</h3>
-<p>A)They will see a 27% higher price to buy natural gas.<br>
-B)They will have insufficient heating oil to keep warm.<br>
-C)They will have a costly bill to pay to heat their homes. ×<br>
-D)They will experience the coldest winter in four decades.</p>
-<p>A)<strong>Provided additional funding</strong> to Low Income Home Energy Assistance Program √<br>
-B)<strong>Assured</strong> U.S citizens of an increase in energy supplies by the end of this year.<br>
-C)Predicted a 10% jump in heating bills for most U.S households this winter<br>
-D)Decided on this year’s energy assistance package of$8 billion in total.</p>
-<blockquote>
-<p>funding = money</p>
-<p>assure = promise</p>
-<p>jump 涨价</p>
-</blockquote>
-<h3 id="原文1">原文1</h3>
-<p>Across the U.S, families are looking to the winter with fear as energy costs soar. A number of factors are creating a bad <strong>situation</strong>, global energy consumption is up but the supplies have been reduced. the energy department <strong>projects</strong> heat bill will jump 28 percent this winter for those who rely on natural gas. Natural gas is used by nearly half of U.S households for heat. Heating oil is <strong>projected</strong> to be 27 percent higher. And electricity 10 percent higher. That comes against the inflation rates that accelerated last month with consumer prices growing 6.6 percent. that’s the fastest pace in 4 decades. The pain will be especially <strong>acute</strong> in part of the country that heavily rely on heating oil to keep homes warm. It is <strong>projected</strong> to cost more than 2300 dollars to heat a typical home with the heating oil this winter. last month, the federal government added one billion dollars in funding to low income energy  assistance program. bringing the total to 4.8 billion dollars but that represents a reduction from last energy assistance package of over 8 billion dollars.</p>
-<blockquote>
-<p>project 预估</p>
-<p>acute 严重</p>
-</blockquote>
-<audio controls id="music">
-  <source src="https://img.zero02.space/NewsReport1.mp3" type="audio/mpeg">
-  您的浏览器不支持音频播放。
-</audio>
-<h3 id="听力题2">听力题2</h3>
-<p>Questions 1 to 4 are based on the conversation you have just heard</p>
-<p>A)Preparing for a job interview.<br>
-B)Writing a work report together.<br>
-C)Going through a couple of <strong>issues</strong> the company faces.<br>
-D)Discussing the woman’s <strong>annual performance review.</strong> ×</p>
-<p>A)The overall culture of the company.<br>
-B)The honesty of the manager.<br>
-C)The <strong>instruction</strong> from her supervisor.<br>
-D)The recognition of her <strong>merits</strong>.</p>
-<p>A)Her <strong>inadequate</strong> language <strong>proficiency</strong>.<br>
-B)Her <strong>inability</strong> to to interact with colleagues properly.<br>
-C)Her inappropriate behavior at company meetings<br>
-D)Her simplistic approach to dealing with others.</p>
-<p>A)To avoid <strong>offending</strong> the <strong>recipients</strong>.<br>
-B)To show her unique writing style.<br>
-C)To be frank.			D)To save time.</p>
-<blockquote>
-<p>annual performance review 年度绩效评审</p>
-<p>issue 问题</p>
-<p>instruction 指示</p>
-<p>merit 优点</p>
-<p>inadequate 不充足的 - insufficient</p>
-<p>proficiency 熟练程度，流利度 - fluency</p>
-<p>inability 无能力的 - cannot</p>
-<p>offend 冒犯</p>
-<p>recipient 收件人</p>
-</blockquote>
-<h3 id="原文2">原文2</h3>
-<p>Ok then, this here is your yearly performance review. you’ve been with the company for three years. <u>Under my direct <strong>supervision</strong> for the past 12 months. your report is mostly good.</u> But there are a couple of issues we must to discuss. The report is yours to take with you. We’ll go through the main points together now, and you can <strong>come through</strong> it in greater detail later. Do you have any question before we start? No sir. I’ll get <strong>straight to it</strong> then. <u>It is evident that you’re a hard worker. You are punctual and industrious.</u> Furthermore, you have strong <strong>analytical</strong> skills and attention to detail. The company might self included a happy with your productivity and overall performance. Thank you, I appreciate the recognition. Do you agree then with this the <strong>depiction</strong> so far? Yeah, It’s a little simplistic perhaps. But that’s to be expected from this kind of evaluation. Sure, would you want to add anything? Your comments can be added to the report if you wish. Oh, there’s no need. It’s a <strong>flattering</strong> for <strong>portrayal</strong> really. Thank you, though. Ok, This leads me to the not so good part. <u>This mostly <strong>centers around</strong> one behavior aspect you ability to work with others.</u> I see. Yes, as you’ve already known, over the last several months. <u>There have been some complained raised about your communication style.</u> Of course, we’ve already have like 3 meetings about this. Look, I’m going to say is that it was never mind intention to offending anyone, simply put, <u>I don’t like to write long email. Because frankly I think they’re a waste of time.</u> <strong>conciseness</strong> is an efficiency. I feel that writing long emails hurts that same productivity you <strong>phrased</strong> me just a minute ago. and I already apologized if anyone was offended. But to be perfectly honest I think anyone who was offended was being a little to sensitive.</p>
-<audio controls id="music">
-  <source src="https://img.zero02.space/6level001.mp3" type="audio/mpeg">
-  您的浏览器不支持音频播放。
-</audio>
-<blockquote>
-<p>supervision  <psw>监视 ，监督</psw></p>
-<p>come through  <psw>经历困难后成功；传来；接通（电话）等意思</psw></p>
-<p>analytical  <psw>分析的；善于分析的</psw></p>
-<p>straight to it  <psw>直接着手做某事；直截了当地做</psw></p>
-<p>depiction  <psw>描绘；描述；刻画</psw></p>
-<p>flattering  <psw>奉承的；讨好的；使显得更漂亮的</psw></p>
-<p>portrayal  <psw>描绘；描写；扮演；表现</psw></p>
-<p>center around  <psw>以……为中心；围绕……</psw></p>
-<p>conciseness  <psw>简洁；简明</psw></p>
-<p>phrased  <psw>表达；措辞（phrase的过去式和过去分词形式）</psw></p>
-</blockquote>
-<h3 id="听力题3">听力题3</h3>
-<p>A. They experienced a <strong>heartbreaking</strong> moment.<br>
-B. They gathered together to rescue a elephant.<br>
-C. They heard a noise from the bottom of a <strong>well</strong>.<br>
-D. They found an elephant wandering around a well.</p>
-<p>A. to borrow their <strong>crane</strong><br>
-B. to ask them for help<br>
-C. to report the strange noise<br>
-D. to get food for the elephant</p>
-<p>A. the elephant was able to return to the jungle<br>
-B. the army officers were examined for injuries.<br>
-C. the army officers were rewarded for their rescue efforts<br>
-D. the elephant was given medical treatment for many days.</p>
-<blockquote>
-<p>heartbreaking 心痛的</p>
-<p>well 井</p>
-<p>crane 吊车，鹤</p>
-</blockquote>
-<h3 id="原文3">原文3</h3>
-<p><u>It was a <strong>heartwarming</strong> moment that dozens of Indians rescuers <strong>rally together</strong> to use a crane In order to save an elephant trapped at a bottom of a twenty feet well.</u> The massive rescue efforts took place last week close to an army camp. The elephant wandered out of the jungle and fell into the well. The army officers heard a noise and coming from well and realized an elephant was trapped deep inside. <u>The officers then throw in some food for the creature and call the local forest department for help.</u> Video of the rescue operation shows how the team used a crane to life up the huge animal out of the well and onto back of the truck. It was then taken into an examining room for the evaluation of any injuries. <u>The elephant was kept under close supervision for a few days.</u> <u>Before it was successfully <strong>released back into</strong> the wild.</u></p>
-<audio controls id="music">
-  <source src="https://img.zero02.space/4level001.mp3" type="audio/mpeg">
-  您的浏览器不支持音频播放。
-</audio>
-]]></content>
       <tags>
         <tag>英语</tag>
       </tags>
@@ -515,132 +641,6 @@ D. the elephant was given medical treatment for many days.</p>
 <p>monopoly 垄断</p>
 <p>empire 帝国</p>
 ]]></content>
-      <tags>
-        <tag>英语</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>英语听力测试3</title>
-    <url>/2025/03/11/%E8%8B%B1%E8%AF%AD%E5%90%AC%E5%8A%9B%E6%B5%8B%E8%AF%953/</url>
-    <content><![CDATA[<h2 id="听力题1">听力题1</h2>
-<p>A. All societies are built upon the cornerstones of basic values.<br>
-B. Everyone everywhere demonstrates seven character <strong>traits</strong>.<br>
-C. All societies are kept together by seven basic moral rules.<br>
-D. Everyone every where shares a universal moral standard.</p>
-<p>A. <strong>Accertain</strong> whether deferring to authority was confined to <strong>right-wing</strong> people<br>
-B. <strong>Find out</strong> whether different societies had different versions of morality<br>
-C. <strong>Make clear</strong> whether all societies faced the same moral isssues.<br>
-D. <strong>Find out</strong> whether <strong>left-wing</strong> people still had a group loyalty.</p>
-<p>A. Make independent descriptions of cultures around the world.<br>
-B. Strive to understand the basic differences between peoples.<br>
-C. Appreciate the foundational value of the existing data.<br>
-D. Carry out <strong>systematic</strong> field studies to gather new data.</p>
-<blockquote>
-<p>trait = feature</p>
-<p>left-wing 激进派</p>
-<p>right-wing 保守派</p>
-<p>systematic 成体系的</p>
-</blockquote>
-<h3 id="问题">问题</h3>
-<ol>
-<li>What do we learn from the Oxford university researchers?</li>
-<li>What did the new study by Oxford researchers aim to do?</li>
-<li>What does Harvey White House think social scientists should do?</li>
-</ol>
-<h3 id="原文">原文</h3>
-<p>All societies are held together by seven universal moral rules, which include <strong>deferring</strong> to superiors and respecting the property of others. Oxford university has concluded that although many cultures are moving towards more liberal, less <strong>hierarchical</strong> organizations, the new research suggests that traditional power structures and basic values of <strong>charity</strong> and brotherhood are the cornerstones of successful societies. The huge study of sixty different cultures around the world found that all communities operate under seven basic moral codes. Those universal rules are: help your family, help your group, return <strong>favors</strong>, be brave, defer to superiors, divide resources fairly and respect the property of others. The character traits held for every kind of community, be they traditional hunter gatherers or advanced civilizations, helping to uphold civilized society and foster social cooperation. <u>Researchers found everyone everywhere shares a common moral code. Said Dr Oliver Scott Curry, lead author and senior researcher at Oxford, “These seven moral rules appear to be universal across cultures because people face the same social problems.</u>” Even if some of these traits look right wing or conservative, for example deferring to authority, left wing people will still have a group loyalty and deference to someone or something. This shows there really is more that unites us than divides us. <u>The study published in <em>Current Anthropology</em> is the largest and most comprehensive and widespread survey of morals ever conducted and aimed to find out whether different societies had different versions of morality</u>. The team accessed the world’s best archives to analyze accounts from more than six hundred sources of sixty societies around the world. They found that the seven rules were considered morally good in all societies and were observed across all continents, religions and politics. However, some communities valued certain rules more highly than others. Dr Curry hopes that this research helps to promote mutual understanding between people of different cultures and appreciation of what we have in common and how and why we differ. Co-author Professor Harvey White House said, “Social scientists should now set about testing the theory in the field rather than relying on old data. This study was based on historical descriptions of cultures around the world. He said these descriptions were made independent of and prior to the theory. <u>We’re testing in future. If social scientists are serious about testing theories of morality, they will need to gather new data more systematically out in the field.”</u></p>
-<blockquote>
-<p>defer 遵从，服从</p>
-<p>hierarchy - hierarchical</p>
-<p>charity 慈善</p>
-<p>favor 恩惠</p>
-</blockquote>
-<h3 id="译文">译文</h3>
-<p>所有社会都由七条普遍的道德准则维系在一起，其中包括服从上级和尊重他人的财产。牛津大学得出的结论是，尽管许多文化正在朝着更加自由、<strong>等级制度</strong>更少的组织发展，但新的研究表明，传统的权力结构以及<strong>慈善</strong>和兄弟情谊的基本价值观是成功社会的基石。对世界各地60种不同文化的大规模研究发现，所有社区都在七条基本道德准则下运作。这些普遍的规则是：帮助你的家庭，帮助你的群体，回报恩惠，勇敢，服从上级，公平分配资源和尊重他人的财产。每一种社区的性格特征，无论是传统的狩猎采集者还是先进的文明，都有助于维护文明社会和促进社会合作。研究人员发现，世界各地的每个人都有共同的道德准则。牛津大学的首席作者兼高级研究员奥利弗·斯科特·库里博士说：“这七条道德规则似乎在不同文化中都是普遍的，因为人们面临着同样的社会问题。”即使其中一些特征看起来像右翼或保守派，例如服从权威，左翼人士仍然会对某人或某事有集体的忠诚和尊重。这表明，真正团结我们的东西比分裂我们的东西多。发表在《当代人类学》上的这项研究是有史以来规模最大、最全面、最广泛的道德调查，旨在找出不同社会是否有不同版本的道德。该团队访问了世界上最好的档案，分析了来自世界各地60个社会的600多个来源的账户。他们发现，这七条规则在所有社会都被认为是道德良好的，并且在所有大陆、宗教和政治中都得到遵守。然而，一些社区比其他社区更重视某些规则。库里博士希望这项研究有助于促进不同文化的人之间的相互理解，并欣赏我们的共同点以及我们如何以及为什么不同。合著者哈维·白宫教授说：“社会科学家现在应该开始在这个领域测试这个理论，而不是依赖旧数据。这项研究基于对世界各地文化的历史描述。他说这些描述是独立于理论之前的。我们将来会进行测试。如果社会科学家认真对待道德理论的测试，他们需要在这个领域更系统地收集新的数据。”</p>
-<h3 id="听力">听力</h3>
-<audio controls id="music">
-  <source src="https://img.zero02.space/6level005.m4a" type="audio/mpeg">
-  您的浏览器不支持音频播放。
-</audio>
-<h2 id="听力题2">听力题2</h2>
-<p>A. The might be the most important part of out eating experience.<br>
-B. They can activate our brain functions in a most direct <strong>fashion</strong>.<br>
-C. They can be reviewed as the windows to out soul.<br>
-D. They can mislead us in more ways than one.</p>
-<p>A. It attracts food companies’ growing attention.<br>
-B. It <strong>invariably</strong> determines how food sells.<br>
-C. It adversely impacts one’s eating experience.<br>
-D. It changes the way people taste food.</p>
-<p>A. Enhance the taste<br>
-B. Make predictions<br>
-C. <strong>Identify</strong> distinct flavors<br>
-D. Enrich the eating experience</p>
-<blockquote>
-<p>invariably 不变的</p>
-<p>fashion = way</p>
-<p>identify 识别</p>
-</blockquote>
-<h3 id="原文-2">原文</h3>
-<p>When it comes to food, color is money. Food companies know that better color gives better prices. So they ensure that their products are attractive in color to bolster earnings. Oranges, for example, have to meet specific color standards. And oranges are just the beginning. There are color standards for foods, including French fries, tomatoes, pumpkins, olives, honey and cherries. The attention to color is for good reason. <strong>For all the talk of the tongue</strong>, our eyes really might be the most important part of the eating experience. A great number of our brain functions are dedicated to processing vision, while only one or two percent is given over to taste faculties. And the result is that color actually changes how we taste food. Scientists have demonstrated many times the importance of color to taste. In a nineteen eighties study, for example, test participants were asked to name the flavor of the beverage they were drinking without being able to see that beverage. Only one in five was able to identify it as orange. But when they were allowed to see what they were drinking, which was orange in color, each of them identified the orange flavor. And when a drink that was lime flavor was colored orange, nearly half of respondents identified the flavor of the beverage as orange. None made that mistake when the beverage was green in color. What’s happening when someone fails to identify the flavor of a beverage? They can’t see or that has an abnormal color. Is it that participants can’t discern what the flavor is and so rely on visual cues? Or does color actually change the experience of taste? The key to these questions is the effect of color on expectation. The brain makes predictions using color. These predictions rely on expectations that come from experience. Research shows that we’re all born liking sweet things and desire to eat them. But we aren’t born knowing what the sweet things we crave look like. So we need to learn this over time. The brain gets information from the environment. And we learn, for example, that fruits go from green and sour to red and ripe and sweet. Thus, if we see a green berry, we equate its color with a sour taste. And just looking at a red fruit will activate our expectations that it will taste sweet and delicious.</p>
-<h3 id="问题-2">问题</h3>
-<p>What does the speaker say about our eyes?</p>
-<p>What does color actually do? According to this lecture.</p>
-<p>What does the brain use color to do?</p>
-<h3 id="译文-2">译文</h3>
-<p>谈到食物，颜色就是金钱。食品公司知道更好的颜色能带来更高的价格。所以他们确保自己的产品颜色诱人，以提高收益。例如，橙子必须符合特定的颜色标准。而橙子只是个开始。包括炸薯条、西红柿、南瓜、橄榄、蜂蜜和樱桃在内的食品都有颜色标准。对颜色的关注是有充分理由的。尽管人们总在谈论舌头，但我们的眼睛可能确实是饮食体验中最重要的部分。我们大脑的大量功能都致力于处理视觉，而只有百分之一或二用于味觉功能。结果是颜色实际上改变了我们对食物的味觉。科学家多次证明了颜色对味觉的重要性。例如，在 20 世纪 80 年代的一项研究中，测试参与者被要求在看不到他们正在饮用的饮料的情况下说出饮料的味道。只有五分之一的人能够识别出它是橙子味。但是当他们被允许看到他们正在喝的饮料，而饮料是橙色的时候，他们每个人都识别出了橙子的味道。当一种酸橙味的饮料被染成橙色时，近一半的受访者认为饮料的味道是橙子味。当饮料是绿色的时候，没有人犯这个错误。当有人无法识别饮料的味道时会发生什么呢？他们看不到饮料或者饮料的颜色不正常。是参与者无法辨别味道，所以依赖视觉线索吗？还是颜色实际上改变了味觉体验？这些问题的关键是颜色对期望的影响。大脑利用颜色进行预测。这些预测依赖于来自经验的期望。研究表明，我们生来就喜欢甜食并渴望吃它们。但我们并不是生来就知道我们渴望的甜食是什么样子。所以我们需要随着时间的推移来学习这一点。大脑从环境中获取信息。例如，我们了解到水果从绿色和酸变成红色、成熟和甜。因此，如果我们看到一个绿色的浆果，我们会把它的颜色等同于酸味。而仅仅看着一个红色的水果就会激活我们对它味道甜美可口的期望。</p>
-<h3 id="听力-2">听力</h3>
-<audio controls id="music">
-  <source src="https://img.zero02.space/6level006.m4a" type="audio/mpeg">
-  您的浏览器不支持音频播放。
-</audio>
-<h2 id="听力题3">听力题3</h2>
-<p>A. Social Status<br>
-B. Financial resources<br>
-C. Meaning<br>
-D. Happiness</p>
-<p>A. Their effect on people’s happiness has long been <strong>overstated</strong>.<br>
-B. Their influence on people’s life varies with social <strong>contexts</strong>.<br>
-C. They can affect people’s experience of meaning.<br>
-D. They can ensure people’s overall <strong>well-being</strong>.</p>
-<p>A. It used questioned totally different from those <strong>in their first study</strong>.<br>
-B. It focused on the sense of meaning of French participants.<br>
-C. It analyzed cases from a daily <strong>poll</strong> of US residents.<br>
-D. It examined data collected from multiple countries.</p>
-<p>A. They might have more access to external sources of happiness.<br>
-B. They might focus on an individual sense of satisfaction or meaning.<br>
-C. They might be less easily affected by a community’s overall feeling.<br>
-D. They might be less adversely impacted by failure to achieve a purpose.</p>
-<blockquote>
-<p>overstate 过度陈述</p>
-<p>poll 民意调查，投票</p>
-<p>context 背景，上下文</p>
-<p>well-being 幸福感，福祉</p>
-</blockquote>
-<h3 id="原文-3">原文</h3>
-<p><u>Searching for meaning is something many of us experience throughout our lives.</u> For some, this meaning is religious, some political, and some <strong>interpersonal</strong>. And having a sense of meaning can bring us happiness. A new study looks at the relationship between meaning and happiness in the <strong>context</strong> of financial resources. <u>Ria Caterpano from the University of Toronto and colleagues find meaning is a far weaker predictor of happiness for rich people than poorer people, <strong>suggesting</strong> economic resources can impact how we experience meaning.</u> The team analyzed data from over five hundred thousand people across one hundred and twenty-three countries. The first study used data from a daily poll of US residents collected between 2013 and 2015. Well-being was tracked using measures of positive effect, whether during the day before they were surveyed, participants had smiled or laughed a lot or experienced a lot of happiness. Meaning was measured through a daily purpose index, which explored the extent to which participants felt that they like what they do every day and are motivated to achieve their goals. Finally, income levels were <strong>assessed</strong>. The results showed that the <strong>correlation</strong> between meaning and happiness was strongest among those in lower <strong>income brackets</strong>, but as <strong>income levels</strong> increased, the correlation became weaker. <u>The second study looked at worldwide data.</u> Happiness was measured using the same questions as in the first study, while meaning was measured using the single question “Do you feel your life has an important purpose or meaning?”. The strength of the relationship between meaning and happiness depended on participants’ income. Meaning had a greater influence on happiness for those on lower incomes compared to those in higher brackets. In the final study, French participants <strong>indicated</strong> the extent to which they felt they led a <strong>purposeful</strong> and meaningful life and how much they considered themselves a happy person. Finally, rather than using specific income brackets, they placed themselves on a social ladder representing where they stand in society with regard to wealth, education, and career. <u>The results from the study <strong>duplicated</strong> those of the first, two. Overall, meaning and happiness had a stronger relationship in those with fewer resources than those with more. This might be the case because richer individuals have more access to other sources of happiness, many of which will be external, like lack of stress or community.</u> Thus, a focus on an internal sense of satisfaction, purpose, or meaning is less important.</p>
-<blockquote>
-<p>interpersonal 人际的</p>
-<p>context 背景</p>
-<p>suggesting 表明 = indicate</p>
-<p>assess = estimate = evaluate</p>
-<p>correlation 相互关系性</p>
-<p>income bracket 收入阶层</p>
-<p>income level 收入水平</p>
-<p>purposeful 有意愿的，有目的的</p>
-<p>duplicate 复制</p>
-</blockquote>
-<h3 id="问题-3">问题</h3>
-<p>What does the speaker say many of us search for throughout our lives?</p>
-<p>What do Ria Caterpano and colleagues find about economic resources?</p>
-<p>What do we learn about Ria Caterpano and colleagues’ second study?</p>
-<p>Why do meaning and happiness have a weaker relationship in those with more resources?</p>
-<h3 id="译文-3">译文</h3>
-<p><u>寻找意义是我们许多人一生中都会经历的事情</u>。对一些人来说，这个含义是宗教的，有些是政治的，有些是<strong>人际的</strong>。而拥有意义感可以给我们带来快乐。一项新的研究着眼于财务资源<strong>背景</strong>下意义与幸福之间的关系。<u>多伦多大学的 Ria Caterpano 及其同事发现，富人比穷人更弱地预测了幸福感的意义，这<strong>表明</strong>经济资源会影响我们体验意义的方式。</u>该团队分析了来自 123 个国家/地区的 50 多万人的数据。第一项研究使用了 2013 年至 2015 年间收集的美国居民每日民意调查的数据。使用积极影响的衡量标准来跟踪幸福感，无论是在接受调查的前一天，参与者是否经常微笑或大笑，或者体验到很多快乐。意义是通过每日目的指数来衡量的，该指数探讨了参与者在多大程度上觉得他们喜欢自己每天所做的事情，并有动力实现自己的目标。最后，<strong>评估</strong>了收入水平。结果显示，意义与幸福之间的<strong>相关性</strong>在低<strong>收入阶层</strong>中最强，但随着收入水平的提高，相关性变得更弱。<u>第二项研究着眼于全球数据</u>。幸福感是使用与第一项研究相同的问题来衡量的，而意义是使用单个问题“你觉得你的生活有重要的目的或意义吗？意义和幸福之间的关系强度取决于参与者的收入。与高收入阶层的人相比，意义对低收入人群的幸福感影响更大。在最后一项研究中，法国参与者表示他们认为自己过着有目的和有意义的生活的程度，以及他们认为自己是一个快乐的人的程度。最后，他们没有使用特定的收入等级，而是将自己置于一个社会阶梯上，代表他们在财富、教育和职业方面的社会地位。<u>该研究的结果与前两项的结果相同。总体而言，意义和幸福感在资源较少的人中比在资源较多的人中具有更强的关系。这可能是因为较富裕的人有更多机会获得其他快乐来源，其中许多是外部的，例如缺乏压力或社区。</u>因此，关注内在的满足感、目标或意义就不那么重要了。</p>
-<h3 id="听力-3">听力</h3>
-<audio controls id="music">
-  <source src="https://img.zero02.space/6level007.m4a" type="audio/mpeg">
-  您的浏览器不支持音频播放。
-</audio>]]></content>
       <tags>
         <tag>英语</tag>
       </tags>
@@ -942,6 +942,164 @@ Co-found        <psw>共同创立</psw></p>
       </tags>
   </entry>
   <entry>
+    <title>英语词汇文章10~13</title>
+    <url>/2025/02/24/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A04/</url>
+    <content><![CDATA[<h2 id="William-Shakespeare">William Shakespeare</h2>
+<p>william sharespeare was an English poet, playwright, and actor. He was born on 26 April 1564 in Stratford-upon-Avon. His father was a successful local businessman and his mother was the daughter of a <strong>landowner</strong>. Shakespeare is widely regarded as the greatest writer in the English language and the world’s <strong>pre-eminent</strong> dramatist. He is often called England’s national poet and nicknamed the Bard of Avon. He wrote about 38 plays, 154 <strong>sonnets</strong>, two long narrative poems and a few other verses, of which the authorship of some is uncertain. His plays have been translated into every major living language and are performed more often than those of any other playwright.</p>
+<p>writer - author</p>
+<p>drama 歌剧</p>
+<p>landowner 地主</p>
+<p>sonnets 十四行诗</p>
+<p>pre-eminent - outstanding - remarkable - splendid - fabulous - terrific</p>
+<p>verse 诗句</p>
+<p>playwright 剧作家</p>
+<p><strong>Marriage and career</strong></p>
+<p>Shakespeare married Anne Hathaway at the age of 18. She was eight years older than him. They had three children: Susanna, and twins Hamnet and Judith. After his marriage information about his life became very rare. But he is thought to have spent most of his time in London writing and performing in his plays. Between 1585 and 1592, he began a successful career in London as an actor, writer and part-owner of a playing company called the Lord Chamberlain’s Men, later known as the King’s Men.</p>
+<p><strong>Retirement and death</strong></p>
+<p>Around 1613, at the age of 49, he retired to Stratford, where he died three years later. Few records of Shakespeare’s private life survive. He died on 23 April 1616, at the age of 52. He died within a month of signing his will, a document which he begins by describing himself as being in “perfect health”. In his will, Shakespeare left the bulk of his large <strong>estate</strong> to his elder daughter Susanna.</p>
+<p>estate = real estate = property</p>
+<p><strong>His work</strong></p>
+<p>Shakespeare produced most of his known work between 1589 and 1613. His early play were mainly <strong>comedies</strong> and histories and these works remain regarded as some of the best work produced in these <strong>genres</strong>. He then wrote mainly <strong>tragedies</strong> until about 1608, including Hamlet, Othello, King Lear, and Macbeth, considerd some of the finest works in the English language. In his last phase, he wrote <strong>tragiccomedies</strong>, also known as romances, and collaborated with other playwrights.</p>
+<p>comedy 喜剧</p>
+<p>genre 流派</p>
+<p>tragedy - trageic - miserable</p>
+<p>context = background</p>
+<p>Shakespeare’s plays remain highly popular today and are constantly studied, performed and <strong>reinterupted</strong> in diverse curtural and political contexts throughout the world.</p>
+<blockquote>
+<p>Diverse <psw>多样的</psw><br>
+Document <psw>文件</psw><br>
+Pre-eminent <psw>卓越的</psw><br>
+Sign <psw>标志</psw><br>
+Uncertain <psw>不确定的</psw><br>
+Will <psw>意志</psw><br>
+Perform <psw>执行</psw><br>
+Career <psw>职业生涯</psw><br>
+Cultural <psw>文化的</psw><br>
+Tragedy <psw>悲剧</psw><br>
+Consider <psw>考虑</psw><br>
+Constantly <psw>不断地</psw><br>
+Collaborate <psw>合作</psw><br>
+Political <psw>政治的</psw><br>
+Poet <psw>诗人</psw><br>
+Bulk <psw>大量</psw><br>
+Tragic <psw>悲剧的</psw><br>
+Comedy <psw>喜剧</psw><br>
+Survive <psw>生存</psw><br>
+Verse <psw>诗句</psw><br>
+Estate <psw>财产</psw><br>
+Comedy <psw>喜剧</psw><br>
+Phase <psw>阶段</psw></p>
+</blockquote>
+<p>Shakespeare’s parents were poor. false</p>
+<p>His wife was 18 when they got married. true</p>
+<p>Shakespeare died on Stratford. false</p>
+<p>In the last years of his life, he wrote mainly tragicomedies. false</p>
+<h2 id="Charles-Dickens">Charles Dickens</h2>
+<blockquote>
+<p>Charles Dickens was an English writer and social <strong>critic</strong>. During his lifetime, his works enjoyed <strong>unprecedented</strong> popularity. He <strong>is</strong> now <strong>considered</strong> a literary <strong>genius</strong> because he created some of the world’s best-known fictional characters and <strong>is regarded as</strong> the greatest novelist of he Victorian era. His novels and short stories enjoy <strong>lasting</strong> popularity.</p>
+</blockquote>
+<p>critic 批评者 - critical 批判的，关键的<br>
+enjoy popularity 享受欢迎度<br>
+unprecedented 前所未有，空前的<br>
+work 作品<br>
+genius 天才<br>
+be regarded as = is considered 被视为<br>
+novel 小说，新颖的<br>
+lasting 持续的</p>
+<blockquote>
+<p>Dickens was born on February 7,1812 in Portsmouth, on the southern <strong>coast</strong> of England. His father, John Dickens was a <strong>naval</strong> clerk who dreamed of becoming rich and his mother, Elizabeth Barrow, <strong>aspired to be</strong> a teacher and school director. But the family’s financial situation had grown worse because John Dickens used to spend money dangerously beyond the family’s <strong>means</strong>. Consequently, John was sent to prison for debt in 1824, when Charles was just 12 years old.</p>
+</blockquote>
+<p>coast - coastal city - coastal line<br>
+by the seaside 在海边<br>
+naval clerk 海上职员<br>
+naval = marine - submarine<br>
+clerk = employee = staff<br>
+aspire to do 想要做…<br>
+financial - economic - finance<br>
+used to 过去常常做…<br>
+means = fortune = wealth<br>
+prison - jail - imprison - cell</p>
+<blockquote>
+<p>After his father’s <strong>imprisonment</strong>, Charles Dickens left school to work in a factory. Despite his lack of formal education, he edited a weekly journal for 20 years, wrote 15 novels, five <strong>novellas</strong>, hundreds of short stories and <strong>non-fiction</strong> articles, lectured and performed extensively, was an indefatigable letter writer, and <strong>campaigned</strong> <strong>vigorously</strong> for children’s rights, education, and other social reforms.</p>
+</blockquote>
+<p>factory - plant (植物，工厂，发电厂)<br>
+despite - while - although - even though - though - in spite of 加逗号; 尽管…但是… 表示让步<br>
+novellas 中等小说<br>
+non-fiction 非小说<br>
+fatigue = tiredness = wearysome - indefatigable 不知疲倦的，不屈不挠<br>
+campaign 运动（偏时政）<br>
+vigor - vigorously - vigorous = energetic</p>
+<p><strong>His literary success</strong></p>
+<p>Dicken’s literary success begin with the 1836 serial publication of The Pickwick Papers Within a few years he had become an international literary <strong>celebrity</strong>, famous for his humor, <strong>satire</strong>, and <strong>keen observation</strong> of character and society. His novels, most published in monthly or weekly <strong>installments</strong>, <strong>pioneered</strong> the serial publication of narrative fiction, which became the dominant Victorian mode for novel publication.</p>
+<p>celebrity 名人<br>
+satire - irony 讥讽<br>
+keen observation 敏锐的观察<br>
+observe 评论 - observation<br>
+installment 出版</p>
+<p>Dickens was regarded as the literary <strong>colossus</strong> of his age. His 1843 novella, A Christmas Carol, remains popular and continues to inspire adaptations in even artistic genre Oliver Twist and Great Expectations are also frequently adapted, and, like many of his novels, evoke images of early Victorian London. His 1859 novel, A tale of Two Cities, set in London and Paris, is his best-known work of historical fiction.</p>
+<p>colossus = giant<br>
+genre 风格，流派</p>
+<p><strong>His Death</strong></p>
+<p>Charles Dickens dies on June 9, 1870 of a stroke. He was buried in Poet’s Corner at Westminster Abbey. Thousands of mourners came to pay their respects at the grave and throw in flowers.</p>
+<blockquote>
+<p>genre aspire unprecedented factory genius naval campaign era prison vigorously celebrity coast indefatigable publication critic clerk imprisonment stroke literary lasting means financial director edit extensive</p>
+</blockquote>
+<ol>
+<li>Dicken’s family was rich. false</li>
+<li>he left school at an early age. false</li>
+<li>novels were characterized by realism. true</li>
+<li>He died due to a stroke. true</li>
+</ol>
+<h2 id="The-Democratic-Party">The Democratic Party</h2>
+<p>There have usually only been two main political parties in the US. Since the 1860s, two main parties have been the Republican Party and the Democratic Party. It should be noted though that there are other minor parties such as the Libertarian Party. the Green Party, and Constitution Party.</p>
+<p><strong>The Democratic Party</strong></p>
+<p>The Democratic Party started in 1828 as a <strong>pro-slavery</strong> party with its Andrew Jackson as the first President in 1829. However, through the economic <strong>resurgence</strong> after the Great Depression in 1930 and 1940s, as well as the Civil Rights Movement in the 1960s, the Democratic party became an advocate of racial equality. The party’s <strong>philosophy</strong> of modern liberalism adopts social and economic equality <strong>principles</strong>. It aims at setting government intervention and regulation in the economy such as the introduction of social programs, support for labor unions, affordable college tuitions, universal health care, equal opportunity, consumer protection, and environmental protection.</p>
+<p>resurgence 死灰复燃</p>
+<p>pro-slavery 支持奴隶制</p>
+<p>great depression 大萧条</p>
+<p>race - racial equality</p>
+<p>philosophy 理念</p>
+<p>principle 准则</p>
+<p>introduce 引进</p>
+<p><strong>The Republican party</strong></p>
+<p>The Republican party, however, started as an anti-slavery party in 1854. Its first President was Abraham Linclon in 1861. In the <strong>Nixon</strong> years, there was a shift to appeal to the implicit racial biases of white voters that did not like the civil rights movement of the 1960s. The <strong>philosophy</strong> of the party focuses on social and economic independence, and a capitalist economic system. It is also known or its <strong>anti-abortion</strong> efforts, anti-regulatory policy, and reduction of government intervention in the economy as well as being in support privatized health care.</p>
+<p>implicit 隐性的</p>
+<p>capital - capitalist - capitalism</p>
+<p>social - socialist - socialism - communism</p>
+<p>individual - individualism</p>
+<p>collective - collectivism</p>
+<p>anti-abortion 堕胎</p>
+<blockquote>
+<p>Capitalist     <psw>资本主义的</psw><br>
+Advocate       <psw>提倡</psw><br>
+Abortion       <psw>堕胎</psw><br>
+Tuition        <psw>学费</psw><br>
+Republic       <psw>共和国</psw><br>
+Minor          <psw>少数</psw><br>
+Equality       <psw>平等</psw><br>
+Slavery        <psw>奴隶制</psw><br>
+Democratic     <psw>民主的</psw><br>
+Resurgence     <psw>复兴</psw><br>
+Liberalism     <psw>自由主义</psw><br>
+Universal      <psw>普遍的</psw><br>
+Liberty        <psw>自由</psw><br>
+Independence   <psw>独立</psw><br>
+Party          <psw>政党</psw><br>
+Constitution   <psw>宪法</psw><br>
+Noted          <psw>著名的</psw><br>
+Depression     <psw>抑郁</psw><br>
+Civil          <psw>公民的</psw><br>
+Philosophy     <psw>哲学</psw><br>
+Privatize      <psw>私有化</psw><br>
+Intervention   <psw>干预</psw><br>
+Bias           <psw>偏见</psw></p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>英语</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>英语词汇文章14~16</title>
     <url>/2025/02/25/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A05/</url>
     <content><![CDATA[<h2 id="UNICEF">UNICEF</h2>
@@ -1111,164 +1269,6 @@ Extreme <psw>极端的</psw><br>
 Meteorological <psw>气象的</psw><br>
 Devastating <psw>毁灭性的</psw><br>
 Extinguish <psw>熄灭 / 消灭</psw></p>
-</blockquote>
-]]></content>
-      <tags>
-        <tag>英语</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>英语词汇文章10~13</title>
-    <url>/2025/02/24/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A04/</url>
-    <content><![CDATA[<h2 id="William-Shakespeare">William Shakespeare</h2>
-<p>william sharespeare was an English poet, playwright, and actor. He was born on 26 April 1564 in Stratford-upon-Avon. His father was a successful local businessman and his mother was the daughter of a <strong>landowner</strong>. Shakespeare is widely regarded as the greatest writer in the English language and the world’s <strong>pre-eminent</strong> dramatist. He is often called England’s national poet and nicknamed the Bard of Avon. He wrote about 38 plays, 154 <strong>sonnets</strong>, two long narrative poems and a few other verses, of which the authorship of some is uncertain. His plays have been translated into every major living language and are performed more often than those of any other playwright.</p>
-<p>writer - author</p>
-<p>drama 歌剧</p>
-<p>landowner 地主</p>
-<p>sonnets 十四行诗</p>
-<p>pre-eminent - outstanding - remarkable - splendid - fabulous - terrific</p>
-<p>verse 诗句</p>
-<p>playwright 剧作家</p>
-<p><strong>Marriage and career</strong></p>
-<p>Shakespeare married Anne Hathaway at the age of 18. She was eight years older than him. They had three children: Susanna, and twins Hamnet and Judith. After his marriage information about his life became very rare. But he is thought to have spent most of his time in London writing and performing in his plays. Between 1585 and 1592, he began a successful career in London as an actor, writer and part-owner of a playing company called the Lord Chamberlain’s Men, later known as the King’s Men.</p>
-<p><strong>Retirement and death</strong></p>
-<p>Around 1613, at the age of 49, he retired to Stratford, where he died three years later. Few records of Shakespeare’s private life survive. He died on 23 April 1616, at the age of 52. He died within a month of signing his will, a document which he begins by describing himself as being in “perfect health”. In his will, Shakespeare left the bulk of his large <strong>estate</strong> to his elder daughter Susanna.</p>
-<p>estate = real estate = property</p>
-<p><strong>His work</strong></p>
-<p>Shakespeare produced most of his known work between 1589 and 1613. His early play were mainly <strong>comedies</strong> and histories and these works remain regarded as some of the best work produced in these <strong>genres</strong>. He then wrote mainly <strong>tragedies</strong> until about 1608, including Hamlet, Othello, King Lear, and Macbeth, considerd some of the finest works in the English language. In his last phase, he wrote <strong>tragiccomedies</strong>, also known as romances, and collaborated with other playwrights.</p>
-<p>comedy 喜剧</p>
-<p>genre 流派</p>
-<p>tragedy - trageic - miserable</p>
-<p>context = background</p>
-<p>Shakespeare’s plays remain highly popular today and are constantly studied, performed and <strong>reinterupted</strong> in diverse curtural and political contexts throughout the world.</p>
-<blockquote>
-<p>Diverse <psw>多样的</psw><br>
-Document <psw>文件</psw><br>
-Pre-eminent <psw>卓越的</psw><br>
-Sign <psw>标志</psw><br>
-Uncertain <psw>不确定的</psw><br>
-Will <psw>意志</psw><br>
-Perform <psw>执行</psw><br>
-Career <psw>职业生涯</psw><br>
-Cultural <psw>文化的</psw><br>
-Tragedy <psw>悲剧</psw><br>
-Consider <psw>考虑</psw><br>
-Constantly <psw>不断地</psw><br>
-Collaborate <psw>合作</psw><br>
-Political <psw>政治的</psw><br>
-Poet <psw>诗人</psw><br>
-Bulk <psw>大量</psw><br>
-Tragic <psw>悲剧的</psw><br>
-Comedy <psw>喜剧</psw><br>
-Survive <psw>生存</psw><br>
-Verse <psw>诗句</psw><br>
-Estate <psw>财产</psw><br>
-Comedy <psw>喜剧</psw><br>
-Phase <psw>阶段</psw></p>
-</blockquote>
-<p>Shakespeare’s parents were poor. false</p>
-<p>His wife was 18 when they got married. true</p>
-<p>Shakespeare died on Stratford. false</p>
-<p>In the last years of his life, he wrote mainly tragicomedies. false</p>
-<h2 id="Charles-Dickens">Charles Dickens</h2>
-<blockquote>
-<p>Charles Dickens was an English writer and social <strong>critic</strong>. During his lifetime, his works enjoyed <strong>unprecedented</strong> popularity. He <strong>is</strong> now <strong>considered</strong> a literary <strong>genius</strong> because he created some of the world’s best-known fictional characters and <strong>is regarded as</strong> the greatest novelist of he Victorian era. His novels and short stories enjoy <strong>lasting</strong> popularity.</p>
-</blockquote>
-<p>critic 批评者 - critical 批判的，关键的<br>
-enjoy popularity 享受欢迎度<br>
-unprecedented 前所未有，空前的<br>
-work 作品<br>
-genius 天才<br>
-be regarded as = is considered 被视为<br>
-novel 小说，新颖的<br>
-lasting 持续的</p>
-<blockquote>
-<p>Dickens was born on February 7,1812 in Portsmouth, on the southern <strong>coast</strong> of England. His father, John Dickens was a <strong>naval</strong> clerk who dreamed of becoming rich and his mother, Elizabeth Barrow, <strong>aspired to be</strong> a teacher and school director. But the family’s financial situation had grown worse because John Dickens used to spend money dangerously beyond the family’s <strong>means</strong>. Consequently, John was sent to prison for debt in 1824, when Charles was just 12 years old.</p>
-</blockquote>
-<p>coast - coastal city - coastal line<br>
-by the seaside 在海边<br>
-naval clerk 海上职员<br>
-naval = marine - submarine<br>
-clerk = employee = staff<br>
-aspire to do 想要做…<br>
-financial - economic - finance<br>
-used to 过去常常做…<br>
-means = fortune = wealth<br>
-prison - jail - imprison - cell</p>
-<blockquote>
-<p>After his father’s <strong>imprisonment</strong>, Charles Dickens left school to work in a factory. Despite his lack of formal education, he edited a weekly journal for 20 years, wrote 15 novels, five <strong>novellas</strong>, hundreds of short stories and <strong>non-fiction</strong> articles, lectured and performed extensively, was an indefatigable letter writer, and <strong>campaigned</strong> <strong>vigorously</strong> for children’s rights, education, and other social reforms.</p>
-</blockquote>
-<p>factory - plant (植物，工厂，发电厂)<br>
-despite - while - although - even though - though - in spite of 加逗号; 尽管…但是… 表示让步<br>
-novellas 中等小说<br>
-non-fiction 非小说<br>
-fatigue = tiredness = wearysome - indefatigable 不知疲倦的，不屈不挠<br>
-campaign 运动（偏时政）<br>
-vigor - vigorously - vigorous = energetic</p>
-<p><strong>His literary success</strong></p>
-<p>Dicken’s literary success begin with the 1836 serial publication of The Pickwick Papers Within a few years he had become an international literary <strong>celebrity</strong>, famous for his humor, <strong>satire</strong>, and <strong>keen observation</strong> of character and society. His novels, most published in monthly or weekly <strong>installments</strong>, <strong>pioneered</strong> the serial publication of narrative fiction, which became the dominant Victorian mode for novel publication.</p>
-<p>celebrity 名人<br>
-satire - irony 讥讽<br>
-keen observation 敏锐的观察<br>
-observe 评论 - observation<br>
-installment 出版</p>
-<p>Dickens was regarded as the literary <strong>colossus</strong> of his age. His 1843 novella, A Christmas Carol, remains popular and continues to inspire adaptations in even artistic genre Oliver Twist and Great Expectations are also frequently adapted, and, like many of his novels, evoke images of early Victorian London. His 1859 novel, A tale of Two Cities, set in London and Paris, is his best-known work of historical fiction.</p>
-<p>colossus = giant<br>
-genre 风格，流派</p>
-<p><strong>His Death</strong></p>
-<p>Charles Dickens dies on June 9, 1870 of a stroke. He was buried in Poet’s Corner at Westminster Abbey. Thousands of mourners came to pay their respects at the grave and throw in flowers.</p>
-<blockquote>
-<p>genre aspire unprecedented factory genius naval campaign era prison vigorously celebrity coast indefatigable publication critic clerk imprisonment stroke literary lasting means financial director edit extensive</p>
-</blockquote>
-<ol>
-<li>Dicken’s family was rich. false</li>
-<li>he left school at an early age. false</li>
-<li>novels were characterized by realism. true</li>
-<li>He died due to a stroke. true</li>
-</ol>
-<h2 id="The-Democratic-Party">The Democratic Party</h2>
-<p>There have usually only been two main political parties in the US. Since the 1860s, two main parties have been the Republican Party and the Democratic Party. It should be noted though that there are other minor parties such as the Libertarian Party. the Green Party, and Constitution Party.</p>
-<p><strong>The Democratic Party</strong></p>
-<p>The Democratic Party started in 1828 as a <strong>pro-slavery</strong> party with its Andrew Jackson as the first President in 1829. However, through the economic <strong>resurgence</strong> after the Great Depression in 1930 and 1940s, as well as the Civil Rights Movement in the 1960s, the Democratic party became an advocate of racial equality. The party’s <strong>philosophy</strong> of modern liberalism adopts social and economic equality <strong>principles</strong>. It aims at setting government intervention and regulation in the economy such as the introduction of social programs, support for labor unions, affordable college tuitions, universal health care, equal opportunity, consumer protection, and environmental protection.</p>
-<p>resurgence 死灰复燃</p>
-<p>pro-slavery 支持奴隶制</p>
-<p>great depression 大萧条</p>
-<p>race - racial equality</p>
-<p>philosophy 理念</p>
-<p>principle 准则</p>
-<p>introduce 引进</p>
-<p><strong>The Republican party</strong></p>
-<p>The Republican party, however, started as an anti-slavery party in 1854. Its first President was Abraham Linclon in 1861. In the <strong>Nixon</strong> years, there was a shift to appeal to the implicit racial biases of white voters that did not like the civil rights movement of the 1960s. The <strong>philosophy</strong> of the party focuses on social and economic independence, and a capitalist economic system. It is also known or its <strong>anti-abortion</strong> efforts, anti-regulatory policy, and reduction of government intervention in the economy as well as being in support privatized health care.</p>
-<p>implicit 隐性的</p>
-<p>capital - capitalist - capitalism</p>
-<p>social - socialist - socialism - communism</p>
-<p>individual - individualism</p>
-<p>collective - collectivism</p>
-<p>anti-abortion 堕胎</p>
-<blockquote>
-<p>Capitalist     <psw>资本主义的</psw><br>
-Advocate       <psw>提倡</psw><br>
-Abortion       <psw>堕胎</psw><br>
-Tuition        <psw>学费</psw><br>
-Republic       <psw>共和国</psw><br>
-Minor          <psw>少数</psw><br>
-Equality       <psw>平等</psw><br>
-Slavery        <psw>奴隶制</psw><br>
-Democratic     <psw>民主的</psw><br>
-Resurgence     <psw>复兴</psw><br>
-Liberalism     <psw>自由主义</psw><br>
-Universal      <psw>普遍的</psw><br>
-Liberty        <psw>自由</psw><br>
-Independence   <psw>独立</psw><br>
-Party          <psw>政党</psw><br>
-Constitution   <psw>宪法</psw><br>
-Noted          <psw>著名的</psw><br>
-Depression     <psw>抑郁</psw><br>
-Civil          <psw>公民的</psw><br>
-Philosophy     <psw>哲学</psw><br>
-Privatize      <psw>私有化</psw><br>
-Intervention   <psw>干预</psw><br>
-Bias           <psw>偏见</psw></p>
 </blockquote>
 ]]></content>
       <tags>
@@ -1463,6 +1463,172 @@ Broad <psw>广泛的 / 宽广的</psw></p>
       </tags>
   </entry>
   <entry>
+    <title>英语词汇文章20~21, 11课（补）</title>
+    <url>/2025/02/27/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A07/</url>
+    <content><![CDATA[<h2 id="Computer-addiction">Computer addiction</h2>
+<blockquote>
+<p>computer addiction can be defined as the excessive or compulsive use of the computer which persists despite serious negative consequences for personal, social or <strong>occupational</strong> fuction. The addiction involves online and / or offline computer usage and <strong>consists of</strong> at least three <strong>subtypes</strong>: excessive gaming, sexual <strong>preoccupations</strong>, and e-mail/text messaging.</p>
+</blockquote>
+<p>define - definition</p>
+<p>compulsive - compulsory</p>
+<p>occupation = work = job = career</p>
+<p>consist of …组成</p>
+<p>subtypes 附属种类</p>
+<p>preoccupation 全身投入</p>
+<p><strong>Offline and online computer addiction</strong></p>
+<blockquote>
+<p>The concept of computer addiction is broadly divided into two types, namely offline and online computer addiction. The <strong>term</strong> offline computer addiction is generally used when speaking about excessive gaming behavior, which can <strong>be practiced</strong> both offline and online. Online computer addiction, <strong>also known as</strong> Internet addiction, gets more attention in general from secientific research than offline computer addiction, mainly because most cases of computer addiction are related to the excessive use of the internet.</p>
+</blockquote>
+<p>term 术语</p>
+<p>also known as 又称为</p>
+<p>be pracitced 被进行，被实施</p>
+<p>The symptoms of computer addiction include:</p>
+<ul>
+<li>Being drawn by the computer as soon as one wakes up and before one goes to bed.</li>
+<li><u>Replacing old hobbies with excessive use of the computer</u> and using the computer as one’s primary source of entertainment and <strong>procrastination</strong>.</li>
+<li>Lacking physical exercise and/or outdoor exposure because of constant use of the computer. This could <strong>contribute to</strong> many health problems such as obesity.</li>
+</ul>
+<p>Repaceing B with A 用A替换B</p>
+<p>procrastinate 拖延</p>
+<p>contribute to 有助于，导致</p>
+<p><strong>Cause and Effects</strong></p>
+<blockquote>
+<p>Researchers link internet/computer addiction with existing mental health issues, most <strong>notably</strong> depression. Studies showed that the majority of those who met the requirements of internet/computer addiction <strong>suffered from</strong> <strong>interpersonal</strong> difficulties and stress and that those addicted to online games specifically responded that they hoped to avoid reality.</p>
+</blockquote>
+<p>notable - notably</p>
+<p>suffered from 遭受</p>
+<p>interpersonal 人际关系的</p>
+<blockquote>
+<p>There are many consequences <strong>resulting from</strong> computer addiction. For example, excessive computer use may <strong>result in</strong> lack of face to face social interaction. It may also lead to Computer Vision <strong>Syndrome</strong> (CVS), a condition that results in headaches, blurred vision, neck pain, fatigue, eye strain, dry eyes, <strong>irritated</strong> eyes, double vision, <strong>vertigo</strong> or dizziness.</p>
+</blockquote>
+<p>result from 由…导致 跟原因</p>
+<p>result in 导致了…结果 跟结果</p>
+<p>sydrome 综合症</p>
+<p>irritate 恼怒，愤怒</p>
+<p>vertigo 晕头转向</p>
+<blockquote>
+<p>Notably <psw>显著地 / 尤其</psw><br>
+Suffer <psw>遭受 / 受苦</psw><br>
+Negative <psw>消极的 / 负面的</psw><br>
+Condition <psw>状况 / 条件</psw><br>
+Exist <psw>存在</psw><br>
+Depression <psw>抑郁</psw><br>
+Excessive <psw>过度的</psw><br>
+Exposure <psw>暴露</psw><br>
+Interaction <psw>互动 / 交流</psw><br>
+Addiction <psw>成瘾</psw><br>
+Persist <psw>持续 / 坚持</psw><br>
+Contribute <psw>贡献 / 促成</psw><br>
+Define <psw>定义</psw><br>
+Symptom <psw>症状</psw><br>
+Preoccupation <psw>关注 / 忧心忡忡</psw><br>
+Dizziness <psw>头晕</psw><br>
+Fatigue <psw>疲劳</psw><br>
+Occupational <psw>职业的</psw><br>
+Irritated <psw>易怒的 / 恼怒的</psw><br>
+Function <psw>功能 / 运作</psw><br>
+Blurred <psw>模糊的</psw><br>
+Procrastination <psw>拖延</psw></p>
+</blockquote>
+<h2 id="Christmas">Christmas</h2>
+<blockquote>
+<p>Christmas which is celebrated on December 25th is an important Christian holiday. The origin of the world “Christmas” comes from “Christ” and the “Holy Mass”. It is believed that the day <strong>commemorates</strong> the birth of Jesus Christ although a lot of people doubt that the Day corresponds to the actual date of birth. In spite of its Christian origin, Christmas is also celebrated by a lot of non Christian countries and the celebration includes a lot of non religious customs. People exchange gifts and <strong>greeting cards</strong>. Homes are decorated with Christmas trees, light and <strong>garlands</strong>. Dinners are planned with special food and all the families gather to have a lot of fun.</p>
+</blockquote>
+<p>Christ - Christmas - Christian - Christianity</p>
+<p>Religious - Religious people</p>
+<p>Islam - Buddhism</p>
+<p>commemorate - honor</p>
+<p>greeting card 贺卡</p>
+<p>garlands 花环</p>
+<blockquote>
+<p>A Central imaginary figure in Christmas is Father Christmas, also called Santa Claus, He is believed to fly on his <strong>sleigh</strong> bringing gifts for children. Christmas is also an opportunity for economic growth. It has become an important period for business activity. Shops make a lot of profit and a lot of countries realized this economic impact.</p>
+</blockquote>
+<p>sleigh 雪橇</p>
+<p>shopping carnival 购物节</p>
+<p><strong>What Does Christmas Mean Today?</strong></p>
+<blockquote>
+<p>Today, Christmas is still connected to its religious background although it has gained some <strong>secular</strong> <strong>characteristics</strong>. For many people, Christmas is spending extra time with family, expressing thanks and love, sharing and making others happy, and commemorating the birth of the central figure of Christianity, Jesus Christ.</p>
+</blockquote>
+<p>secular 世俗的，现期的</p>
+<p>characteristics = feature = trait</p>
+<blockquote>
+<p>Christmas is also a worldwide cultural and economic phenomenon. It is considered the most significant economic boost for many countries worldwide since sales in particularly all retail <strong>categories</strong> <strong>surge</strong> considerably. People buy and exchange gifts, decorate Christmas trees, enjoy meals with family and friends, and of course, wait for Santa Claus to arrive.</p>
+</blockquote>
+<p>surge = soar 增长</p>
+<p>category 类别</p>
+<ol>
+<li>Christmas celebration on December 25.</li>
+<li>Jesus Christ’s Date of birth we are not sure about the exactly date.</li>
+<li>Santa Claus comes on a flying sleigh</li>
+</ol>
+<h2 id="Culture-Shock">Culture Shock</h2>
+<p><strong>what is the culture shock</strong>?</p>
+<blockquote>
+<p>Culture shock <strong>refers to</strong> the feeling of <strong>disorientation</strong> experienced by people when they move to an unfamiliar cultural environment or when they are suddenly exposed to a different way of life or set of attitudes. This can be the result of immigration or a visit to a new country, a move between social environments, or simply a transition to another type of life.</p>
+</blockquote>
+<p>shock 冲击，震惊</p>
+<p>refer to 指的是</p>
+<p>orient - disorientation 迷失</p>
+<p><strong>Culture shock stages</strong></p>
+<blockquote>
+<p>Culture shock consists of four distinct stages: honeymoon, <strong>negotiation</strong>, adjustment, and adaption, The honeymoon stage occurs when the individual sees the difference between the old and new culture in a romantic light. In negotiation stage, the differences between the old and new culture become <strong>apparent</strong> and may create <strong>anxiety</strong>. The adjustment stage refers to the period when the individuals grows accustomed to the new culture and develop <strong>routines</strong>. Finally, in the adaption stage, individuals are able to participate fully and comfortably in the host culture. Adaption or acceptance does not mean total conversion; people often keep many traits from their earlier culture, such as accents and languages. It is often referred to as <strong>bicultural</strong> stage.</p>
+</blockquote>
+<p>negotiate - negotiation 协商</p>
+<p>apparent = obvious</p>
+<p>anxiety - anxious</p>
+<p>routine 日常</p>
+<p>bicultural 双重文化的 bilingual 双重语言者</p>
+<p><strong>Homesickness</strong></p>
+<blockquote>
+<p>Culture shock may cause homesickness. This refers to the feeling of longing for one’s home. People suffering from culture shock typically experience a <strong>combination</strong> of <strong>depressive</strong> and anxious <strong>symptoms</strong> related to homesickness. Ways of coping with homesickness include developing a hobby, thinking positively and feeling grateful about what one has, and building new relationships.</p>
+</blockquote>
+<p>depressive 压抑</p>
+<p>typically 典型的</p>
+<p>combination 组合</p>
+<p>symptoms 症状</p>
+<p>cope with = deal with</p>
+<p>grateful 感激</p>
+<blockquote>
+<p>Cultural shock is a natural phenomenon that <strong>occurs</strong> when one has a cross-cultural experience. Going through the different stages can take weeks, months or years, But ultimately, the experience can be enriching and may end up with either adaption with the new culture or a return home.</p>
+</blockquote>
+<p>occur = happen</p>
+<blockquote>
+<p>Enrich <psw>丰富 / 提升</psw><br>
+Suddenly <psw>突然地</psw><br>
+Disorientation <psw>迷失方向 / 迷茫</psw><br>
+Ultimately <psw>最终 / 归根结底</psw><br>
+Longing <psw>渴望 / 思念</psw><br>
+Phenomenon <psw>现象</psw><br>
+Accustomed <psw>习惯的 / 适应的</psw><br>
+Apparent <psw>明显的 / 显而易见的</psw><br>
+Shock <psw>震惊 / 休克</psw><br>
+Unfamiliar <psw>不熟悉的 / 陌生的</psw><br>
+Expose <psw>暴露 / 接触</psw><br>
+Attitude <psw>态度</psw><br>
+Occur <psw>发生</psw><br>
+Grateful <psw>感激的</psw><br>
+Adjustment <psw>调整 / 适应</psw><br>
+Adaption <psw>适应 / 改编</psw><br>
+Repressive <psw>压制的 / 镇压的</psw><br>
+Routine <psw>常规 / 例行公事</psw><br>
+Transition <psw>过渡 / 转变</psw><br>
+Negotiation <psw>谈判 / 协商</psw><br>
+Trait <psw>特征 / 品质</psw><br>
+Participate <psw>参与</psw><br>
+Conversion <psw>转变 / 转换</psw></p>
+</blockquote>
+<ol>
+<li>Culture shock occurs only as a result of immigration. true</li>
+<li>The adaptation stage means that there is a complete change of personality. false</li>
+<li>Homesickness and culture shock refer to the same thing. false</li>
+<li>culture shock has also positive effects on people experiencing it. true</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>英语</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>英语词汇文章22~25</title>
     <url>/2025/03/03/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A08/</url>
     <content><![CDATA[<hr>
@@ -1627,172 +1793,6 @@ Inaccurate       <psw>不准确的</psw></p>
 <blockquote>
 <p>debate enslave status sacrifice kindness discrimination struggle reform subject medieval gigantic degree illiterate deny inheritance civilization suppress supporter</p>
 </blockquote>
-]]></content>
-      <tags>
-        <tag>英语</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>英语词汇文章20~21, 11课（补）</title>
-    <url>/2025/02/27/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A07/</url>
-    <content><![CDATA[<h2 id="Computer-addiction">Computer addiction</h2>
-<blockquote>
-<p>computer addiction can be defined as the excessive or compulsive use of the computer which persists despite serious negative consequences for personal, social or <strong>occupational</strong> fuction. The addiction involves online and / or offline computer usage and <strong>consists of</strong> at least three <strong>subtypes</strong>: excessive gaming, sexual <strong>preoccupations</strong>, and e-mail/text messaging.</p>
-</blockquote>
-<p>define - definition</p>
-<p>compulsive - compulsory</p>
-<p>occupation = work = job = career</p>
-<p>consist of …组成</p>
-<p>subtypes 附属种类</p>
-<p>preoccupation 全身投入</p>
-<p><strong>Offline and online computer addiction</strong></p>
-<blockquote>
-<p>The concept of computer addiction is broadly divided into two types, namely offline and online computer addiction. The <strong>term</strong> offline computer addiction is generally used when speaking about excessive gaming behavior, which can <strong>be practiced</strong> both offline and online. Online computer addiction, <strong>also known as</strong> Internet addiction, gets more attention in general from secientific research than offline computer addiction, mainly because most cases of computer addiction are related to the excessive use of the internet.</p>
-</blockquote>
-<p>term 术语</p>
-<p>also known as 又称为</p>
-<p>be pracitced 被进行，被实施</p>
-<p>The symptoms of computer addiction include:</p>
-<ul>
-<li>Being drawn by the computer as soon as one wakes up and before one goes to bed.</li>
-<li><u>Replacing old hobbies with excessive use of the computer</u> and using the computer as one’s primary source of entertainment and <strong>procrastination</strong>.</li>
-<li>Lacking physical exercise and/or outdoor exposure because of constant use of the computer. This could <strong>contribute to</strong> many health problems such as obesity.</li>
-</ul>
-<p>Repaceing B with A 用A替换B</p>
-<p>procrastinate 拖延</p>
-<p>contribute to 有助于，导致</p>
-<p><strong>Cause and Effects</strong></p>
-<blockquote>
-<p>Researchers link internet/computer addiction with existing mental health issues, most <strong>notably</strong> depression. Studies showed that the majority of those who met the requirements of internet/computer addiction <strong>suffered from</strong> <strong>interpersonal</strong> difficulties and stress and that those addicted to online games specifically responded that they hoped to avoid reality.</p>
-</blockquote>
-<p>notable - notably</p>
-<p>suffered from 遭受</p>
-<p>interpersonal 人际关系的</p>
-<blockquote>
-<p>There are many consequences <strong>resulting from</strong> computer addiction. For example, excessive computer use may <strong>result in</strong> lack of face to face social interaction. It may also lead to Computer Vision <strong>Syndrome</strong> (CVS), a condition that results in headaches, blurred vision, neck pain, fatigue, eye strain, dry eyes, <strong>irritated</strong> eyes, double vision, <strong>vertigo</strong> or dizziness.</p>
-</blockquote>
-<p>result from 由…导致 跟原因</p>
-<p>result in 导致了…结果 跟结果</p>
-<p>sydrome 综合症</p>
-<p>irritate 恼怒，愤怒</p>
-<p>vertigo 晕头转向</p>
-<blockquote>
-<p>Notably <psw>显著地 / 尤其</psw><br>
-Suffer <psw>遭受 / 受苦</psw><br>
-Negative <psw>消极的 / 负面的</psw><br>
-Condition <psw>状况 / 条件</psw><br>
-Exist <psw>存在</psw><br>
-Depression <psw>抑郁</psw><br>
-Excessive <psw>过度的</psw><br>
-Exposure <psw>暴露</psw><br>
-Interaction <psw>互动 / 交流</psw><br>
-Addiction <psw>成瘾</psw><br>
-Persist <psw>持续 / 坚持</psw><br>
-Contribute <psw>贡献 / 促成</psw><br>
-Define <psw>定义</psw><br>
-Symptom <psw>症状</psw><br>
-Preoccupation <psw>关注 / 忧心忡忡</psw><br>
-Dizziness <psw>头晕</psw><br>
-Fatigue <psw>疲劳</psw><br>
-Occupational <psw>职业的</psw><br>
-Irritated <psw>易怒的 / 恼怒的</psw><br>
-Function <psw>功能 / 运作</psw><br>
-Blurred <psw>模糊的</psw><br>
-Procrastination <psw>拖延</psw></p>
-</blockquote>
-<h2 id="Christmas">Christmas</h2>
-<blockquote>
-<p>Christmas which is celebrated on December 25th is an important Christian holiday. The origin of the world “Christmas” comes from “Christ” and the “Holy Mass”. It is believed that the day <strong>commemorates</strong> the birth of Jesus Christ although a lot of people doubt that the Day corresponds to the actual date of birth. In spite of its Christian origin, Christmas is also celebrated by a lot of non Christian countries and the celebration includes a lot of non religious customs. People exchange gifts and <strong>greeting cards</strong>. Homes are decorated with Christmas trees, light and <strong>garlands</strong>. Dinners are planned with special food and all the families gather to have a lot of fun.</p>
-</blockquote>
-<p>Christ - Christmas - Christian - Christianity</p>
-<p>Religious - Religious people</p>
-<p>Islam - Buddhism</p>
-<p>commemorate - honor</p>
-<p>greeting card 贺卡</p>
-<p>garlands 花环</p>
-<blockquote>
-<p>A Central imaginary figure in Christmas is Father Christmas, also called Santa Claus, He is believed to fly on his <strong>sleigh</strong> bringing gifts for children. Christmas is also an opportunity for economic growth. It has become an important period for business activity. Shops make a lot of profit and a lot of countries realized this economic impact.</p>
-</blockquote>
-<p>sleigh 雪橇</p>
-<p>shopping carnival 购物节</p>
-<p><strong>What Does Christmas Mean Today?</strong></p>
-<blockquote>
-<p>Today, Christmas is still connected to its religious background although it has gained some <strong>secular</strong> <strong>characteristics</strong>. For many people, Christmas is spending extra time with family, expressing thanks and love, sharing and making others happy, and commemorating the birth of the central figure of Christianity, Jesus Christ.</p>
-</blockquote>
-<p>secular 世俗的，现期的</p>
-<p>characteristics = feature = trait</p>
-<blockquote>
-<p>Christmas is also a worldwide cultural and economic phenomenon. It is considered the most significant economic boost for many countries worldwide since sales in particularly all retail <strong>categories</strong> <strong>surge</strong> considerably. People buy and exchange gifts, decorate Christmas trees, enjoy meals with family and friends, and of course, wait for Santa Claus to arrive.</p>
-</blockquote>
-<p>surge = soar 增长</p>
-<p>category 类别</p>
-<ol>
-<li>Christmas celebration on December 25.</li>
-<li>Jesus Christ’s Date of birth we are not sure about the exactly date.</li>
-<li>Santa Claus comes on a flying sleigh</li>
-</ol>
-<h2 id="Culture-Shock">Culture Shock</h2>
-<p><strong>what is the culture shock</strong>?</p>
-<blockquote>
-<p>Culture shock <strong>refers to</strong> the feeling of <strong>disorientation</strong> experienced by people when they move to an unfamiliar cultural environment or when they are suddenly exposed to a different way of life or set of attitudes. This can be the result of immigration or a visit to a new country, a move between social environments, or simply a transition to another type of life.</p>
-</blockquote>
-<p>shock 冲击，震惊</p>
-<p>refer to 指的是</p>
-<p>orient - disorientation 迷失</p>
-<p><strong>Culture shock stages</strong></p>
-<blockquote>
-<p>Culture shock consists of four distinct stages: honeymoon, <strong>negotiation</strong>, adjustment, and adaption, The honeymoon stage occurs when the individual sees the difference between the old and new culture in a romantic light. In negotiation stage, the differences between the old and new culture become <strong>apparent</strong> and may create <strong>anxiety</strong>. The adjustment stage refers to the period when the individuals grows accustomed to the new culture and develop <strong>routines</strong>. Finally, in the adaption stage, individuals are able to participate fully and comfortably in the host culture. Adaption or acceptance does not mean total conversion; people often keep many traits from their earlier culture, such as accents and languages. It is often referred to as <strong>bicultural</strong> stage.</p>
-</blockquote>
-<p>negotiate - negotiation 协商</p>
-<p>apparent = obvious</p>
-<p>anxiety - anxious</p>
-<p>routine 日常</p>
-<p>bicultural 双重文化的 bilingual 双重语言者</p>
-<p><strong>Homesickness</strong></p>
-<blockquote>
-<p>Culture shock may cause homesickness. This refers to the feeling of longing for one’s home. People suffering from culture shock typically experience a <strong>combination</strong> of <strong>depressive</strong> and anxious <strong>symptoms</strong> related to homesickness. Ways of coping with homesickness include developing a hobby, thinking positively and feeling grateful about what one has, and building new relationships.</p>
-</blockquote>
-<p>depressive 压抑</p>
-<p>typically 典型的</p>
-<p>combination 组合</p>
-<p>symptoms 症状</p>
-<p>cope with = deal with</p>
-<p>grateful 感激</p>
-<blockquote>
-<p>Cultural shock is a natural phenomenon that <strong>occurs</strong> when one has a cross-cultural experience. Going through the different stages can take weeks, months or years, But ultimately, the experience can be enriching and may end up with either adaption with the new culture or a return home.</p>
-</blockquote>
-<p>occur = happen</p>
-<blockquote>
-<p>Enrich <psw>丰富 / 提升</psw><br>
-Suddenly <psw>突然地</psw><br>
-Disorientation <psw>迷失方向 / 迷茫</psw><br>
-Ultimately <psw>最终 / 归根结底</psw><br>
-Longing <psw>渴望 / 思念</psw><br>
-Phenomenon <psw>现象</psw><br>
-Accustomed <psw>习惯的 / 适应的</psw><br>
-Apparent <psw>明显的 / 显而易见的</psw><br>
-Shock <psw>震惊 / 休克</psw><br>
-Unfamiliar <psw>不熟悉的 / 陌生的</psw><br>
-Expose <psw>暴露 / 接触</psw><br>
-Attitude <psw>态度</psw><br>
-Occur <psw>发生</psw><br>
-Grateful <psw>感激的</psw><br>
-Adjustment <psw>调整 / 适应</psw><br>
-Adaption <psw>适应 / 改编</psw><br>
-Repressive <psw>压制的 / 镇压的</psw><br>
-Routine <psw>常规 / 例行公事</psw><br>
-Transition <psw>过渡 / 转变</psw><br>
-Negotiation <psw>谈判 / 协商</psw><br>
-Trait <psw>特征 / 品质</psw><br>
-Participate <psw>参与</psw><br>
-Conversion <psw>转变 / 转换</psw></p>
-</blockquote>
-<ol>
-<li>Culture shock occurs only as a result of immigration. true</li>
-<li>The adaptation stage means that there is a complete change of personality. false</li>
-<li>Homesickness and culture shock refer to the same thing. false</li>
-<li>culture shock has also positive effects on people experiencing it. true</li>
-</ol>
 ]]></content>
       <tags>
         <tag>英语</tag>
