@@ -1,0 +1,1978 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hello World</title>
+    <url>/2025/03/19/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start">Quick Start</h2>
+<h3 id="Create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>外挂标签演示</title>
+    <url>/2025/02/28/%E5%A4%96%E6%8C%82%E6%A0%87%E7%AD%BE%E6%BC%94%E7%A4%BA/</url>
+    <content><![CDATA[<h2 id="外挂标签">外挂标签</h2>
+<p>Butterfly 主题是 Hexo 中非常受欢迎的一款主题，支持丰富的自定义功能，尤其是通过外挂标签（Tag Plugins）可以实现更多样化的内容展示效果。以下是关于 Butterfly 外挂标签的详细教程，涵盖基本概念、使用方法以及一些实用示例。</p>
+<hr>
+<h2 id="Butterfly-外挂标签简介">Butterfly 外挂标签简介</h2>
+<p>外挂标签是 Butterfly 主题提供的一种扩展功能，允许用户在 Markdown 文件中通过特定的语法插入自定义内容，例如彩色文字、提示框、超链接卡片等。这些标签通过简单的语法即可实现复杂的样式效果，非常适合美化博客内容。</p>
+<hr>
+<h2 id="外挂标签的基本使用方法">外挂标签的基本使用方法</h2>
+<h3 id="1-标签语法">1. 标签语法</h3>
+<p>Butterfly 外挂标签的基本语法格式为：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% 标签名 参数 %&#125;</span><br><span class="line">内容</span><br><span class="line">&#123;% end标签名 %&#125;</span><br></pre></td></tr></table></figure>
+<p>部分标签不需要 <code>end</code> 结束符，具体取决于标签的定义。</p>
+<h3 id="2-常用标签示例">2. 常用标签示例</h3>
+<p>以下是一些常用的外挂标签及其效果：</p>
+<h4 id="（1）行内文本样式">（1）行内文本样式</h4>
+<ul>
+<li><strong>下划线</strong>：<u>文本内容</u></li>
+<li><strong>着重号</strong>：<emp>文本内容</emp></li>
+<li><strong>波浪线</strong>：<wavy>文本内容</wavy></li>
+<li><strong>删除线</strong>：<del>文本内容</del></li>
+<li><strong>键盘样式</strong>：<kbd>文本内容</kbd></li>
+<li><strong>密码样式</strong>：<psw>文本内容</psw></li>
+</ul>
+<h4 id="（2）彩色文字">（2）彩色文字</h4>
+<p>使用 <code>span</code> 标签可以实现彩色文字效果：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% span 颜色, 文本内容 %&#125;</span><br></pre></td></tr></table></figure>
+<p>支持的颜色参数：<code>red</code>、<code>yellow</code>、<code>green</code>、<code>cyan</code>、<code>blue</code>、<code>gray</code> 等。</p>
+<p>示例：</p>
+<p>彩色文字：<span class='p red'>红色</span>、<span class='p yellow'>黄色</span>、<span class='p green'>绿色</span></p>
+<p>超大号文字：<span class='p center logo large'>Volantis</span></p>
+<h4 id="（3）提示框（Note）">（3）提示框（Note）</h4>
+<p>Butterfly 提供了多种样式的提示框，可以通过 <code>note</code> 标签实现：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note [class] [no-icon] [style] %&#125;</span><br><span class="line">提示内容</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>class</code>：可选参数，支持 <code>default</code>、<code>primary</code>、<code>success</code>、<code>info</code>、<code>warning</code>、<code>danger</code> 等样式。</li>
+<li><code>no-icon</code>：可选参数，隐藏图标。</li>
+<li><code>style</code>：可选参数，支持 <code>simple</code>、<code>modern</code>、<code>flat</code> 等样式。</li>
+</ul>
+<p>示例：</p>
+<div class="note success"><p>这是一个成功的提示框！</p>
+</div>
+<h4 id="（4）超链接卡片">（4）超链接卡片</h4>
+<p>通过自定义标签可以实现超链接卡片效果，显示网站的 Favicon 和标题：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% link 标题, 网站名, 链接 %&#125;</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<div class="tag link"><a class="link-card" title="获取网站的Favicon图标并显示在你的网页上" href="owen0o0"><div class="left"><img src="https://github.com/owen0o0/getFavicon"/></div><div class="right"><p class="text">获取网站的Favicon图标并显示在你的网页上</p><p class="url">owen0o0</p></div></a></div>
+<hr>
+<h2 id="自定义外挂标签">自定义外挂标签</h2>
+<p>如果默认的标签无法满足需求，可以通过自定义标签实现更多功能。以下是自定义标签的基本步骤：</p>
+<h3 id="1-创建标签脚本">1. 创建标签脚本</h3>
+<p>在 <code>themes/butterfly/scripts/tag/</code> 目录下新建一个 JavaScript 文件，例如 <code>link.js</code>，并编写标签逻辑：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">link</span>(<span class="params">args</span>) &#123;</span><br><span class="line">    args = args.<span class="title function_">join</span>(<span class="string">&#x27; &#x27;</span>).<span class="title function_">split</span>(<span class="string">&#x27;,&#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> title = args[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">let</span> sitename = args[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">let</span> link = args[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">let</span> imgUrl = <span class="string">&quot;https://api.iowen.cn/favicon/&quot;</span> + link.<span class="title function_">replace</span>(<span class="regexp">/^https?\:\/\//i</span>, <span class="string">&quot;&quot;</span>) + <span class="string">&quot;.png&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`&lt;a class=&quot;tag-Link&quot; target=&quot;_blank&quot; href=&quot;<span class="subst">$&#123;link&#125;</span>&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;div class=&quot;tag-link-tips&quot;&gt;引用站外地址&lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;div class=&quot;tag-link-bottom&quot;&gt;</span></span><br><span class="line"><span class="string">            &lt;div class=&quot;tag-link-left&quot; style=&quot;background-image: url(<span class="subst">$&#123;imgUrl&#125;</span>);&quot;&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;div class=&quot;tag-link-right&quot;&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&quot;tag-link-title&quot;&gt;<span class="subst">$&#123;title&#125;</span>&lt;/div&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&quot;tag-link-sitename&quot;&gt;<span class="subst">$&#123;sitename&#125;</span>&lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;/a&gt;`</span>;</span><br><span class="line">&#125;</span><br><span class="line">hexo.<span class="property">extend</span>.<span class="property">tag</span>.<span class="title function_">register</span>(<span class="string">&#x27;link&#x27;</span>, link, &#123; <span class="attr">ends</span>: <span class="literal">false</span> &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="2-添加-CSS-样式">2. 添加 CSS 样式</h3>
+<p>在 <code>themes/butterfly/source/css/</code> 目录下新建 CSS 文件，例如 <code>tag-link.css</code>，并编写样式：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.tag-Link</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ddd</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">text-decoration</span>: none;</span><br><span class="line">    <span class="attribute">color</span>: inherit;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-bottom</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-left</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">background-size</span>: cover;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-right</span> &#123;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-引用-CSS-文件">3. 引用 CSS 文件</h3>
+<p>在主题配置文件 <code>_config.butterfly.yml</code> 中引用 CSS 文件：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">inject:</span></span><br><span class="line">  <span class="attr">head:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&lt;link</span> <span class="string">rel=&quot;stylesheet&quot;</span> <span class="string">href=&quot;/css/tag-link.css&quot;&gt;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>butterfly</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>英语听力测试2</title>
+    <url>/2025/03/08/%E8%8B%B1%E8%AF%AD%E5%90%AC%E5%8A%9B%E6%B5%8B%E8%AF%952/</url>
+    <content><![CDATA[<h2 id="听力题1">听力题1</h2>
+<p>A. Provide a medical service to the community<br>
+B. Make healthcare in her hometown the best<br>
+C. Obtain a doctoral degree in internal medicine<br>
+D. Have a <strong>profound</strong> impact on people around her</p>
+<p>A. They have urged constantly urged her to study hard<br>
+B. They have tried to create a positive learning environment<br>
+C. They have pursued the family’s dreams together with her<br>
+D. They have work hard to <strong>finance</strong> her education</p>
+<p>A. It is a key medical branch <strong>conductive</strong> to realizing her dreams<br>
+B. It connects many other <strong>specialties</strong> with its broad coverage.<br>
+C. It has a long history in the man’s <strong>prestigious</strong> institution.<br>
+D. It is a medical branch both of parents specialize in.</p>
+<p>A. Problematic<br>
+B. Competitive<br>
+C. Inconsistent<br>
+D. Trustworthy</p>
+<blockquote>
+<p>profound 深刻的</p>
+<p>finance 资助</p>
+<p>conductive = beneficial</p>
+<p>specialty = expertise</p>
+<p>prestigious = authority</p>
+<p>specialize 专攻，专长</p>
+</blockquote>
+<h3 id="听力原文">听力原文</h3>
+<p><strong>对话一</strong><br>
+M: So tell me, why do you wish to study medicine?<br>
+W: I’ve always wanted to be a doctor. I come from a small town where healthcare was never the best. And I think that had a profound effect on me as a child. <u>I remember thinking how great it would be to serve the community and cure people.</u><br>
+M: What other people or events in your life have shaped your interest in becoming a doctor?<br>
+W: Well, that’s hard to say. <u>I would certainly say my parents have been a key factor. They always pushed me to study hard</u>. And I certainly wouldn’t be here without their support. I guess I was also immensely fortunate to have good teachers and friends around me at the end of the day. I’ve always been surrounded by a positive environment <strong>conducive</strong> to my working hard and pursuing my dreams.<br>
+M: Is there any medical branch that you would like to specialize in?<br>
+W: I haven’t decided yet. It’s still early days. However, if I had to say, internal medicine.<br>
+M: Why internal medicine?<br>
+W: <u>I know it’s no picnic. But I find it the most intriguing because it covers so much and ties together so many other specialties.</u><br>
+M: Thank you. Now, I’d like to address your academic history and projected grades. We like to think of ourselves as a <strong>prestigious</strong> institution with a highly competitive and promising student body. As you know, to get into our programs, you need at least an eighty-five percent score in the entrance exam. Do you think you can <strong>attain</strong> this?<br>
+W: I think so, yes.<br>
+M: I’m looking at your school grades now. And I’ll be honest, it’s a bit of a mixed bag. <u>You do get top grades here and there, but you are not very, shall we say, consistent.</u> I see no problem in making you a conditional offer, but consider yourself warned. Our entrance exam is, to use your own words, no picnic.</p>
+<h3 id="题目">题目</h3>
+<ol>
+<li>What does the woman say she has always wanted to do?</li>
+<li>What do we learn about the woman’s parents from the conversation?</li>
+<li>Why does the woman say she wants to choose internal medicine as her specialty?</li>
+<li>How does the man describe the woman’s school grades?</li>
+</ol>
+<h3 id="音频">音频</h3>
+<audio controls id="music">
+  <source src="https://img.zero02.space/6level002.m4a" type="audio/mpeg">
+  您的浏览器不支持音频播放。
+</audio>
+<h2 id="听力题2">听力题2</h2>
+<p>A. To prevent <strong>hackers</strong> from <strong>cracking</strong> our secret codes.<br>
+B. To show that all the guidelines are being followed.<br>
+C. To provide evidence that passwords are forgotten.<br>
+D. To convince our computer that we are human.</p>
+<p>A. <strong>Put an end</strong> to the hacking phenomenon.<br>
+B. Reduce the <strong>intricacy</strong> of the password itself.<br>
+C. Help people remember their passwords.<br>
+D. Explain the need for different email accounts.</p>
+<p>A. innovate technologies to ensure the safety of users’ accounts.<br>
+B. Provide <strong>incentives</strong> for the application of creative passwords.<br>
+C. Explore the possibility of using simpler secret codes.<br>
+D. Take steps to encourage users to <strong>log in</strong> more often.</p>
+<blockquote>
+<p>hacker 骇客，黑客</p>
+<p>crack 破解</p>
+<p>put an end 画上句号，终止</p>
+<p>sophisiticated = intrcate - intracacy</p>
+<p>incentive 激励，奖励</p>
+<p>log in 登录</p>
+</blockquote>
+<h3 id="听力原文-2">听力原文</h3>
+<p>Logging into your email account can sometimes feel like trying to hack into the pentagon. If you follow all of the guidelines, you need to use a different password for every one of your accounts, use an <strong>incomprehensible</strong> variety of letters, numbers and symbols, sign up for two-step <strong>verification</strong> and change every password every time one of them is <strong>compromised</strong>. <u>More often than not, you then have to choose photos that include a street sign, as this apparently provides solid evidence to your computer that you are in fact a human being.</u> <strong>It’s no small wonder</strong> most of us forget our passwords more often than our keys now. <u>A new <strong>peer-reviewed</strong> study by researchers at AUTO University in Finland is <strong>attempting</strong> to <strong>figure out</strong> why we forget our passwords in order to help put an end to this <strong>frustrating</strong> phenomenon.</u> Their findings suggest that how likely you are to remember your password has less to do with the intricacy of the password itself and more to do with how often you anticipate using it. Which is to say, you are far more likely to remember a <strong>complicated</strong> password if you know you’ll frequently be using it to log into an account than you are to remember a simple password for an account that you don’t expect to log into very often. <u>The researchers advise websites to include more of an incentive for users to log in more often in order to help them remember their secret codes.</u></p>
+<blockquote>
+<p>incomprehensible 不可理解的</p>
+<p>verification 验证</p>
+<p>compromised 泄露</p>
+<p>it’s not small wonder 难怪</p>
+<p>peer-reviewed 同行评审</p>
+<p>attempting 试图</p>
+<p>figure out 弄清楚</p>
+<p>frustrate 沮丧的</p>
+</blockquote>
+<h3 id="题目-2">题目</h3>
+<ol>
+<li>
+<p>Why do we often have to choose photos that include a street sign to log into our email accounts?</p>
+</li>
+<li>
+<p>What do researchers at a university in Finland aim to do in their new study?</p>
+</li>
+<li>
+<p>What do the researchers advise websites to do at the end of the passage?</p>
+</li>
+</ol>
+<h3 id="音频-2">音频</h3>
+<audio controls id="music">
+  <source src="https://img.zero02.space/6level003.m4a" type="audio/mpeg">
+  您的浏览器不支持音频播放。
+</audio>
+<h2 id="听力题3">听力题3</h2>
+<p>A. Her work no longer interested her.<br>
+B. Her training app did not fit her.<br>
+C. Her <strong>fitness</strong> fell into a slump.<br>
+D. Her business deteriorated.</p>
+<p>A. Help users keep track of their <strong>fitness</strong> levels.<br>
+B. Design personalized training programmes.<br>
+C. Strengthen ties among users worldwide.<br>
+D. Select <strong>well-qualified</strong> human coaches.</p>
+<p>A. They are never repeated.<br>
+B. They help enrich her life.<br>
+C. They are of no extreme intensity.<br>
+D. They keep her focused on her goal.</p>
+<p>A. They will not be able to <u>take the place of</u> human personal trainers.<br>
+B. They will not be able to comprehend some of the profiles users put in.<br>
+C. They cannot lead to <strong>optimal</strong> results with their matchematical approach.<br>
+D. They cannot match humans in <strong>arranging</strong> <strong>meticulous</strong> <strong>workout</strong> schedules.</p>
+<blockquote>
+<p>fitness 健康</p>
+<p>optimal 最佳的，最理想的</p>
+<p>well-qualified 合格的</p>
+<p>meticulous 小心翼翼的</p>
+<p>workout 锻炼</p>
+<p>arranging 规划，安排</p>
+<p>take the place of 替代</p>
+</blockquote>
+<h3 id="听力原文-3">听力原文</h3>
+<p><u>Four years ago, Jenny Wayner was in a fitness slump.</u> She wanted to improve her physical and mental health. However, her workouts lacked intensity. Without a proper training program to follow when she went to the gym, her daily <strong>ritual</strong> <strong>predominantly</strong> involved easy exercise options like jogging. She avoided more <strong>formidable</strong> exercises like lifting weights. A personal trainer who might push her was out of the question. The <strong>extravagant</strong> cost was just unaffordable. She then discovered the fitness phone app Slieretics. <u>To use the app, you first input your profile about your previous training experiences and preferences as well as your desired goals. A virtual coach then uses that information to suggest a personalized training <strong>regime</strong>.</u> After the workout, the app’s artificial intelligence software system uses feedback from Miss Wayner and its other fifty-three million users around the world to adjust future training sessions. <u>Now, Miss Wayner finds the workouts exciting. This is because no two are ever the same</u>. As a result, the app has helped her to lose more than twenty-five kilograms. The app’s mathematical approach can arrange a more <strong>meticulous</strong> workout schedule. This has led to optimal results. However, <u>some experts think that apps cannot replace human personal trainers.</u> An app cannot understand human behavior. It will not comprehend that there are competing interests outside of health and fitness. Additionally, a human trainer can add <strong>compassion</strong> to the workout. He can also make exercise fun and sustainable. Trainers can monitor whether the person is doing exercises correctly and safeguard against injuries. An app cannot perceive such <strong>subtleties</strong>.</p>
+<blockquote>
+<p>ritual 仪式，行为</p>
+<p>predominantly 主要地</p>
+<p>formidable 令人畏惧的，难对付的，望而却步的</p>
+<p>extravagant 奢侈的，昂贵的</p>
+<p>regime - fitness regime 健身计划</p>
+<p>meticulous 细致的，小心谨慎的</p>
+<p>compassion 同情心</p>
+<p>subtleties 微妙之处</p>
+</blockquote>
+<h3 id="题目-3">题目</h3>
+<p>第12题：What was the problem Jenny wayner encountered four years ago? （珍妮·韦纳4年前遇到了什么问题？）</p>
+<p>第13题：What can the fitness phone app Slim eretics do according to the passage? （根据文章，健身手机应用Slim eretics能做什么？）</p>
+<p>第14题：Why does the passage say Jenny waynner now finds the workouts exciting? （为什么文章说珍妮·韦纳现在觉得锻炼很令人兴奋？）</p>
+<p>第15题：What do some experts think of fitness apps like slieretics? （一些专家对像Slieretics这样的健身应用有什么看法？）</p>
+<h3 id="音频-3">音频</h3>
+<audio controls id="music">
+  <source src="https://img.zero02.space/6level004.m4a" type="audio/mpeg">
+  您的浏览器不支持音频播放。
+</audio>]]></content>
+      <tags>
+        <tag>英语</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>英语听力测试1</title>
+    <url>/2025/03/05/%E8%8B%B1%E8%AF%AD%E5%90%AC%E5%8A%9B%E6%B5%8B%E8%AF%951/</url>
+    <content><![CDATA[<h2 id="听力技巧">听力技巧</h2>
+<p>1.听前–读题(预测题目)选项不同之处是重点 过读音</p>
+<p>2.听中-放音-- 盯着题目 勾画你听到的内容-匹配程度高 为正确确选项(概率大)80%</p>
+<p>3.听后-念题目–不听题目往下读选项</p>
+<p>常见问题：</p>
+<ul>
+<li>没时间读题；</li>
+<li>熟词生义-题目听不懂；</li>
+<li>思考和听力不能同时进行</li>
+<li>不知道怎么记笔记</li>
+</ul>
+<p>词汇量不够 - 熟练度</p>
+<p>目标：把题做对，把文章听懂</p>
+<p>听前：预读，猜测，过读音</p>
+<h3 id="听力题1">听力题1</h3>
+<p>A)They will see a 27% higher price to buy natural gas.<br>
+B)They will have insufficient heating oil to keep warm.<br>
+C)They will have a costly bill to pay to heat their homes. ×<br>
+D)They will experience the coldest winter in four decades.</p>
+<p>A)<strong>Provided additional funding</strong> to Low Income Home Energy Assistance Program √<br>
+B)<strong>Assured</strong> U.S citizens of an increase in energy supplies by the end of this year.<br>
+C)Predicted a 10% jump in heating bills for most U.S households this winter<br>
+D)Decided on this year’s energy assistance package of$8 billion in total.</p>
+<blockquote>
+<p>funding = money</p>
+<p>assure = promise</p>
+<p>jump 涨价</p>
+</blockquote>
+<h3 id="原文1">原文1</h3>
+<p>Across the U.S, families are looking to the winter with fear as energy costs soar. A number of factors are creating a bad <strong>situation</strong>, global energy consumption is up but the supplies have been reduced. the energy department <strong>projects</strong> heat bill will jump 28 percent this winter for those who rely on natural gas. Natural gas is used by nearly half of U.S households for heat. Heating oil is <strong>projected</strong> to be 27 percent higher. And electricity 10 percent higher. That comes against the inflation rates that accelerated last month with consumer prices growing 6.6 percent. that’s the fastest pace in 4 decades. The pain will be especially <strong>acute</strong> in part of the country that heavily rely on heating oil to keep homes warm. It is <strong>projected</strong> to cost more than 2300 dollars to heat a typical home with the heating oil this winter. last month, the federal government added one billion dollars in funding to low income energy  assistance program. bringing the total to 4.8 billion dollars but that represents a reduction from last energy assistance package of over 8 billion dollars.</p>
+<blockquote>
+<p>project 预估</p>
+<p>acute 严重</p>
+</blockquote>
+<audio controls id="music">
+  <source src="https://img.zero02.space/NewsReport1.mp3" type="audio/mpeg">
+  您的浏览器不支持音频播放。
+</audio>
+<h3 id="听力题2">听力题2</h3>
+<p>Questions 1 to 4 are based on the conversation you have just heard</p>
+<p>A)Preparing for a job interview.<br>
+B)Writing a work report together.<br>
+C)Going through a couple of <strong>issues</strong> the company faces.<br>
+D)Discussing the woman’s <strong>annual performance review.</strong> ×</p>
+<p>A)The overall culture of the company.<br>
+B)The honesty of the manager.<br>
+C)The <strong>instruction</strong> from her supervisor.<br>
+D)The recognition of her <strong>merits</strong>.</p>
+<p>A)Her <strong>inadequate</strong> language <strong>proficiency</strong>.<br>
+B)Her <strong>inability</strong> to to interact with colleagues properly.<br>
+C)Her inappropriate behavior at company meetings<br>
+D)Her simplistic approach to dealing with others.</p>
+<p>A)To avoid <strong>offending</strong> the <strong>recipients</strong>.<br>
+B)To show her unique writing style.<br>
+C)To be frank.			D)To save time.</p>
+<blockquote>
+<p>annual performance review 年度绩效评审</p>
+<p>issue 问题</p>
+<p>instruction 指示</p>
+<p>merit 优点</p>
+<p>inadequate 不充足的 - insufficient</p>
+<p>proficiency 熟练程度，流利度 - fluency</p>
+<p>inability 无能力的 - cannot</p>
+<p>offend 冒犯</p>
+<p>recipient 收件人</p>
+</blockquote>
+<h3 id="原文2">原文2</h3>
+<p>Ok then, this here is your yearly performance review. you’ve been with the company for three years. <u>Under my direct <strong>supervision</strong> for the past 12 months. your report is mostly good.</u> But there are a couple of issues we must to discuss. The report is yours to take with you. We’ll go through the main points together now, and you can <strong>come through</strong> it in greater detail later. Do you have any question before we start? No sir. I’ll get <strong>straight to it</strong> then. <u>It is evident that you’re a hard worker. You are punctual and industrious.</u> Furthermore, you have strong <strong>analytical</strong> skills and attention to detail. The company might self included a happy with your productivity and overall performance. Thank you, I appreciate the recognition. Do you agree then with this the <strong>depiction</strong> so far? Yeah, It’s a little simplistic perhaps. But that’s to be expected from this kind of evaluation. Sure, would you want to add anything? Your comments can be added to the report if you wish. Oh, there’s no need. It’s a <strong>flattering</strong> for <strong>portrayal</strong> really. Thank you, though. Ok, This leads me to the not so good part. <u>This mostly <strong>centers around</strong> one behavior aspect you ability to work with others.</u> I see. Yes, as you’ve already known, over the last several months. <u>There have been some complained raised about your communication style.</u> Of course, we’ve already have like 3 meetings about this. Look, I’m going to say is that it was never mind intention to offending anyone, simply put, <u>I don’t like to write long email. Because frankly I think they’re a waste of time.</u> <strong>conciseness</strong> is an efficiency. I feel that writing long emails hurts that same productivity you <strong>phrased</strong> me just a minute ago. and I already apologized if anyone was offended. But to be perfectly honest I think anyone who was offended was being a little to sensitive.</p>
+<audio controls id="music">
+  <source src="https://img.zero02.space/6level001.mp3" type="audio/mpeg">
+  您的浏览器不支持音频播放。
+</audio>
+<blockquote>
+<p>supervision  <psw>监视 ，监督</psw></p>
+<p>come through  <psw>经历困难后成功；传来；接通（电话）等意思</psw></p>
+<p>analytical  <psw>分析的；善于分析的</psw></p>
+<p>straight to it  <psw>直接着手做某事；直截了当地做</psw></p>
+<p>depiction  <psw>描绘；描述；刻画</psw></p>
+<p>flattering  <psw>奉承的；讨好的；使显得更漂亮的</psw></p>
+<p>portrayal  <psw>描绘；描写；扮演；表现</psw></p>
+<p>center around  <psw>以……为中心；围绕……</psw></p>
+<p>conciseness  <psw>简洁；简明</psw></p>
+<p>phrased  <psw>表达；措辞（phrase的过去式和过去分词形式）</psw></p>
+</blockquote>
+<h3 id="听力题3">听力题3</h3>
+<p>A. They experienced a <strong>heartbreaking</strong> moment.<br>
+B. They gathered together to rescue a elephant.<br>
+C. They heard a noise from the bottom of a <strong>well</strong>.<br>
+D. They found an elephant wandering around a well.</p>
+<p>A. to borrow their <strong>crane</strong><br>
+B. to ask them for help<br>
+C. to report the strange noise<br>
+D. to get food for the elephant</p>
+<p>A. the elephant was able to return to the jungle<br>
+B. the army officers were examined for injuries.<br>
+C. the army officers were rewarded for their rescue efforts<br>
+D. the elephant was given medical treatment for many days.</p>
+<blockquote>
+<p>heartbreaking 心痛的</p>
+<p>well 井</p>
+<p>crane 吊车，鹤</p>
+</blockquote>
+<h3 id="原文3">原文3</h3>
+<p><u>It was a <strong>heartwarming</strong> moment that dozens of Indians rescuers <strong>rally together</strong> to use a crane In order to save an elephant trapped at a bottom of a twenty feet well.</u> The massive rescue efforts took place last week close to an army camp. The elephant wandered out of the jungle and fell into the well. The army officers heard a noise and coming from well and realized an elephant was trapped deep inside. <u>The officers then throw in some food for the creature and call the local forest department for help.</u> Video of the rescue operation shows how the team used a crane to life up the huge animal out of the well and onto back of the truck. It was then taken into an examining room for the evaluation of any injuries. <u>The elephant was kept under close supervision for a few days.</u> <u>Before it was successfully <strong>released back into</strong> the wild.</u></p>
+<audio controls id="music">
+  <source src="https://img.zero02.space/4level001.mp3" type="audio/mpeg">
+  您的浏览器不支持音频播放。
+</audio>
+]]></content>
+      <tags>
+        <tag>英语</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>英语听力测试3</title>
+    <url>/2025/03/11/%E8%8B%B1%E8%AF%AD%E5%90%AC%E5%8A%9B%E6%B5%8B%E8%AF%953/</url>
+    <content><![CDATA[<h2 id="听力题1">听力题1</h2>
+<p>A. All societies are built upon the cornerstones of basic values.<br>
+B. Everyone everywhere demonstrates seven character <strong>traits</strong>.<br>
+C. All societies are kept together by seven basic moral rules.<br>
+D. Everyone every where shares a universal moral standard.</p>
+<p>A. <strong>Accertain</strong> whether deferring to authority was confined to <strong>right-wing</strong> people<br>
+B. <strong>Find out</strong> whether different societies had different versions of morality<br>
+C. <strong>Make clear</strong> whether all societies faced the same moral isssues.<br>
+D. <strong>Find out</strong> whether <strong>left-wing</strong> people still had a group loyalty.</p>
+<p>A. Make independent descriptions of cultures around the world.<br>
+B. Strive to understand the basic differences between peoples.<br>
+C. Appreciate the foundational value of the existing data.<br>
+D. Carry out <strong>systematic</strong> field studies to gather new data.</p>
+<blockquote>
+<p>trait = feature</p>
+<p>left-wing 激进派</p>
+<p>right-wing 保守派</p>
+<p>systematic 成体系的</p>
+</blockquote>
+<h3 id="问题">问题</h3>
+<ol>
+<li>What do we learn from the Oxford university researchers?</li>
+<li>What did the new study by Oxford researchers aim to do?</li>
+<li>What does Harvey White House think social scientists should do?</li>
+</ol>
+<h3 id="原文">原文</h3>
+<p>All societies are held together by seven universal moral rules, which include <strong>deferring</strong> to superiors and respecting the property of others. Oxford university has concluded that although many cultures are moving towards more liberal, less <strong>hierarchical</strong> organizations, the new research suggests that traditional power structures and basic values of <strong>charity</strong> and brotherhood are the cornerstones of successful societies. The huge study of sixty different cultures around the world found that all communities operate under seven basic moral codes. Those universal rules are: help your family, help your group, return <strong>favors</strong>, be brave, defer to superiors, divide resources fairly and respect the property of others. The character traits held for every kind of community, be they traditional hunter gatherers or advanced civilizations, helping to uphold civilized society and foster social cooperation. <u>Researchers found everyone everywhere shares a common moral code. Said Dr Oliver Scott Curry, lead author and senior researcher at Oxford, “These seven moral rules appear to be universal across cultures because people face the same social problems.</u>” Even if some of these traits look right wing or conservative, for example deferring to authority, left wing people will still have a group loyalty and deference to someone or something. This shows there really is more that unites us than divides us. <u>The study published in <em>Current Anthropology</em> is the largest and most comprehensive and widespread survey of morals ever conducted and aimed to find out whether different societies had different versions of morality</u>. The team accessed the world’s best archives to analyze accounts from more than six hundred sources of sixty societies around the world. They found that the seven rules were considered morally good in all societies and were observed across all continents, religions and politics. However, some communities valued certain rules more highly than others. Dr Curry hopes that this research helps to promote mutual understanding between people of different cultures and appreciation of what we have in common and how and why we differ. Co-author Professor Harvey White House said, “Social scientists should now set about testing the theory in the field rather than relying on old data. This study was based on historical descriptions of cultures around the world. He said these descriptions were made independent of and prior to the theory. <u>We’re testing in future. If social scientists are serious about testing theories of morality, they will need to gather new data more systematically out in the field.”</u></p>
+<blockquote>
+<p>defer 遵从，服从</p>
+<p>hierarchy - hierarchical</p>
+<p>charity 慈善</p>
+<p>favor 恩惠</p>
+</blockquote>
+<h3 id="译文">译文</h3>
+<p>所有社会都由七条普遍的道德准则维系在一起，其中包括服从上级和尊重他人的财产。牛津大学得出的结论是，尽管许多文化正在朝着更加自由、<strong>等级制度</strong>更少的组织发展，但新的研究表明，传统的权力结构以及<strong>慈善</strong>和兄弟情谊的基本价值观是成功社会的基石。对世界各地60种不同文化的大规模研究发现，所有社区都在七条基本道德准则下运作。这些普遍的规则是：帮助你的家庭，帮助你的群体，回报恩惠，勇敢，服从上级，公平分配资源和尊重他人的财产。每一种社区的性格特征，无论是传统的狩猎采集者还是先进的文明，都有助于维护文明社会和促进社会合作。研究人员发现，世界各地的每个人都有共同的道德准则。牛津大学的首席作者兼高级研究员奥利弗·斯科特·库里博士说：“这七条道德规则似乎在不同文化中都是普遍的，因为人们面临着同样的社会问题。”即使其中一些特征看起来像右翼或保守派，例如服从权威，左翼人士仍然会对某人或某事有集体的忠诚和尊重。这表明，真正团结我们的东西比分裂我们的东西多。发表在《当代人类学》上的这项研究是有史以来规模最大、最全面、最广泛的道德调查，旨在找出不同社会是否有不同版本的道德。该团队访问了世界上最好的档案，分析了来自世界各地60个社会的600多个来源的账户。他们发现，这七条规则在所有社会都被认为是道德良好的，并且在所有大陆、宗教和政治中都得到遵守。然而，一些社区比其他社区更重视某些规则。库里博士希望这项研究有助于促进不同文化的人之间的相互理解，并欣赏我们的共同点以及我们如何以及为什么不同。合著者哈维·白宫教授说：“社会科学家现在应该开始在这个领域测试这个理论，而不是依赖旧数据。这项研究基于对世界各地文化的历史描述。他说这些描述是独立于理论之前的。我们将来会进行测试。如果社会科学家认真对待道德理论的测试，他们需要在这个领域更系统地收集新的数据。”</p>
+<h3 id="听力">听力</h3>
+<audio controls id="music">
+  <source src="https://img.zero02.space/6level005.m4a" type="audio/mpeg">
+  您的浏览器不支持音频播放。
+</audio>
+<h2 id="听力题2">听力题2</h2>
+<p>A. The might be the most important part of out eating experience.<br>
+B. They can activate our brain functions in a most direct <strong>fashion</strong>.<br>
+C. They can be reviewed as the windows to out soul.<br>
+D. They can mislead us in more ways than one.</p>
+<p>A. It attracts food companies’ growing attention.<br>
+B. It <strong>invariably</strong> determines how food sells.<br>
+C. It adversely impacts one’s eating experience.<br>
+D. It changes the way people taste food.</p>
+<p>A. Enhance the taste<br>
+B. Make predictions<br>
+C. <strong>Identify</strong> distinct flavors<br>
+D. Enrich the eating experience</p>
+<blockquote>
+<p>invariably 不变的</p>
+<p>fashion = way</p>
+<p>identify 识别</p>
+</blockquote>
+<h3 id="原文-2">原文</h3>
+<p>When it comes to food, color is money. Food companies know that better color gives better prices. So they ensure that their products are attractive in color to bolster earnings. Oranges, for example, have to meet specific color standards. And oranges are just the beginning. There are color standards for foods, including French fries, tomatoes, pumpkins, olives, honey and cherries. The attention to color is for good reason. <strong>For all the talk of the tongue</strong>, our eyes really might be the most important part of the eating experience. A great number of our brain functions are dedicated to processing vision, while only one or two percent is given over to taste faculties. And the result is that color actually changes how we taste food. Scientists have demonstrated many times the importance of color to taste. In a nineteen eighties study, for example, test participants were asked to name the flavor of the beverage they were drinking without being able to see that beverage. Only one in five was able to identify it as orange. But when they were allowed to see what they were drinking, which was orange in color, each of them identified the orange flavor. And when a drink that was lime flavor was colored orange, nearly half of respondents identified the flavor of the beverage as orange. None made that mistake when the beverage was green in color. What’s happening when someone fails to identify the flavor of a beverage? They can’t see or that has an abnormal color. Is it that participants can’t discern what the flavor is and so rely on visual cues? Or does color actually change the experience of taste? The key to these questions is the effect of color on expectation. The brain makes predictions using color. These predictions rely on expectations that come from experience. Research shows that we’re all born liking sweet things and desire to eat them. But we aren’t born knowing what the sweet things we crave look like. So we need to learn this over time. The brain gets information from the environment. And we learn, for example, that fruits go from green and sour to red and ripe and sweet. Thus, if we see a green berry, we equate its color with a sour taste. And just looking at a red fruit will activate our expectations that it will taste sweet and delicious.</p>
+<h3 id="问题-2">问题</h3>
+<p>What does the speaker say about our eyes?</p>
+<p>What does color actually do? According to this lecture.</p>
+<p>What does the brain use color to do?</p>
+<h3 id="译文-2">译文</h3>
+<p>谈到食物，颜色就是金钱。食品公司知道更好的颜色能带来更高的价格。所以他们确保自己的产品颜色诱人，以提高收益。例如，橙子必须符合特定的颜色标准。而橙子只是个开始。包括炸薯条、西红柿、南瓜、橄榄、蜂蜜和樱桃在内的食品都有颜色标准。对颜色的关注是有充分理由的。尽管人们总在谈论舌头，但我们的眼睛可能确实是饮食体验中最重要的部分。我们大脑的大量功能都致力于处理视觉，而只有百分之一或二用于味觉功能。结果是颜色实际上改变了我们对食物的味觉。科学家多次证明了颜色对味觉的重要性。例如，在 20 世纪 80 年代的一项研究中，测试参与者被要求在看不到他们正在饮用的饮料的情况下说出饮料的味道。只有五分之一的人能够识别出它是橙子味。但是当他们被允许看到他们正在喝的饮料，而饮料是橙色的时候，他们每个人都识别出了橙子的味道。当一种酸橙味的饮料被染成橙色时，近一半的受访者认为饮料的味道是橙子味。当饮料是绿色的时候，没有人犯这个错误。当有人无法识别饮料的味道时会发生什么呢？他们看不到饮料或者饮料的颜色不正常。是参与者无法辨别味道，所以依赖视觉线索吗？还是颜色实际上改变了味觉体验？这些问题的关键是颜色对期望的影响。大脑利用颜色进行预测。这些预测依赖于来自经验的期望。研究表明，我们生来就喜欢甜食并渴望吃它们。但我们并不是生来就知道我们渴望的甜食是什么样子。所以我们需要随着时间的推移来学习这一点。大脑从环境中获取信息。例如，我们了解到水果从绿色和酸变成红色、成熟和甜。因此，如果我们看到一个绿色的浆果，我们会把它的颜色等同于酸味。而仅仅看着一个红色的水果就会激活我们对它味道甜美可口的期望。</p>
+<h3 id="听力-2">听力</h3>
+<audio controls id="music">
+  <source src="https://img.zero02.space/6level006.m4a" type="audio/mpeg">
+  您的浏览器不支持音频播放。
+</audio>
+<h2 id="听力题3">听力题3</h2>
+<p>A. Social Status<br>
+B. Financial resources<br>
+C. Meaning<br>
+D. Happiness</p>
+<p>A. Their effect on people’s happiness has long been <strong>overstated</strong>.<br>
+B. Their influence on people’s life varies with social <strong>contexts</strong>.<br>
+C. They can affect people’s experience of meaning.<br>
+D. They can ensure people’s overall <strong>well-being</strong>.</p>
+<p>A. It used questioned totally different from those <strong>in their first study</strong>.<br>
+B. It focused on the sense of meaning of French participants.<br>
+C. It analyzed cases from a daily <strong>poll</strong> of US residents.<br>
+D. It examined data collected from multiple countries.</p>
+<p>A. They might have more access to external sources of happiness.<br>
+B. They might focus on an individual sense of satisfaction or meaning.<br>
+C. They might be less easily affected by a community’s overall feeling.<br>
+D. They might be less adversely impacted by failure to achieve a purpose.</p>
+<blockquote>
+<p>overstate 过度陈述</p>
+<p>poll 民意调查，投票</p>
+<p>context 背景，上下文</p>
+<p>well-being 幸福感，福祉</p>
+</blockquote>
+<h3 id="原文-3">原文</h3>
+<p><u>Searching for meaning is something many of us experience throughout our lives.</u> For some, this meaning is religious, some political, and some <strong>interpersonal</strong>. And having a sense of meaning can bring us happiness. A new study looks at the relationship between meaning and happiness in the <strong>context</strong> of financial resources. <u>Ria Caterpano from the University of Toronto and colleagues find meaning is a far weaker predictor of happiness for rich people than poorer people, <strong>suggesting</strong> economic resources can impact how we experience meaning.</u> The team analyzed data from over five hundred thousand people across one hundred and twenty-three countries. The first study used data from a daily poll of US residents collected between 2013 and 2015. Well-being was tracked using measures of positive effect, whether during the day before they were surveyed, participants had smiled or laughed a lot or experienced a lot of happiness. Meaning was measured through a daily purpose index, which explored the extent to which participants felt that they like what they do every day and are motivated to achieve their goals. Finally, income levels were <strong>assessed</strong>. The results showed that the <strong>correlation</strong> between meaning and happiness was strongest among those in lower <strong>income brackets</strong>, but as <strong>income levels</strong> increased, the correlation became weaker. <u>The second study looked at worldwide data.</u> Happiness was measured using the same questions as in the first study, while meaning was measured using the single question “Do you feel your life has an important purpose or meaning?”. The strength of the relationship between meaning and happiness depended on participants’ income. Meaning had a greater influence on happiness for those on lower incomes compared to those in higher brackets. In the final study, French participants <strong>indicated</strong> the extent to which they felt they led a <strong>purposeful</strong> and meaningful life and how much they considered themselves a happy person. Finally, rather than using specific income brackets, they placed themselves on a social ladder representing where they stand in society with regard to wealth, education, and career. <u>The results from the study <strong>duplicated</strong> those of the first, two. Overall, meaning and happiness had a stronger relationship in those with fewer resources than those with more. This might be the case because richer individuals have more access to other sources of happiness, many of which will be external, like lack of stress or community.</u> Thus, a focus on an internal sense of satisfaction, purpose, or meaning is less important.</p>
+<blockquote>
+<p>interpersonal 人际的</p>
+<p>context 背景</p>
+<p>suggesting 表明 = indicate</p>
+<p>assess = estimate = evaluate</p>
+<p>correlation 相互关系性</p>
+<p>income bracket 收入阶层</p>
+<p>income level 收入水平</p>
+<p>purposeful 有意愿的，有目的的</p>
+<p>duplicate 复制</p>
+</blockquote>
+<h3 id="问题-3">问题</h3>
+<p>What does the speaker say many of us search for throughout our lives?</p>
+<p>What do Ria Caterpano and colleagues find about economic resources?</p>
+<p>What do we learn about Ria Caterpano and colleagues’ second study?</p>
+<p>Why do meaning and happiness have a weaker relationship in those with more resources?</p>
+<h3 id="译文-3">译文</h3>
+<p><u>寻找意义是我们许多人一生中都会经历的事情</u>。对一些人来说，这个含义是宗教的，有些是政治的，有些是<strong>人际的</strong>。而拥有意义感可以给我们带来快乐。一项新的研究着眼于财务资源<strong>背景</strong>下意义与幸福之间的关系。<u>多伦多大学的 Ria Caterpano 及其同事发现，富人比穷人更弱地预测了幸福感的意义，这<strong>表明</strong>经济资源会影响我们体验意义的方式。</u>该团队分析了来自 123 个国家/地区的 50 多万人的数据。第一项研究使用了 2013 年至 2015 年间收集的美国居民每日民意调查的数据。使用积极影响的衡量标准来跟踪幸福感，无论是在接受调查的前一天，参与者是否经常微笑或大笑，或者体验到很多快乐。意义是通过每日目的指数来衡量的，该指数探讨了参与者在多大程度上觉得他们喜欢自己每天所做的事情，并有动力实现自己的目标。最后，<strong>评估</strong>了收入水平。结果显示，意义与幸福之间的<strong>相关性</strong>在低<strong>收入阶层</strong>中最强，但随着收入水平的提高，相关性变得更弱。<u>第二项研究着眼于全球数据</u>。幸福感是使用与第一项研究相同的问题来衡量的，而意义是使用单个问题“你觉得你的生活有重要的目的或意义吗？意义和幸福之间的关系强度取决于参与者的收入。与高收入阶层的人相比，意义对低收入人群的幸福感影响更大。在最后一项研究中，法国参与者表示他们认为自己过着有目的和有意义的生活的程度，以及他们认为自己是一个快乐的人的程度。最后，他们没有使用特定的收入等级，而是将自己置于一个社会阶梯上，代表他们在财富、教育和职业方面的社会地位。<u>该研究的结果与前两项的结果相同。总体而言，意义和幸福感在资源较少的人中比在资源较多的人中具有更强的关系。这可能是因为较富裕的人有更多机会获得其他快乐来源，其中许多是外部的，例如缺乏压力或社区。</u>因此，关注内在的满足感、目标或意义就不那么重要了。</p>
+<h3 id="听力-3">听力</h3>
+<audio controls id="music">
+  <source src="https://img.zero02.space/6level007.m4a" type="audio/mpeg">
+  您的浏览器不支持音频播放。
+</audio>]]></content>
+      <tags>
+        <tag>英语</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>英语词汇文章1~3</title>
+    <url>/2025/02/19/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A01/</url>
+    <content><![CDATA[<h2 id="Passage-1">Passage 1</h2>
+<blockquote>
+<p>According to the World Health Organization, over a billion adults around the world suffer from high blood pressure. It is now taking steps to fight against what is called a silent killer. High blood pressure can lead to strokes and a heart attack.</p>
+</blockquote>
+<p>over = more than</p>
+<p>billion - million - trillion</p>
+<p>high blood pressure - hypertension</p>
+<p>taking steps to - take measures to</p>
+<p>what is called</p>
+<p>attack - defend</p>
+<blockquote>
+<p>Almost 10 million people die of these two disease every year. They are the number one causes of death globally. High blood pressure also leads to kidney failure. blindness and other illnesses. it often <strong>goes hand in hand with</strong> diabetes and obesity, which increase health risks even further.</p>
+</blockquote>
+<p>Almost - nearly</p>
+<p>disease - illness - sickness</p>
+<p>cancer - tumor - plague - pandemic - epidemic</p>
+<p>kidney - lung - heart - guts - liver - spleen</p>
+<p>go hand in hand with - has a close relationship with</p>
+<p>obesity - fat - fatty</p>
+<blockquote>
+<p>As the WHO reports, people in developing countries in Africa suffer more from high blood pressure than people in developed countries. The <strong>reason</strong> is that health care in the developed world is much better organized and people go to the doctor soon enough.</p>
+</blockquote>
+<p>cause - reason</p>
+<blockquote>
+<p>High blood pressure should never be <strong>ignored</strong> and always taken <strong>seriously</strong>. It is a warning sign from your body that something is not OK. Although people may live with high blood pressure for years without even knowing it, it is important to check your blood pressure regularly and take the necessary steps.</p>
+</blockquote>
+<p>ignore - neglect</p>
+<p>serious - seriously</p>
+<p>Although - while - Even though - despite - in spite of</p>
+<blockquote>
+<p>The WHO says that you can reduce your blood pressure by changing your living habits. Eating a balanced diet, exercising regularly, avoiding alcohol and <strong>nicotine</strong> are some things that you can do without consulting a doctor.</p>
+</blockquote>
+<p>nicotine - cigar - cigarette - tobacco - vaping</p>
+<h2 id="Passage-2">Passage 2</h2>
+<p><strong>Malnutrition is a disorder of your food intake.</strong></p>
+<blockquote>
+<p>It occurs when a person eat too little or too much, or has an unbalanced diet. In most cases <strong>malnutrition</strong> means <strong>undernourishment</strong>, a lack of food and not enough calories. It is widespread in developing countries.</p>
+</blockquote>
+<p>occur = happen</p>
+<p>malnutrition = undernourishment</p>
+<blockquote>
+<p>On the other side obesity occurs in developed countries where people eat too much. According to the World Health Organization malnutrition is one of the greatest dangers of global health. Currently, about one billion people around the world do not have enough to eat.</p>
+</blockquote>
+<p>Currently - today - nowadays - these days - at present</p>
+<p><strong>When does malnutrition occur</strong></p>
+<blockquote>
+<p>Malnutrition happen when people lack nutrients, vitamins and minerals. Not enough proteins can have negative effects on a person’s growth and lead to physical problems. Vitamins are important for good health and the <strong>functioning</strong> of your body. A lack of them can cause major problems。 Vitamin A deficiency may lead to eye problem and blindness. A lack of <strong>calcium</strong> leads to a bad growth of bones and teeth. Iron deficiency can affect the brain and lead to a low IQ rate. It can make children less active and not able to concentrate.</p>
+</blockquote>
+<p>negative - pessimistic</p>
+<p>positive - optimistic</p>
+<p>physical - physics - physician - surgeon</p>
+<p>functioning 功能 运转</p>
+<p>affect - effect</p>
+<p>concentrate = focus</p>
+<blockquote>
+<p>Malnutrition increases the risk of diseases and weakens the immune system. It affects the <strong>transmission</strong> of viruses. including HIV. it is especially widespread among women,  children and older people. Children can be at risk even before birth because they <strong>depend on</strong> the mother’s nutrition.</p>
+</blockquote>
+<p>transmission = spread</p>
+<p>depend on = rely on - dependence = reliance</p>
+<p>dependent - independent - independence</p>
+<p>One in ten people around the world is malnourished. Eating disorders <strong>account for</strong> 60 million deaths a year, including six million children. It is the main cause of child mortality.</p>
+<p>one in ten = one tenths</p>
+<p>account for 导致 占比 …是…解释 …是…原因</p>
+<p>mortal - mortality - immortal</p>
+<p><strong>Causes of malnutrition</strong></p>
+<blockquote>
+<p>One of the major causes of malnutrition in developing countries is <strong>famine</strong> and drought which lead to the unavailability of food. Many countries in the Third World to not have enough land to grow food on or do not know how to use it. They do not have the money to <strong>afford</strong> <strong>imported</strong> food. In other countries the government neglects the importance of <strong>agriculture</strong> and does not help farmers.</p>
+</blockquote>
+<p>famine 饥荒</p>
+<p>afford - affordable</p>
+<p>import - export</p>
+<p>agriculture 农业</p>
+<blockquote>
+<p>In places with a lack of or dirty drinking water diseases, like diarrhea, lead to <strong>indigestion</strong> of food. Digestive disorders may also be causes of malnutrition. People eat properly but their body cannot digest the food. In the Third World many mothers do not <strong>breastfeed</strong> their children, thus weakening the immune system.</p>
+</blockquote>
+<p>diarrhea 痢疾</p>
+<p>indigestion 消化不良</p>
+<p>breastfeed 母乳</p>
+<p><strong>sign of malnutrition</strong></p>
+<ul>
+<li>tiredness and not enough energy</li>
+<li>decaying teeth</li>
+<li>poor growth</li>
+<li>weight loss</li>
+<li><strong>fragile</strong> bones that break easily</li>
+<li>weakening of muscles</li>
+<li>diarrhea</li>
+<li>dizziness</li>
+</ul>
+<hr>
+<p>fragile - vulnerable - delicate</p>
+<p>dizziness - dizzy</p>
+<p><strong>Depression Obesity</strong></p>
+<blockquote>
+<p>In developed countries obesity is the most widespread form of malnutrition. Obese people consume more calories than they need. This may lead to diabetes and contribute to heat problems and high blood pressure. Too many fats in your diet an lead to high <strong>cholesterol</strong> levels.</p>
+</blockquote>
+<p>Obese = too fat</p>
+<p>consume - consumer - consumption</p>
+<p>cholesterol 胆固醇</p>
+<p><strong>Solution and Treatment</strong></p>
+<blockquote>
+<p>One way to help avoid malnutrition is to <strong>enrich</strong> food with vitamins. For example, milk is <strong>enriched</strong> with Vitamin D. In Third World Countries schools must try to teach children the right eating habits and <strong>emphasize</strong> vegetables and fruit. Governments and other institutions must do their part in educating the population to eat the right things. The World Health Organization and other groups try to help the poorest of these countries with <strong>financial</strong> aid and other support.</p>
+</blockquote>
+<p>enrich 丰富，富有</p>
+<p>emphasize = stress 强调，重点</p>
+<p>financial 财务</p>
+<p>aid = assistance</p>
+<h2 id="Passage-3">Passage 3</h2>
+<p><strong><a href="http://Amazon.com">Amazon.com</a> - The World’s largest Internet Company</strong></p>
+<blockquote>
+<p><a href="http://Amazon.com">Amazon.com</a> is the world’s largest Internet company. It <strong>started out</strong> as an online bookstore in the middle of the 1990s and grew gradually over the years. Today Amazon sells almost everything <u><em>from</em> CDs and DVDs <em>to</em></u> <strong>sportswear</strong> and electrical appliances. The company also produces its own tablets and <strong>e-readers</strong> and lets users upload their own photos and other files to the Amazon-based cloud.</p>
+</blockquote>
+<p>started out 开创，起家</p>
+<p>gradually - eventually</p>
+<p>from … to</p>
+<p>e-reader -&gt; electric reader</p>
+<p>sportswear 运动服</p>
+<blockquote>
+<p>Amazon offers its services all over the world. It <strong>operates</strong> its own websites in the UK. Germany, China, Australia, as well as many South American and Asian countries.</p>
+</blockquote>
+<p>operate - operation - operator</p>
+<blockquote>
+<p><a href="http://Amazon.com">Amazon.com</a> <strong>was founded by</strong> by Jeff Bezos in 1994, It first operated out of a small garage in Washington state. Within a year Amazon offered hundreds of thousands of books. People could <u><em>not only</em> order books from an online catalogue <em>but also</em></u> write their own <strong>reviews</strong>. In 1997 <a href="http://Amazon.com">Amazon.com</a> started trading <strong>shares</strong> on the NASDAQ stock exchange. By 2000 it made over a billion dollars <strong>in sales</strong>.</p>
+</blockquote>
+<p>was founded by 创立</p>
+<p>review = comment</p>
+<p>shares 股份</p>
+<p>exchange 交易</p>
+<p>in sales 销售额</p>
+<blockquote>
+<p><strong>As time went on</strong> <a href="http://Amazon.com">Amazon.com</a> grew gradually. It bought many of its <strong>rivals</strong> and today <strong>cooperates</strong> with other companies and lets them sell their products via the Amazon website.</p>
+</blockquote>
+<p>as time went on 随着时间的推移</p>
+<p>rival 竞争者 -&gt; rivalry 竞争</p>
+<p>cooperate 合作 -&gt; coworker 同事 -&gt; colleague 同事</p>
+<blockquote>
+<p>In 2007 Amazon <strong>went a step further</strong>. It surprised the electronics world with  a revolutionary eBook reader, the Kindle, which today <strong>dominates</strong> the market. In 2011 a tablet computer followed, the Amazon Fire. In the following years the company started selling music downloads and videos <strong>on demand</strong>. Amazon customers can store everything they buy on their private cloud and download it anytime they want.</p>
+</blockquote>
+<p>went a step further 更进一步</p>
+<p>dominate 主宰，统治</p>
+<p>on demand 按需</p>
+<p>store 存储</p>
+<blockquote>
+<p>Today, <a href="http://Amazon.com">Amazon.com</a> serves 20 million customers every day. Its annual income is over 34 billion dollars. There are a number of reasons <strong>for</strong> Amazon’s success. One of them is company founder Jeff Bezos himself. <em>TIME</em> magazine’s Man of the Year of 1999 is a visionary, an ambitious businessman who is not afraid of taking risks, even if it means a <strong>downturn</strong> for the company at first. Amazon’s website tries to <strong>personalize</strong> the buying experience for its customers. It knows what you want you are interested in.</p>
+</blockquote>
+<p>Annual = every year -&gt; Annually</p>
+<p>customer -&gt; consumer</p>
+<p>downturn</p>
+<p>personalize - individualize -&gt; urbanize</p>
+<blockquote>
+<p>Although <a href="http://Amazon.com">Amazon.com</a> is the biggest internet <strong>retailer</strong> in the world it is often criticized. Economic experts say that Amazon is turning Internet business into a <strong>monopoly</strong>. Others point out the bad working conditions for Amazon employees. Amazon is a business <strong>empire</strong> that sells almost everything cheaper and faster than anyone else.</p>
+</blockquote>
+<p>retailer 零售商</p>
+<p>expect - expectation</p>
+<p>monopoly 垄断</p>
+<p>empire 帝国</p>
+]]></content>
+      <tags>
+        <tag>英语</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>英语词汇文章7~9</title>
+    <url>/2025/02/24/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A03/</url>
+    <content><![CDATA[<h2 id="Passage-7">Passage 7</h2>
+<p>Dolphins are often <strong>regarded</strong> as one of Earth’s most intelligent animals.</p>
+<blockquote>
+<p>They are <strong>social</strong> creatures, living in <strong>pods</strong> of up to a dozen individuals. In places with a high abundance of food, pods can merge temporarily, forming a <strong>superpod</strong>; such groupings may exceed 1,000 dolphins. They communicate using a variety of clicks, <strong>whistle</strong>-like sounds and other <strong>vocalizations</strong>.</p>
+</blockquote>
+<p>regarded as - treated as - view</p>
+<p>social 群居的</p>
+<p>whistle 哨声，呼啸</p>
+<p>pods 族群</p>
+<p>vocalization 发声</p>
+<blockquote>
+<p><strong>Membership</strong> in pods is not rigid; <strong>interchange</strong> is common. Dolphins can, however, establish strong social bonds; they will <strong>stay with</strong> injured or ill individuals, even helping them to breathe by bringing them to the surface if needed. This <strong>altruism</strong> does not appear to be limited to their own species. The dolphin Moko in New Zealand has been observed guiding a female Pygmy Sperm Whale together with her <strong>calf</strong> out of <strong>shallow</strong> water where they had <strong>stranded</strong> several times. They have also been seen protecting swimmers from sharks by swimming circles around the swimmers or charging the sharks to make them go away.</p>
+</blockquote>
+<p>membership 成员身份</p>
+<p>interchange 内部交换</p>
+<p>social bonds 社交纽带</p>
+<p>stay with 陪伴</p>
+<p>altruism 利他主义</p>
+<p>shallow 浅的 - skin deep</p>
+<p>stranded 搁浅</p>
+<blockquote>
+<p>Dolphins also display culture, something long believed to be unique to humans. In May 2005, a discovery in Australia found Indo-Pacific <strong>bottlenose</strong> dolphins (Tursiops aduncus) teaching their young to use tools. They cover their <strong>snouts</strong> with <strong>sponges</strong> to protect them while <strong>foraging</strong> (looking or searching for food or provisions.) Using sponges as mouth protection as well as other transmitted behavior proves dolphins’ intelligence. This knowledge is mostly transferred by mothers to daughters.</p>
+</blockquote>
+<p>bottlenose 宽嘴</p>
+<p>snout 喙</p>
+<p>sponge 海绵</p>
+<p>foraging 觅食</p>
+<ul>
+<li>are Dolphins solitary creatures? ×</li>
+<li>are Dolphins selfish? ×</li>
+<li>Do Dolphins teach each other some behaviors? ×</li>
+</ul>
+<h2 id="Passage-8">Passage 8</h2>
+<p>What are rainforests?</p>
+<blockquote>
+<p>Rainforests are forests <strong>characterized by</strong> biodiversity and high <strong>rainfall</strong>, with annual rainfall between 250 and 450 centimeters (98 and 177 in). There are two types of rainforest: tropical rainforest and <strong>temperate</strong> rainforest. Tropical rainforests are characterized by a warm and wet climate <strong>with no</strong> substantial dry season: typically found within 10 degrees north and south of the equator in areas such as South America, Southeast Asia and Sub-Saharan Africa.</p>
+</blockquote>
+<p>be characterized by …为特征</p>
+<p>biodiversity 生物多样性 - diverse - diversify</p>
+<p>rainfall 降水量</p>
+<p>temperate 温和的，温带的</p>
+<p>with no = without</p>
+<p>substantial 大量的</p>
+<p>Temperate rainforests, however, are only found in few temperate regions around the world such as Europe, North America and East Asia.</p>
+<p>Biodiversity</p>
+<blockquote>
+<p>Around 40% to 75% of all <strong>biotic</strong> species are <strong>indigenous</strong> to the rainforests. It has been estimated that there may be many millions of species of plants, insects and <strong>microorganisms</strong> still undiscovered in tropical rainforests. Tropical rainforests have been called the “jewels of the Earth” and the “world’s largest <strong>pharmacy</strong>”, because over one <strong>quarter</strong> of natural medicines have been discovered there. Rainforests are also responsible for 28% of the world’s oxygen <strong>turnover</strong>; that is why tropical forests are also called “Earth’s lungs”.</p>
+</blockquote>
+<p>biotic - antibiotic</p>
+<p>indigenous = native</p>
+<p>microorganism</p>
+<p>jewel - jewelry</p>
+<p>quarter - quarterback - headquarter</p>
+<p>turnover 营业额，流通</p>
+<p>lung - heart - kidney - liver - spleen - stomach -&gt; Guts</p>
+<p>Economy</p>
+<blockquote>
+<p>Rainforests produce many items that we all use in our daily lives. Tropical rainforests provide <strong>timber</strong> as well as animal products such as meat and hides. Other common rainforests products include: chocolate, sugar, <strong>cinnamon</strong>, rubber, medicine, and pineapples. Rainforests also have value as tourism destinations and for the ecosystem services provided.</p>
+</blockquote>
+<p>timber 木材</p>
+<p>hides = fur = leather -&gt; feather</p>
+<p>cinnamon 肉桂</p>
+<p>tourist attraction 名胜古迹</p>
+<p>tourist destination 旅游目的地</p>
+<p>ecosystem- ecology</p>
+<p>Are tropical forests found in tropical regions? √</p>
+<p>Many species of plants, insects and microorganisms haven’t been discovered in tropical rainforests yet. √</p>
+<p>Rainforests have contributed to economic development. √</p>
+<blockquote>
+<p>Jewel           <psw>宝石</psw><br>
+Characterize    <psw>以...为特征</psw><br>
+Estimate        <psw>估计</psw><br>
+Hides           <psw>隐藏</psw><br>
+Annual          <psw>每年的</psw><br>
+Rubber          <psw>橡胶</psw><br>
+Climate         <psw>气候</psw><br>
+Lung            <psw>肺</psw><br>
+Temperate       <psw>温带的</psw><br>
+Microorganism   <psw>微生物</psw><br>
+Ecosystem       <psw>生态系统</psw><br>
+Substantial     <psw>大量的</psw><br>
+Insect          <psw>昆虫</psw><br>
+Indigenous      <psw>本土的</psw><br>
+Tropical        <psw>热带的</psw><br>
+Rainforest      <psw>雨林</psw><br>
+Rainfall        <psw>降雨</psw></p>
+<p>lweej aeizcrtrhaec aimteets hside lunnaa rerubb cleimta lngu epteraemt omimrscigraon osesmtyce slstbiaaunt itnsec oegunniids trilocap oratfreisn lfaarinl</p>
+</blockquote>
+<h2 id="Passage-9">Passage 9</h2>
+<blockquote>
+<p>Walt Disney was born on December 5, 1901. Disney became one of the best-known motion picture producers in the world. He is particularly <strong>noted for</strong> being a film producer and a popular showman, as well as an <strong>innovator</strong> in animation and theme park design.</p>
+</blockquote>
+<p>is noted for 因…闻名 = be famous for = be known as</p>
+<p>particularly = especially</p>
+<p>innovator - innovate - innovative - creative</p>
+<blockquote>
+<p>Disney is famous for his contributions in the field of entertainment during 20th century. His first success was through the series, Oswald the Lucky Rabbit which was created by the Disney studio for Charles Mintz of <strong>Universal Studios</strong>. When Disney asked for a larger <strong>budget</strong> for his popular Oswald series, Mintz <strong>refused</strong> and Disney had to quit. Later, Disney and his brother Roy O. Disney <strong>started from scratch</strong> and co-founded Walt Disney Productions, now known as The Walt Disney Company. Today, this company has annual <strong>revenues</strong> of <strong>approximately</strong> U.S. $35 billion. This success is largely due to a number of the world’s most famous <strong>fictional</strong> characters he and his staff created including Mickey Mouse, a character for which Disney himself was the original voice.</p>
+</blockquote>
+<p>budget 预算，经济实惠 - on budget 预算之内 - budget airline 廉价航班</p>
+<p>Refuse - reject</p>
+<p>start from scratch 白手起家 - from rag to rich 从穷到富 - alliteration 压头韵</p>
+<p>approximately - about - nearly - almost - around</p>
+<p>revenues - income</p>
+<p>fictional 虚构的，小说的</p>
+<p><strong>due to … good cause - owing to … bad cause</strong></p>
+<blockquote>
+<p>Disney won 26 <strong>Academy Awards</strong> out of 59 <strong>nominations</strong>, including a record four in one year, giving him more awards and nominations than any other individual. He is also the <strong>namesake</strong> for Disneyland and Walt Disney World Resort theme parks in the United States, as well as the international resorts in Japan, France, and China.</p>
+</blockquote>
+<p>academy awards 奥斯卡金像奖</p>
+<p>nominations 提名 - nominee 候选人，提名者 - name</p>
+<p>namesake 同名同姓的</p>
+<blockquote>
+<p>Disney died of lung cancer in Burbank, California, on December 15, 1966. The following year, construction began on Walt Disney World Resort in Florida. His brother Roy Disney <strong>inaugurated</strong> The Magic Kingdom on October 1, 1971.</p>
+</blockquote>
+<p>inaugurated 揭幕</p>
+<table>
+<thead>
+<tr>
+<th>The following is a list of some of Walt Disney best quotes:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All our dream can come true, if we have the courage to pursue them.</td>
+</tr>
+<tr>
+<td>I always like to look on the <strong>optimistic</strong> side of life, but I am realistic enough to know that life is a <strong>complex</strong> matter.</td>
+</tr>
+<tr>
+<td>I do not like to repeat successes, I like to go on to other things.</td>
+</tr>
+</tbody>
+</table>
+<p>optimistic == positive</p>
+<p>pessimistic = negative</p>
+<p>complex- complicated - sophisticated - intricate</p>
+<p>I have been up against tough competition all my life. I wouldn’t know how to get along without it. If you can dream it, you can do it.</p>
+<p>The way to get started is to quit talking and begin doing.</p>
+<blockquote>
+<p>Annual          <psw>年度的</psw><br>
+Motion          <psw>运动</psw><br>
+Nomination      <psw>提名</psw><br>
+Approximately   <psw>大约</psw><br>
+Inaugurate      <psw>就职</psw><br>
+Create          <psw>创造</psw><br>
+Producer        <psw>制片人</psw><br>
+Studio          <psw>工作室</psw><br>
+Theme           <psw>主题</psw><br>
+Budget          <psw>预算</psw><br>
+Staff           <psw>员工</psw><br>
+Showman         <psw>演出者</psw><br>
+Pursue          <psw>追求</psw><br>
+Fictional       <psw>虚构的</psw><br>
+Refuse          <psw>拒绝</psw><br>
+Series          <psw>系列</psw><br>
+Original        <psw>原创的</psw><br>
+Optimistic      <psw>乐观的</psw><br>
+Courage         <psw>勇气</psw><br>
+Award           <psw>奖项</psw><br>
+Particularly    <psw>特别是</psw><br>
+Revenue         <psw>收入</psw><br>
+Scratch         <psw>划伤</psw><br>
+Co-found        <psw>共同创立</psw></p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>英语</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>英语词汇文章4~6</title>
+    <url>/2025/02/19/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A02/</url>
+    <content><![CDATA[<h2 id="Passage-4">Passage 4</h2>
+<p>OPEC is the Organization of Petroleum Exporting Countries.</p>
+<p>Petroleum - oil</p>
+<blockquote>
+<p>It was founded in <strong>Bagdad</strong> in 1960 and has currently 11 members. OPEC’s aim is to <strong>regulate</strong> the amount of oil that member nations produce and to keep prices at a <strong>steady rate</strong>. The countries get together twice a year and <strong>agree on</strong> how much oil each country is allowed to produce. OPEC’ s <strong>headquarters</strong> are in Vienna, the capital of Austria.</p>
+</blockquote>
+<p>Bagdad 巴格达</p>
+<p>regulate 规划，控制</p>
+<p>agree on 达成一致</p>
+<p>headquarters 总部</p>
+<p>Vienna 维尼亚</p>
+<p>Austria 奥地利</p>
+<blockquote>
+<p>Before OPEC was created, there were large oil companies that controlled the world’s oil production. They wanted to sell as much oil as possible and did not let governments influence their decisions. Oil-rich countries, especially in the Middle East, wanted more control over the oil that they produce, <strong>As a result,</strong> Iran, Iraq, Saudi Arabia, Kuwait and Venezuela founded OPEC. In the following years Qatar, Indonesia, Libya, Algeria, Nigeria, Ecuador, Angola and the United Arab Emirates also become members.</p>
+</blockquote>
+<p>As a result 结果 - consequence - consequently</p>
+<p>In the 1960s, OPEC did not have much power. This changed in 1973 when the third Arab-Israeli war started. The United States and a few European countries supported Israel. As a form <strong>punishment</strong>. OPEC nations, <strong>influenced</strong> by the Arab countries, stopped selling oil to the West. Within the next six years oil prices rose to ten times the price of the early 1970s. OPEC countries became rich with so-called <strong>petrodollars</strong>; the West <strong>sank into</strong> deep <strong>recession</strong> because they needed OPEC’s oil.</p>
+<p>Arab-Israeli war 阿拉伯以色列战争</p>
+<p>punishment 惩罚</p>
+<p>influenced 影响</p>
+<p>petrodollars 石油美刀 （Portmanteau)</p>
+<p>sank into 陷入</p>
+<p>recession 衰退</p>
+<blockquote>
+<p>In the <strong>aftermath</strong> of the energy crisis of the 1970s, western countries started looking for <strong>alternative</strong> forms of energy in order to become more independent from OPEC and the oil-producing nations. In 1986, oil prices <strong>dropped</strong> to the lowest rate in history. Oil-producing nations lost much of their income. In the 80s and 90s OPEC’s power <strong>diminished</strong>, often because of conflicts and internal arguments and because member states could not agree on <strong>production quotas</strong>. Some OPEC countries did not keep <strong>agreements</strong> and produced more oil, thus lowering prices.</p>
+</blockquote>
+<p>aftermath 创伤</p>
+<p>alternative 可替换的</p>
+<p>dropped 下降</p>
+<p>diminish 减少</p>
+<p>production quotas 生产定额</p>
+<p>agreement 协议</p>
+<blockquote>
+<p>After 2000, oil prices began to rise again and reached an <strong>all-time high</strong> in 2007. The <strong>financial crisis</strong> of 2007 and 2008 hit world economy hard and oil prices fell once again. Sine the Arab Spring of 20011, prices have gone up and down several times. Today OPEC still controls about 60% of the world’s oil reserves and produces 40% of the world’s oil. Saudi Arabia is the most powerful member of the group, because it has the largest reserves. Even though there have been <strong>quarrels</strong> in the <strong>cartel</strong> in the last 5 decades it remains a powerful organization.</p>
+</blockquote>
+<p>all-time high 历史最高点</p>
+<p>financial crisis 经济危机</p>
+<p>quarrel 争论</p>
+<p>cartel 卡特尔</p>
+<h2 id="Passage-5">Passage 5</h2>
+<blockquote>
+<p>A research reports says that virtual worlds can be important places where children <strong>practice</strong> what they will do in real life. They are also a powerful and <strong>attractive</strong> alternative to more passive <strong>adventures</strong> like watching TV. The research was done with children using the BBC’s Adventure Rock virtual world, <strong>aimed</strong> at those aged 6-12. It <strong>surveyed</strong> and interviewed children who were the first to <strong>test the game</strong>.</p>
+</blockquote>
+<p>practice v. 练习；n. 措施，手段</p>
+<p>attractive 有吸引力的</p>
+<p>adventures 娱乐方式</p>
+<p>aim 目标</p>
+<p>survey = investigate</p>
+<p>test the game  内测</p>
+<blockquote>
+<p>The online world is the theme island built for the BBC’s children channel by Belgian game maker Larian. Children <strong>explore</strong> the world alone but they use message boards to share what they find and what they do in the different creative studios they find around the virtual space.</p>
+</blockquote>
+<p>explore 探索 exploration</p>
+<blockquote>
+<p><strong>At times</strong> children were explorers and at other they were <strong>social climbers</strong> eager to connect with other players. Some were power users looking for more information about how the virtual space really worked. The children could try all kinds of things without having to be afraid of the <strong>consequences</strong> that would follow if they tried them in the real world. They learned many useful social skills and played around with their identity <strong>in ways</strong> that would be much more difficult in real life.</p>
+</blockquote>
+<p>at times 很多时候</p>
+<p>social climber 社交达人</p>
+<p>work 工作，运转，起作用，作品</p>
+<p>consequence = result</p>
+<p>in ways 在某些方面</p>
+<blockquote>
+<p>According to the study what children liked about virtual worlds was the chance to create content such as music, cartoons and videos. The publishers of the reports say that virtual worlds can be a powerful, <strong>engaging</strong> and real <strong>interactive</strong> alternative to more passive media. They urged creators of virtual spaces for children to get young people <strong>involved</strong> very early on because they really do have good ideas to add and they are very good critical friends.</p>
+</blockquote>
+<p>interactive 互动的</p>
+<p>engaging = participate = involved</p>
+<h2 id="Passage-6">Passage 6</h2>
+<p><strong>Do whale sleep?</strong></p>
+<ul>
+<li>Like all mammals, whales breathe air</li>
+<li>They are warm-blooded</li>
+<li>They <strong>nurse</strong> their young with milk</li>
+<li>they have body hair.</li>
+<li>Whales have a four-chambered hearted.</li>
+</ul>
+<p>nurse 滋养</p>
+<blockquote>
+<p>Whales are mammals, so in many ways, They are just like human beings. The most important difference is that humans and whales live in different environments and whales have a special <strong>respiratory system</strong> that enables them to stay underwater for several minutes without breathing oxygen. For this reason, they are said to be <strong>voluntary</strong> breathers. That is, because of whales underwater environment, they must be <strong>conscious</strong> breathers. They think about every breath they take and come up to the surface of the water to breathe through <strong>blowholes</strong> on top of their heads.</p>
+</blockquote>
+<p>voluntary 自发性的</p>
+<p>conscious 有意识的 - consciousness - subconsciousness 潜意识的 - conscientious 有良知的</p>
+<p>blowholes 呼吸孔</p>
+<blockquote>
+<p>What is <strong>outstanding</strong> about whales is the way they can sleep. While all mammals sleep, whales cannot afford to <strong>become</strong> unconscious for long because they may <strong>drown</strong>. They only way they can sleep is by remaining partially conscious. It is believed that only one hemisphere of the whale’s brain sleeps at a time, so they rest but are never completely sleep. They can do so most probably near the surface so that they can come up for air easily.</p>
+</blockquote>
+<p>outstanding - dwarf 相形见拙，矮人 - overshadow 相形见拙</p>
+<p>drown - drought - dry</p>
+<p>afford 承担，支付得起</p>
+<p>part -  partial  - partially - potential 潜在的</p>
+<ul>
+<li>Whales are like fish in the way they breathe. true or false? ×</li>
+<li>Whales don’t sleep at all. true or false? ×</li>
+<li>Whales sleep by letting the <strong>whole</strong> brain rest for a <strong>lapse</strong> of time. true or false? ×</li>
+</ul>
+<p>complete - whole - entire - all - total - overall</p>
+<p>lapse 流逝（一段时间）</p>
+<blockquote>
+<p>Mammal      <psw>哺乳动物</psw><br>
+Whale       <psw>鲸鱼</psw><br>
+Conscious   <psw>有意识的</psw><br>
+Chamber     <psw>腔室</psw><br>
+Partially   <psw>部分地</psw><br>
+Nurse       <psw>护理</psw><br>
+Drown       <psw>溺水</psw><br>
+Oxygen      <psw>氧气</psw><br>
+Outstanding <psw>杰出的</psw><br>
+Respiratory <psw>呼吸的</psw><br>
+Hemisphere  <psw>半球</psw><br>
+Surface     <psw>表面</psw><br>
+Voluntary   <psw>自愿的</psw><br>
+Asleep      <psw>睡着的</psw><br>
+Breath      <psw>呼吸</psw></p>
+</blockquote>
+<blockquote>
+<p>mamlma wlahe inuoccsso rahmebc aiyatlrpl rsuen dnwro onxyge onttsdnaugi yeosrraritp smepeihhre sucaefr tlrnuaoyv eaeslp ehtbra</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>英语</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>英语词汇文章10~13</title>
+    <url>/2025/02/24/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A04/</url>
+    <content><![CDATA[<h2 id="William-Shakespeare">William Shakespeare</h2>
+<p>william sharespeare was an English poet, playwright, and actor. He was born on 26 April 1564 in Stratford-upon-Avon. His father was a successful local businessman and his mother was the daughter of a <strong>landowner</strong>. Shakespeare is widely regarded as the greatest writer in the English language and the world’s <strong>pre-eminent</strong> dramatist. He is often called England’s national poet and nicknamed the Bard of Avon. He wrote about 38 plays, 154 <strong>sonnets</strong>, two long narrative poems and a few other verses, of which the authorship of some is uncertain. His plays have been translated into every major living language and are performed more often than those of any other playwright.</p>
+<p>writer - author</p>
+<p>drama 歌剧</p>
+<p>landowner 地主</p>
+<p>sonnets 十四行诗</p>
+<p>pre-eminent - outstanding - remarkable - splendid - fabulous - terrific</p>
+<p>verse 诗句</p>
+<p>playwright 剧作家</p>
+<p><strong>Marriage and career</strong></p>
+<p>Shakespeare married Anne Hathaway at the age of 18. She was eight years older than him. They had three children: Susanna, and twins Hamnet and Judith. After his marriage information about his life became very rare. But he is thought to have spent most of his time in London writing and performing in his plays. Between 1585 and 1592, he began a successful career in London as an actor, writer and part-owner of a playing company called the Lord Chamberlain’s Men, later known as the King’s Men.</p>
+<p><strong>Retirement and death</strong></p>
+<p>Around 1613, at the age of 49, he retired to Stratford, where he died three years later. Few records of Shakespeare’s private life survive. He died on 23 April 1616, at the age of 52. He died within a month of signing his will, a document which he begins by describing himself as being in “perfect health”. In his will, Shakespeare left the bulk of his large <strong>estate</strong> to his elder daughter Susanna.</p>
+<p>estate = real estate = property</p>
+<p><strong>His work</strong></p>
+<p>Shakespeare produced most of his known work between 1589 and 1613. His early play were mainly <strong>comedies</strong> and histories and these works remain regarded as some of the best work produced in these <strong>genres</strong>. He then wrote mainly <strong>tragedies</strong> until about 1608, including Hamlet, Othello, King Lear, and Macbeth, considerd some of the finest works in the English language. In his last phase, he wrote <strong>tragiccomedies</strong>, also known as romances, and collaborated with other playwrights.</p>
+<p>comedy 喜剧</p>
+<p>genre 流派</p>
+<p>tragedy - trageic - miserable</p>
+<p>context = background</p>
+<p>Shakespeare’s plays remain highly popular today and are constantly studied, performed and <strong>reinterupted</strong> in diverse curtural and political contexts throughout the world.</p>
+<blockquote>
+<p>Diverse <psw>多样的</psw><br>
+Document <psw>文件</psw><br>
+Pre-eminent <psw>卓越的</psw><br>
+Sign <psw>标志</psw><br>
+Uncertain <psw>不确定的</psw><br>
+Will <psw>意志</psw><br>
+Perform <psw>执行</psw><br>
+Career <psw>职业生涯</psw><br>
+Cultural <psw>文化的</psw><br>
+Tragedy <psw>悲剧</psw><br>
+Consider <psw>考虑</psw><br>
+Constantly <psw>不断地</psw><br>
+Collaborate <psw>合作</psw><br>
+Political <psw>政治的</psw><br>
+Poet <psw>诗人</psw><br>
+Bulk <psw>大量</psw><br>
+Tragic <psw>悲剧的</psw><br>
+Comedy <psw>喜剧</psw><br>
+Survive <psw>生存</psw><br>
+Verse <psw>诗句</psw><br>
+Estate <psw>财产</psw><br>
+Comedy <psw>喜剧</psw><br>
+Phase <psw>阶段</psw></p>
+</blockquote>
+<p>Shakespeare’s parents were poor. false</p>
+<p>His wife was 18 when they got married. true</p>
+<p>Shakespeare died on Stratford. false</p>
+<p>In the last years of his life, he wrote mainly tragicomedies. false</p>
+<h2 id="Charles-Dickens">Charles Dickens</h2>
+<blockquote>
+<p>Charles Dickens was an English writer and social <strong>critic</strong>. During his lifetime, his works enjoyed <strong>unprecedented</strong> popularity. He <strong>is</strong> now <strong>considered</strong> a literary <strong>genius</strong> because he created some of the world’s best-known fictional characters and <strong>is regarded as</strong> the greatest novelist of he Victorian era. His novels and short stories enjoy <strong>lasting</strong> popularity.</p>
+</blockquote>
+<p>critic 批评者 - critical 批判的，关键的<br>
+enjoy popularity 享受欢迎度<br>
+unprecedented 前所未有，空前的<br>
+work 作品<br>
+genius 天才<br>
+be regarded as = is considered 被视为<br>
+novel 小说，新颖的<br>
+lasting 持续的</p>
+<blockquote>
+<p>Dickens was born on February 7,1812 in Portsmouth, on the southern <strong>coast</strong> of England. His father, John Dickens was a <strong>naval</strong> clerk who dreamed of becoming rich and his mother, Elizabeth Barrow, <strong>aspired to be</strong> a teacher and school director. But the family’s financial situation had grown worse because John Dickens used to spend money dangerously beyond the family’s <strong>means</strong>. Consequently, John was sent to prison for debt in 1824, when Charles was just 12 years old.</p>
+</blockquote>
+<p>coast - coastal city - coastal line<br>
+by the seaside 在海边<br>
+naval clerk 海上职员<br>
+naval = marine - submarine<br>
+clerk = employee = staff<br>
+aspire to do 想要做…<br>
+financial - economic - finance<br>
+used to 过去常常做…<br>
+means = fortune = wealth<br>
+prison - jail - imprison - cell</p>
+<blockquote>
+<p>After his father’s <strong>imprisonment</strong>, Charles Dickens left school to work in a factory. Despite his lack of formal education, he edited a weekly journal for 20 years, wrote 15 novels, five <strong>novellas</strong>, hundreds of short stories and <strong>non-fiction</strong> articles, lectured and performed extensively, was an indefatigable letter writer, and <strong>campaigned</strong> <strong>vigorously</strong> for children’s rights, education, and other social reforms.</p>
+</blockquote>
+<p>factory - plant (植物，工厂，发电厂)<br>
+despite - while - although - even though - though - in spite of 加逗号; 尽管…但是… 表示让步<br>
+novellas 中等小说<br>
+non-fiction 非小说<br>
+fatigue = tiredness = wearysome - indefatigable 不知疲倦的，不屈不挠<br>
+campaign 运动（偏时政）<br>
+vigor - vigorously - vigorous = energetic</p>
+<p><strong>His literary success</strong></p>
+<p>Dicken’s literary success begin with the 1836 serial publication of The Pickwick Papers Within a few years he had become an international literary <strong>celebrity</strong>, famous for his humor, <strong>satire</strong>, and <strong>keen observation</strong> of character and society. His novels, most published in monthly or weekly <strong>installments</strong>, <strong>pioneered</strong> the serial publication of narrative fiction, which became the dominant Victorian mode for novel publication.</p>
+<p>celebrity 名人<br>
+satire - irony 讥讽<br>
+keen observation 敏锐的观察<br>
+observe 评论 - observation<br>
+installment 出版</p>
+<p>Dickens was regarded as the literary <strong>colossus</strong> of his age. His 1843 novella, A Christmas Carol, remains popular and continues to inspire adaptations in even artistic genre Oliver Twist and Great Expectations are also frequently adapted, and, like many of his novels, evoke images of early Victorian London. His 1859 novel, A tale of Two Cities, set in London and Paris, is his best-known work of historical fiction.</p>
+<p>colossus = giant<br>
+genre 风格，流派</p>
+<p><strong>His Death</strong></p>
+<p>Charles Dickens dies on June 9, 1870 of a stroke. He was buried in Poet’s Corner at Westminster Abbey. Thousands of mourners came to pay their respects at the grave and throw in flowers.</p>
+<blockquote>
+<p>genre aspire unprecedented factory genius naval campaign era prison vigorously celebrity coast indefatigable publication critic clerk imprisonment stroke literary lasting means financial director edit extensive</p>
+</blockquote>
+<ol>
+<li>Dicken’s family was rich. false</li>
+<li>he left school at an early age. false</li>
+<li>novels were characterized by realism. true</li>
+<li>He died due to a stroke. true</li>
+</ol>
+<h2 id="The-Democratic-Party">The Democratic Party</h2>
+<p>There have usually only been two main political parties in the US. Since the 1860s, two main parties have been the Republican Party and the Democratic Party. It should be noted though that there are other minor parties such as the Libertarian Party. the Green Party, and Constitution Party.</p>
+<p><strong>The Democratic Party</strong></p>
+<p>The Democratic Party started in 1828 as a <strong>pro-slavery</strong> party with its Andrew Jackson as the first President in 1829. However, through the economic <strong>resurgence</strong> after the Great Depression in 1930 and 1940s, as well as the Civil Rights Movement in the 1960s, the Democratic party became an advocate of racial equality. The party’s <strong>philosophy</strong> of modern liberalism adopts social and economic equality <strong>principles</strong>. It aims at setting government intervention and regulation in the economy such as the introduction of social programs, support for labor unions, affordable college tuitions, universal health care, equal opportunity, consumer protection, and environmental protection.</p>
+<p>resurgence 死灰复燃</p>
+<p>pro-slavery 支持奴隶制</p>
+<p>great depression 大萧条</p>
+<p>race - racial equality</p>
+<p>philosophy 理念</p>
+<p>principle 准则</p>
+<p>introduce 引进</p>
+<p><strong>The Republican party</strong></p>
+<p>The Republican party, however, started as an anti-slavery party in 1854. Its first President was Abraham Linclon in 1861. In the <strong>Nixon</strong> years, there was a shift to appeal to the implicit racial biases of white voters that did not like the civil rights movement of the 1960s. The <strong>philosophy</strong> of the party focuses on social and economic independence, and a capitalist economic system. It is also known or its <strong>anti-abortion</strong> efforts, anti-regulatory policy, and reduction of government intervention in the economy as well as being in support privatized health care.</p>
+<p>implicit 隐性的</p>
+<p>capital - capitalist - capitalism</p>
+<p>social - socialist - socialism - communism</p>
+<p>individual - individualism</p>
+<p>collective - collectivism</p>
+<p>anti-abortion 堕胎</p>
+<blockquote>
+<p>Capitalist     <psw>资本主义的</psw><br>
+Advocate       <psw>提倡</psw><br>
+Abortion       <psw>堕胎</psw><br>
+Tuition        <psw>学费</psw><br>
+Republic       <psw>共和国</psw><br>
+Minor          <psw>少数</psw><br>
+Equality       <psw>平等</psw><br>
+Slavery        <psw>奴隶制</psw><br>
+Democratic     <psw>民主的</psw><br>
+Resurgence     <psw>复兴</psw><br>
+Liberalism     <psw>自由主义</psw><br>
+Universal      <psw>普遍的</psw><br>
+Liberty        <psw>自由</psw><br>
+Independence   <psw>独立</psw><br>
+Party          <psw>政党</psw><br>
+Constitution   <psw>宪法</psw><br>
+Noted          <psw>著名的</psw><br>
+Depression     <psw>抑郁</psw><br>
+Civil          <psw>公民的</psw><br>
+Philosophy     <psw>哲学</psw><br>
+Privatize      <psw>私有化</psw><br>
+Intervention   <psw>干预</psw><br>
+Bias           <psw>偏见</psw></p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>英语</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>英语词汇文章14~16</title>
+    <url>/2025/02/25/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A05/</url>
+    <content><![CDATA[<h2 id="UNICEF">UNICEF</h2>
+<blockquote>
+<p>UNICEF <strong>stands for</strong> United Nations International Children’s Emergency Fund. It was created by the United Nations <u>General <strong>Assembly</strong></u> on December 11,1946, to provide emergency food and health care to children in countries that had been <strong>devastated</strong> by World War II In 1954, UNICEF became a <strong>permanent</strong> part of the United Nations System. UNICEF relies on <strong>contributions</strong> from governments and private donors. Governments contribute <strong>two thirds</strong> of the<br>
+organization’s resources; private groups and <strong>some</strong> 6 million individuals contribute the rest through the National Committee. Most of UNICEF’s work is <strong>in the field</strong>, with staff in over 190 countries and territories. More than 200 country offices carry out UNICEF’s mission through a program developed with host governments. Seven <strong>regional</strong> offices provide technical assistance to country offices as needed.</p>
+</blockquote>
+<p>emergency 紧急</p>
+<p>fund = finance = donate</p>
+<p>assembly 集会</p>
+<p>general assembly 全体大会</p>
+<p>devastate = destroy = damage</p>
+<p>permanent = forever</p>
+<p>contribute to</p>
+<p>two thirds = two in three</p>
+<p>some 大概，大约</p>
+<p>in the field 在基层</p>
+<blockquote>
+<p>UNICEF’s programs emphasize developing community-level services to promote the health and well-being of children. UNICEF was awarded the Nobel Peace Prize in 1965 and the Prince of Asturias Award of Concord in 2006.</p>
+</blockquote>
+<p>emphasize = focus on</p>
+<p>well-being 福祉</p>
+<blockquote>
+<p>Contribution    <psw>贡献</psw><br>
+Assistance      <psw>援助</psw><br>
+Establish       <psw>建立</psw><br>
+Technical       <psw>技术的</psw><br>
+Community       <psw>社区</psw><br>
+Stand           <psw>代表</psw><br>
+Well-being      <psw>福祉</psw><br>
+Permanent       <psw>永久的</psw><br>
+Territory       <psw>领土</psw><br>
+Emergency       <psw>紧急的</psw><br>
+Resource        <psw>资源</psw><br>
+Mission         <psw>使命</psw><br>
+Headquarter     <psw>总部</psw><br>
+Emphasize       <psw>强调</psw><br>
+Devastate       <psw>摧毁</psw><br>
+Assembly        <psw>集会</psw><br>
+Promote         <psw>促进</psw><br>
+Donor           <psw>捐赠者</psw><br>
+Host            <psw>主办</psw></p>
+</blockquote>
+<h2 id="Obesity">Obesity</h2>
+<blockquote>
+<p>Obesity is a medical <strong>condition</strong> in which excess body fat has accumulated to the extent that it may have an <strong>adverse</strong> effect on health, leading to reduced life expectancy and/or increased health problems. Body mass index(BMI), a <strong>measurement</strong> which compares weight and height, defines people as overweight (pre-obese) when their BMI is between 25kg/m2 and 30kg/m2, and obese when it is greater than 30kg/m2.</p>
+</blockquote>
+<p>fat - protein - vitamin</p>
+<p>condition - disease - illness - sickness</p>
+<p>adverse - bad - opposite</p>
+<p>more and more = an increasing number of</p>
+<p>measure v.测量 n.手段，措施</p>
+<p>Obesity increases the <strong>likelihood</strong> of various diseases, particularly heart disease, type 2 diabetes, breathing difficulties during sleep, certain types of cancer, and <strong>osteoarthritis</strong>. Obesity is most commonly caused by a combination of excessive dietary calories, lack of physical activity, and genetic <strong>susceptibility</strong>, although a few cases are caused primarily by genes, <strong>endocrine</strong> disorders, <strong>medications</strong> or <strong>psychiatric</strong> illness. Evidence to support the view that some obese people eat little yet gain weight due to a slow <strong>metabolism</strong> is limited;on average obese people have a greater energy expenditure than their thin <strong>counterparts</strong> due to the energy required to maintain an increased body mass.</p>
+<p>likelihood = possibility = potential</p>
+<p>particularly = especially</p>
+<p>endocrine 内分泌</p>
+<p>medication 药物</p>
+<p>psychiatric 精神学的</p>
+<p>susceptible - vulnerable - fragile - susceptibility 易受影响</p>
+<p>metabolism 新陈代谢</p>
+<p>on average = generally</p>
+<p>The primary treatment for obesity is dieting and physical exercise. To <strong>supplement</strong> this, or in case of failure, anti-obesity drugs may be taken to <strong>reduce appetite</strong> or inhibit fat absorption. In severe cases, surgery is performed or an intragastric balloon is placed to reduce stomach volume and/or bowel length, leading to earlier <strong>satiation</strong> and reduced ability to absorb nutrients from food.</p>
+<p>dieting 节食</p>
+<p>reduce appetite 减少食欲</p>
+<p>supplement v. 补充</p>
+<p>satiation 饱足感</p>
+<p>Obesity is a leading preventable cause of death worldwide, with increasing prevalence in adults and children, and authorities <u>view it as</u> one of the most serious public health problems of the 21st century. Obesity is <strong>stigmatized</strong> in much of the modern world (particularly in the Western world), though it <u>was widely perceived as</u> a symbol of wealth and <strong>fertility</strong> at other times in history, and still is in some parts of the world.</p>
+<p>stigma - stigmatize 污名化</p>
+<p>fertility 多产 - fertile 肥沃 - fertilizer 肥料</p>
+<ul>
+<li>The statistics state that (although obesity is prevalent, it is not considered  as a serious illness.)</li>
+<li>Obese people (may suffer from severe illnesses.)</li>
+<li>Modern medicine (can cure obesity.)</li>
+<li>The best treatment for obesity is (related to individuals lifestyle.)</li>
+</ul>
+<blockquote>
+<p>Extent          <psw>程度</psw><br>
+Symbol          <psw>象征</psw><br>
+Likelihood      <psw>可能性</psw><br>
+Susceptibility  <psw>易受影响的</psw><br>
+Dietary         <psw>饮食的</psw><br>
+Gene            <psw>基因</psw><br>
+Excess          <psw>过量</psw><br>
+Obesity         <psw>肥胖</psw><br>
+Fertility       <psw>肥沃</psw><br>
+Psychiatric     <psw>精神病的</psw><br>
+Supplement      <psw>补充</psw><br>
+Accumulate      <psw>积累</psw><br>
+Wealth          <psw>财富</psw><br>
+Define          <psw>定义</psw><br>
+Calories        <psw>卡路里</psw><br>
+Evidence        <psw>证据</psw><br>
+Excessive       <psw>过度的</psw><br>
+Measurement     <psw>测量</psw><br>
+Dieting         <psw>节食</psw><br>
+Expenditure     <psw>支出</psw><br>
+Stigmatized     <psw>被污名化的</psw><br>
+Statistics      <psw>统计</psw><br>
+Disorder        <psw>紊乱</psw><br>
+Genetic         <psw>遗传的</psw></p>
+</blockquote>
+<h2 id="Climate-change">Climate change</h2>
+<blockquote>
+<p>Climate <strong>encompasses</strong> the statistics of temperature, humidity, <strong>atmospheric</strong> pressure, wind, rainfall, atmospheric particle count and other <strong>meteorological</strong> elements in a given region over a long period of time. Climate can be contrasted to weather, which is the present condition of these same elements and their <strong>variations</strong> over shorter time periods.</p>
+</blockquote>
+<p>encompass - include</p>
+<p>atmosphere - atmospheric 大气的</p>
+<p>meteor - meteorological 大气现象的</p>
+<p>vary - variation</p>
+<blockquote>
+<p>Climate may be <strong>inherently</strong> variable <strong>as evidenced by</strong> the irregularity of the<br>
+seasons from one year to another. This variability is normal and may remain <strong>partially</strong> understood. It <strong>is related to</strong> changes in ocean <strong>currents</strong>, volcanic eruptions, solar radiation and other components of the climate system. In addition, our climate also has its extremes (such as floods, droughts, <strong>hail</strong>, <strong>tornadoes</strong> and hurricanes), which can be <strong>devastating</strong>. However, in recent decades, a number of <strong>indicators</strong> and studies show more and more evidence of climate warming across the globe. A <strong>disturbing</strong> phenomenon that challenges human habits and activities which are responsible for greenhouse gas emissions.</p>
+</blockquote>
+<p>inherently 固有的，不断的</p>
+<p>as evidence by 作为…的证据</p>
+<p>partially 部分地</p>
+<p>is related to = have something to do with …相关</p>
+<p>current 流动</p>
+<p>devastating 毁灭性的</p>
+<p>indicate 指出 - indictor 指标</p>
+<p>disturbing 令人不安的</p>
+<p><strong>Consequences of global warming</strong></p>
+<blockquote>
+<p>There are two major effects of global warming: the increase of temperature on the earth by about 3° to 5°C (5.4° to 9° Fahrenheit) by the year 2100 and Rise of sea levels by at least 25 meters (82 feet) by the year 2100. Other consequences are listed below:</p>
+</blockquote>
+<ul>
+<li>Sea levels are rising due to <strong>thermal</strong> expansion of the ocean, in addition to melting of land ice.</li>
+<li>Amounts and patterns of <strong>precipitation</strong> and changing.</li>
+<li>The total annual power of hurricanes has already increased markedly since 1975 because their average intensity and average duration have increased.</li>
+<li>Changes in temperature and precipitation patterns increase the frequency, duration, and intensity of other extreme weather events, such as floods, droughts, heat waves, and tornadoes.</li>
+<li>Higher and lower agricultural <strong>yields</strong>, further <strong>glacial</strong> retreat, reduced summer stream flows, species extinctions.</li>
+<li>Diseases like <strong>malaria</strong> are returning into areas where they have been extinguished earlier.</li>
+</ul>
+<p>thermal 热量</p>
+<p>precipitation 降水</p>
+<p>yield 产出</p>
+<p>glacier - glacial</p>
+<p>malaria 疟疾</p>
+<ul>
+<li>Climate is by definition variable. true</li>
+<li>greenhouse effects have no impacts on our health. false</li>
+</ul>
+<blockquote>
+<p>Variability <psw>变化性</psw><br>
+Agricultural <psw>农业的</psw><br>
+Melt <psw>融化</psw><br>
+Volcanic <psw>火山的</psw><br>
+Component <psw>组成部分</psw><br>
+Radiation <psw>辐射</psw><br>
+Contrast <psw>对比</psw><br>
+Glacial <psw>冰川的</psw><br>
+Humidity <psw>湿度</psw><br>
+Variable <psw>变量的 / 可变的</psw><br>
+Encompass <psw>包含 / 涵盖</psw><br>
+Sea level <psw>海平面</psw><br>
+Current <psw>洋流 / 当前的</psw><br>
+Consequence <psw>结果 / 后果</psw><br>
+Atmosphere <psw>大气 / 氛围</psw><br>
+Extinction <psw>灭绝</psw><br>
+Solar <psw>太阳的</psw><br>
+Major <psw>主要的</psw><br>
+Thermal <psw>热的 / 热量的</psw><br>
+Eruption <psw>喷发</psw><br>
+Intensity <psw>强度</psw><br>
+Yield <psw>产量 / 产出</psw><br>
+Extreme <psw>极端的</psw><br>
+Meteorological <psw>气象的</psw><br>
+Devastating <psw>毁灭性的</psw><br>
+Extinguish <psw>熄灭 / 消灭</psw></p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>英语</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>英语词汇文章17~19</title>
+    <url>/2025/02/26/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A06/</url>
+    <content><![CDATA[<h2 id="Ozone-layer-depletion">Ozone layer depletion</h2>
+<blockquote>
+<p>The ozone layer <strong>depletion</strong> is harmful to the environment. The ozone layer or ozone shield is a <strong>region</strong> of Earth’s **stratosphere ** the absorbs most of the Sun’s <strong>ultraviolet</strong> (UV) radiation. It was discovered in 1913 by the French physicists Charles Fabry and Henri Buisson. The ozone layer contains high <strong>concentrations</strong> of ozone <strong>in relation to</strong> other parts of the <strong>atmosphere</strong>.</p>
+</blockquote>
+<p>deplete 消耗 - complete 完成</p>
+<p>region 区域</p>
+<p>stratosphere 平流层</p>
+<p>ultraviolet radiation 紫外线</p>
+<p>physics - physician 内科医生 - physicist 物理学家</p>
+<p>in relation to 与…相比</p>
+<p>atmosphere 大气层，氛围</p>
+<p>concentrate - focus on - concentration</p>
+<blockquote>
+<p>A depletion of the ozone layer has been noticed since the late 1970s. In atmospheric regions over <strong>Antarctica</strong>, the ozone layer has become significantly <strong>thin</strong>, especially in spring season causing the formation of what is called ‘ozone hole’. The main cause of ozone depletion and the ozone hole is man-made chemicals such as the <strong>chlorofluorocarbon</strong> (CFCs). As a consequence of the <strong>deterioration</strong> of the ozone layer, large amounts of ultraviolet B rays reach the Earth, which can cause skin cancer and <strong>cataracts</strong> in humans and harm animals as well.</p>
+</blockquote>
+<p>Antarctica 南极洲</p>
+<p>thin - thinness 瘦，薄; thick - thickness 厚</p>
+<p>man-made = artificial</p>
+<p>as a consequence 作为…结果</p>
+<p>deterioration 恶化</p>
+<p>cataract 白内障</p>
+<blockquote>
+<p>The harmful consequences of ozone deterioration <strong>paved the way to</strong> the <strong>adoption</strong> of the Montreal Protocol in 1987. This Protocol bans the production of CFCs, halons, and other ozone-depleting chemicals. The <strong>ban</strong> came into effect in 1989 and since then it has <strong>had positive effects on</strong> the environment. Ozone levels <strong>stabilized</strong> by the mid-1990s and began to <strong>recover</strong> in the 2000s. Recovery <strong>is projected to</strong> continue over the next century, and the ozone hole is expected to reach pre-1980 levels by around 2075. The Montreal Protocol is considered the most successful international environmental agreement to date.</p>
+</blockquote>
+<p>pave the way to 导致了…</p>
+<p>pavement 人行道</p>
+<p>adopt 采用，接收，收养；adapt 适应，改编，调整</p>
+<p>protocol 条约</p>
+<p>bar = ban = prohibit = inhibit = block</p>
+<p>has … effect on 有…影响</p>
+<p>stabilize 稳定</p>
+<p>recover 恢复 = rehabilitate = revive</p>
+<p>be expected to = is projected to 预计做某事</p>
+<ul>
+<li>The ozone layer was discovered in the 1970s. false</li>
+<li>The deterioration of the ozone layer started in the 21st century. false</li>
+<li>The harmful chemicals that caused the ozone layer depletion are not allowed to be produced anymore. yes</li>
+<li>Th ozone layer is still deteriorating. false</li>
+</ul>
+<blockquote>
+<p>Protocol <psw>协议</psw><br>
+Deteriorate <psw>恶化</psw><br>
+Absorb <psw>吸收</psw><br>
+Concentration <psw>浓度</psw><br>
+Agreement <psw>协议 / 协定</psw><br>
+Adaption <psw>适应</psw><br>
+Shield <psw>保护 / 屏障</psw><br>
+Layer <psw>层</psw><br>
+Radiation <psw>辐射</psw><br>
+Recovery <psw>恢复</psw><br>
+Level <psw>水平 / 层级</psw><br>
+Come into effect <psw>生效</psw><br>
+Ozone <psw>臭氧</psw><br>
+Project <psw>项目 / 计划</psw><br>
+Atmosphere <psw>大气 / 氛围</psw><br>
+Date <psw>日期</psw><br>
+Antarctica <psw>南极洲</psw><br>
+Depletion <psw>消耗 / 破坏</psw><br>
+Stabilize <psw>稳定</psw></p>
+</blockquote>
+<h2 id="Pollution">Pollution</h2>
+<blockquote>
+<p>pollution is the <strong>degradation</strong> of natural environment by external substances <strong>introduced</strong> directly or indirectly. Human health, ecosystem quality and <strong>aquatic</strong> and <strong>terrestrial</strong> biodiversity may be affected and <strong>altered</strong> <strong>permanently</strong> by pollution.</p>
+</blockquote>
+<p>degradation 降级</p>
+<p>introduce 引进</p>
+<p>aqua - aquatic 水产的 - aquarius - aquarium 水族馆</p>
+<p>territory - terrestrial</p>
+<p>permanently 永久地 - forever - perpetual - everlasting - eternal - long lasting - enduring</p>
+<p>alter - shift - change</p>
+<blockquote>
+<p>pollution occurs when ecosystems can not <strong>get rid of</strong> substances introduced into the environment. The critical <strong>threshold</strong> of its ability to naturally <strong>eliminate</strong> substances is <strong>compromised</strong> and the balance of the ecosystem is broken.</p>
+</blockquote>
+<p>get rid of 摆脱</p>
+<p>threshold 临界值</p>
+<p>eliminate 消除，剔除</p>
+<p>compromise 妥协，折中，损害</p>
+<blockquote>
+<p>The sources of pollution are numerous. The <strong>identification</strong> of these different <strong>pollutants</strong> and their effects on ecosystems is <strong>complex</strong>. They can come from natural <strong>disasters</strong> or the result of human activity, such as oil spills, chemical spills, <strong>nuclear</strong> accidents … These can have terrible consequences on people and the planet where they live; destruction of the biodiversity, increased <strong>mortality</strong> of the human and animal species, destruction of natural habitat, damage caused to the quality of soil, water and air …</p>
+</blockquote>
+<p>identify - identification 识别 - identity 身份 - identical 同一的 - identical twin</p>
+<p>pollutant 污染物</p>
+<p>complex 复杂的 - complicated - sophisticated - intricate</p>
+<p>disaster - disastrous</p>
+<p>earthquake - volcano eruption - catastrophe</p>
+<p>nuclear 原子</p>
+<p>mortality 死亡率</p>
+<blockquote>
+<p>Preventing pollution and protecting the environment <strong>necessitate</strong> the application of the principles of sustainable development. we have to <strong>consider</strong> to satisfy the needs of today without compromising the ability of future <strong>generations</strong> to meet their needs. This means that we should remedy existing pollution, but also anticipate and prevent future pollution sources in order to protect the environment and public health. Any environmental damage must be <strong>punishable</strong> by law, and polluters should pay compensation for the damage caused to the environment.</p>
+</blockquote>
+<p>necessitate 使有必要</p>
+<p>consider 设法</p>
+<p>satisfy - satisfaction - satisfied</p>
+<p>generation 几代</p>
+<p>anticipate - anticipation -expectation</p>
+<p>punishable 可惩罚的</p>
+<ul>
+<li>The damage caused by pollution might be irreversible. true</li>
+<li>The ecosystem may not always be able to cope with pollution.</li>
+<li>Pollution may sometimes be caused by natural disasters.</li>
+<li>An ideal solution to prevent pollution  would  be to <strong>take into consideration</strong> the future generations need to live in a healthy environment.</li>
+</ul>
+<h2 id="What-is-meditation">What is meditation?</h2>
+<blockquote>
+<p>The <strong>term</strong> meditation <strong>refers to</strong> a practice where a person uses <strong>techniques</strong>, such as <strong>mindfulness</strong>, or focusing their mind on a <strong>particular</strong> object, thought, or activity. Meditation aims at training the attention and awareness and achieving a <strong>mentally</strong> clear and <strong>emotionally</strong> calm and stable state.</p>
+</blockquote>
+<p>term 术语</p>
+<p>refer to 涉及</p>
+<p>technique 技术</p>
+<p>mindfulness 专注</p>
+<p>particular 具体的</p>
+<p>mental - physical - psychologically - spirit</p>
+<p>state 状态，州，陈述</p>
+<blockquote>
+<p>Meditation has been practiced since <strong>antiquity</strong> in numerous religious traditions and beliefs, often as part of the path towards <strong>enlightenment</strong> and self-realization. Since the 19th century, it has spread from its origins to other cultures where it is commonly practiced in private and business life.</p>
+</blockquote>
+<p>enlightenment 启发，开导</p>
+<p>antiquity 古代 = ancient - antique 古董</p>
+<p><strong>How do you meditate</strong></p>
+<blockquote>
+<p>Most meditation techniques don’t require <strong>specialized</strong> equipment or space. Generally, these techniques can be classified into two broad categories:</p>
+</blockquote>
+<ol>
+<li>Focused (or concentrative) meditation: This involves the <strong>voluntary</strong> focusing of attention on a chosen object, breathing, image, or words.</li>
+<li>Open <strong>monitoring</strong> (or mindfulness) meditation: This involves the focus on all mental events that enter the field of awareness.</li>
+</ol>
+<p>specialized 专门的</p>
+<p>voluntary = consciously</p>
+<p>monitor 监管，班长</p>
+<blockquote>
+<p>Generally speaking, beginner should start with short periods of meditation (e.g. three minutes) that involves four steps:</p>
+</blockquote>
+<ol>
+<li>Finding a comfortable position.</li>
+<li>Closing one’s eyes.</li>
+<li>Breathing naturally.1</li>
+<li>Focusing the attention on the breath.</li>
+</ol>
+<blockquote>
+<p>While meditation, the individual has to be aware of the body’s reactions to every <strong>inhalation</strong> and exhalation. That is, as one breathes attention should be brought to the movement of your body mainly the chest, the belly, and the shoulders.</p>
+</blockquote>
+<p>inhalation 吸气</p>
+<p>What are the benefits of meditation?</p>
+<p>Meditation is an old practice that aims at training the mind and the body to relax and get calm. It is known for improving psychological balance, dealing with illness, and enhancing general health and <strong>well-being</strong>. Some of the benefits of mediation identified by experts include:</p>
+<ul>
+<li>Stress reduction</li>
+<li><strong>Anxiety</strong> control</li>
+<li>Emotional health <strong>promotion</strong></li>
+<li>Self-Awareness <strong>enhancement</strong></li>
+<li>Attention span lengthening</li>
+<li>Kindness generation</li>
+<li>Addiction treatment</li>
+<li>Sleep <strong>improvement</strong></li>
+<li>Pain Control</li>
+<li>Blood pressure decrease</li>
+</ul>
+<p>well-being 福祉</p>
+<p>anxiety = anxious = worry</p>
+<p>promote 促销，改善，提升，晋级</p>
+<p>enhance = promote = improve</p>
+<blockquote>
+<p>Refer to <psw>指的是 / 参考</psw><br>
+Psychological <psw>心理的</psw><br>
+Chest <psw>胸部</psw><br>
+Antiquity <psw>古代 / 古老</psw><br>
+Technique <psw>技巧 / 技术</psw><br>
+Belly <psw>腹部</psw><br>
+Monitor <psw>监测 / 监视</psw><br>
+Meditation <psw>冥想</psw><br>
+Enhance <psw>提高 / 增强</psw><br>
+Anxiety <psw>焦虑</psw><br>
+Mindfulness <psw>正念 / 专注</psw><br>
+Enlightenment <psw>启蒙 / 觉悟</psw><br>
+Classify <psw>分类</psw><br>
+Awareness <psw>意识 / 认知</psw><br>
+Practice <psw>练习 / 实践</psw><br>
+Category <psw>类别</psw><br>
+Broad <psw>广泛的 / 宽广的</psw></p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>英语</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>英语词汇文章20~21, 11课（补）</title>
+    <url>/2025/02/27/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A07/</url>
+    <content><![CDATA[<h2 id="Computer-addiction">Computer addiction</h2>
+<blockquote>
+<p>computer addiction can be defined as the excessive or compulsive use of the computer which persists despite serious negative consequences for personal, social or <strong>occupational</strong> fuction. The addiction involves online and / or offline computer usage and <strong>consists of</strong> at least three <strong>subtypes</strong>: excessive gaming, sexual <strong>preoccupations</strong>, and e-mail/text messaging.</p>
+</blockquote>
+<p>define - definition</p>
+<p>compulsive - compulsory</p>
+<p>occupation = work = job = career</p>
+<p>consist of …组成</p>
+<p>subtypes 附属种类</p>
+<p>preoccupation 全身投入</p>
+<p><strong>Offline and online computer addiction</strong></p>
+<blockquote>
+<p>The concept of computer addiction is broadly divided into two types, namely offline and online computer addiction. The <strong>term</strong> offline computer addiction is generally used when speaking about excessive gaming behavior, which can <strong>be practiced</strong> both offline and online. Online computer addiction, <strong>also known as</strong> Internet addiction, gets more attention in general from secientific research than offline computer addiction, mainly because most cases of computer addiction are related to the excessive use of the internet.</p>
+</blockquote>
+<p>term 术语</p>
+<p>also known as 又称为</p>
+<p>be pracitced 被进行，被实施</p>
+<p>The symptoms of computer addiction include:</p>
+<ul>
+<li>Being drawn by the computer as soon as one wakes up and before one goes to bed.</li>
+<li><u>Replacing old hobbies with excessive use of the computer</u> and using the computer as one’s primary source of entertainment and <strong>procrastination</strong>.</li>
+<li>Lacking physical exercise and/or outdoor exposure because of constant use of the computer. This could <strong>contribute to</strong> many health problems such as obesity.</li>
+</ul>
+<p>Repaceing B with A 用A替换B</p>
+<p>procrastinate 拖延</p>
+<p>contribute to 有助于，导致</p>
+<p><strong>Cause and Effects</strong></p>
+<blockquote>
+<p>Researchers link internet/computer addiction with existing mental health issues, most <strong>notably</strong> depression. Studies showed that the majority of those who met the requirements of internet/computer addiction <strong>suffered from</strong> <strong>interpersonal</strong> difficulties and stress and that those addicted to online games specifically responded that they hoped to avoid reality.</p>
+</blockquote>
+<p>notable - notably</p>
+<p>suffered from 遭受</p>
+<p>interpersonal 人际关系的</p>
+<blockquote>
+<p>There are many consequences <strong>resulting from</strong> computer addiction. For example, excessive computer use may <strong>result in</strong> lack of face to face social interaction. It may also lead to Computer Vision <strong>Syndrome</strong> (CVS), a condition that results in headaches, blurred vision, neck pain, fatigue, eye strain, dry eyes, <strong>irritated</strong> eyes, double vision, <strong>vertigo</strong> or dizziness.</p>
+</blockquote>
+<p>result from 由…导致 跟原因</p>
+<p>result in 导致了…结果 跟结果</p>
+<p>sydrome 综合症</p>
+<p>irritate 恼怒，愤怒</p>
+<p>vertigo 晕头转向</p>
+<blockquote>
+<p>Notably <psw>显著地 / 尤其</psw><br>
+Suffer <psw>遭受 / 受苦</psw><br>
+Negative <psw>消极的 / 负面的</psw><br>
+Condition <psw>状况 / 条件</psw><br>
+Exist <psw>存在</psw><br>
+Depression <psw>抑郁</psw><br>
+Excessive <psw>过度的</psw><br>
+Exposure <psw>暴露</psw><br>
+Interaction <psw>互动 / 交流</psw><br>
+Addiction <psw>成瘾</psw><br>
+Persist <psw>持续 / 坚持</psw><br>
+Contribute <psw>贡献 / 促成</psw><br>
+Define <psw>定义</psw><br>
+Symptom <psw>症状</psw><br>
+Preoccupation <psw>关注 / 忧心忡忡</psw><br>
+Dizziness <psw>头晕</psw><br>
+Fatigue <psw>疲劳</psw><br>
+Occupational <psw>职业的</psw><br>
+Irritated <psw>易怒的 / 恼怒的</psw><br>
+Function <psw>功能 / 运作</psw><br>
+Blurred <psw>模糊的</psw><br>
+Procrastination <psw>拖延</psw></p>
+</blockquote>
+<h2 id="Christmas">Christmas</h2>
+<blockquote>
+<p>Christmas which is celebrated on December 25th is an important Christian holiday. The origin of the world “Christmas” comes from “Christ” and the “Holy Mass”. It is believed that the day <strong>commemorates</strong> the birth of Jesus Christ although a lot of people doubt that the Day corresponds to the actual date of birth. In spite of its Christian origin, Christmas is also celebrated by a lot of non Christian countries and the celebration includes a lot of non religious customs. People exchange gifts and <strong>greeting cards</strong>. Homes are decorated with Christmas trees, light and <strong>garlands</strong>. Dinners are planned with special food and all the families gather to have a lot of fun.</p>
+</blockquote>
+<p>Christ - Christmas - Christian - Christianity</p>
+<p>Religious - Religious people</p>
+<p>Islam - Buddhism</p>
+<p>commemorate - honor</p>
+<p>greeting card 贺卡</p>
+<p>garlands 花环</p>
+<blockquote>
+<p>A Central imaginary figure in Christmas is Father Christmas, also called Santa Claus, He is believed to fly on his <strong>sleigh</strong> bringing gifts for children. Christmas is also an opportunity for economic growth. It has become an important period for business activity. Shops make a lot of profit and a lot of countries realized this economic impact.</p>
+</blockquote>
+<p>sleigh 雪橇</p>
+<p>shopping carnival 购物节</p>
+<p><strong>What Does Christmas Mean Today?</strong></p>
+<blockquote>
+<p>Today, Christmas is still connected to its religious background although it has gained some <strong>secular</strong> <strong>characteristics</strong>. For many people, Christmas is spending extra time with family, expressing thanks and love, sharing and making others happy, and commemorating the birth of the central figure of Christianity, Jesus Christ.</p>
+</blockquote>
+<p>secular 世俗的，现期的</p>
+<p>characteristics = feature = trait</p>
+<blockquote>
+<p>Christmas is also a worldwide cultural and economic phenomenon. It is considered the most significant economic boost for many countries worldwide since sales in particularly all retail <strong>categories</strong> <strong>surge</strong> considerably. People buy and exchange gifts, decorate Christmas trees, enjoy meals with family and friends, and of course, wait for Santa Claus to arrive.</p>
+</blockquote>
+<p>surge = soar 增长</p>
+<p>category 类别</p>
+<ol>
+<li>Christmas celebration on December 25.</li>
+<li>Jesus Christ’s Date of birth we are not sure about the exactly date.</li>
+<li>Santa Claus comes on a flying sleigh</li>
+</ol>
+<h2 id="Culture-Shock">Culture Shock</h2>
+<p><strong>what is the culture shock</strong>?</p>
+<blockquote>
+<p>Culture shock <strong>refers to</strong> the feeling of <strong>disorientation</strong> experienced by people when they move to an unfamiliar cultural environment or when they are suddenly exposed to a different way of life or set of attitudes. This can be the result of immigration or a visit to a new country, a move between social environments, or simply a transition to another type of life.</p>
+</blockquote>
+<p>shock 冲击，震惊</p>
+<p>refer to 指的是</p>
+<p>orient - disorientation 迷失</p>
+<p><strong>Culture shock stages</strong></p>
+<blockquote>
+<p>Culture shock consists of four distinct stages: honeymoon, <strong>negotiation</strong>, adjustment, and adaption, The honeymoon stage occurs when the individual sees the difference between the old and new culture in a romantic light. In negotiation stage, the differences between the old and new culture become <strong>apparent</strong> and may create <strong>anxiety</strong>. The adjustment stage refers to the period when the individuals grows accustomed to the new culture and develop <strong>routines</strong>. Finally, in the adaption stage, individuals are able to participate fully and comfortably in the host culture. Adaption or acceptance does not mean total conversion; people often keep many traits from their earlier culture, such as accents and languages. It is often referred to as <strong>bicultural</strong> stage.</p>
+</blockquote>
+<p>negotiate - negotiation 协商</p>
+<p>apparent = obvious</p>
+<p>anxiety - anxious</p>
+<p>routine 日常</p>
+<p>bicultural 双重文化的 bilingual 双重语言者</p>
+<p><strong>Homesickness</strong></p>
+<blockquote>
+<p>Culture shock may cause homesickness. This refers to the feeling of longing for one’s home. People suffering from culture shock typically experience a <strong>combination</strong> of <strong>depressive</strong> and anxious <strong>symptoms</strong> related to homesickness. Ways of coping with homesickness include developing a hobby, thinking positively and feeling grateful about what one has, and building new relationships.</p>
+</blockquote>
+<p>depressive 压抑</p>
+<p>typically 典型的</p>
+<p>combination 组合</p>
+<p>symptoms 症状</p>
+<p>cope with = deal with</p>
+<p>grateful 感激</p>
+<blockquote>
+<p>Cultural shock is a natural phenomenon that <strong>occurs</strong> when one has a cross-cultural experience. Going through the different stages can take weeks, months or years, But ultimately, the experience can be enriching and may end up with either adaption with the new culture or a return home.</p>
+</blockquote>
+<p>occur = happen</p>
+<blockquote>
+<p>Enrich <psw>丰富 / 提升</psw><br>
+Suddenly <psw>突然地</psw><br>
+Disorientation <psw>迷失方向 / 迷茫</psw><br>
+Ultimately <psw>最终 / 归根结底</psw><br>
+Longing <psw>渴望 / 思念</psw><br>
+Phenomenon <psw>现象</psw><br>
+Accustomed <psw>习惯的 / 适应的</psw><br>
+Apparent <psw>明显的 / 显而易见的</psw><br>
+Shock <psw>震惊 / 休克</psw><br>
+Unfamiliar <psw>不熟悉的 / 陌生的</psw><br>
+Expose <psw>暴露 / 接触</psw><br>
+Attitude <psw>态度</psw><br>
+Occur <psw>发生</psw><br>
+Grateful <psw>感激的</psw><br>
+Adjustment <psw>调整 / 适应</psw><br>
+Adaption <psw>适应 / 改编</psw><br>
+Repressive <psw>压制的 / 镇压的</psw><br>
+Routine <psw>常规 / 例行公事</psw><br>
+Transition <psw>过渡 / 转变</psw><br>
+Negotiation <psw>谈判 / 协商</psw><br>
+Trait <psw>特征 / 品质</psw><br>
+Participate <psw>参与</psw><br>
+Conversion <psw>转变 / 转换</psw></p>
+</blockquote>
+<ol>
+<li>Culture shock occurs only as a result of immigration. true</li>
+<li>The adaptation stage means that there is a complete change of personality. false</li>
+<li>Homesickness and culture shock refer to the same thing. false</li>
+<li>culture shock has also positive effects on people experiencing it. true</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>英语</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>英语词汇文章22~25</title>
+    <url>/2025/03/03/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A08/</url>
+    <content><![CDATA[<hr>
+<h2 id="The-Winter-Olympic-Games">The Winter Olympic Games</h2>
+<blockquote>
+<p>The Winter Olympic Games is a major international sporting event that occurs every four years. The first Winter Olympics, the 1924 Winter Olympics, was held in Chamonix, France. The original sports were alpine and cross-country skiing, figure skating, ice hockey, Nordic combined, ski jumping and speed skating.</p>
+</blockquote>
+<p>Olympics, Candidate</p>
+<p>Torch 火炬</p>
+<p>Anthem 赞歌 - National anthem 国歌</p>
+<p>Host city - host country 主办方</p>
+<p>Guest 客人</p>
+<p>Spirit 精神 - spiritual</p>
+<p>opening ceremony - ending ceremony</p>
+<p>mascot 吉祥物</p>
+<p>alpine 阿尔卑斯</p>
+<blockquote>
+<p>The Games were held every <u>four years from 1924 until</u> 1936, after which they were interrupted by World War II. The Olympics resumed in 1948 and was again held every four years. Until 1992, the Winter and Summer Olympics Games were held in the same years, but in accordance with a 1986 decision by the International Olympic Committee (IOC) to place the Summer and Winter Games on separate four-year cycles in alternating even-numbered years, the next Winter Olympics after 1992 was in 1994.</p>
+</blockquote>
+<p>interrupt 打断，中止</p>
+<p>resume 恢复，继续 - resume 简历</p>
+<p>in accordance with = follow = obey</p>
+<p>cycle 循环</p>
+<p>alternate - alternating = shift</p>
+<p>affordable alternative 平替</p>
+<p>luxury 奢饰品 - luxurious - extravagant</p>
+<blockquote>
+<p>The Winter Olympics has been hosted on three continents by eleven different countries, but never in a country in the southern hemisphere.</p>
+</blockquote>
+<ol>
+<li>
+<p>The games are held every four years. Yes</p>
+</li>
+<li>
+<p>Winter Olympics and Summer Olympics games have always been held in the same year. Yes</p>
+</li>
+<li>
+<p>Winter Olympics have been held in south America. No</p>
+</li>
+</ol>
+<h2 id="Stereotypes">Stereotypes</h2>
+<blockquote>
+<p>A stereotype is fixed idea that people have about what specific social groups or individuals are like, especially an idea that is wrong. Other terms that are associated with the term stereotype are prejudice and cliche. The Term has a Greek origin: stereos means solid or firm and typos mean blow, impression, engraved or mark. The term was first used in the printing business. The first modern English use of the term was in 1850, meaning “image perpetuated without change.”</p>
+</blockquote>
+<p>地图炮 - 地域歧视 regional discrimination - 性别歧视 gender discrimination, sexism, sexist - 人种歧视 racial discrimination, racism, racist</p>
+<p>famine - feminine  女权- feminism - feminist</p>
+<wavy>cliche 陈词滥调</wavy>
+<p>be associate with = related to = have something to do with</p>
+<p>prejudice = bias</p>
+<p>solid or firm 坚实或坚硬</p>
+<p>typos 排版错误</p>
+<p>engraved 雕刻，被牢记心中的</p>
+<p>image 印象</p>
+<blockquote>
+<p>Because stereotypes are standardized and simplified ideas of groups, based on some prejudices, they are not derived from objective facts, but rather subjective and often unverifiable ideas.</p>
+</blockquote>
+<blockquote>
+<p>As Sociologist Charles E. Hurst states: “One reason for stereotypes is the lack of personal concrete familiarity that individuals have with persons in other racial or ethnic groups. Lack of familiarity encourages the lumping together of unknown individuals”.</p>
+</blockquote>
+<p>standard - Standardize 标准化 - criteria</p>
+<p>urban - urbanize - urbanization</p>
+<p>simplify 简化</p>
+<p>derived from 由…来，源自于</p>
+<p>objective 客观，目标 - subjective 主观</p>
+<p>aim - goal - target - purpose - intention</p>
+<p>verify - verifiable - unverifiable 不可验证的</p>
+<p>concrete 具体的</p>
+<p>encourage 促使</p>
+<p>lumping 归到一起</p>
+<p>a lump in the throat 如鲠在喉</p>
+<blockquote>
+<p>The existence of stereotypes may be explained by the need of groups of people to view themselves as more normal or more superior than other groups. Consequently, stereotypes may be used to justify ill-founded prejudices or ignorance and <u>prevent people of stereotyped groups from</u> entering or succeeding in various activities or fields. The stereotyping group are, generally, reluctant to reconsider their attitudes and behavior towards stereotyped group.</p>
+</blockquote>
+<p>superior - inferior - superiority</p>
+<p>justify 证明</p>
+<p>ill-founded 毫无根据</p>
+<p>inaccurate - accurate</p>
+<p>formal - informal</p>
+<p>reluctant 不愿意</p>
+<blockquote>
+<p>Stereotypes may affect people negatively. This includes forming inaccurate and distorted images and opinions of people. Stereotypes may also be used for scapegoating or for making general erroneous judgments about people. Some stereotyping people may feel comfortable when they prevent themselves from emotion identification with the stereotyped group, which leads to xenophobic or racist behavior. Finally another serious consequences stereotypes is the feeling of inferiority that the stereotyped people may have and which may impair their performance.</p>
+</blockquote>
+<p>inaccurate 不准确的</p>
+<p>distort 扭曲的</p>
+<p>scapegoating 替罪羊</p>
+<p>erroneous judgement 错误的判断</p>
+<p>identification 认同</p>
+<p>xenophobic - acrophobia - homophobic</p>
+<p>impair 损害</p>
+<blockquote>
+<p>Racial           <psw>人种的</psw><br>
+Derive           <psw>源自于</psw><br>
+State            <psw>状态</psw><br>
+Associate        <psw>关联</psw><br>
+Prejudice        <psw>偏见</psw><br>
+Ignorance        <psw>无知</psw><br>
+Standardize      <psw>标准化</psw><br>
+Lump             <psw>归为一类</psw><br>
+Superior         <psw>优越的</psw><br>
+Unverifiable     <psw>不可验证的</psw><br>
+Fixed            <psw>固定的</psw><br>
+Ethnic           <psw>种族的</psw><br>
+Simplified       <psw>简化的</psw><br>
+Familiarity      <psw>熟悉</psw><br>
+Cliche           <psw>陈词滥调</psw><br>
+Distorted        <psw>扭曲的</psw><br>
+Succeed          <psw>成功</psw><br>
+Justify          <psw>证明合理</psw><br>
+Stereotype       <psw>刻板印象</psw><br>
+Reluctant        <psw>不情愿的</psw><br>
+Inferiority      <psw>自卑</psw><br>
+Inaccurate       <psw>不准确的</psw></p>
+</blockquote>
+<ol>
+<li>The word stereotype has a Greek Origin.</li>
+<li>Stereotype used to make generalization about different group of people</li>
+<li>If you label people in terms of stereotype, you will probably be behaving in a discriminatory way.</li>
+</ol>
+<h2 id="Women’s-Rights">Women’s Rights</h2>
+<blockquote>
+<p>Feminism is the belief and aim that women should have the same rights, power, and opportunities as men.</p>
+</blockquote>
+<p>Feminism - female - feminist - individualism - collectivism - socialism - capitalism - communism</p>
+<p>feminine - famine</p>
+<p>masculine</p>
+<blockquote>
+<p>Women won their present through <strong>struggle</strong> and sacrifices rather than through men’s kindness. Women and their supporters have <strong>fought</strong> and in some places continue to fight for the same rights as men. Laws were made to replace <strong>local customs</strong> which <strong>denigrated</strong> and suppressed women’s rights. Women have <u>gained higher positions</u> in the world at all levels: political, economic and social.</p>
+</blockquote>
+<p>struggle - endeavor</p>
+<p>fight - fought</p>
+<p>denigrated 玷污，诋毁</p>
+<p>gain position 赢得地位</p>
+<blockquote>
+<p>Historically, whether in <strong>Hindu</strong>, Greek or Roman civilizations women were always minors and subject to men. It was only during the <strong>Islamic</strong> civilization, between 610 and 661, that the early reforms were <strong>undertaken</strong>. The reforms gave women greater rights than Muslim women in pre-Islamic Arabia and <strong>medieval</strong> Europe. These reforms included greater rights in marriage, divorce and inheritance. Women <u>were not accorded with</u> such legal status in other cultures until centuries later.</p>
+</blockquote>
+<p>India = Hindu</p>
+<p>Islamic 伊斯兰的</p>
+<p>undertaken 进行</p>
+<p>medieval 中世纪的 - middle age</p>
+<p>were accorded with 被…给予</p>
+<blockquote>
+<p>During the middle ages women were <strong>enslaved</strong> and were denied all rights in Europe. In the late 18th century, however, women’s status became a subject of political debate. In the 19th century women started their fight for equal rights. In the late 19th century they won the right to <strong>vote</strong> (<strong>suffrage</strong>) in various countries in the world. More <strong>gigantic</strong> steps were taken during the following years. Women gained more economic, social and political status in various degrees and in different countries.</p>
+</blockquote>
+<p>enslave 奴役</p>
+<p>deny 否定 - deny rights 否定权力 - deprive 剥夺</p>
+<p>deprive women of their rights</p>
+<p>equal - equality</p>
+<p>vote 投票</p>
+<p>gigantic 庞大的 - giant - titanic - huge - enormous - tremendous</p>
+<p>take step to do = take measure to do</p>
+<blockquote>
+<p><strong>In spite of</strong> all the success women still suffer from <strong>discrimination</strong> at various levels. For example women work more and earn less than men. In addition to that, the majority of the world’s poor and <strong>illiterate</strong> are women. The road to real equality is still long.</p>
+</blockquote>
+<p>in spite of = despite = while = although = though = even though</p>
+<p>discrimination 歧视</p>
+<p>illiterate 不识字的人</p>
+<ol>
+<li>The first reforms occurred in Europe. ×</li>
+<li>Political debate over women’s status started in the 18th century. √</li>
+<li>Women gained the right to vote during the 19th century. √</li>
+</ol>
+<blockquote>
+<p>debate enslave status sacrifice kindness discrimination struggle reform subject medieval gigantic degree illiterate deny inheritance civilization suppress supporter</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>英语</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>英语词汇文章26~28</title>
+    <url>/2025/03/09/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A09/</url>
+    <content><![CDATA[<h2 id="The-World-Wide-Web">The World Wide Web</h2>
+<blockquote>
+<p>The World Wide Web, The WWW or the Web <strong>refers to</strong> an information space <strong>where</strong> documents and other web resources are identified by Uniform Resource Locators (URLs), <strong>interlinked</strong> by hypertext links, and can be accessed via the Internet. It <strong>was invented by</strong> the English scientist Tim Berners-Lee in 1989. He wrote the first web browser computer program in 1990. The World Wide Web has been central to the development of the Information Age and is the <strong>primary</strong> tool billions of people use to interact on the Internet.</p>
+</blockquote>
+<p>Website 网站</p>
+<p>refer to 代指的是</p>
+<p>where = in which</p>
+<p>interlink 相互连接</p>
+<p>hypertext 超文本 - hypertension</p>
+<p>was invent by 被…发明</p>
+<p>primary 首要的</p>
+<blockquote>
+<p>Web pages are primarily text documents formatted and <strong>annotated</strong> with Hypertext Markup Language (HTML). <strong>In addition to</strong> formatted text, web pages may contain images, video, audio, and software components that are <strong>rendered</strong> in the user’s web browser as <strong>coherent</strong> pages of multimedia content. <strong>Embedded</strong> hyperlinks <strong>permit</strong> users to navigate between web pages. Multiple web pages with a common domain name make up a website. Website content can largely be provided by the publisher or by users who contribute content online.</p>
+</blockquote>
+<p>annotate 解释，注释</p>
+<p>in addition to 除了</p>
+<p>render 提取，提供，渲染</p>
+<p>coherent 一致的，连贯的</p>
+<p>embed 嵌入，内置</p>
+<p>permit 允许</p>
+<blockquote>
+<p>Recently, many people have criticized today’s <strong>misuse</strong> of the web. The inventor of the World Wide Web, Tim Berners-Lee himself has warned of the dangers of the Internet. According to him, the web has become a tool in the <strong>hand of the powerful</strong> to get what they want. For example, he warns that fake news is <strong>disseminated</strong> either to generate a lot of money or to attempt to <strong>manipulate</strong> people’s opinions. Another worry was the <strong>gross</strong> <strong>invasion</strong> of privacy. Tim Berners-Lee is also concerned about governments’ misuse of the Internet to collect personal data to manipulate or <strong>oppress</strong> people.</p>
+</blockquote>
+<p>misuse - abuse</p>
+<p>hand of the powerful 掌权者</p>
+<p>disseminate 散播</p>
+<p>manipulate - control</p>
+<p>gross 严重的，大的，总体的</p>
+<p>invade - invasion</p>
+<p>oppress 镇压</p>
+<blockquote>
+<p>central access oppress via navigate interact manipulate invent criticize misuse browser multiple generate permit audio warn embed content gross scientist primary invasion contribute page</p>
+</blockquote>
+<h2 id="Friendship">Friendship</h2>
+<blockquote>
+<p>Friendship <strong>is defined as</strong> a bond of affection between two people. People are referred to as best friends if the friendship is really strong. This relationship is characterized by positive <strong>interpersonal</strong> qualities such as kindness, <strong>generosity</strong>, loyalty, and honesty. True friends choose to be with one another, enjoy time spent together, and can engage in a positive and supportive role to one another.</p>
+</blockquote>
+<p>is define as 被定义为</p>
+<p>generosity 慷慨</p>
+<p>interpersonal 人际间的</p>
+<p>positive - optimisitic - negative</p>
+<p><strong>What are the different types of friends?</strong></p>
+<p><strong>Acquaintances</strong></p>
+<blockquote>
+<p>It’s easy to classify acquaintances. They’re the people you meet frequently at casual places but don’t truly know each other. These are people we know well enough to <strong>strike up</strong> a conversation with from time to time, but not people we’d ask to a dinner party or contact for help.</p>
+</blockquote>
+<p>Acquaintance - stranger</p>
+<p>be acquainted with - familiar</p>
+<p>strike up 开启</p>
+<p>time to time 时而不时</p>
+<p><strong>Close friends</strong></p>
+<blockquote>
+<p>You’re more inclined to seek help or support from a close <strong>buddy</strong>. There is not only a high level of trust amongst close friends but also a great deal of genuine love and affection. Even if you disagree with a close friend’s decisions, you would protect his or her freedom to make them.</p>
+</blockquote>
+<p><strong>Best friends</strong></p>
+<blockquote>
+<p>Although best friends are quite rare, they are people whom we need in our lives. Your best friend understands you without much explanation and is always there for you. Your relationship with your best friend is not dependent on the time you spend together. You may not meet your best friends for a long time. But once you get in touch with them, you feel <strong>as if</strong> nothing has changed in your friendship. These connections are <strong>distinct</strong> in their ability to adapt the the environment and endure despite the <strong>vagaries</strong> of life.</p>
+</blockquote>
+<p>as if 仿佛</p>
+<p>distinct 不同的</p>
+<p>vagaries 变换莫测</p>
+<p><strong>Virtual friends</strong></p>
+<blockquote>
+<p>Virtual friendship is a relatively new type of friendship. It <strong>refers to</strong> friendship that takes place on the internet and is unlikely to be connected to real-life interaction. It is <strong>contrasted with</strong> the traditional friendships that we have listed above. The latter is a form of relationship that requires a lot of face-to-face connection.</p>
+<p>This type of friendship developed <strong>as a result of</strong> advances in technology. The internet, especially social media, played an <strong>undeniable</strong> role in connecting people worldwide.</p>
+</blockquote>
+<p>contrast 相反的</p>
+<p>as a result of 作为…的结果</p>
+<p>undeniable 无法否认的</p>
+<ol>
+<li>There are different levels of friendship. True</li>
+<li>Best friends are necessarily people we always meet. False</li>
+<li>Virtual friendship is an old type of relationships. False</li>
+</ol>
+<blockquote>
+<p>distinct characterize adapt engage freedom seek strike up traditional undeniable dependent affection contact incline endure aquaintance bond generosity genuine loyalty honesty</p>
+</blockquote>
+<h2 id="Independence-Day">Independence Day</h2>
+<blockquote>
+<p>Independence Day, <strong>also referred to as</strong> the Fourth of July or July Fourth, is an American federal holiday <strong>commemorating</strong> the adoption of the Declaration of Independence on July 4, 1776. The Continental Congress declared that the thirteen American <strong>colonies</strong> were no longer under the rule of the <strong>monarch</strong> of Britain (George III), and they were united, free, and independent states.</p>
+</blockquote>
+<p>also refer to as = also known as</p>
+<p>FBI = Federal Bureau of Investigation</p>
+<p>commemorate 纪念</p>
+<p>colony 殖民地</p>
+<p>monarch 君主 - monarchy 君主制</p>
+<blockquote>
+<p>Independence Day is the national day of the United States and is associated with many activities. Public and private events celebrating the history, government, and traditions of the United States are organized. It is also generally associated with fireworks, family gatherings, <strong>carnivals</strong>, fairs picnics, and concerts.</p>
+</blockquote>
+<p>9 Interesting facts about Independence Day</p>
+<p>Here are 9 interesting facts about Independence Day:</p>
+<ol>
+<li>Congress had voted for the declaration of independence on July 2, but it was not declared until July 4.</li>
+<li>On June 11, 1776, Congress appointed a “Committee of Five”, consisting of John Adams, Benjamin Franklin, Thomas Jefferson, Robert R. Livingston, and Roger Sherman, to <strong>draft</strong> the declaration. Jefferson wrote the first draft which was then edited by the others and then edited again by the whole Congress.</li>
+<li>Fifty-six members of Congress signed the declaration.</li>
+<li>By a striking coincidence, Thomas Jefferson and John Adams, the only two signatories of the Declaration of Independence later to serve as presidents of the United States, died on the same day: July 4, 1826, which was the 50th anniversary of the Declaration.</li>
+<li>Although not a signatory of the Declaration of Independence, James Monroe, another Founding Father who was elected as president, also died on July 4, 1831, making him the third President who died on the anniversary of independence.</li>
+<li>The only U.S. president to have been born on Independence Day was Calvin Coolidge, who was born on July 4, 1872.</li>
+<li>Almost 100 years after the Declaration of Independence, in 1870, July 4 was made an official holiday by Congress.</li>
+<li>Every 4th of July, the Liberty Bell in Philadelphia is tapped thirteen times <strong>in honor of</strong> the original 13 American colonies.</li>
+<li>fireworks are an important part of the holiday because the first Independence Day celebration on July 4, 1777, witnessed Americans <strong>meeting</strong> to watch as the sky <strong>illuminated</strong> to commemorate the new nation.</li>
+</ol>
+<blockquote>
+<p>draft 起稿</p>
+<p>meeting = gathering</p>
+<p>in honor of = commemorate</p>
+<p>illuminate 照亮</p>
+</blockquote>
+<ol>
+<li>The <strong>downsizing</strong> or the <strong>restructuring</strong> of an organization.</li>
+<li>New challenges or opportunities that arise.</li>
+<li>Poor or ineffective leadership.</li>
+<li>Having a poor relationship with a manager.</li>
+<li>For the improvement of a better work/life balance.</li>
+<li>Contributions are not being recognized.</li>
+<li>For better compensation and benefits.</li>
+<li>For better <strong>alignment</strong> with personal and organizational values.</li>
+<li>Personal strengths and capabilities.</li>
+<li>The financial instability of an organization.</li>
+<li>An organization relocated.</li>
+</ol>
+<blockquote>
+<p>Downsize 缩减</p>
+<p>restructuring 重新调整</p>
+<p>alignment 配合</p>
+</blockquote>
+<p>Because the world has become so competitive, you will have to do your best to secure your share of success. The following are tips to get you ahead in your career.</p>
+<ol>
+<li>Priority and goals</li>
+</ol>
+<p>What are your priorities of the day? Make a list and of your priorities and plan your day. The tasks of the day must be outlined with the most important and urgent ones on top.</p>
+<p>Likewise determine your short-term and long-term goals and evaluate your progress frequently.</p>
+<ol start="2">
+<li>Be focused</li>
+</ol>
+<p>Are you really present physically and mentally. Try to block out all distractions so that you have the time to truly focus on your tasks and career.</p>
+<ol start="3">
+<li>Broaden your skills</li>
+</ol>
+<p>Nothing remains the same and so do job requirements. Update your knowledge and skills. Seek improvement of your <strong>know-hows</strong>. Attend seminars, conferences, read books, be an eternal learner.</p>
+<p>know-hows = expertise</p>
+<ol start="4">
+<li>Socialize</li>
+</ol>
+<p>Be ready to participate in social functions .Be open to new acquaintances. Meet new people and deal with them respectfully and enthusiastically. Be an active listener; you will surely learn something new…</p>
+<ol start="5">
+<li>Know your <strong>merits</strong></li>
+</ol>
+<p>Know your strengths and weaknesses. If you think you deserve a position or promotion, claim it.</p>
+<ol start="6">
+<li>Accept challenge</li>
+</ol>
+<p>Through challenge you will reach areas of your personality you have never discovered before. It is a good idea to step away from you <strong>comfort zone</strong> to explore new horizons. If you settle into a routine and play it safe all the time, you will never get ahead in your career. If you always do what you’ve always done, you’ll only get what you’ve already got’</p>
+<ol start="7">
+<li>Communication</li>
+</ol>
+<p>Learn to communicate effectively. Listen to what others are saying and focus on how to give and receive constructive feedback, to persuade effectively and to ask for help and collect information.</p>
+<ol start="8">
+<li>Avoid <strong>gossip</strong></li>
+</ol>
+<p>Avoid office gossip about colleagues and the boss. Be respectful and work for the good of the company.</p>
+<ol start="9">
+<li>Relax</li>
+</ol>
+<p>Relax and do something different, a hobby that you love doing. Take time off for yourself. This will help boost your productivity during week days.</p>
+<ol start="10">
+<li>Seek satisfaction</li>
+</ol>
+<p>If you are disappointed with what you are doing, try to transform it into something you love. If you fail, it might be a good idea to do something different. As Confucius said: 'Choose a job you love, and you will never have to work a day in your life. ’</p>
+]]></content>
+      <tags>
+        <tag>英语</tag>
+      </tags>
+  </entry>
+</search>

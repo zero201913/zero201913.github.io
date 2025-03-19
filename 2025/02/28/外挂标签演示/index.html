@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="演示各种各样的外挂标签使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="外挂标签演示">
+<meta property="og:url" content="http://example.com/2025/02/28/%E5%A4%96%E6%8C%82%E6%A0%87%E7%AD%BE%E6%BC%94%E7%A4%BA/index.html">
+<meta property="og:site_name" content="Zero&#39;s Blog">
+<meta property="og:description" content="演示各种各样的外挂标签使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/owen0o0/getFavicon">
+<meta property="article:published_time" content="2025-02-28T14:33:53.000Z">
+<meta property="article:modified_time" content="2025-03-16T04:58:21.064Z">
+<meta property="article:author" content="Zero02">
+<meta property="article:tag" content="butterfly">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/owen0o0/getFavicon">
+
+
+<link rel="canonical" href="http://example.com/2025/02/28/%E5%A4%96%E6%8C%82%E6%A0%87%E7%AD%BE%E6%BC%94%E7%A4%BA/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/02/28/%E5%A4%96%E6%8C%82%E6%A0%87%E7%AD%BE%E6%BC%94%E7%A4%BA/","path":"2025/02/28/外挂标签演示/","title":"外挂标签演示"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>外挂标签演示 | Zero's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start --><link rel="stylesheet" href="https://unpkg.com/hexo-butterfly-tag-plugins-plus-chinese@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.com/hexo-butterfly-tag-plugins-plus-chinese@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://unpkg.com/hexo-butterfly-tag-plugins-plus-chinese@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Zero's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">zero02 的知识仓库</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%96%E6%8C%82%E6%A0%87%E7%AD%BE"><span class="nav-number">1.</span> <span class="nav-text">外挂标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Butterfly-%E5%A4%96%E6%8C%82%E6%A0%87%E7%AD%BE%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">Butterfly 外挂标签简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%96%E6%8C%82%E6%A0%87%E7%AD%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">外挂标签的基本使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A0%87%E7%AD%BE%E8%AF%AD%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">1. 标签语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.2.</span> <span class="nav-text">2. 常用标签示例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E8%A1%8C%E5%86%85%E6%96%87%E6%9C%AC%E6%A0%B7%E5%BC%8F"><span class="nav-number">3.2.1.</span> <span class="nav-text">（1）行内文本样式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%BD%A9%E8%89%B2%E6%96%87%E5%AD%97"><span class="nav-number">3.2.2.</span> <span class="nav-text">（2）彩色文字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E6%8F%90%E7%A4%BA%E6%A1%86%EF%BC%88Note%EF%BC%89"><span class="nav-number">3.2.3.</span> <span class="nav-text">（3）提示框（Note）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E8%B6%85%E9%93%BE%E6%8E%A5%E5%8D%A1%E7%89%87"><span class="nav-number">3.2.4.</span> <span class="nav-text">（4）超链接卡片</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%96%E6%8C%82%E6%A0%87%E7%AD%BE"><span class="nav-number">4.</span> <span class="nav-text">自定义外挂标签</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA%E6%A0%87%E7%AD%BE%E8%84%9A%E6%9C%AC"><span class="nav-number">4.1.</span> <span class="nav-text">1. 创建标签脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%B7%BB%E5%8A%A0-CSS-%E6%A0%B7%E5%BC%8F"><span class="nav-number">4.2.</span> <span class="nav-text">2. 添加 CSS 样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%BC%95%E7%94%A8-CSS-%E6%96%87%E4%BB%B6"><span class="nav-number">4.3.</span> <span class="nav-text">3. 引用 CSS 文件</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zero02"
+      src="https://img.zero02.space/avatar1.webp">
+  <p class="site-author-name" itemprop="name">Zero02</p>
+  <div class="site-description" itemprop="description">lorem</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/28/%E5%A4%96%E6%8C%82%E6%A0%87%E7%AD%BE%E6%BC%94%E7%A4%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://img.zero02.space/avatar1.webp">
+      <meta itemprop="name" content="Zero02">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zero's Blog">
+      <meta itemprop="description" content="lorem">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="外挂标签演示 | Zero's Blog">
+      <meta itemprop="description" content="演示各种各样的外挂标签使用">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          外挂标签演示
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-28 22:33:53" itemprop="dateCreated datePublished" datetime="2025-02-28T22:33:53+08:00">2025-02-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-16 12:58:21" itemprop="dateModified" datetime="2025-03-16T12:58:21+08:00">2025-03-16</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">演示各种各样的外挂标签使用</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="外挂标签">外挂标签</h2>
+<p>Butterfly 主题是 Hexo 中非常受欢迎的一款主题，支持丰富的自定义功能，尤其是通过外挂标签（Tag Plugins）可以实现更多样化的内容展示效果。以下是关于 Butterfly 外挂标签的详细教程，涵盖基本概念、使用方法以及一些实用示例。</p>
+<hr>
+<h2 id="Butterfly-外挂标签简介">Butterfly 外挂标签简介</h2>
+<p>外挂标签是 Butterfly 主题提供的一种扩展功能，允许用户在 Markdown 文件中通过特定的语法插入自定义内容，例如彩色文字、提示框、超链接卡片等。这些标签通过简单的语法即可实现复杂的样式效果，非常适合美化博客内容。</p>
+<hr>
+<h2 id="外挂标签的基本使用方法">外挂标签的基本使用方法</h2>
+<h3 id="1-标签语法">1. 标签语法</h3>
+<p>Butterfly 外挂标签的基本语法格式为：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% 标签名 参数 %&#125;</span><br><span class="line">内容</span><br><span class="line">&#123;% end标签名 %&#125;</span><br></pre></td></tr></table></figure>
+<p>部分标签不需要 <code>end</code> 结束符，具体取决于标签的定义。</p>
+<h3 id="2-常用标签示例">2. 常用标签示例</h3>
+<p>以下是一些常用的外挂标签及其效果：</p>
+<h4 id="（1）行内文本样式">（1）行内文本样式</h4>
+<ul>
+<li><strong>下划线</strong>：<u>文本内容</u></li>
+<li><strong>着重号</strong>：<emp>文本内容</emp></li>
+<li><strong>波浪线</strong>：<wavy>文本内容</wavy></li>
+<li><strong>删除线</strong>：<del>文本内容</del></li>
+<li><strong>键盘样式</strong>：<kbd>文本内容</kbd></li>
+<li><strong>密码样式</strong>：<psw>文本内容</psw></li>
+</ul>
+<h4 id="（2）彩色文字">（2）彩色文字</h4>
+<p>使用 <code>span</code> 标签可以实现彩色文字效果：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% span 颜色, 文本内容 %&#125;</span><br></pre></td></tr></table></figure>
+<p>支持的颜色参数：<code>red</code>、<code>yellow</code>、<code>green</code>、<code>cyan</code>、<code>blue</code>、<code>gray</code> 等。</p>
+<p>示例：</p>
+<p>彩色文字：<span class='p red'>红色</span>、<span class='p yellow'>黄色</span>、<span class='p green'>绿色</span></p>
+<p>超大号文字：<span class='p center logo large'>Volantis</span></p>
+<h4 id="（3）提示框（Note）">（3）提示框（Note）</h4>
+<p>Butterfly 提供了多种样式的提示框，可以通过 <code>note</code> 标签实现：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% note [class] [no-icon] [style] %&#125;</span><br><span class="line">提示内容</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>class</code>：可选参数，支持 <code>default</code>、<code>primary</code>、<code>success</code>、<code>info</code>、<code>warning</code>、<code>danger</code> 等样式。</li>
+<li><code>no-icon</code>：可选参数，隐藏图标。</li>
+<li><code>style</code>：可选参数，支持 <code>simple</code>、<code>modern</code>、<code>flat</code> 等样式。</li>
+</ul>
+<p>示例：</p>
+<div class="note success"><p>这是一个成功的提示框！</p>
+</div>
+<h4 id="（4）超链接卡片">（4）超链接卡片</h4>
+<p>通过自定义标签可以实现超链接卡片效果，显示网站的 Favicon 和标题：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% link 标题, 网站名, 链接 %&#125;</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<div class="tag link"><a class="link-card" title="获取网站的Favicon图标并显示在你的网页上" href="owen0o0"><div class="left"><img src="https://github.com/owen0o0/getFavicon"/></div><div class="right"><p class="text">获取网站的Favicon图标并显示在你的网页上</p><p class="url">owen0o0</p></div></a></div>
+<hr>
+<h2 id="自定义外挂标签">自定义外挂标签</h2>
+<p>如果默认的标签无法满足需求，可以通过自定义标签实现更多功能。以下是自定义标签的基本步骤：</p>
+<h3 id="1-创建标签脚本">1. 创建标签脚本</h3>
+<p>在 <code>themes/butterfly/scripts/tag/</code> 目录下新建一个 JavaScript 文件，例如 <code>link.js</code>，并编写标签逻辑：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">link</span>(<span class="params">args</span>) &#123;</span><br><span class="line">    args = args.<span class="title function_">join</span>(<span class="string">&#x27; &#x27;</span>).<span class="title function_">split</span>(<span class="string">&#x27;,&#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> title = args[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">let</span> sitename = args[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">let</span> link = args[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">let</span> imgUrl = <span class="string">&quot;https://api.iowen.cn/favicon/&quot;</span> + link.<span class="title function_">replace</span>(<span class="regexp">/^https?\:\/\//i</span>, <span class="string">&quot;&quot;</span>) + <span class="string">&quot;.png&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`&lt;a class=&quot;tag-Link&quot; target=&quot;_blank&quot; href=&quot;<span class="subst">$&#123;link&#125;</span>&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;div class=&quot;tag-link-tips&quot;&gt;引用站外地址&lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;div class=&quot;tag-link-bottom&quot;&gt;</span></span><br><span class="line"><span class="string">            &lt;div class=&quot;tag-link-left&quot; style=&quot;background-image: url(<span class="subst">$&#123;imgUrl&#125;</span>);&quot;&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;div class=&quot;tag-link-right&quot;&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&quot;tag-link-title&quot;&gt;<span class="subst">$&#123;title&#125;</span>&lt;/div&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&quot;tag-link-sitename&quot;&gt;<span class="subst">$&#123;sitename&#125;</span>&lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;/a&gt;`</span>;</span><br><span class="line">&#125;</span><br><span class="line">hexo.<span class="property">extend</span>.<span class="property">tag</span>.<span class="title function_">register</span>(<span class="string">&#x27;link&#x27;</span>, link, &#123; <span class="attr">ends</span>: <span class="literal">false</span> &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="2-添加-CSS-样式">2. 添加 CSS 样式</h3>
+<p>在 <code>themes/butterfly/source/css/</code> 目录下新建 CSS 文件，例如 <code>tag-link.css</code>，并编写样式：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.tag-Link</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ddd</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">text-decoration</span>: none;</span><br><span class="line">    <span class="attribute">color</span>: inherit;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-bottom</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-left</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">background-size</span>: cover;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-right</span> &#123;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-引用-CSS-文件">3. 引用 CSS 文件</h3>
+<p>在主题配置文件 <code>_config.butterfly.yml</code> 中引用 CSS 文件：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">inject:</span></span><br><span class="line">  <span class="attr">head:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&lt;link</span> <span class="string">rel=&quot;stylesheet&quot;</span> <span class="string">href=&quot;/css/tag-link.css&quot;&gt;</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/butterfly/" rel="tag"># butterfly</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/02/27/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A07/" rel="prev" title="英语词汇文章20~21, 11课（补）">
+                  <i class="fa fa-angle-left"></i> 英语词汇文章20~21, 11课（补）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/03/03/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A08/" rel="next" title="英语词汇文章22~25">
+                  英语词汇文章22~25 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zero02</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">86k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:18</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span id="busuanzi_container_site_pv">
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+  </span>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+<!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><!-- hexo injector body_end end --></body>
+</html>
