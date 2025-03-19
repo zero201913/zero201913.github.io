@@ -20,6 +20,71 @@
 ]]></content>
   </entry>
   <entry>
+    <title>外挂标签演示</title>
+    <url>/2025/02/28/%E5%A4%96%E6%8C%82%E6%A0%87%E7%AD%BE%E6%BC%94%E7%A4%BA/</url>
+    <content><![CDATA[<h2 id="外挂标签">外挂标签</h2>
+<p>Butterfly 主题是 Hexo 中非常受欢迎的一款主题，支持丰富的自定义功能，尤其是通过外挂标签（Tag Plugins）可以实现更多样化的内容展示效果。以下是关于 Butterfly 外挂标签的详细教程，涵盖基本概念、使用方法以及一些实用示例。</p>
+<hr>
+<h2 id="Butterfly-外挂标签简介">Butterfly 外挂标签简介</h2>
+<p>外挂标签是 Butterfly 主题提供的一种扩展功能，允许用户在 Markdown 文件中通过特定的语法插入自定义内容，例如彩色文字、提示框、超链接卡片等。这些标签通过简单的语法即可实现复杂的样式效果，非常适合美化博客内容。</p>
+<hr>
+<h2 id="外挂标签的基本使用方法">外挂标签的基本使用方法</h2>
+<h3 id="1-标签语法">1. 标签语法</h3>
+<p>Butterfly 外挂标签的基本语法格式为：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% 标签名 参数 %&#125;</span><br><span class="line">内容</span><br><span class="line">&#123;% end标签名 %&#125;</span><br></pre></td></tr></table></figure>
+<p>部分标签不需要 <code>end</code> 结束符，具体取决于标签的定义。</p>
+<h3 id="2-常用标签示例">2. 常用标签示例</h3>
+<p>以下是一些常用的外挂标签及其效果：</p>
+<h4 id="（1）行内文本样式">（1）行内文本样式</h4>
+<ul>
+<li><strong>下划线</strong>：<u>文本内容</u></li>
+<li><strong>着重号</strong>：<emp>文本内容</emp></li>
+<li><strong>波浪线</strong>：<wavy>文本内容</wavy></li>
+<li><strong>删除线</strong>：<del>文本内容</del></li>
+<li><strong>键盘样式</strong>：<kbd>文本内容</kbd></li>
+<li><strong>密码样式</strong>：<psw>文本内容</psw></li>
+</ul>
+<h4 id="（2）彩色文字">（2）彩色文字</h4>
+<p>使用 <code>span</code> 标签可以实现彩色文字效果：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% span 颜色, 文本内容 %&#125;</span><br></pre></td></tr></table></figure>
+<p>支持的颜色参数：<code>red</code>、<code>yellow</code>、<code>green</code>、<code>cyan</code>、<code>blue</code>、<code>gray</code> 等。</p>
+<p>示例：</p>
+<p>彩色文字：<span class='p red'>红色</span>、<span class='p yellow'>黄色</span>、<span class='p green'>绿色</span></p>
+<p>超大号文字：<span class='p center logo large'>Volantis</span></p>
+<h4 id="（3）提示框（Note）">（3）提示框（Note）</h4>
+<p>Butterfly 提供了多种样式的提示框，可以通过 <code>note</code> 标签实现：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note [class] [no-icon] [style] %&#125;</span><br><span class="line">提示内容</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>class</code>：可选参数，支持 <code>default</code>、<code>primary</code>、<code>success</code>、<code>info</code>、<code>warning</code>、<code>danger</code> 等样式。</li>
+<li><code>no-icon</code>：可选参数，隐藏图标。</li>
+<li><code>style</code>：可选参数，支持 <code>simple</code>、<code>modern</code>、<code>flat</code> 等样式。</li>
+</ul>
+<p>示例：</p>
+<div class="note success"><p>这是一个成功的提示框！</p>
+</div>
+<h4 id="（4）超链接卡片">（4）超链接卡片</h4>
+<p>通过自定义标签可以实现超链接卡片效果，显示网站的 Favicon 和标题：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% link 标题, 网站名, 链接 %&#125;</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<div class="tag link"><a class="link-card" title="获取网站的Favicon图标并显示在你的网页上" href="owen0o0"><div class="left"><img src="https://github.com/owen0o0/getFavicon"/></div><div class="right"><p class="text">获取网站的Favicon图标并显示在你的网页上</p><p class="url">owen0o0</p></div></a></div>
+<hr>
+<h2 id="自定义外挂标签">自定义外挂标签</h2>
+<p>如果默认的标签无法满足需求，可以通过自定义标签实现更多功能。以下是自定义标签的基本步骤：</p>
+<h3 id="1-创建标签脚本">1. 创建标签脚本</h3>
+<p>在 <code>themes/butterfly/scripts/tag/</code> 目录下新建一个 JavaScript 文件，例如 <code>link.js</code>，并编写标签逻辑：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">link</span>(<span class="params">args</span>) &#123;</span><br><span class="line">    args = args.<span class="title function_">join</span>(<span class="string">&#x27; &#x27;</span>).<span class="title function_">split</span>(<span class="string">&#x27;,&#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> title = args[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">let</span> sitename = args[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">let</span> link = args[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">let</span> imgUrl = <span class="string">&quot;https://api.iowen.cn/favicon/&quot;</span> + link.<span class="title function_">replace</span>(<span class="regexp">/^https?\:\/\//i</span>, <span class="string">&quot;&quot;</span>) + <span class="string">&quot;.png&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`&lt;a class=&quot;tag-Link&quot; target=&quot;_blank&quot; href=&quot;<span class="subst">$&#123;link&#125;</span>&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;div class=&quot;tag-link-tips&quot;&gt;引用站外地址&lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;div class=&quot;tag-link-bottom&quot;&gt;</span></span><br><span class="line"><span class="string">            &lt;div class=&quot;tag-link-left&quot; style=&quot;background-image: url(<span class="subst">$&#123;imgUrl&#125;</span>);&quot;&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;div class=&quot;tag-link-right&quot;&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&quot;tag-link-title&quot;&gt;<span class="subst">$&#123;title&#125;</span>&lt;/div&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&quot;tag-link-sitename&quot;&gt;<span class="subst">$&#123;sitename&#125;</span>&lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;/a&gt;`</span>;</span><br><span class="line">&#125;</span><br><span class="line">hexo.<span class="property">extend</span>.<span class="property">tag</span>.<span class="title function_">register</span>(<span class="string">&#x27;link&#x27;</span>, link, &#123; <span class="attr">ends</span>: <span class="literal">false</span> &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="2-添加-CSS-样式">2. 添加 CSS 样式</h3>
+<p>在 <code>themes/butterfly/source/css/</code> 目录下新建 CSS 文件，例如 <code>tag-link.css</code>，并编写样式：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.tag-Link</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ddd</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">text-decoration</span>: none;</span><br><span class="line">    <span class="attribute">color</span>: inherit;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-bottom</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-left</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">background-size</span>: cover;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-right</span> &#123;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-引用-CSS-文件">3. 引用 CSS 文件</h3>
+<p>在主题配置文件 <code>_config.butterfly.yml</code> 中引用 CSS 文件：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">inject:</span></span><br><span class="line">  <span class="attr">head:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&lt;link</span> <span class="string">rel=&quot;stylesheet&quot;</span> <span class="string">href=&quot;/css/tag-link.css&quot;&gt;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>butterfly</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>英语听力测试1</title>
     <url>/2025/03/05/%E8%8B%B1%E8%AF%AD%E5%90%AC%E5%8A%9B%E6%B5%8B%E8%AF%951/</url>
     <content><![CDATA[<h2 id="听力技巧">听力技巧</h2>
@@ -133,71 +198,6 @@ D. the elephant was given medical treatment for many days.</p>
 ]]></content>
       <tags>
         <tag>英语</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>外挂标签演示</title>
-    <url>/2025/02/28/%E5%A4%96%E6%8C%82%E6%A0%87%E7%AD%BE%E6%BC%94%E7%A4%BA/</url>
-    <content><![CDATA[<h2 id="外挂标签">外挂标签</h2>
-<p>Butterfly 主题是 Hexo 中非常受欢迎的一款主题，支持丰富的自定义功能，尤其是通过外挂标签（Tag Plugins）可以实现更多样化的内容展示效果。以下是关于 Butterfly 外挂标签的详细教程，涵盖基本概念、使用方法以及一些实用示例。</p>
-<hr>
-<h2 id="Butterfly-外挂标签简介">Butterfly 外挂标签简介</h2>
-<p>外挂标签是 Butterfly 主题提供的一种扩展功能，允许用户在 Markdown 文件中通过特定的语法插入自定义内容，例如彩色文字、提示框、超链接卡片等。这些标签通过简单的语法即可实现复杂的样式效果，非常适合美化博客内容。</p>
-<hr>
-<h2 id="外挂标签的基本使用方法">外挂标签的基本使用方法</h2>
-<h3 id="1-标签语法">1. 标签语法</h3>
-<p>Butterfly 外挂标签的基本语法格式为：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% 标签名 参数 %&#125;</span><br><span class="line">内容</span><br><span class="line">&#123;% end标签名 %&#125;</span><br></pre></td></tr></table></figure>
-<p>部分标签不需要 <code>end</code> 结束符，具体取决于标签的定义。</p>
-<h3 id="2-常用标签示例">2. 常用标签示例</h3>
-<p>以下是一些常用的外挂标签及其效果：</p>
-<h4 id="（1）行内文本样式">（1）行内文本样式</h4>
-<ul>
-<li><strong>下划线</strong>：<u>文本内容</u></li>
-<li><strong>着重号</strong>：<emp>文本内容</emp></li>
-<li><strong>波浪线</strong>：<wavy>文本内容</wavy></li>
-<li><strong>删除线</strong>：<del>文本内容</del></li>
-<li><strong>键盘样式</strong>：<kbd>文本内容</kbd></li>
-<li><strong>密码样式</strong>：<psw>文本内容</psw></li>
-</ul>
-<h4 id="（2）彩色文字">（2）彩色文字</h4>
-<p>使用 <code>span</code> 标签可以实现彩色文字效果：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% span 颜色, 文本内容 %&#125;</span><br></pre></td></tr></table></figure>
-<p>支持的颜色参数：<code>red</code>、<code>yellow</code>、<code>green</code>、<code>cyan</code>、<code>blue</code>、<code>gray</code> 等。</p>
-<p>示例：</p>
-<p>彩色文字：<span class='p red'>红色</span>、<span class='p yellow'>黄色</span>、<span class='p green'>绿色</span></p>
-<p>超大号文字：<span class='p center logo large'>Volantis</span></p>
-<h4 id="（3）提示框（Note）">（3）提示框（Note）</h4>
-<p>Butterfly 提供了多种样式的提示框，可以通过 <code>note</code> 标签实现：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note [class] [no-icon] [style] %&#125;</span><br><span class="line">提示内容</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>class</code>：可选参数，支持 <code>default</code>、<code>primary</code>、<code>success</code>、<code>info</code>、<code>warning</code>、<code>danger</code> 等样式。</li>
-<li><code>no-icon</code>：可选参数，隐藏图标。</li>
-<li><code>style</code>：可选参数，支持 <code>simple</code>、<code>modern</code>、<code>flat</code> 等样式。</li>
-</ul>
-<p>示例：</p>
-<div class="note success"><p>这是一个成功的提示框！</p>
-</div>
-<h4 id="（4）超链接卡片">（4）超链接卡片</h4>
-<p>通过自定义标签可以实现超链接卡片效果，显示网站的 Favicon 和标题：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% link 标题, 网站名, 链接 %&#125;</span><br></pre></td></tr></table></figure>
-<p>示例：</p>
-<div class="tag link"><a class="link-card" title="获取网站的Favicon图标并显示在你的网页上" href="owen0o0"><div class="left"><img src="https://github.com/owen0o0/getFavicon"/></div><div class="right"><p class="text">获取网站的Favicon图标并显示在你的网页上</p><p class="url">owen0o0</p></div></a></div>
-<hr>
-<h2 id="自定义外挂标签">自定义外挂标签</h2>
-<p>如果默认的标签无法满足需求，可以通过自定义标签实现更多功能。以下是自定义标签的基本步骤：</p>
-<h3 id="1-创建标签脚本">1. 创建标签脚本</h3>
-<p>在 <code>themes/butterfly/scripts/tag/</code> 目录下新建一个 JavaScript 文件，例如 <code>link.js</code>，并编写标签逻辑：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">link</span>(<span class="params">args</span>) &#123;</span><br><span class="line">    args = args.<span class="title function_">join</span>(<span class="string">&#x27; &#x27;</span>).<span class="title function_">split</span>(<span class="string">&#x27;,&#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> title = args[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">let</span> sitename = args[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">let</span> link = args[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">let</span> imgUrl = <span class="string">&quot;https://api.iowen.cn/favicon/&quot;</span> + link.<span class="title function_">replace</span>(<span class="regexp">/^https?\:\/\//i</span>, <span class="string">&quot;&quot;</span>) + <span class="string">&quot;.png&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`&lt;a class=&quot;tag-Link&quot; target=&quot;_blank&quot; href=&quot;<span class="subst">$&#123;link&#125;</span>&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;div class=&quot;tag-link-tips&quot;&gt;引用站外地址&lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;div class=&quot;tag-link-bottom&quot;&gt;</span></span><br><span class="line"><span class="string">            &lt;div class=&quot;tag-link-left&quot; style=&quot;background-image: url(<span class="subst">$&#123;imgUrl&#125;</span>);&quot;&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;div class=&quot;tag-link-right&quot;&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&quot;tag-link-title&quot;&gt;<span class="subst">$&#123;title&#125;</span>&lt;/div&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&quot;tag-link-sitename&quot;&gt;<span class="subst">$&#123;sitename&#125;</span>&lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;/a&gt;`</span>;</span><br><span class="line">&#125;</span><br><span class="line">hexo.<span class="property">extend</span>.<span class="property">tag</span>.<span class="title function_">register</span>(<span class="string">&#x27;link&#x27;</span>, link, &#123; <span class="attr">ends</span>: <span class="literal">false</span> &#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="2-添加-CSS-样式">2. 添加 CSS 样式</h3>
-<p>在 <code>themes/butterfly/source/css/</code> 目录下新建 CSS 文件，例如 <code>tag-link.css</code>，并编写样式：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.tag-Link</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ddd</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">text-decoration</span>: none;</span><br><span class="line">    <span class="attribute">color</span>: inherit;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-bottom</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-left</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">background-size</span>: cover;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-right</span> &#123;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="3-引用-CSS-文件">3. 引用 CSS 文件</h3>
-<p>在主题配置文件 <code>_config.butterfly.yml</code> 中引用 CSS 文件：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">inject:</span></span><br><span class="line">  <span class="attr">head:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&lt;link</span> <span class="string">rel=&quot;stylesheet&quot;</span> <span class="string">href=&quot;/css/tag-link.css&quot;&gt;</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>butterfly</tag>
       </tags>
   </entry>
   <entry>
@@ -351,6 +351,130 @@ D. They cannot match humans in <strong>arranging</strong> <strong>meticulous</st
   <source src="https://img.zero02.space/6level004.m4a" type="audio/mpeg">
   您的浏览器不支持音频播放。
 </audio>]]></content>
+      <tags>
+        <tag>英语</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>英语词汇文章4~6</title>
+    <url>/2025/02/19/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A02/</url>
+    <content><![CDATA[<h2 id="Passage-4">Passage 4</h2>
+<p>OPEC is the Organization of Petroleum Exporting Countries.</p>
+<p>Petroleum - oil</p>
+<blockquote>
+<p>It was founded in <strong>Bagdad</strong> in 1960 and has currently 11 members. OPEC’s aim is to <strong>regulate</strong> the amount of oil that member nations produce and to keep prices at a <strong>steady rate</strong>. The countries get together twice a year and <strong>agree on</strong> how much oil each country is allowed to produce. OPEC’ s <strong>headquarters</strong> are in Vienna, the capital of Austria.</p>
+</blockquote>
+<p>Bagdad 巴格达</p>
+<p>regulate 规划，控制</p>
+<p>agree on 达成一致</p>
+<p>headquarters 总部</p>
+<p>Vienna 维尼亚</p>
+<p>Austria 奥地利</p>
+<blockquote>
+<p>Before OPEC was created, there were large oil companies that controlled the world’s oil production. They wanted to sell as much oil as possible and did not let governments influence their decisions. Oil-rich countries, especially in the Middle East, wanted more control over the oil that they produce, <strong>As a result,</strong> Iran, Iraq, Saudi Arabia, Kuwait and Venezuela founded OPEC. In the following years Qatar, Indonesia, Libya, Algeria, Nigeria, Ecuador, Angola and the United Arab Emirates also become members.</p>
+</blockquote>
+<p>As a result 结果 - consequence - consequently</p>
+<p>In the 1960s, OPEC did not have much power. This changed in 1973 when the third Arab-Israeli war started. The United States and a few European countries supported Israel. As a form <strong>punishment</strong>. OPEC nations, <strong>influenced</strong> by the Arab countries, stopped selling oil to the West. Within the next six years oil prices rose to ten times the price of the early 1970s. OPEC countries became rich with so-called <strong>petrodollars</strong>; the West <strong>sank into</strong> deep <strong>recession</strong> because they needed OPEC’s oil.</p>
+<p>Arab-Israeli war 阿拉伯以色列战争</p>
+<p>punishment 惩罚</p>
+<p>influenced 影响</p>
+<p>petrodollars 石油美刀 （Portmanteau)</p>
+<p>sank into 陷入</p>
+<p>recession 衰退</p>
+<blockquote>
+<p>In the <strong>aftermath</strong> of the energy crisis of the 1970s, western countries started looking for <strong>alternative</strong> forms of energy in order to become more independent from OPEC and the oil-producing nations. In 1986, oil prices <strong>dropped</strong> to the lowest rate in history. Oil-producing nations lost much of their income. In the 80s and 90s OPEC’s power <strong>diminished</strong>, often because of conflicts and internal arguments and because member states could not agree on <strong>production quotas</strong>. Some OPEC countries did not keep <strong>agreements</strong> and produced more oil, thus lowering prices.</p>
+</blockquote>
+<p>aftermath 创伤</p>
+<p>alternative 可替换的</p>
+<p>dropped 下降</p>
+<p>diminish 减少</p>
+<p>production quotas 生产定额</p>
+<p>agreement 协议</p>
+<blockquote>
+<p>After 2000, oil prices began to rise again and reached an <strong>all-time high</strong> in 2007. The <strong>financial crisis</strong> of 2007 and 2008 hit world economy hard and oil prices fell once again. Sine the Arab Spring of 20011, prices have gone up and down several times. Today OPEC still controls about 60% of the world’s oil reserves and produces 40% of the world’s oil. Saudi Arabia is the most powerful member of the group, because it has the largest reserves. Even though there have been <strong>quarrels</strong> in the <strong>cartel</strong> in the last 5 decades it remains a powerful organization.</p>
+</blockquote>
+<p>all-time high 历史最高点</p>
+<p>financial crisis 经济危机</p>
+<p>quarrel 争论</p>
+<p>cartel 卡特尔</p>
+<h2 id="Passage-5">Passage 5</h2>
+<blockquote>
+<p>A research reports says that virtual worlds can be important places where children <strong>practice</strong> what they will do in real life. They are also a powerful and <strong>attractive</strong> alternative to more passive <strong>adventures</strong> like watching TV. The research was done with children using the BBC’s Adventure Rock virtual world, <strong>aimed</strong> at those aged 6-12. It <strong>surveyed</strong> and interviewed children who were the first to <strong>test the game</strong>.</p>
+</blockquote>
+<p>practice v. 练习；n. 措施，手段</p>
+<p>attractive 有吸引力的</p>
+<p>adventures 娱乐方式</p>
+<p>aim 目标</p>
+<p>survey = investigate</p>
+<p>test the game  内测</p>
+<blockquote>
+<p>The online world is the theme island built for the BBC’s children channel by Belgian game maker Larian. Children <strong>explore</strong> the world alone but they use message boards to share what they find and what they do in the different creative studios they find around the virtual space.</p>
+</blockquote>
+<p>explore 探索 exploration</p>
+<blockquote>
+<p><strong>At times</strong> children were explorers and at other they were <strong>social climbers</strong> eager to connect with other players. Some were power users looking for more information about how the virtual space really worked. The children could try all kinds of things without having to be afraid of the <strong>consequences</strong> that would follow if they tried them in the real world. They learned many useful social skills and played around with their identity <strong>in ways</strong> that would be much more difficult in real life.</p>
+</blockquote>
+<p>at times 很多时候</p>
+<p>social climber 社交达人</p>
+<p>work 工作，运转，起作用，作品</p>
+<p>consequence = result</p>
+<p>in ways 在某些方面</p>
+<blockquote>
+<p>According to the study what children liked about virtual worlds was the chance to create content such as music, cartoons and videos. The publishers of the reports say that virtual worlds can be a powerful, <strong>engaging</strong> and real <strong>interactive</strong> alternative to more passive media. They urged creators of virtual spaces for children to get young people <strong>involved</strong> very early on because they really do have good ideas to add and they are very good critical friends.</p>
+</blockquote>
+<p>interactive 互动的</p>
+<p>engaging = participate = involved</p>
+<h2 id="Passage-6">Passage 6</h2>
+<p><strong>Do whale sleep?</strong></p>
+<ul>
+<li>Like all mammals, whales breathe air</li>
+<li>They are warm-blooded</li>
+<li>They <strong>nurse</strong> their young with milk</li>
+<li>they have body hair.</li>
+<li>Whales have a four-chambered hearted.</li>
+</ul>
+<p>nurse 滋养</p>
+<blockquote>
+<p>Whales are mammals, so in many ways, They are just like human beings. The most important difference is that humans and whales live in different environments and whales have a special <strong>respiratory system</strong> that enables them to stay underwater for several minutes without breathing oxygen. For this reason, they are said to be <strong>voluntary</strong> breathers. That is, because of whales underwater environment, they must be <strong>conscious</strong> breathers. They think about every breath they take and come up to the surface of the water to breathe through <strong>blowholes</strong> on top of their heads.</p>
+</blockquote>
+<p>voluntary 自发性的</p>
+<p>conscious 有意识的 - consciousness - subconsciousness 潜意识的 - conscientious 有良知的</p>
+<p>blowholes 呼吸孔</p>
+<blockquote>
+<p>What is <strong>outstanding</strong> about whales is the way they can sleep. While all mammals sleep, whales cannot afford to <strong>become</strong> unconscious for long because they may <strong>drown</strong>. They only way they can sleep is by remaining partially conscious. It is believed that only one hemisphere of the whale’s brain sleeps at a time, so they rest but are never completely sleep. They can do so most probably near the surface so that they can come up for air easily.</p>
+</blockquote>
+<p>outstanding - dwarf 相形见拙，矮人 - overshadow 相形见拙</p>
+<p>drown - drought - dry</p>
+<p>afford 承担，支付得起</p>
+<p>part -  partial  - partially - potential 潜在的</p>
+<ul>
+<li>Whales are like fish in the way they breathe. true or false? ×</li>
+<li>Whales don’t sleep at all. true or false? ×</li>
+<li>Whales sleep by letting the <strong>whole</strong> brain rest for a <strong>lapse</strong> of time. true or false? ×</li>
+</ul>
+<p>complete - whole - entire - all - total - overall</p>
+<p>lapse 流逝（一段时间）</p>
+<blockquote>
+<p>Mammal      <psw>哺乳动物</psw><br>
+Whale       <psw>鲸鱼</psw><br>
+Conscious   <psw>有意识的</psw><br>
+Chamber     <psw>腔室</psw><br>
+Partially   <psw>部分地</psw><br>
+Nurse       <psw>护理</psw><br>
+Drown       <psw>溺水</psw><br>
+Oxygen      <psw>氧气</psw><br>
+Outstanding <psw>杰出的</psw><br>
+Respiratory <psw>呼吸的</psw><br>
+Hemisphere  <psw>半球</psw><br>
+Surface     <psw>表面</psw><br>
+Voluntary   <psw>自愿的</psw><br>
+Asleep      <psw>睡着的</psw><br>
+Breath      <psw>呼吸</psw></p>
+</blockquote>
+<blockquote>
+<p>mamlma wlahe inuoccsso rahmebc aiyatlrpl rsuen dnwro onxyge onttsdnaugi yeosrraritp smepeihhre sucaefr tlrnuaoyv eaeslp ehtbra</p>
+</blockquote>
+]]></content>
       <tags>
         <tag>英语</tag>
       </tags>
@@ -640,130 +764,6 @@ D. They might be less adversely impacted by failure to achieve a purpose.</p>
 <p>expect - expectation</p>
 <p>monopoly 垄断</p>
 <p>empire 帝国</p>
-]]></content>
-      <tags>
-        <tag>英语</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>英语词汇文章4~6</title>
-    <url>/2025/02/19/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A02/</url>
-    <content><![CDATA[<h2 id="Passage-4">Passage 4</h2>
-<p>OPEC is the Organization of Petroleum Exporting Countries.</p>
-<p>Petroleum - oil</p>
-<blockquote>
-<p>It was founded in <strong>Bagdad</strong> in 1960 and has currently 11 members. OPEC’s aim is to <strong>regulate</strong> the amount of oil that member nations produce and to keep prices at a <strong>steady rate</strong>. The countries get together twice a year and <strong>agree on</strong> how much oil each country is allowed to produce. OPEC’ s <strong>headquarters</strong> are in Vienna, the capital of Austria.</p>
-</blockquote>
-<p>Bagdad 巴格达</p>
-<p>regulate 规划，控制</p>
-<p>agree on 达成一致</p>
-<p>headquarters 总部</p>
-<p>Vienna 维尼亚</p>
-<p>Austria 奥地利</p>
-<blockquote>
-<p>Before OPEC was created, there were large oil companies that controlled the world’s oil production. They wanted to sell as much oil as possible and did not let governments influence their decisions. Oil-rich countries, especially in the Middle East, wanted more control over the oil that they produce, <strong>As a result,</strong> Iran, Iraq, Saudi Arabia, Kuwait and Venezuela founded OPEC. In the following years Qatar, Indonesia, Libya, Algeria, Nigeria, Ecuador, Angola and the United Arab Emirates also become members.</p>
-</blockquote>
-<p>As a result 结果 - consequence - consequently</p>
-<p>In the 1960s, OPEC did not have much power. This changed in 1973 when the third Arab-Israeli war started. The United States and a few European countries supported Israel. As a form <strong>punishment</strong>. OPEC nations, <strong>influenced</strong> by the Arab countries, stopped selling oil to the West. Within the next six years oil prices rose to ten times the price of the early 1970s. OPEC countries became rich with so-called <strong>petrodollars</strong>; the West <strong>sank into</strong> deep <strong>recession</strong> because they needed OPEC’s oil.</p>
-<p>Arab-Israeli war 阿拉伯以色列战争</p>
-<p>punishment 惩罚</p>
-<p>influenced 影响</p>
-<p>petrodollars 石油美刀 （Portmanteau)</p>
-<p>sank into 陷入</p>
-<p>recession 衰退</p>
-<blockquote>
-<p>In the <strong>aftermath</strong> of the energy crisis of the 1970s, western countries started looking for <strong>alternative</strong> forms of energy in order to become more independent from OPEC and the oil-producing nations. In 1986, oil prices <strong>dropped</strong> to the lowest rate in history. Oil-producing nations lost much of their income. In the 80s and 90s OPEC’s power <strong>diminished</strong>, often because of conflicts and internal arguments and because member states could not agree on <strong>production quotas</strong>. Some OPEC countries did not keep <strong>agreements</strong> and produced more oil, thus lowering prices.</p>
-</blockquote>
-<p>aftermath 创伤</p>
-<p>alternative 可替换的</p>
-<p>dropped 下降</p>
-<p>diminish 减少</p>
-<p>production quotas 生产定额</p>
-<p>agreement 协议</p>
-<blockquote>
-<p>After 2000, oil prices began to rise again and reached an <strong>all-time high</strong> in 2007. The <strong>financial crisis</strong> of 2007 and 2008 hit world economy hard and oil prices fell once again. Sine the Arab Spring of 20011, prices have gone up and down several times. Today OPEC still controls about 60% of the world’s oil reserves and produces 40% of the world’s oil. Saudi Arabia is the most powerful member of the group, because it has the largest reserves. Even though there have been <strong>quarrels</strong> in the <strong>cartel</strong> in the last 5 decades it remains a powerful organization.</p>
-</blockquote>
-<p>all-time high 历史最高点</p>
-<p>financial crisis 经济危机</p>
-<p>quarrel 争论</p>
-<p>cartel 卡特尔</p>
-<h2 id="Passage-5">Passage 5</h2>
-<blockquote>
-<p>A research reports says that virtual worlds can be important places where children <strong>practice</strong> what they will do in real life. They are also a powerful and <strong>attractive</strong> alternative to more passive <strong>adventures</strong> like watching TV. The research was done with children using the BBC’s Adventure Rock virtual world, <strong>aimed</strong> at those aged 6-12. It <strong>surveyed</strong> and interviewed children who were the first to <strong>test the game</strong>.</p>
-</blockquote>
-<p>practice v. 练习；n. 措施，手段</p>
-<p>attractive 有吸引力的</p>
-<p>adventures 娱乐方式</p>
-<p>aim 目标</p>
-<p>survey = investigate</p>
-<p>test the game  内测</p>
-<blockquote>
-<p>The online world is the theme island built for the BBC’s children channel by Belgian game maker Larian. Children <strong>explore</strong> the world alone but they use message boards to share what they find and what they do in the different creative studios they find around the virtual space.</p>
-</blockquote>
-<p>explore 探索 exploration</p>
-<blockquote>
-<p><strong>At times</strong> children were explorers and at other they were <strong>social climbers</strong> eager to connect with other players. Some were power users looking for more information about how the virtual space really worked. The children could try all kinds of things without having to be afraid of the <strong>consequences</strong> that would follow if they tried them in the real world. They learned many useful social skills and played around with their identity <strong>in ways</strong> that would be much more difficult in real life.</p>
-</blockquote>
-<p>at times 很多时候</p>
-<p>social climber 社交达人</p>
-<p>work 工作，运转，起作用，作品</p>
-<p>consequence = result</p>
-<p>in ways 在某些方面</p>
-<blockquote>
-<p>According to the study what children liked about virtual worlds was the chance to create content such as music, cartoons and videos. The publishers of the reports say that virtual worlds can be a powerful, <strong>engaging</strong> and real <strong>interactive</strong> alternative to more passive media. They urged creators of virtual spaces for children to get young people <strong>involved</strong> very early on because they really do have good ideas to add and they are very good critical friends.</p>
-</blockquote>
-<p>interactive 互动的</p>
-<p>engaging = participate = involved</p>
-<h2 id="Passage-6">Passage 6</h2>
-<p><strong>Do whale sleep?</strong></p>
-<ul>
-<li>Like all mammals, whales breathe air</li>
-<li>They are warm-blooded</li>
-<li>They <strong>nurse</strong> their young with milk</li>
-<li>they have body hair.</li>
-<li>Whales have a four-chambered hearted.</li>
-</ul>
-<p>nurse 滋养</p>
-<blockquote>
-<p>Whales are mammals, so in many ways, They are just like human beings. The most important difference is that humans and whales live in different environments and whales have a special <strong>respiratory system</strong> that enables them to stay underwater for several minutes without breathing oxygen. For this reason, they are said to be <strong>voluntary</strong> breathers. That is, because of whales underwater environment, they must be <strong>conscious</strong> breathers. They think about every breath they take and come up to the surface of the water to breathe through <strong>blowholes</strong> on top of their heads.</p>
-</blockquote>
-<p>voluntary 自发性的</p>
-<p>conscious 有意识的 - consciousness - subconsciousness 潜意识的 - conscientious 有良知的</p>
-<p>blowholes 呼吸孔</p>
-<blockquote>
-<p>What is <strong>outstanding</strong> about whales is the way they can sleep. While all mammals sleep, whales cannot afford to <strong>become</strong> unconscious for long because they may <strong>drown</strong>. They only way they can sleep is by remaining partially conscious. It is believed that only one hemisphere of the whale’s brain sleeps at a time, so they rest but are never completely sleep. They can do so most probably near the surface so that they can come up for air easily.</p>
-</blockquote>
-<p>outstanding - dwarf 相形见拙，矮人 - overshadow 相形见拙</p>
-<p>drown - drought - dry</p>
-<p>afford 承担，支付得起</p>
-<p>part -  partial  - partially - potential 潜在的</p>
-<ul>
-<li>Whales are like fish in the way they breathe. true or false? ×</li>
-<li>Whales don’t sleep at all. true or false? ×</li>
-<li>Whales sleep by letting the <strong>whole</strong> brain rest for a <strong>lapse</strong> of time. true or false? ×</li>
-</ul>
-<p>complete - whole - entire - all - total - overall</p>
-<p>lapse 流逝（一段时间）</p>
-<blockquote>
-<p>Mammal      <psw>哺乳动物</psw><br>
-Whale       <psw>鲸鱼</psw><br>
-Conscious   <psw>有意识的</psw><br>
-Chamber     <psw>腔室</psw><br>
-Partially   <psw>部分地</psw><br>
-Nurse       <psw>护理</psw><br>
-Drown       <psw>溺水</psw><br>
-Oxygen      <psw>氧气</psw><br>
-Outstanding <psw>杰出的</psw><br>
-Respiratory <psw>呼吸的</psw><br>
-Hemisphere  <psw>半球</psw><br>
-Surface     <psw>表面</psw><br>
-Voluntary   <psw>自愿的</psw><br>
-Asleep      <psw>睡着的</psw><br>
-Breath      <psw>呼吸</psw></p>
-</blockquote>
-<blockquote>
-<p>mamlma wlahe inuoccsso rahmebc aiyatlrpl rsuen dnwro onxyge onttsdnaugi yeosrraritp smepeihhre sucaefr tlrnuaoyv eaeslp ehtbra</p>
-</blockquote>
 ]]></content>
       <tags>
         <tag>英语</tag>
