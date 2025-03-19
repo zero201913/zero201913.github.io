@@ -20,71 +20,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>外挂标签演示</title>
-    <url>/2025/02/28/%E5%A4%96%E6%8C%82%E6%A0%87%E7%AD%BE%E6%BC%94%E7%A4%BA/</url>
-    <content><![CDATA[<h2 id="外挂标签">外挂标签</h2>
-<p>Butterfly 主题是 Hexo 中非常受欢迎的一款主题，支持丰富的自定义功能，尤其是通过外挂标签（Tag Plugins）可以实现更多样化的内容展示效果。以下是关于 Butterfly 外挂标签的详细教程，涵盖基本概念、使用方法以及一些实用示例。</p>
-<hr>
-<h2 id="Butterfly-外挂标签简介">Butterfly 外挂标签简介</h2>
-<p>外挂标签是 Butterfly 主题提供的一种扩展功能，允许用户在 Markdown 文件中通过特定的语法插入自定义内容，例如彩色文字、提示框、超链接卡片等。这些标签通过简单的语法即可实现复杂的样式效果，非常适合美化博客内容。</p>
-<hr>
-<h2 id="外挂标签的基本使用方法">外挂标签的基本使用方法</h2>
-<h3 id="1-标签语法">1. 标签语法</h3>
-<p>Butterfly 外挂标签的基本语法格式为：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% 标签名 参数 %&#125;</span><br><span class="line">内容</span><br><span class="line">&#123;% end标签名 %&#125;</span><br></pre></td></tr></table></figure>
-<p>部分标签不需要 <code>end</code> 结束符，具体取决于标签的定义。</p>
-<h3 id="2-常用标签示例">2. 常用标签示例</h3>
-<p>以下是一些常用的外挂标签及其效果：</p>
-<h4 id="（1）行内文本样式">（1）行内文本样式</h4>
-<ul>
-<li><strong>下划线</strong>：<u>文本内容</u></li>
-<li><strong>着重号</strong>：<emp>文本内容</emp></li>
-<li><strong>波浪线</strong>：<wavy>文本内容</wavy></li>
-<li><strong>删除线</strong>：<del>文本内容</del></li>
-<li><strong>键盘样式</strong>：<kbd>文本内容</kbd></li>
-<li><strong>密码样式</strong>：<psw>文本内容</psw></li>
-</ul>
-<h4 id="（2）彩色文字">（2）彩色文字</h4>
-<p>使用 <code>span</code> 标签可以实现彩色文字效果：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% span 颜色, 文本内容 %&#125;</span><br></pre></td></tr></table></figure>
-<p>支持的颜色参数：<code>red</code>、<code>yellow</code>、<code>green</code>、<code>cyan</code>、<code>blue</code>、<code>gray</code> 等。</p>
-<p>示例：</p>
-<p>彩色文字：<span class='p red'>红色</span>、<span class='p yellow'>黄色</span>、<span class='p green'>绿色</span></p>
-<p>超大号文字：<span class='p center logo large'>Volantis</span></p>
-<h4 id="（3）提示框（Note）">（3）提示框（Note）</h4>
-<p>Butterfly 提供了多种样式的提示框，可以通过 <code>note</code> 标签实现：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note [class] [no-icon] [style] %&#125;</span><br><span class="line">提示内容</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>class</code>：可选参数，支持 <code>default</code>、<code>primary</code>、<code>success</code>、<code>info</code>、<code>warning</code>、<code>danger</code> 等样式。</li>
-<li><code>no-icon</code>：可选参数，隐藏图标。</li>
-<li><code>style</code>：可选参数，支持 <code>simple</code>、<code>modern</code>、<code>flat</code> 等样式。</li>
-</ul>
-<p>示例：</p>
-<div class="note success"><p>这是一个成功的提示框！</p>
-</div>
-<h4 id="（4）超链接卡片">（4）超链接卡片</h4>
-<p>通过自定义标签可以实现超链接卡片效果，显示网站的 Favicon 和标题：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% link 标题, 网站名, 链接 %&#125;</span><br></pre></td></tr></table></figure>
-<p>示例：</p>
-<div class="tag link"><a class="link-card" title="获取网站的Favicon图标并显示在你的网页上" href="owen0o0"><div class="left"><img src="https://github.com/owen0o0/getFavicon"/></div><div class="right"><p class="text">获取网站的Favicon图标并显示在你的网页上</p><p class="url">owen0o0</p></div></a></div>
-<hr>
-<h2 id="自定义外挂标签">自定义外挂标签</h2>
-<p>如果默认的标签无法满足需求，可以通过自定义标签实现更多功能。以下是自定义标签的基本步骤：</p>
-<h3 id="1-创建标签脚本">1. 创建标签脚本</h3>
-<p>在 <code>themes/butterfly/scripts/tag/</code> 目录下新建一个 JavaScript 文件，例如 <code>link.js</code>，并编写标签逻辑：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">link</span>(<span class="params">args</span>) &#123;</span><br><span class="line">    args = args.<span class="title function_">join</span>(<span class="string">&#x27; &#x27;</span>).<span class="title function_">split</span>(<span class="string">&#x27;,&#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> title = args[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">let</span> sitename = args[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">let</span> link = args[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">let</span> imgUrl = <span class="string">&quot;https://api.iowen.cn/favicon/&quot;</span> + link.<span class="title function_">replace</span>(<span class="regexp">/^https?\:\/\//i</span>, <span class="string">&quot;&quot;</span>) + <span class="string">&quot;.png&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`&lt;a class=&quot;tag-Link&quot; target=&quot;_blank&quot; href=&quot;<span class="subst">$&#123;link&#125;</span>&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;div class=&quot;tag-link-tips&quot;&gt;引用站外地址&lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;div class=&quot;tag-link-bottom&quot;&gt;</span></span><br><span class="line"><span class="string">            &lt;div class=&quot;tag-link-left&quot; style=&quot;background-image: url(<span class="subst">$&#123;imgUrl&#125;</span>);&quot;&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;div class=&quot;tag-link-right&quot;&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&quot;tag-link-title&quot;&gt;<span class="subst">$&#123;title&#125;</span>&lt;/div&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&quot;tag-link-sitename&quot;&gt;<span class="subst">$&#123;sitename&#125;</span>&lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;/a&gt;`</span>;</span><br><span class="line">&#125;</span><br><span class="line">hexo.<span class="property">extend</span>.<span class="property">tag</span>.<span class="title function_">register</span>(<span class="string">&#x27;link&#x27;</span>, link, &#123; <span class="attr">ends</span>: <span class="literal">false</span> &#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="2-添加-CSS-样式">2. 添加 CSS 样式</h3>
-<p>在 <code>themes/butterfly/source/css/</code> 目录下新建 CSS 文件，例如 <code>tag-link.css</code>，并编写样式：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.tag-Link</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ddd</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">text-decoration</span>: none;</span><br><span class="line">    <span class="attribute">color</span>: inherit;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-bottom</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-left</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">background-size</span>: cover;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-right</span> &#123;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="3-引用-CSS-文件">3. 引用 CSS 文件</h3>
-<p>在主题配置文件 <code>_config.butterfly.yml</code> 中引用 CSS 文件：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">inject:</span></span><br><span class="line">  <span class="attr">head:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&lt;link</span> <span class="string">rel=&quot;stylesheet&quot;</span> <span class="string">href=&quot;/css/tag-link.css&quot;&gt;</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>butterfly</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>英语听力测试1</title>
     <url>/2025/03/05/%E8%8B%B1%E8%AF%AD%E5%90%AC%E5%8A%9B%E6%B5%8B%E8%AF%951/</url>
     <content><![CDATA[<h2 id="听力技巧">听力技巧</h2>
@@ -198,6 +133,71 @@ D. the elephant was given medical treatment for many days.</p>
 ]]></content>
       <tags>
         <tag>英语</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>外挂标签演示</title>
+    <url>/2025/02/28/%E5%A4%96%E6%8C%82%E6%A0%87%E7%AD%BE%E6%BC%94%E7%A4%BA/</url>
+    <content><![CDATA[<h2 id="外挂标签">外挂标签</h2>
+<p>Butterfly 主题是 Hexo 中非常受欢迎的一款主题，支持丰富的自定义功能，尤其是通过外挂标签（Tag Plugins）可以实现更多样化的内容展示效果。以下是关于 Butterfly 外挂标签的详细教程，涵盖基本概念、使用方法以及一些实用示例。</p>
+<hr>
+<h2 id="Butterfly-外挂标签简介">Butterfly 外挂标签简介</h2>
+<p>外挂标签是 Butterfly 主题提供的一种扩展功能，允许用户在 Markdown 文件中通过特定的语法插入自定义内容，例如彩色文字、提示框、超链接卡片等。这些标签通过简单的语法即可实现复杂的样式效果，非常适合美化博客内容。</p>
+<hr>
+<h2 id="外挂标签的基本使用方法">外挂标签的基本使用方法</h2>
+<h3 id="1-标签语法">1. 标签语法</h3>
+<p>Butterfly 外挂标签的基本语法格式为：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% 标签名 参数 %&#125;</span><br><span class="line">内容</span><br><span class="line">&#123;% end标签名 %&#125;</span><br></pre></td></tr></table></figure>
+<p>部分标签不需要 <code>end</code> 结束符，具体取决于标签的定义。</p>
+<h3 id="2-常用标签示例">2. 常用标签示例</h3>
+<p>以下是一些常用的外挂标签及其效果：</p>
+<h4 id="（1）行内文本样式">（1）行内文本样式</h4>
+<ul>
+<li><strong>下划线</strong>：<u>文本内容</u></li>
+<li><strong>着重号</strong>：<emp>文本内容</emp></li>
+<li><strong>波浪线</strong>：<wavy>文本内容</wavy></li>
+<li><strong>删除线</strong>：<del>文本内容</del></li>
+<li><strong>键盘样式</strong>：<kbd>文本内容</kbd></li>
+<li><strong>密码样式</strong>：<psw>文本内容</psw></li>
+</ul>
+<h4 id="（2）彩色文字">（2）彩色文字</h4>
+<p>使用 <code>span</code> 标签可以实现彩色文字效果：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% span 颜色, 文本内容 %&#125;</span><br></pre></td></tr></table></figure>
+<p>支持的颜色参数：<code>red</code>、<code>yellow</code>、<code>green</code>、<code>cyan</code>、<code>blue</code>、<code>gray</code> 等。</p>
+<p>示例：</p>
+<p>彩色文字：<span class='p red'>红色</span>、<span class='p yellow'>黄色</span>、<span class='p green'>绿色</span></p>
+<p>超大号文字：<span class='p center logo large'>Volantis</span></p>
+<h4 id="（3）提示框（Note）">（3）提示框（Note）</h4>
+<p>Butterfly 提供了多种样式的提示框，可以通过 <code>note</code> 标签实现：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note [class] [no-icon] [style] %&#125;</span><br><span class="line">提示内容</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>class</code>：可选参数，支持 <code>default</code>、<code>primary</code>、<code>success</code>、<code>info</code>、<code>warning</code>、<code>danger</code> 等样式。</li>
+<li><code>no-icon</code>：可选参数，隐藏图标。</li>
+<li><code>style</code>：可选参数，支持 <code>simple</code>、<code>modern</code>、<code>flat</code> 等样式。</li>
+</ul>
+<p>示例：</p>
+<div class="note success"><p>这是一个成功的提示框！</p>
+</div>
+<h4 id="（4）超链接卡片">（4）超链接卡片</h4>
+<p>通过自定义标签可以实现超链接卡片效果，显示网站的 Favicon 和标题：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% link 标题, 网站名, 链接 %&#125;</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<div class="tag link"><a class="link-card" title="获取网站的Favicon图标并显示在你的网页上" href="owen0o0"><div class="left"><img src="https://github.com/owen0o0/getFavicon"/></div><div class="right"><p class="text">获取网站的Favicon图标并显示在你的网页上</p><p class="url">owen0o0</p></div></a></div>
+<hr>
+<h2 id="自定义外挂标签">自定义外挂标签</h2>
+<p>如果默认的标签无法满足需求，可以通过自定义标签实现更多功能。以下是自定义标签的基本步骤：</p>
+<h3 id="1-创建标签脚本">1. 创建标签脚本</h3>
+<p>在 <code>themes/butterfly/scripts/tag/</code> 目录下新建一个 JavaScript 文件，例如 <code>link.js</code>，并编写标签逻辑：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">link</span>(<span class="params">args</span>) &#123;</span><br><span class="line">    args = args.<span class="title function_">join</span>(<span class="string">&#x27; &#x27;</span>).<span class="title function_">split</span>(<span class="string">&#x27;,&#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> title = args[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">let</span> sitename = args[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">let</span> link = args[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">let</span> imgUrl = <span class="string">&quot;https://api.iowen.cn/favicon/&quot;</span> + link.<span class="title function_">replace</span>(<span class="regexp">/^https?\:\/\//i</span>, <span class="string">&quot;&quot;</span>) + <span class="string">&quot;.png&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`&lt;a class=&quot;tag-Link&quot; target=&quot;_blank&quot; href=&quot;<span class="subst">$&#123;link&#125;</span>&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;div class=&quot;tag-link-tips&quot;&gt;引用站外地址&lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;div class=&quot;tag-link-bottom&quot;&gt;</span></span><br><span class="line"><span class="string">            &lt;div class=&quot;tag-link-left&quot; style=&quot;background-image: url(<span class="subst">$&#123;imgUrl&#125;</span>);&quot;&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;div class=&quot;tag-link-right&quot;&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&quot;tag-link-title&quot;&gt;<span class="subst">$&#123;title&#125;</span>&lt;/div&gt;</span></span><br><span class="line"><span class="string">                &lt;div class=&quot;tag-link-sitename&quot;&gt;<span class="subst">$&#123;sitename&#125;</span>&lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;/a&gt;`</span>;</span><br><span class="line">&#125;</span><br><span class="line">hexo.<span class="property">extend</span>.<span class="property">tag</span>.<span class="title function_">register</span>(<span class="string">&#x27;link&#x27;</span>, link, &#123; <span class="attr">ends</span>: <span class="literal">false</span> &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="2-添加-CSS-样式">2. 添加 CSS 样式</h3>
+<p>在 <code>themes/butterfly/source/css/</code> 目录下新建 CSS 文件，例如 <code>tag-link.css</code>，并编写样式：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.tag-Link</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ddd</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">text-decoration</span>: none;</span><br><span class="line">    <span class="attribute">color</span>: inherit;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-bottom</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-left</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">background-size</span>: cover;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tag-link-right</span> &#123;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-引用-CSS-文件">3. 引用 CSS 文件</h3>
+<p>在主题配置文件 <code>_config.butterfly.yml</code> 中引用 CSS 文件：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">inject:</span></span><br><span class="line">  <span class="attr">head:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&lt;link</span> <span class="string">rel=&quot;stylesheet&quot;</span> <span class="string">href=&quot;/css/tag-link.css&quot;&gt;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>butterfly</tag>
       </tags>
   </entry>
   <entry>
@@ -942,164 +942,6 @@ Co-found        <psw>共同创立</psw></p>
       </tags>
   </entry>
   <entry>
-    <title>英语词汇文章10~13</title>
-    <url>/2025/02/24/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A04/</url>
-    <content><![CDATA[<h2 id="William-Shakespeare">William Shakespeare</h2>
-<p>william sharespeare was an English poet, playwright, and actor. He was born on 26 April 1564 in Stratford-upon-Avon. His father was a successful local businessman and his mother was the daughter of a <strong>landowner</strong>. Shakespeare is widely regarded as the greatest writer in the English language and the world’s <strong>pre-eminent</strong> dramatist. He is often called England’s national poet and nicknamed the Bard of Avon. He wrote about 38 plays, 154 <strong>sonnets</strong>, two long narrative poems and a few other verses, of which the authorship of some is uncertain. His plays have been translated into every major living language and are performed more often than those of any other playwright.</p>
-<p>writer - author</p>
-<p>drama 歌剧</p>
-<p>landowner 地主</p>
-<p>sonnets 十四行诗</p>
-<p>pre-eminent - outstanding - remarkable - splendid - fabulous - terrific</p>
-<p>verse 诗句</p>
-<p>playwright 剧作家</p>
-<p><strong>Marriage and career</strong></p>
-<p>Shakespeare married Anne Hathaway at the age of 18. She was eight years older than him. They had three children: Susanna, and twins Hamnet and Judith. After his marriage information about his life became very rare. But he is thought to have spent most of his time in London writing and performing in his plays. Between 1585 and 1592, he began a successful career in London as an actor, writer and part-owner of a playing company called the Lord Chamberlain’s Men, later known as the King’s Men.</p>
-<p><strong>Retirement and death</strong></p>
-<p>Around 1613, at the age of 49, he retired to Stratford, where he died three years later. Few records of Shakespeare’s private life survive. He died on 23 April 1616, at the age of 52. He died within a month of signing his will, a document which he begins by describing himself as being in “perfect health”. In his will, Shakespeare left the bulk of his large <strong>estate</strong> to his elder daughter Susanna.</p>
-<p>estate = real estate = property</p>
-<p><strong>His work</strong></p>
-<p>Shakespeare produced most of his known work between 1589 and 1613. His early play were mainly <strong>comedies</strong> and histories and these works remain regarded as some of the best work produced in these <strong>genres</strong>. He then wrote mainly <strong>tragedies</strong> until about 1608, including Hamlet, Othello, King Lear, and Macbeth, considerd some of the finest works in the English language. In his last phase, he wrote <strong>tragiccomedies</strong>, also known as romances, and collaborated with other playwrights.</p>
-<p>comedy 喜剧</p>
-<p>genre 流派</p>
-<p>tragedy - trageic - miserable</p>
-<p>context = background</p>
-<p>Shakespeare’s plays remain highly popular today and are constantly studied, performed and <strong>reinterupted</strong> in diverse curtural and political contexts throughout the world.</p>
-<blockquote>
-<p>Diverse <psw>多样的</psw><br>
-Document <psw>文件</psw><br>
-Pre-eminent <psw>卓越的</psw><br>
-Sign <psw>标志</psw><br>
-Uncertain <psw>不确定的</psw><br>
-Will <psw>意志</psw><br>
-Perform <psw>执行</psw><br>
-Career <psw>职业生涯</psw><br>
-Cultural <psw>文化的</psw><br>
-Tragedy <psw>悲剧</psw><br>
-Consider <psw>考虑</psw><br>
-Constantly <psw>不断地</psw><br>
-Collaborate <psw>合作</psw><br>
-Political <psw>政治的</psw><br>
-Poet <psw>诗人</psw><br>
-Bulk <psw>大量</psw><br>
-Tragic <psw>悲剧的</psw><br>
-Comedy <psw>喜剧</psw><br>
-Survive <psw>生存</psw><br>
-Verse <psw>诗句</psw><br>
-Estate <psw>财产</psw><br>
-Comedy <psw>喜剧</psw><br>
-Phase <psw>阶段</psw></p>
-</blockquote>
-<p>Shakespeare’s parents were poor. false</p>
-<p>His wife was 18 when they got married. true</p>
-<p>Shakespeare died on Stratford. false</p>
-<p>In the last years of his life, he wrote mainly tragicomedies. false</p>
-<h2 id="Charles-Dickens">Charles Dickens</h2>
-<blockquote>
-<p>Charles Dickens was an English writer and social <strong>critic</strong>. During his lifetime, his works enjoyed <strong>unprecedented</strong> popularity. He <strong>is</strong> now <strong>considered</strong> a literary <strong>genius</strong> because he created some of the world’s best-known fictional characters and <strong>is regarded as</strong> the greatest novelist of he Victorian era. His novels and short stories enjoy <strong>lasting</strong> popularity.</p>
-</blockquote>
-<p>critic 批评者 - critical 批判的，关键的<br>
-enjoy popularity 享受欢迎度<br>
-unprecedented 前所未有，空前的<br>
-work 作品<br>
-genius 天才<br>
-be regarded as = is considered 被视为<br>
-novel 小说，新颖的<br>
-lasting 持续的</p>
-<blockquote>
-<p>Dickens was born on February 7,1812 in Portsmouth, on the southern <strong>coast</strong> of England. His father, John Dickens was a <strong>naval</strong> clerk who dreamed of becoming rich and his mother, Elizabeth Barrow, <strong>aspired to be</strong> a teacher and school director. But the family’s financial situation had grown worse because John Dickens used to spend money dangerously beyond the family’s <strong>means</strong>. Consequently, John was sent to prison for debt in 1824, when Charles was just 12 years old.</p>
-</blockquote>
-<p>coast - coastal city - coastal line<br>
-by the seaside 在海边<br>
-naval clerk 海上职员<br>
-naval = marine - submarine<br>
-clerk = employee = staff<br>
-aspire to do 想要做…<br>
-financial - economic - finance<br>
-used to 过去常常做…<br>
-means = fortune = wealth<br>
-prison - jail - imprison - cell</p>
-<blockquote>
-<p>After his father’s <strong>imprisonment</strong>, Charles Dickens left school to work in a factory. Despite his lack of formal education, he edited a weekly journal for 20 years, wrote 15 novels, five <strong>novellas</strong>, hundreds of short stories and <strong>non-fiction</strong> articles, lectured and performed extensively, was an indefatigable letter writer, and <strong>campaigned</strong> <strong>vigorously</strong> for children’s rights, education, and other social reforms.</p>
-</blockquote>
-<p>factory - plant (植物，工厂，发电厂)<br>
-despite - while - although - even though - though - in spite of 加逗号; 尽管…但是… 表示让步<br>
-novellas 中等小说<br>
-non-fiction 非小说<br>
-fatigue = tiredness = wearysome - indefatigable 不知疲倦的，不屈不挠<br>
-campaign 运动（偏时政）<br>
-vigor - vigorously - vigorous = energetic</p>
-<p><strong>His literary success</strong></p>
-<p>Dicken’s literary success begin with the 1836 serial publication of The Pickwick Papers Within a few years he had become an international literary <strong>celebrity</strong>, famous for his humor, <strong>satire</strong>, and <strong>keen observation</strong> of character and society. His novels, most published in monthly or weekly <strong>installments</strong>, <strong>pioneered</strong> the serial publication of narrative fiction, which became the dominant Victorian mode for novel publication.</p>
-<p>celebrity 名人<br>
-satire - irony 讥讽<br>
-keen observation 敏锐的观察<br>
-observe 评论 - observation<br>
-installment 出版</p>
-<p>Dickens was regarded as the literary <strong>colossus</strong> of his age. His 1843 novella, A Christmas Carol, remains popular and continues to inspire adaptations in even artistic genre Oliver Twist and Great Expectations are also frequently adapted, and, like many of his novels, evoke images of early Victorian London. His 1859 novel, A tale of Two Cities, set in London and Paris, is his best-known work of historical fiction.</p>
-<p>colossus = giant<br>
-genre 风格，流派</p>
-<p><strong>His Death</strong></p>
-<p>Charles Dickens dies on June 9, 1870 of a stroke. He was buried in Poet’s Corner at Westminster Abbey. Thousands of mourners came to pay their respects at the grave and throw in flowers.</p>
-<blockquote>
-<p>genre aspire unprecedented factory genius naval campaign era prison vigorously celebrity coast indefatigable publication critic clerk imprisonment stroke literary lasting means financial director edit extensive</p>
-</blockquote>
-<ol>
-<li>Dicken’s family was rich. false</li>
-<li>he left school at an early age. false</li>
-<li>novels were characterized by realism. true</li>
-<li>He died due to a stroke. true</li>
-</ol>
-<h2 id="The-Democratic-Party">The Democratic Party</h2>
-<p>There have usually only been two main political parties in the US. Since the 1860s, two main parties have been the Republican Party and the Democratic Party. It should be noted though that there are other minor parties such as the Libertarian Party. the Green Party, and Constitution Party.</p>
-<p><strong>The Democratic Party</strong></p>
-<p>The Democratic Party started in 1828 as a <strong>pro-slavery</strong> party with its Andrew Jackson as the first President in 1829. However, through the economic <strong>resurgence</strong> after the Great Depression in 1930 and 1940s, as well as the Civil Rights Movement in the 1960s, the Democratic party became an advocate of racial equality. The party’s <strong>philosophy</strong> of modern liberalism adopts social and economic equality <strong>principles</strong>. It aims at setting government intervention and regulation in the economy such as the introduction of social programs, support for labor unions, affordable college tuitions, universal health care, equal opportunity, consumer protection, and environmental protection.</p>
-<p>resurgence 死灰复燃</p>
-<p>pro-slavery 支持奴隶制</p>
-<p>great depression 大萧条</p>
-<p>race - racial equality</p>
-<p>philosophy 理念</p>
-<p>principle 准则</p>
-<p>introduce 引进</p>
-<p><strong>The Republican party</strong></p>
-<p>The Republican party, however, started as an anti-slavery party in 1854. Its first President was Abraham Linclon in 1861. In the <strong>Nixon</strong> years, there was a shift to appeal to the implicit racial biases of white voters that did not like the civil rights movement of the 1960s. The <strong>philosophy</strong> of the party focuses on social and economic independence, and a capitalist economic system. It is also known or its <strong>anti-abortion</strong> efforts, anti-regulatory policy, and reduction of government intervention in the economy as well as being in support privatized health care.</p>
-<p>implicit 隐性的</p>
-<p>capital - capitalist - capitalism</p>
-<p>social - socialist - socialism - communism</p>
-<p>individual - individualism</p>
-<p>collective - collectivism</p>
-<p>anti-abortion 堕胎</p>
-<blockquote>
-<p>Capitalist     <psw>资本主义的</psw><br>
-Advocate       <psw>提倡</psw><br>
-Abortion       <psw>堕胎</psw><br>
-Tuition        <psw>学费</psw><br>
-Republic       <psw>共和国</psw><br>
-Minor          <psw>少数</psw><br>
-Equality       <psw>平等</psw><br>
-Slavery        <psw>奴隶制</psw><br>
-Democratic     <psw>民主的</psw><br>
-Resurgence     <psw>复兴</psw><br>
-Liberalism     <psw>自由主义</psw><br>
-Universal      <psw>普遍的</psw><br>
-Liberty        <psw>自由</psw><br>
-Independence   <psw>独立</psw><br>
-Party          <psw>政党</psw><br>
-Constitution   <psw>宪法</psw><br>
-Noted          <psw>著名的</psw><br>
-Depression     <psw>抑郁</psw><br>
-Civil          <psw>公民的</psw><br>
-Philosophy     <psw>哲学</psw><br>
-Privatize      <psw>私有化</psw><br>
-Intervention   <psw>干预</psw><br>
-Bias           <psw>偏见</psw></p>
-</blockquote>
-]]></content>
-      <tags>
-        <tag>英语</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>英语词汇文章14~16</title>
     <url>/2025/02/25/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A05/</url>
     <content><![CDATA[<h2 id="UNICEF">UNICEF</h2>
@@ -1269,6 +1111,164 @@ Extreme <psw>极端的</psw><br>
 Meteorological <psw>气象的</psw><br>
 Devastating <psw>毁灭性的</psw><br>
 Extinguish <psw>熄灭 / 消灭</psw></p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>英语</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>英语词汇文章10~13</title>
+    <url>/2025/02/24/%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%E6%96%87%E7%AB%A04/</url>
+    <content><![CDATA[<h2 id="William-Shakespeare">William Shakespeare</h2>
+<p>william sharespeare was an English poet, playwright, and actor. He was born on 26 April 1564 in Stratford-upon-Avon. His father was a successful local businessman and his mother was the daughter of a <strong>landowner</strong>. Shakespeare is widely regarded as the greatest writer in the English language and the world’s <strong>pre-eminent</strong> dramatist. He is often called England’s national poet and nicknamed the Bard of Avon. He wrote about 38 plays, 154 <strong>sonnets</strong>, two long narrative poems and a few other verses, of which the authorship of some is uncertain. His plays have been translated into every major living language and are performed more often than those of any other playwright.</p>
+<p>writer - author</p>
+<p>drama 歌剧</p>
+<p>landowner 地主</p>
+<p>sonnets 十四行诗</p>
+<p>pre-eminent - outstanding - remarkable - splendid - fabulous - terrific</p>
+<p>verse 诗句</p>
+<p>playwright 剧作家</p>
+<p><strong>Marriage and career</strong></p>
+<p>Shakespeare married Anne Hathaway at the age of 18. She was eight years older than him. They had three children: Susanna, and twins Hamnet and Judith. After his marriage information about his life became very rare. But he is thought to have spent most of his time in London writing and performing in his plays. Between 1585 and 1592, he began a successful career in London as an actor, writer and part-owner of a playing company called the Lord Chamberlain’s Men, later known as the King’s Men.</p>
+<p><strong>Retirement and death</strong></p>
+<p>Around 1613, at the age of 49, he retired to Stratford, where he died three years later. Few records of Shakespeare’s private life survive. He died on 23 April 1616, at the age of 52. He died within a month of signing his will, a document which he begins by describing himself as being in “perfect health”. In his will, Shakespeare left the bulk of his large <strong>estate</strong> to his elder daughter Susanna.</p>
+<p>estate = real estate = property</p>
+<p><strong>His work</strong></p>
+<p>Shakespeare produced most of his known work between 1589 and 1613. His early play were mainly <strong>comedies</strong> and histories and these works remain regarded as some of the best work produced in these <strong>genres</strong>. He then wrote mainly <strong>tragedies</strong> until about 1608, including Hamlet, Othello, King Lear, and Macbeth, considerd some of the finest works in the English language. In his last phase, he wrote <strong>tragiccomedies</strong>, also known as romances, and collaborated with other playwrights.</p>
+<p>comedy 喜剧</p>
+<p>genre 流派</p>
+<p>tragedy - trageic - miserable</p>
+<p>context = background</p>
+<p>Shakespeare’s plays remain highly popular today and are constantly studied, performed and <strong>reinterupted</strong> in diverse curtural and political contexts throughout the world.</p>
+<blockquote>
+<p>Diverse <psw>多样的</psw><br>
+Document <psw>文件</psw><br>
+Pre-eminent <psw>卓越的</psw><br>
+Sign <psw>标志</psw><br>
+Uncertain <psw>不确定的</psw><br>
+Will <psw>意志</psw><br>
+Perform <psw>执行</psw><br>
+Career <psw>职业生涯</psw><br>
+Cultural <psw>文化的</psw><br>
+Tragedy <psw>悲剧</psw><br>
+Consider <psw>考虑</psw><br>
+Constantly <psw>不断地</psw><br>
+Collaborate <psw>合作</psw><br>
+Political <psw>政治的</psw><br>
+Poet <psw>诗人</psw><br>
+Bulk <psw>大量</psw><br>
+Tragic <psw>悲剧的</psw><br>
+Comedy <psw>喜剧</psw><br>
+Survive <psw>生存</psw><br>
+Verse <psw>诗句</psw><br>
+Estate <psw>财产</psw><br>
+Comedy <psw>喜剧</psw><br>
+Phase <psw>阶段</psw></p>
+</blockquote>
+<p>Shakespeare’s parents were poor. false</p>
+<p>His wife was 18 when they got married. true</p>
+<p>Shakespeare died on Stratford. false</p>
+<p>In the last years of his life, he wrote mainly tragicomedies. false</p>
+<h2 id="Charles-Dickens">Charles Dickens</h2>
+<blockquote>
+<p>Charles Dickens was an English writer and social <strong>critic</strong>. During his lifetime, his works enjoyed <strong>unprecedented</strong> popularity. He <strong>is</strong> now <strong>considered</strong> a literary <strong>genius</strong> because he created some of the world’s best-known fictional characters and <strong>is regarded as</strong> the greatest novelist of he Victorian era. His novels and short stories enjoy <strong>lasting</strong> popularity.</p>
+</blockquote>
+<p>critic 批评者 - critical 批判的，关键的<br>
+enjoy popularity 享受欢迎度<br>
+unprecedented 前所未有，空前的<br>
+work 作品<br>
+genius 天才<br>
+be regarded as = is considered 被视为<br>
+novel 小说，新颖的<br>
+lasting 持续的</p>
+<blockquote>
+<p>Dickens was born on February 7,1812 in Portsmouth, on the southern <strong>coast</strong> of England. His father, John Dickens was a <strong>naval</strong> clerk who dreamed of becoming rich and his mother, Elizabeth Barrow, <strong>aspired to be</strong> a teacher and school director. But the family’s financial situation had grown worse because John Dickens used to spend money dangerously beyond the family’s <strong>means</strong>. Consequently, John was sent to prison for debt in 1824, when Charles was just 12 years old.</p>
+</blockquote>
+<p>coast - coastal city - coastal line<br>
+by the seaside 在海边<br>
+naval clerk 海上职员<br>
+naval = marine - submarine<br>
+clerk = employee = staff<br>
+aspire to do 想要做…<br>
+financial - economic - finance<br>
+used to 过去常常做…<br>
+means = fortune = wealth<br>
+prison - jail - imprison - cell</p>
+<blockquote>
+<p>After his father’s <strong>imprisonment</strong>, Charles Dickens left school to work in a factory. Despite his lack of formal education, he edited a weekly journal for 20 years, wrote 15 novels, five <strong>novellas</strong>, hundreds of short stories and <strong>non-fiction</strong> articles, lectured and performed extensively, was an indefatigable letter writer, and <strong>campaigned</strong> <strong>vigorously</strong> for children’s rights, education, and other social reforms.</p>
+</blockquote>
+<p>factory - plant (植物，工厂，发电厂)<br>
+despite - while - although - even though - though - in spite of 加逗号; 尽管…但是… 表示让步<br>
+novellas 中等小说<br>
+non-fiction 非小说<br>
+fatigue = tiredness = wearysome - indefatigable 不知疲倦的，不屈不挠<br>
+campaign 运动（偏时政）<br>
+vigor - vigorously - vigorous = energetic</p>
+<p><strong>His literary success</strong></p>
+<p>Dicken’s literary success begin with the 1836 serial publication of The Pickwick Papers Within a few years he had become an international literary <strong>celebrity</strong>, famous for his humor, <strong>satire</strong>, and <strong>keen observation</strong> of character and society. His novels, most published in monthly or weekly <strong>installments</strong>, <strong>pioneered</strong> the serial publication of narrative fiction, which became the dominant Victorian mode for novel publication.</p>
+<p>celebrity 名人<br>
+satire - irony 讥讽<br>
+keen observation 敏锐的观察<br>
+observe 评论 - observation<br>
+installment 出版</p>
+<p>Dickens was regarded as the literary <strong>colossus</strong> of his age. His 1843 novella, A Christmas Carol, remains popular and continues to inspire adaptations in even artistic genre Oliver Twist and Great Expectations are also frequently adapted, and, like many of his novels, evoke images of early Victorian London. His 1859 novel, A tale of Two Cities, set in London and Paris, is his best-known work of historical fiction.</p>
+<p>colossus = giant<br>
+genre 风格，流派</p>
+<p><strong>His Death</strong></p>
+<p>Charles Dickens dies on June 9, 1870 of a stroke. He was buried in Poet’s Corner at Westminster Abbey. Thousands of mourners came to pay their respects at the grave and throw in flowers.</p>
+<blockquote>
+<p>genre aspire unprecedented factory genius naval campaign era prison vigorously celebrity coast indefatigable publication critic clerk imprisonment stroke literary lasting means financial director edit extensive</p>
+</blockquote>
+<ol>
+<li>Dicken’s family was rich. false</li>
+<li>he left school at an early age. false</li>
+<li>novels were characterized by realism. true</li>
+<li>He died due to a stroke. true</li>
+</ol>
+<h2 id="The-Democratic-Party">The Democratic Party</h2>
+<p>There have usually only been two main political parties in the US. Since the 1860s, two main parties have been the Republican Party and the Democratic Party. It should be noted though that there are other minor parties such as the Libertarian Party. the Green Party, and Constitution Party.</p>
+<p><strong>The Democratic Party</strong></p>
+<p>The Democratic Party started in 1828 as a <strong>pro-slavery</strong> party with its Andrew Jackson as the first President in 1829. However, through the economic <strong>resurgence</strong> after the Great Depression in 1930 and 1940s, as well as the Civil Rights Movement in the 1960s, the Democratic party became an advocate of racial equality. The party’s <strong>philosophy</strong> of modern liberalism adopts social and economic equality <strong>principles</strong>. It aims at setting government intervention and regulation in the economy such as the introduction of social programs, support for labor unions, affordable college tuitions, universal health care, equal opportunity, consumer protection, and environmental protection.</p>
+<p>resurgence 死灰复燃</p>
+<p>pro-slavery 支持奴隶制</p>
+<p>great depression 大萧条</p>
+<p>race - racial equality</p>
+<p>philosophy 理念</p>
+<p>principle 准则</p>
+<p>introduce 引进</p>
+<p><strong>The Republican party</strong></p>
+<p>The Republican party, however, started as an anti-slavery party in 1854. Its first President was Abraham Linclon in 1861. In the <strong>Nixon</strong> years, there was a shift to appeal to the implicit racial biases of white voters that did not like the civil rights movement of the 1960s. The <strong>philosophy</strong> of the party focuses on social and economic independence, and a capitalist economic system. It is also known or its <strong>anti-abortion</strong> efforts, anti-regulatory policy, and reduction of government intervention in the economy as well as being in support privatized health care.</p>
+<p>implicit 隐性的</p>
+<p>capital - capitalist - capitalism</p>
+<p>social - socialist - socialism - communism</p>
+<p>individual - individualism</p>
+<p>collective - collectivism</p>
+<p>anti-abortion 堕胎</p>
+<blockquote>
+<p>Capitalist     <psw>资本主义的</psw><br>
+Advocate       <psw>提倡</psw><br>
+Abortion       <psw>堕胎</psw><br>
+Tuition        <psw>学费</psw><br>
+Republic       <psw>共和国</psw><br>
+Minor          <psw>少数</psw><br>
+Equality       <psw>平等</psw><br>
+Slavery        <psw>奴隶制</psw><br>
+Democratic     <psw>民主的</psw><br>
+Resurgence     <psw>复兴</psw><br>
+Liberalism     <psw>自由主义</psw><br>
+Universal      <psw>普遍的</psw><br>
+Liberty        <psw>自由</psw><br>
+Independence   <psw>独立</psw><br>
+Party          <psw>政党</psw><br>
+Constitution   <psw>宪法</psw><br>
+Noted          <psw>著名的</psw><br>
+Depression     <psw>抑郁</psw><br>
+Civil          <psw>公民的</psw><br>
+Philosophy     <psw>哲学</psw><br>
+Privatize      <psw>私有化</psw><br>
+Intervention   <psw>干预</psw><br>
+Bias           <psw>偏见</psw></p>
 </blockquote>
 ]]></content>
       <tags>
