@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="这是一种在 Java 8 中引入的 API，用于以声明式方式处理数据集合（如 List、Set、Map 等）。它可以让你写出更简洁、更易读、更高效的代码。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Stream 流">
+<meta property="og:url" content="https://zero201913.github.io/2025/10/15/JavaStream%E6%B5%81/index.html">
+<meta property="og:site_name" content="Zero&#39;s Blog">
+<meta property="og:description" content="这是一种在 Java 8 中引入的 API，用于以声明式方式处理数据集合（如 List、Set、Map 等）。它可以让你写出更简洁、更易读、更高效的代码。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-10-15T10:00:00.000Z">
+<meta property="article:modified_time" content="2025-10-24T12:35:04.460Z">
+<meta property="article:author" content="zero201913">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="https://tncache1-f1.v3mh.com/image/2025/10/22/60e271b86ec7980f1fc10edbbb267165.jpg">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="https://tncache1-f1.v3mh.com/image/2025/10/22/60e271b86ec7980f1fc10edbbb267165.jpg" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="https://tncache1-f1.v3mh.com/image/2025/10/22/60e271b86ec7980f1fc10edbbb267165.jpg">
+        
+      
+    
+    <!-- title -->
+    <title>Java Stream 流</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 8.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2025/10/15/Cookie%20%E4%B8%8E%20Session%20%E6%A6%82%E5%BF%B5%E8%A7%A3%E6%9E%90%E5%8F%8A%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2025/10/15/Java%E7%BA%BF%E7%A8%8B%E5%A4%8D%E4%B9%A0/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zero201913.github.io/2025/10/15/JavaStream%E6%B5%81/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zero201913.github.io/2025/10/15/JavaStream%E6%B5%81/&text=Java Stream 流"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zero201913.github.io/2025/10/15/JavaStream%E6%B5%81/&title=Java Stream 流"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zero201913.github.io/2025/10/15/JavaStream%E6%B5%81/&is_video=false&description=Java Stream 流"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Java Stream 流&body=Check out this article: https://zero201913.github.io/2025/10/15/JavaStream%E6%B5%81/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zero201913.github.io/2025/10/15/JavaStream%E6%B5%81/&title=Java Stream 流"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zero201913.github.io/2025/10/15/JavaStream%E6%B5%81/&title=Java Stream 流"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zero201913.github.io/2025/10/15/JavaStream%E6%B5%81/&title=Java Stream 流"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zero201913.github.io/2025/10/15/JavaStream%E6%B5%81/&title=Java Stream 流"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zero201913.github.io/2025/10/15/JavaStream%E6%B5%81/&name=Java Stream 流&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zero201913.github.io/2025/10/15/JavaStream%E6%B5%81/&t=Java Stream 流"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%EF%BC%9A%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">第一部分：核心概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%EF%BC%9A%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E9%97%AE%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">第二部分：实际应用问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86%EF%BC%9A%E5%B8%B8%E7%94%A8%E7%9A%84%E6%B5%81%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">第三部分：常用的流使用方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Java Stream 流
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">zero201913</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-10-15T10:00:00.000Z" class="dt-published" itemprop="datePublished">2025-10-15</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Java/">Java</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>好的，我们来系统地复习一下 Java Stream 流。这是一种在 Java 8 中引入的 API，用于以声明式方式处理数据集合（如 List、Set、Map 等）。它可以让你写出更简洁、更易读、更高效的代码。</p>
+<hr>
+<h3 id="第一部分：核心概念"><a href="#第一部分：核心概念" class="headerlink" title="第一部分：核心概念"></a>第一部分：核心概念</h3><p><strong>1. 什么是 Stream？</strong><br>Stream（流）是一个来自数据源（如集合、数组）的元素队列，并支持聚合操作。它自己<strong>不存储数据</strong>，而是通过一个计算管道来处理数据。</p>
+<p><strong>2. 流的特点</strong></p>
+<ul>
+<li><strong>不是数据结构</strong>：它本身不存储任何数据，数据来自其源（如集合）。</li>
+<li><strong>函数式风格</strong>：对流的操作会产生一个结果，但不会修改其源。例如，对一个集合进行过滤，会生成一个新的流，而不是删除集合中的元素。</li>
+<li><strong>惰性执行</strong>：许多流操作（如过滤、映射）可以是“惰性的”，这意味着它们只有在需要结果时才会执行。</li>
+<li><strong>只能遍历一次</strong>：像迭代器一样，流在生命周期内只能被消费一次。一旦遍历结束，流就关闭了。如果你想再次操作，必须重新创建流。</li>
+<li><strong>可并行化</strong>：流操作可以透明地利用多核架构，你只需要将 <code>stream()</code> 改为 <code>parallelStream()</code>，而逻辑代码无需改变。</li>
+</ul>
+<p><strong>3. 流的操作流程</strong><br>流的操作分为两个阶段，连接起来形成一个“流管道”。</p>
+<ol>
+<li><strong>中间操作</strong>：返回一个新的流，可以连续多个。它们是惰性的，不立即执行。<ul>
+<li>例如：<code>filter()</code>, <code>map()</code>, <code>sorted()</code>, <code>distinct()</code>, <code>limit()</code></li>
+</ul>
+</li>
+<li><strong>终端操作</strong>：返回一个非流的结果（如 <code>void</code>、<code>List</code>、<code>Optional</code>、<code>Integer</code> 等）。它会触发整个流水线的实际执行。<ul>
+<li>例如：<code>forEach()</code>, <code>collect()</code>, <code>count()</code>, <code>reduce()</code>, <code>findFirst()</code></li>
+</ul>
+</li>
+</ol>
+<p><strong>流程示意图：</strong><br><code>数据源 -&gt; (中间操作1 -&gt; 中间操作2 -&gt; ...) -&gt; 终端操作 -&gt; 结果</code></p>
+<hr>
+<h3 id="第二部分：实际应用问题"><a href="#第二部分：实际应用问题" class="headerlink" title="第二部分：实际应用问题"></a>第二部分：实际应用问题</h3><p>让我们通过一个具体的例子来应用这些概念。</p>
+<p><strong>问题场景：</strong><br>我们有一个 <code>Employee</code>（员工）类，包含以下属性：<code>id</code>（编号）、<code>name</code>（姓名）、<code>age</code>（年龄）、<code>salary</code>（薪资）、<code>department</code>（部门）。<br>我们有一个包含多个员工的 List。</p>
+<p><strong>目标：</strong></p>
+<ol>
+<li>找出所有在“技术部”且年龄大于 25 岁的员工。</li>
+<li>提取出这些员工的姓名。</li>
+<li>将这些姓名按字母顺序排序。</li>
+<li>将最终结果收集到一个新的 List 中。</li>
+</ol>
+<p><strong>传统方式（循环和条件判断）：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Employee&gt; filteredList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (Employee emp : employeeList) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">&quot;技术部&quot;</span>.equals(emp.getDepartment()) &amp;&amp; emp.getAge() &gt; <span class="number">25</span>) &#123;</span><br><span class="line">        filteredList.add(emp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">List&lt;String&gt; nameList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (Employee emp : filteredList) &#123;</span><br><span class="line">    nameList.add(emp.getName());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Collections.sort(nameList);</span><br></pre></td></tr></table></figure>
+
+<p><strong>Stream 方式：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; result = employeeList.stream() <span class="comment">// 1. 创建流</span></span><br><span class="line">        .filter(emp -&gt; <span class="string">&quot;技术部&quot;</span>.equals(emp.getDepartment())) <span class="comment">// 2. 中间操作：过滤部门</span></span><br><span class="line">        .filter(emp -&gt; emp.getAge() &gt; <span class="number">25</span>) <span class="comment">// 3. 中间操作：过滤年龄</span></span><br><span class="line">        .map(Employee::getName) <span class="comment">// 4. 中间操作：将Employee对象映射为其姓名（String）</span></span><br><span class="line">        .sorted() <span class="comment">// 5. 中间操作：对姓名进行自然排序</span></span><br><span class="line">        .collect(Collectors.toList()); <span class="comment">// 6. 终端操作：将结果收集到List中</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>代码分析：</strong></p>
+<ul>
+<li><code>stream()</code>：从 <code>employeeList</code> 创建流。</li>
+<li><code>filter(...)</code>：两个连续的过滤操作，是中间操作。它们会等待终端操作的触发。</li>
+<li><code>map(Employee::getName)</code>：这是一个关键的中间操作。它将流中的 <code>Employee</code> 元素转换为 <code>String</code>（员工姓名）元素。现在流的类型从 <code>Stream&lt;Employee&gt;</code> 变成了 <code>Stream&lt;String&gt;</code>。</li>
+<li><code>sorted()</code>：对 <code>Stream&lt;String&gt;</code> 中的字符串进行排序。</li>
+<li><code>collect(Collectors.toList())</code>：这是终端操作。它触发了前面所有中间操作的执行，并将最终的 <code>Stream&lt;String&gt;</code> 收集到一个 <code>List&lt;String&gt;</code> 中。</li>
+</ul>
+<p>可以看到，Stream 代码更加<strong>声明式</strong>（“做什么”而不是“怎么做”），逻辑清晰，一气呵成，并且没有改变原始的 <code>employeeList</code>。</p>
+<hr>
+<h3 id="第三部分：常用的流使用方式"><a href="#第三部分：常用的流使用方式" class="headerlink" title="第三部分：常用的流使用方式"></a>第三部分：常用的流使用方式</h3><p>这里列出一些最常用和强大的流操作组合。</p>
+<p><strong>1. 过滤与收集</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 找出所有薪资超过 10000 的员工</span></span><br><span class="line">List&lt;Employee&gt; wellPaid = employeeList.stream()</span><br><span class="line">        .filter(emp -&gt; emp.getSalary() &gt; <span class="number">10000</span>)</span><br><span class="line">        .collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取所有不同的部门</span></span><br><span class="line">Set&lt;String&gt; departments = employeeList.stream()</span><br><span class="line">        .map(Employee::getDepartment)</span><br><span class="line">        .collect(Collectors.toSet()); <span class="comment">// 用Set自动去重</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 映射（提取信息或转换）</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取所有员工的姓名列表</span></span><br><span class="line">List&lt;String&gt; names = employeeList.stream()</span><br><span class="line">        .map(Employee::getName) <span class="comment">// 方法引用，等价于 .map(emp -&gt; emp.getName())</span></span><br><span class="line">        .collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将每个员工的姓名转换为大写</span></span><br><span class="line">List&lt;String&gt; upperCaseNames = employeeList.stream()</span><br><span class="line">        .map(Employee::getName)</span><br><span class="line">        .map(String::toUpperCase)</span><br><span class="line">        .collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
+
+<p><strong>3. 查找与匹配</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 检查是否有员工在“财务部”</span></span><br><span class="line"><span class="type">boolean</span> <span class="variable">hasFinance</span> <span class="operator">=</span> employeeList.stream()</span><br><span class="line">        .anyMatch(emp -&gt; <span class="string">&quot;财务部&quot;</span>.equals(emp.getDepartment()));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检查是否所有员工都大于18岁</span></span><br><span class="line"><span class="type">boolean</span> <span class="variable">allAdult</span> <span class="operator">=</span> employeeList.stream()</span><br><span class="line">        .allMatch(emp -&gt; emp.getAge() &gt;= <span class="number">18</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查找第一个在“人事部”的员工</span></span><br><span class="line">Optional&lt;Employee&gt; firstHr = employeeList.stream()</span><br><span class="line">        .filter(emp -&gt; <span class="string">&quot;人事部&quot;</span>.equals(emp.getDepartment()))</span><br><span class="line">        .findFirst();</span><br><span class="line"><span class="comment">// 使用Optional安全地处理结果</span></span><br><span class="line">firstHr.ifPresent(emp -&gt; System.out.println(emp.getName()));</span><br></pre></td></tr></table></figure>
+
+<p><strong>4. 归约与聚合</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 计算技术部员工的平均薪资</span></span><br><span class="line"><span class="type">OptionalDouble</span> <span class="variable">avgSalary</span> <span class="operator">=</span> employeeList.stream()</span><br><span class="line">        .filter(emp -&gt; <span class="string">&quot;技术部&quot;</span>.equals(emp.getDepartment()))</span><br><span class="line">        .mapToDouble(Employee::getSalary) <span class="comment">// 转换为DoubleStream，有专门的统计方法</span></span><br><span class="line">        .average();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 计算公司总薪资支出</span></span><br><span class="line"><span class="type">double</span> <span class="variable">totalSalary</span> <span class="operator">=</span> employeeList.stream()</span><br><span class="line">        .mapToDouble(Employee::getSalary)</span><br><span class="line">        .sum();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 找出薪资最高的员工</span></span><br><span class="line">Optional&lt;Employee&gt; topEarner = employeeList.stream()</span><br><span class="line">        .max(Comparator.comparingDouble(Employee::getSalary));</span><br></pre></td></tr></table></figure>
+
+<p><strong>5. 分组</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 按部门对员工进行分组</span></span><br><span class="line">Map&lt;String, List&lt;Employee&gt;&gt; byDept = employeeList.stream()</span><br><span class="line">        .collect(Collectors.groupingBy(Employee::getDepartment));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 按薪资范围分组（例如：&lt;5000, 5000-10000, &gt;10000）</span></span><br><span class="line">Map&lt;String, List&lt;Employee&gt;&gt; bySalaryRange = employeeList.stream()</span><br><span class="line">        .collect(Collectors.groupingBy(emp -&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span> (emp.getSalary() &lt; <span class="number">5000</span>) <span class="keyword">return</span> <span class="string">&quot;低&quot;</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (emp.getSalary() &lt;= <span class="number">10000</span>) <span class="keyword">return</span> <span class="string">&quot;中&quot;</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">return</span> <span class="string">&quot;高&quot;</span>;</span><br><span class="line">        &#125;));</span><br></pre></td></tr></table></figure>
+
+<p><strong>6. 链式操作的综合示例</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 统计技术部员工的数量</span></span><br><span class="line"><span class="type">long</span> <span class="variable">count</span> <span class="operator">=</span> employeeList.stream()</span><br><span class="line">        .filter(emp -&gt; <span class="string">&quot;技术部&quot;</span>.equals(emp.getDepartment()))</span><br><span class="line">        .count();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取技术部员工姓名，按薪资降序排列的前3名</span></span><br><span class="line">List&lt;String&gt; topTechNames = employeeList.stream()</span><br><span class="line">        .filter(emp -&gt; <span class="string">&quot;技术部&quot;</span>.equals(emp.getDepartment()))</span><br><span class="line">        .sorted(Comparator.comparingDouble(Employee::getSalary).reversed())</span><br><span class="line">        .limit(<span class="number">3</span>)</span><br><span class="line">        .map(Employee::getName)</span><br><span class="line">        .collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Java Stream API 的核心在于 <strong>声明式编程</strong> 和 <strong>函数式组合</strong>。通过将多个简单的中间操作（<code>filter</code>, <code>map</code>, <code>sorted</code>）连接起来，最后以一个终端操作（<code>collect</code>, <code>forEach</code>, <code>count</code>）收尾，你可以构建出非常强大且易读的数据处理管道。</p>
+<p>多加练习，你会发现自己处理集合数据的代码会变得异常简洁和优雅。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%EF%BC%9A%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">第一部分：核心概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%EF%BC%9A%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E9%97%AE%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">第二部分：实际应用问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86%EF%BC%9A%E5%B8%B8%E7%94%A8%E7%9A%84%E6%B5%81%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">第三部分：常用的流使用方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zero201913.github.io/2025/10/15/JavaStream%E6%B5%81/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zero201913.github.io/2025/10/15/JavaStream%E6%B5%81/&text=Java Stream 流"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zero201913.github.io/2025/10/15/JavaStream%E6%B5%81/&title=Java Stream 流"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zero201913.github.io/2025/10/15/JavaStream%E6%B5%81/&is_video=false&description=Java Stream 流"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Java Stream 流&body=Check out this article: https://zero201913.github.io/2025/10/15/JavaStream%E6%B5%81/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zero201913.github.io/2025/10/15/JavaStream%E6%B5%81/&title=Java Stream 流"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zero201913.github.io/2025/10/15/JavaStream%E6%B5%81/&title=Java Stream 流"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zero201913.github.io/2025/10/15/JavaStream%E6%B5%81/&title=Java Stream 流"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zero201913.github.io/2025/10/15/JavaStream%E6%B5%81/&title=Java Stream 流"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zero201913.github.io/2025/10/15/JavaStream%E6%B5%81/&name=Java Stream 流&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zero201913.github.io/2025/10/15/JavaStream%E6%B5%81/&t=Java Stream 流"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    zero201913
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
