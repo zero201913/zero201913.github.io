@@ -1,0 +1,627 @@
+  <!DOCTYPE html>
+  <html lang="zh-CN"  
+      data-theme-mode="auto"
+  >
+  <head>
+  <meta charset="utf-8">
+  
+  
+  
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_4k4bc36ef96';window.REIMU_CONFIG.clipboard_tips = {"success":{"zh-CN":"复制成功 (*^▽^*)"},"fail":{"zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":50};window.REIMU_CONFIG.base = 'http://example.com';</script>
+  <title>
+    Zero02 Blog
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Zero02 Blog">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="Zero02 Blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/banner.webp">
+<meta property="article:author" content="Zero02">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/banner.webp">
+    <link rel="alternate" href="/atom.xml" title="Zero02 Blog" type="application/atom+xml">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL&#x2F;toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx&#x2F;1oA&#x2F;0l8ysE" crossorigin="anonymous">
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css" integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous">
+
+<meta name="generator" content="Hexo 8.1.0"></head>
+
+  <body>
+      <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate">
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script>
+<div id="copy-tooltip"></div>
+<div id="heatmap-tooltip"></div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation">
+        <a class="main-nav-link-wrap" href="/">
+          <div class="main-nav-icon icon rotate">
+              &#xe62b;
+          </div>
+          <span class="main-nav-link">首页</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/archives">
+          <div class="main-nav-icon icon rotate">
+              &#xe62b;
+          </div>
+          <span class="main-nav-link">归档</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/about">
+          <div class="main-nav-icon icon rotate">
+              &#xe62b;
+          </div>
+          <span class="main-nav-link">关于</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/music">
+          <div class="main-nav-icon icon rotate">
+              &#xe62b;
+          </div>
+          <span class="main-nav-link">music</span>
+        </span>
+    <a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation">
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" aria-label="RSS 订阅" target="_blank"></a>
+      <a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a>
+  </nav>
+</div>
+<header id="header" aria-label="Site header">
+      <picture>
+      </picture>
+        <img  fetchpriority="high" src="/images/banner.webp" alt="">
+  <div id="header-outer">
+    <div id="header-title">
+          <span id="logo">
+            <h1 data-aos="slide-up">Zero02 Blog</h1>
+          </span>
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+        </h2>
+    </div>
+  </div>
+</header>
+
+        <div id="content" aria-label="Page content"  class="sidebar-right" >
+          <aside id="sidebar" aria-label="Sidebar">
+  <div class="sidebar-wrapper-container ">
+  <div class="sidebar-wrapper">
+    <div class="sidebar-wrap" data-aos="fade-up">
+        <div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Zero02" class="lazyload">
+  <div class="sidebar-author-name">Zero02</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">7</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social">
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/music" aria-label="music"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">music</div>
+      </div>
+</div>
+
+    </div>
+  </div>
+  <div class="sidebar-widget">
+  </div>
+  </div>
+</aside>
+
+          <section id="main" aria-label="Main content">      <div class="post-wrapper">
+  <div class="post-wrap left" data-aos="fade-up">
+      <a class="post-link" href="/2025/10/26/%E6%B5%81%E7%A8%8B%E5%9B%BE%E6%B5%8B%E8%AF%95/" aria-label="流程图测试" title="流程图测试"></a>
+    <div class="post-cover left">
+          <img data-src="/images/banner.webp" data-sizes="auto" alt="流程图测试" class="lazyload">
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-10-26</span>
+        <span><span class="icon-pencil"></span>70 字</span>
+        <span><span class="icon-clock"></span>1 分钟</span>
+      </div>
+      <h2 class="post-title">流程图测试</h2>
+      <article class="post-article">
+          我的流程图文章以下是一个简单的流程图：
+graph TD;
+    A[开始] --&gt; B{判断条件};
+    B --&gt;|是| C[操作1];
+    B --&gt;|否| D[操作2];
+    C --&gt; E[结束];
+    D --&gt; E;
+
+graph TD;
+    A[开始] --&gt; B{是否继续?};
+    B -- 是 --&gt; C[执行任务];
+    B -- 否 --&gt; D[停止];
+    C --&gt; A;
+
+
+      </article>
+    </div>
+  </div>
+</div>
+      <div class="post-wrapper">
+  <div class="post-wrap right" data-aos="fade-up">
+      <a class="post-link" href="/2025/10/15/Cookie%20%E4%B8%8E%20Session%20%E6%A6%82%E5%BF%B5%E8%A7%A3%E6%9E%90%E5%8F%8A%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/" aria-label="Cookie 与 Session 概念解析及应用场景" title="Cookie 与 Session 概念解析及应用场景"></a>
+    <div class="post-cover right">
+        <img data-src="https://tncache1-f1.v3mh.com/image/2025/10/26/b7525824a2116a75ae201336daaea95c.jpg" data-sizes="auto" alt="Cookie 与 Session 概念解析及应用场景" class="lazyload">
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-10-15</span>
+        <span><span class="icon-pencil"></span>3.7k 字</span>
+        <span><span class="icon-clock"></span>20 分钟</span>
+      </div>
+      <h2 class="post-title">Cookie 与 Session 概念解析及应用场景</h2>
+      <article class="post-article">
+          一、基本概念对比Cookie定义：存储在客户端的小型文本文件，由服务器发送到浏览器并保存在本地。
+特性：
+
+存储在客户端浏览器中
+有大小限制（约4KB）
+可设置过期时间
+每次请求自动携带到服务器
+可被用户禁用或清除
+
+Session定义：存储在服务器端的用户状态信息，通过Session ID与客户端关联。
+特性：
+
+存储在服务器内存或数据库中
+存储容量较大
+默认浏览器关闭后失效
+更安全，敏感数据不暴露给客户端
+服务器资源占用较多
+
+二、实际应用场景演示下面通过一个用户登录系统来展示Cookie和Session的不同应用：
+123456789101112131415161718192021222
+      </article>
+    </div>
+  </div>
+</div>
+      <div class="post-wrapper">
+  <div class="post-wrap left" data-aos="fade-up">
+      <a class="post-link" href="/2025/10/15/Commons%20IO%20%E5%92%8C%20Commons%20FileUpload%20%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%E5%AE%9E%E7%8E%B0/" aria-label="Commons IO 和 Commons FileUpload 文件上传下载实现" title="Commons IO 和 Commons FileUpload 文件上传下载实现"></a>
+    <div class="post-cover left">
+        <img data-src="https://tncache1-f1.v3mh.com/image/2025/10/26/74ef64b707b3d1edd9a4a88c7dd6a9fe.png" data-sizes="auto" alt="Commons IO 和 Commons FileUpload 文件上传下载实现" class="lazyload">
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-10-15</span>
+        <span><span class="icon-pencil"></span>4.2k 字</span>
+        <span><span class="icon-clock"></span>24 分钟</span>
+      </div>
+      <h2 class="post-title">Commons IO 和 Commons FileUpload 文件上传下载实现</h2>
+      <article class="post-article">
+          一、环境准备和依赖配置Maven 依赖1234567891011121314151617181920212223&amp;lt;dependencies&amp;gt;        &amp;lt;dependency&amp;gt;        &amp;lt;groupId&amp;gt;commons-fileupload&amp;lt;/groupId&amp;gt;        &amp;lt;artifactId&amp;gt;commons-fileupload&amp;lt;/artifactId&amp;gt;        &amp;lt;version&amp;gt;1.5&amp;lt;/version&amp;gt;    &amp;lt;/dependency&amp;gt;            &amp;
+      </article>
+    </div>
+  </div>
+</div>
+      <div class="post-wrapper">
+  <div class="post-wrap right" data-aos="fade-up">
+      <a class="post-link" href="/2025/10/15/AJAX%20%E5%A4%8D%E4%B9%A0%E6%8C%87%E5%8D%97/" aria-label="AJAX 复习指南" title="AJAX 复习指南"></a>
+    <div class="post-cover right">
+        <img data-src="https://tncache1-f1.v3mh.com/image/2025/10/26/6468f1851ffd405bdabb7f1a5869dd72.jpg" data-sizes="auto" alt="AJAX 复习指南" class="lazyload">
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-10-15</span>
+        <span><span class="icon-pencil"></span>2.9k 字</span>
+        <span><span class="icon-clock"></span>16 分钟</span>
+      </div>
+      <h2 class="post-title">AJAX 复习指南</h2>
+      <article class="post-article">
+          一、AJAX 概述与作用AJAX（Asynchronous JavaScript and XML）是一种创建快速动态网页的技术，通过在后台与服务器进行少量数据交换，使网页实现异步更新。
+核心作用：
+
+异步数据交换
+局部页面更新
+提升用户体验
+减少服务器负载
+
+二、应用场景
+表单验证 - 实时验证用户输入
+搜索建议 - 动态搜索提示
+无限滚动 - 滚动加载更多内容
+实时更新 - 聊天应用、股票行情
+购物车更新 - 无需刷新页面更新购物车
+
+三、实际问题演示下面通过一个完整的实时天气应用来展示 AJAX 的作用：
+123456789101112131415161718192021222324252
+      </article>
+    </div>
+  </div>
+</div>
+      <div class="post-wrapper">
+  <div class="post-wrap left" data-aos="fade-up">
+      <a class="post-link" href="/2025/10/15/JavaStream%E6%B5%81/" aria-label="Java Stream 流" title="Java Stream 流"></a>
+    <div class="post-cover left">
+        <img data-src="https://tncache1-f1.v3mh.com/image/2025/10/26/8d1b903e9593fbc3687b15458ca6428a.png" data-sizes="auto" alt="Java Stream 流" class="lazyload">
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-10-15</span>
+        <span><span class="icon-pencil"></span>1.6k 字</span>
+        <span><span class="icon-clock"></span>7 分钟</span>
+      </div>
+      <h2 class="post-title">Java Stream 流</h2>
+      <article class="post-article">
+          好的，我们来系统地复习一下 Java Stream 流。这是一种在 Java 8 中引入的 API，用于以声明式方式处理数据集合（如 List、Set、Map 等）。它可以让你写出更简洁、更易读、更高效的代码。
+
+第一部分：核心概念1. 什么是 Stream？Stream（流）是一个来自数据源（如集合、数组）的元素队列，并支持聚合操作。它自己不存储数据，而是通过一个计算管道来处理数据。
+2. 流的特点
+
+不是数据结构：它本身不存储任何数据，数据来自其源（如集合）。
+函数式风格：对流的操作会产生一个结果，但不会修改其源。例如，对一个集合进行过滤，会生成一个新的流，而不是删除集合中的元素。
+惰性执
+      </article>
+    </div>
+  </div>
+</div>
+      <div class="post-wrapper">
+  <div class="post-wrap right" data-aos="fade-up">
+      <a class="post-link" href="/2025/10/15/Java%E7%BA%BF%E7%A8%8B%E5%A4%8D%E4%B9%A0/" aria-label="Java线程复习" title="Java线程复习"></a>
+    <div class="post-cover right">
+        <img data-src="https://tncache1-f1.v3mh.com/image/2025/10/26/8ae14bd9ed5e1c98cbda9dc0872a1470.jpg" data-sizes="auto" alt="Java线程复习" class="lazyload">
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-10-15</span>
+        <span><span class="icon-pencil"></span>1.7k 字</span>
+        <span><span class="icon-clock"></span>9 分钟</span>
+      </div>
+      <h2 class="post-title">Java线程复习</h2>
+      <article class="post-article">
+          好的，我们来系统地复习 Java 线程相关的知识。线程是 Java 并发编程的核心，理解它对于编写高性能、响应式的应用程序至关重要。
+
+第一部分：核心概念1. 进程 vs 线程进程：
+
+操作系统资源分配的基本单位
+每个进程有独立的内存空间（堆、栈、代码区）
+进程间通信（IPC）比较复杂（如管道、信号、共享内存等）
+创建和销毁开销较大
+
+线程：
+
+CPU 调度的基本单位，是进程内的执行单元
+同一进程的线程共享堆和方法区，但有独立的程序计数器和栈
+线程间通信相对简单（共享内存）
+创建和销毁开销较小
+
+2. 线程的生命周期（状态）Java 线程有 6 种状态：
+
+NEW（新建）：线程被创建但尚未启动
+      </article>
+    </div>
+  </div>
+</div>
+      <div class="post-wrapper">
+  <div class="post-wrap left" data-aos="fade-up">
+      <a class="post-link" href="/2025/10/15/jQuery%20%E5%A4%8D%E4%B9%A0%E6%8C%87%E5%8D%97/" aria-label="个人成长之路：从技术到生活的全面提升" title="个人成长之路：从技术到生活的全面提升"></a>
+    <div class="post-cover left">
+        <img data-src="https://tncache1-f1.v3mh.com/image/2025/10/26/d9a30670ea9c6ef1a20696bc3fcb1521.jpg" data-sizes="auto" alt="个人成长之路：从技术到生活的全面提升" class="lazyload">
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-10-15</span>
+        <span><span class="icon-pencil"></span>2.1k 字</span>
+        <span><span class="icon-clock"></span>12 分钟</span>
+      </div>
+      <h2 class="post-title">个人成长之路：从技术到生活的全面提升</h2>
+      <article class="post-article">
+          一、jQuery 概述与作用jQuery 是一个快速、简洁的 JavaScript 库，它简化了 HTML 文档遍历、事件处理、动画和 Ajax 交互等操作。
+核心作用：
+
+DOM 操作简化
+事件处理统一
+动画效果创建
+Ajax 请求封装
+跨浏览器兼容性处理
+
+二、应用场景
+DOM 操作 - 快速选择、修改页面元素
+动态交互 - 实现各种用户交互效果
+表单处理 - 验证、提交、数据获取
+Ajax 应用 - 异步数据加载
+响应式界面 - 创建动态响应式组件
+
+三、实际问题演示下面通过一个实际的购物车功能来展示 jQuery 的作用：
+1234567891011121314151617181920
+      </article>
+    </div>
+  </div>
+</div>
+
+</section>
+        </div>
+        <footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    <div>
+      <span class="icon-copyright"></span>
+        2025
+      <span class="footer-info-sep rotate"></span>
+      Zero02
+    </div>
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+      <div>
+        <span class="icon-brush"></span>
+        16.4k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        01:29
+      </div>
+  </div>
+</footer>
+
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap">
+      <div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Zero02" class="lazyload">
+  <div class="sidebar-author-name">Zero02</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">7</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social">
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/music" aria-label="music"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">music</div>
+      </div>
+</div>
+
+  </div>
+</nav>
+
+    </div>
+      <div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png"/>
+        </div>
+      </div>
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+  
+<script src="/js/generator_search.js" defer></script>
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js" integrity="sha384-8LyaidD9GPxQQgLJO&#x2F;WRw&#x2F;O2h3BoNq&#x2F;ApI&#x2F;ecpvM6RsrCz2qP2ppBXUKihP4V&#x2F;2d" crossorigin="anonymous"></script>
+
+  <script>
+    if (! || !window.matchMedia('(max-width: 768px)').matches) {
+      window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'));
+    }
+  </script>
+
+
+
+
+
+<div id="lazy-script">
+  <div>
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.10.3' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+
+
+
+  </body>
+  <script src="https://unpkg.com/mermaid@9.4.3/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({startOnLoad: true});</script>
+  </html>
