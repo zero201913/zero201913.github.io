@@ -25,7 +25,7 @@
 <meta property="og:description" content="这是一种在 Java 8 中引入的 API，用于以声明式方式处理数据集合（如 List、Set、Map 等）。它可以让你写出更简洁、更易读、更高效的代码。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-15T10:00:00.000Z">
-<meta property="article:modified_time" content="2025-10-26T13:27:41.236Z">
+<meta property="article:modified_time" content="2025-10-26T13:54:43.710Z">
 <meta property="article:author" content="Zero02">
 <meta name="twitter:card" content="summary">
     <link rel="alternate" href="/atom.xml" title="Zero02 Blog" type="application/atom+xml">
@@ -161,7 +161,7 @@
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
-    <div class="sidebar-state-number">3</div>
+    <div class="sidebar-state-number">2</div>
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
@@ -223,7 +223,7 @@
 </div>
 
         <div class="article-category">
-    <a class="article-category-link" href="/categories/Java%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/" title="Java编程技术">Java编程技术</a>
+    <a class="article-category-link" href="/categories/Java%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" title="Java编程语言">Java编程语言</a>
   </div>
 
     </div>
@@ -242,13 +242,6 @@
 <li><strong>只能遍历一次</strong>：像迭代器一样，流在生命周期内只能被消费一次。一旦遍历结束，流就关闭了。如果你想再次操作，必须重新创建流。</li>
 <li><strong>可并行化</strong>：流操作可以透明地利用多核架构，你只需要将 <code>stream()</code> 改为 <code>parallelStream()</code>，而逻辑代码无需改变。</li>
 </ul>
-<pre class="mermaid">graph TD
-    A[开始] --> B{条件判断}
-    B -->|是| C[执行操作1]
-    B -->|否| D[执行操作2]
-    C --> E[结束]
-    D --> E</pre>
-
 <p><strong>3. 流的操作流程</strong><br>流的操作分为两个阶段，连接起来形成一个“流管道”。</p>
 <ol>
 <li><strong>中间操作</strong>：返回一个新的流，可以连续多个。它们是惰性的，不立即执行。<ul>
@@ -276,6 +269,15 @@
 
 <p><strong>Stream 方式：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; result = employeeList.stream() <span class="comment">// 1. 创建流</span></span><br><span class="line">        .filter(emp -&gt; <span class="string">&quot;技术部&quot;</span>.equals(emp.getDepartment())) <span class="comment">// 2. 中间操作：过滤部门</span></span><br><span class="line">        .filter(emp -&gt; emp.getAge() &gt; <span class="number">25</span>) <span class="comment">// 3. 中间操作：过滤年龄</span></span><br><span class="line">        .map(Employee::getName) <span class="comment">// 4. 中间操作：将Employee对象映射为其姓名（String）</span></span><br><span class="line">        .sorted() <span class="comment">// 5. 中间操作：对姓名进行自然排序</span></span><br><span class="line">        .collect(Collectors.toList()); <span class="comment">// 6. 终端操作：将结果收集到List中</span></span><br></pre></td></tr></table></figure>
+<p><strong>stream流的流程图</strong></p>
+<pre class="mermaid">graph TD;
+    A[Start] --> B[Create Stream from employeeList];
+    B --> C[Filter by Department: 技术部];
+    C --> D[Filter by Age > 25];
+    D --> E[Map to Names];
+    E --> F[Sort Names];
+    F --> G[Collect to nameList];
+    G --> H[End];</pre>
 
 <p><strong>代码分析：</strong></p>
 <ul>
@@ -388,7 +390,7 @@
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
-    <div class="sidebar-state-number">3</div>
+    <div class="sidebar-state-number">2</div>
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
@@ -517,7 +519,7 @@
           description: "这是一种在 Java 8 中引入的 API，用于以声明式方式处理数据集合（如 List、Set、Map 等）。它可以让你写出更简洁、更易读、更高效的代码。",
           stripContent: "好的，我们来系统地复习一下 Java Stream 流。这是一种在 Java 8 中引入的 API，用于以声明式方式处理数据集合（如 List、Set、Map 等）。它可以让你写出更简洁、更易读、更高效的代码。  第一部分：核心概念1. 什么是 Stream？Stream（流）是一个来自数据源（如集合、数组）的元素队列，并支持聚合操作。它自己不存储数据，而是通过一个计算管道来处理数据。 2. 流的特点  不是数据结构：它本身不存储任何数据，数据来自其源（如集合）。 函数式风格：对流的操作会产生一",
           date: "Wed Oct 15 2025 18:00:00 GMT+0800",
-          updated: "Sun Oct 26 2025 21:27:41 GMT+0800",
+          updated: "Sun Oct 26 2025 21:54:43 GMT+0800",
           cover: "https://tncache1-f1.v3mh.com/image/2025/10/26/8d1b903e9593fbc3687b15458ca6428a.png",
         };
       </script>
