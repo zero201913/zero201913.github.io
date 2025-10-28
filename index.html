@@ -151,11 +151,11 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">7</div>
+    <div class="sidebar-state-number">10</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
-    <div class="sidebar-state-number">2</div>
+    <div class="sidebar-state-number">3</div>
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
@@ -295,7 +295,8 @@ Session定义：存储在服务器端的用户状态信息，通过Session ID与
       </div>
       <h2 class="post-title">Commons IO 和 Commons FileUpload 文件上传下载实现</h2>
       <article class="post-article">
-          一、环境准备和依赖配置Maven 依赖1234567891011121314151617181920212223&amp;lt;dependencies&amp;gt;        &amp;lt;dependency&amp;gt;        &amp;lt;groupId&amp;gt;commons-fileupload&amp;lt;/groupId&amp;gt;        &amp;lt;artifactId&amp;gt;commons-fileupload&amp;lt;/artifactId&amp;gt;        &amp;lt;version&amp;gt;1.5&amp;lt;/version&amp;gt;    &amp;lt;/dependency&amp;gt;            &amp;
+          一、环境准备和依赖配置通过传统的jsp+servlet+maven项目，来实现一个本地文件上传下载的功能，通过两个jar包来实现。
+Maven 依赖1234567891011121314151617181920212223&amp;lt;dependencies&amp;gt;        &amp;lt;dependency&amp;gt;        &amp;lt;groupId&amp;gt;commons-fileupload&amp;lt;/groupId&amp;gt;        &amp;lt;artifactId&amp;gt;commons-fileupload&amp;lt;/artifactId&amp;gt;        &amp;lt;version&amp;gt;
       </article>
     </div>
   </div>
@@ -434,6 +435,84 @@ Ajax 应用 - 异步数据加载
     </div>
   </div>
 </div>
+      <div class="post-wrapper">
+  <div class="post-wrap right" data-aos="fade-up">
+      <a class="post-link" href="/2025/10/15/Spring%20%E4%B8%AD%20SLF4J%20+%20Log4j2%20%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8/" aria-label="Spring 框架中使用 Slf4j" title="Spring 框架中使用 Slf4j"></a>
+    <div class="post-cover right">
+        <img data-src="https://tncache1-f1.v3mh.com/image/2025/10/26/6468f1851ffd405bdabb7f1a5869dd72.jpg" data-sizes="auto" alt="Spring 框架中使用 Slf4j" class="lazyload">
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-10-15</span>
+        <span><span class="icon-pencil"></span>1.3k 字</span>
+        <span><span class="icon-clock"></span>7 分钟</span>
+      </div>
+      <h2 class="post-title">Spring 框架中使用 Slf4j</h2>
+      <article class="post-article">
+          一、核心概念说明
+SLF4J：日志门面（接口），提供统一的日志调用 API，不负责具体实现。
+Log4j2：日志实现框架，负责日志的输出、格式化等具体功能。
+关系：SLF4J 作为接口，Log4j2 作为实现，项目中通过 SLF4J 调用，底层由 Log4j2 处理。
+
+二、步骤 1：添加依赖（Maven&amp;#x2F;Gradle）需排除 Spring 项目中默认的日志框架（如 Logback），避免冲突，再引入 SLF4J 和 Log4j2 依赖。
+Maven 配置（pom.xml）：123456789101112131415161718192021222324&amp;lt;dependency&amp;g
+      </article>
+    </div>
+  </div>
+</div>
+      <div class="post-wrapper">
+  <div class="post-wrap left" data-aos="fade-up">
+      <a class="post-link" href="/2025/10/15/Spring%E9%80%9A%E8%BF%87bean.xml%E8%A7%A3%E6%9E%90%E4%B8%8E%E5%8F%8D%E5%B0%84%E7%94%9F%E6%88%90%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%8E%9F%E7%90%86/" aria-label="Spring解析XML与反射生成对象的原理" title="Spring解析XML与反射生成对象的原理"></a>
+    <div class="post-cover left">
+        <img data-src="https://tncache1-f1.v3mh.com/image/2025/10/26/6468f1851ffd405bdabb7f1a5869dd72.jpg" data-sizes="auto" alt="Spring解析XML与反射生成对象的原理" class="lazyload">
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-10-15</span>
+        <span><span class="icon-pencil"></span>1.4k 字</span>
+        <span><span class="icon-clock"></span>6 分钟</span>
+      </div>
+      <h2 class="post-title">Spring解析XML与反射生成对象的原理</h2>
+      <article class="post-article">
+          一、核心原理拆解Spring通过bean.xml生成对象的整体流程可分为4步：
+
+加载XML配置文件：将bean.xml文件读取到内存中。
+
+解析XML文件：使用DOM&amp;#x2F;SAX等解析技术，提取标签中的关键信息（如id、class全路径）。
+
+反射创建对象：根据class全路径，通过Java反射机制实例化对象。
+
+存储对象到容器：将创建好的对象存入Spring容器（如HashMap），后续通过id即可获取。
+
+
+二、自定义模拟实现Spring的XML解析与反射流程我们通过自定义一个简单的”迷你Spring容器”，模拟Spring解析bean.xml并生成对象的过程。
+步骤1：编写测试用
+      </article>
+    </div>
+  </div>
+</div>
+      <div class="post-wrapper">
+  <div class="post-wrap right" data-aos="fade-up">
+      <a class="post-link" href="/2025/10/15/Spring%E7%9A%84IOC%E5%92%8CAOP/" aria-label="Spring 框架中 IOC 和 AOP 的价值及应用" title="Spring 框架中 IOC 和 AOP 的价值及应用"></a>
+    <div class="post-cover right">
+        <img data-src="https://tncache1-f1.v3mh.com/image/2025/10/26/6468f1851ffd405bdabb7f1a5869dd72.jpg" data-sizes="auto" alt="Spring 框架中 IOC 和 AOP 的价值及应用" class="lazyload">
+    </div>
+    <div class="post-info">
+      <div class="post-meta">
+        <span><span class="icon-calendar"></span>2025-10-15</span>
+        <span><span class="icon-pencil"></span>2.1k 字</span>
+        <span><span class="icon-clock"></span>9 分钟</span>
+      </div>
+      <h2 class="post-title">Spring 框架中 IOC 和 AOP 的价值及应用</h2>
+      <article class="post-article">
+          一、IOC（控制反转）：反转对象的创建权1. 核心概念IOC的核心是“将对象的创建、管理和依赖关系的维护交给容器”，而非由开发者在代码中手动new对象。开发者只需定义对象的“蓝图”（如类、依赖关系），容器（Spring容器）会自动完成对象的创建和组装。
+2. 传统开发模式 vs IOC模式传统模式：  
+假设开发一个用户服务（UserService），它依赖于数据访问层（UserDao），代码如下：
+123456789101112131415161718192021222324// 数据访问层public class UserDao &amp;#123;    public void save() &amp;
+      </article>
+    </div>
+  </div>
+</div>
 
 </section>
         </div>
@@ -454,10 +533,10 @@ Ajax 应用 - 异步数据加载
       </div>
       <div>
         <span class="icon-brush"></span>
-        16.4k
+        21.2k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        01:29
+        01:51
       </div>
   </div>
 </footer>
@@ -478,11 +557,11 @@ Ajax 应用 - 异步数据加载
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">7</div>
+    <div class="sidebar-state-number">10</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
-    <div class="sidebar-state-number">2</div>
+    <div class="sidebar-state-number">3</div>
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
