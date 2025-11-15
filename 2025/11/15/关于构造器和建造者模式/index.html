@@ -1,0 +1,683 @@
+  <!DOCTYPE html>
+  <html lang="zh-CN"  
+      data-theme-mode="auto"
+  >
+  <head>
+  <meta charset="utf-8">
+  
+  
+  
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_4k4bc36ef96';window.REIMU_CONFIG.clipboard_tips = {"success":{"zh-CN":"复制成功 (*^▽^*)"},"fail":{"zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":50};window.REIMU_CONFIG.base = 'http://example.com';</script>
+  <title>
+    关于构造器和建造者模式 | Zero02 Blog
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+    <meta name="description" content="基于代码：&#96;Computer&#96; 类 + 内部 &#96;Builder&#96; 静态类，一句话优雅的构建对象，提升可读性和编码效率。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于构造器和建造者模式">
+<meta property="og:url" content="http://example.com/2025/11/15/%E5%85%B3%E4%BA%8E%E6%9E%84%E9%80%A0%E5%99%A8%E5%92%8C%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="Zero02 Blog">
+<meta property="og:description" content="基于代码：&#96;Computer&#96; 类 + 内部 &#96;Builder&#96; 静态类，一句话优雅的构建对象，提升可读性和编码效率。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-11-15T08:20:00.000Z">
+<meta property="article:modified_time" content="2025-11-15T09:03:45.262Z">
+<meta property="article:author" content="Zero02">
+<meta name="twitter:card" content="summary">
+    <link rel="alternate" href="/atom.xml" title="Zero02 Blog" type="application/atom+xml">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL&#x2F;toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx&#x2F;1oA&#x2F;0l8ysE" crossorigin="anonymous">
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css" integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous">
+
+    <link rel="preload" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;" href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css" integrity="sha384-tLMkTWh2pfXNWGFlUS0w1TFtRG5xZ9lPWFOooj+vDDLIL+xBGQU&#x2F;voDBY5XE2lVh" crossorigin="anonymous">
+<meta name="generator" content="Hexo 8.1.0"></head>
+
+  <body>
+      <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate">
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script>
+<div id="copy-tooltip"></div>
+<div id="heatmap-tooltip"></div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation">
+        <a class="main-nav-link-wrap" href="/">
+          <div class="main-nav-icon icon rotate">
+              &#xe62b;
+          </div>
+          <span class="main-nav-link">首页</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/archives">
+          <div class="main-nav-icon icon rotate">
+              &#xe62b;
+          </div>
+          <span class="main-nav-link">归档</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/about">
+          <div class="main-nav-icon icon rotate">
+              &#xe62b;
+          </div>
+          <span class="main-nav-link">关于</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/music">
+          <div class="main-nav-icon icon rotate">
+              &#xe62b;
+          </div>
+          <span class="main-nav-link">music</span>
+        </span>
+    <a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation">
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" aria-label="RSS 订阅" target="_blank"></a>
+      <a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a>
+  </nav>
+</div>
+<header id="header" aria-label="Site header">
+    <picture></picture>
+    <img  fetchpriority="high" src="https://image.acg.lol/file/2025/11/09/reimu-4.jpg" alt="关于构造器和建造者模式">
+  <div id="header-outer">
+    <div id="header-title">
+          <span id="logo">
+            <h1 data-aos="slide-up">关于构造器和建造者模式</h1>
+          </span>
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+        </h2>
+    </div>
+  </div>
+</header>
+
+        <div id="content" aria-label="Page content"  class="sidebar-right" >
+          <aside id="sidebar" aria-label="Sidebar">
+  <div class="sidebar-wrapper-container sticky">
+      <div id="aplayer" theme="var(--color-link)" data-aos="fade-up"></div>
+  <div class="sidebar-wrapper">
+    <div class="sidebar-wrap" data-aos="fade-up">
+          <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java-%E6%9E%84%E9%80%A0%E5%99%A8%E4%B8%8E%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F%E5%A4%8D%E4%B9%A0%E6%96%87%E6%A1%A3"><span class="toc-number">1.</span> <span class="toc-text">Java 构造器与建造者模式复习文档</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9%E5%9B%9E%E9%A1%BE"><span class="toc-number">1.1.</span> <span class="toc-text">一、核心知识点回顾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90%EF%BC%9AComputer-%E7%B1%BB"><span class="toc-number">1.2.</span> <span class="toc-text">二、代码解析：Computer 类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88Builder-Pattern%EF%BC%89%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.3.</span> <span class="toc-text">三、建造者模式（Builder Pattern）详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%9A%E4%B9%89"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. 适用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F%E7%BB%93%E6%9E%84%E5%9B%BE%EF%BC%88%E7%AE%80%E5%8C%96%E7%89%88%EF%BC%89"><span class="toc-number">1.3.3.</span> <span class="toc-text">3. 建造者模式结构图（简化版）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B%EF%BC%88%E6%8E%A8%E8%8D%90%E5%86%99%E6%B3%95%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">四、使用示例（推荐写法）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8-%E7%A7%81%E6%9C%89%E6%9E%84%E9%80%A0%E5%99%A8-Builder%EF%BC%9F"><span class="toc-number">1.5.</span> <span class="toc-text">五、为什么用 私有构造器 + Builder？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E8%BF%9B%E9%98%B6%EF%BC%9A%E8%AE%A9-Computer-%E6%88%90%E4%B8%BA%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%B1%BB"><span class="toc-number">1.6.</span> <span class="toc-text">六、进阶：让 Computer 成为不可变类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="toc-number">1.7.</span> <span class="toc-text">七、常见面试题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%80%BB%E7%BB%93"><span class="toc-number">1.8.</span> <span class="toc-text">八、一句话总结</span></a></li></ol></li></ol>
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Zero02" class="lazyload">
+  <div class="sidebar-author-name">Zero02</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">20</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">8</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social">
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/music" aria-label="music"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">music</div>
+      </div>
+</div>
+</div>
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
+    </div>
+  </div>
+  <div class="sidebar-widget">
+  </div>
+  </div>
+</aside>
+
+          <section id="main" aria-label="Main content"><article id="post-关于构造器和建造者模式" class="h-entry article" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <span class="article-date-link icon-calendar" data-aos="zoom-in">
+    <time datetime="2025-11-15T08:20:00.000Z" itemprop="datePublished">2025-11-15</time>
+    <time style="display: none;" id="post-update-time">2025-11-15</time>
+  </span>
+</div>
+
+        <div class="article-category">
+    <a class="article-category-link" href="/categories/Java%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" title="Java编程语言">Java编程语言</a>
+  </div>
+
+    </div>
+    
+    <div class="hr-line"></div>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+        <h1 id="Java-构造器与建造者模式复习文档"><a href="#Java-构造器与建造者模式复习文档" class="headerlink" title="Java 构造器与建造者模式复习文档"></a>Java 构造器与建造者模式复习文档</h1><p><strong>基于代码：<code>Computer</code> 类 + 内部 <code>Builder</code> 静态类</strong></p>
+<hr>
+<h2 id="一、核心知识点回顾"><a href="#一、核心知识点回顾" class="headerlink" title="一、核心知识点回顾"></a>一、核心知识点回顾</h2><table>
+<thead>
+<tr>
+<th>知识点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>构造器（Constructor）</strong></td>
+<td>用于创建对象并初始化实例变量</td>
+</tr>
+<tr>
+<td><strong>私有构造器</strong></td>
+<td>防止外部直接 <code>new</code>，强制通过特定方式创建对象</td>
+</tr>
+<tr>
+<td><strong>静态内部类</strong></td>
+<td><code>Builder</code> 是 <code>Computer</code> 的静态内部类，可独立使用</td>
+</tr>
+<tr>
+<td><strong>建造者模式（Builder Pattern）</strong></td>
+<td>一种<strong>创建型设计模式</strong>，用于构造复杂对象</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="二、代码解析：Computer-类"><a href="#二、代码解析：Computer-类" class="headerlink" title="二、代码解析：Computer 类"></a>二、代码解析：<code>Computer</code> 类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Computer</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String cpu;</span><br><span class="line">    <span class="keyword">private</span> String memory;</span><br><span class="line">    <span class="keyword">private</span> String storage;</span><br><span class="line">    <span class="keyword">private</span> String graphics;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 私有构造函数 —— 只能由 Builder 调用</span></span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">Computer</span><span class="params">(Builder builder)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.cpu = builder.cpu;</span><br><span class="line">        <span class="built_in">this</span>.memory = builder.memory;</span><br><span class="line">        <span class="built_in">this</span>.storage = builder.storage;</span><br><span class="line">        <span class="built_in">this</span>.graphics = builder.graphics;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 静态内部类 Builder</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Builder</span> &#123;</span><br><span class="line">        <span class="comment">// 与外部类相同的字段（可选配置）</span></span><br><span class="line">        <span class="keyword">private</span> String cpu;</span><br><span class="line">        <span class="keyword">private</span> String memory;</span><br><span class="line">        <span class="keyword">private</span> String storage;</span><br><span class="line">        <span class="keyword">private</span> String graphics;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 链式调用方法（返回 this）</span></span><br><span class="line">        <span class="keyword">public</span> Builder <span class="title function_">cpu</span><span class="params">(String cpu)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.cpu = cpu;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> Builder <span class="title function_">memory</span><span class="params">(String memory)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.memory = memory;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> Builder <span class="title function_">storage</span><span class="params">(String storage)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.storage = storage;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> Builder <span class="title function_">graphics</span><span class="params">(String graphics)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.graphics = graphics;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 构建最终对象</span></span><br><span class="line">        <span class="keyword">public</span> Computer <span class="title function_">build</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Computer</span>(<span class="built_in">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="三、建造者模式（Builder-Pattern）详解"><a href="#三、建造者模式（Builder-Pattern）详解" class="headerlink" title="三、建造者模式（Builder Pattern）详解"></a>三、建造者模式（Builder Pattern）详解</h2><h3 id="1-定义"><a href="#1-定义" class="headerlink" title="1. 定义"></a>1. <strong>定义</strong></h3><blockquote>
+<p>将一个<strong>复杂对象的构造过程</strong>与它的<strong>表示分离</strong>，使得同样的构建过程可以创建不同的表示。</p>
+</blockquote>
+<h3 id="2-适用场景"><a href="#2-适用场景" class="headerlink" title="2. 适用场景"></a>2. <strong>适用场景</strong></h3><ul>
+<li>对象有<strong>多个可选参数</strong></li>
+<li>需要<strong>保证对象创建的顺序或完整性</strong></li>
+<li>避免<strong>构造函数参数过多</strong>（望而生畏）</li>
+<li>希望创建<strong>不可变对象</strong></li>
+</ul>
+<hr>
+<h3 id="3-建造者模式结构图（简化版）"><a href="#3-建造者模式结构图（简化版）" class="headerlink" title="3. 建造者模式结构图（简化版）"></a>3. <strong>建造者模式结构图（简化版）</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[Client]</span><br><span class="line">   ↓</span><br><span class="line">[Builder] → build() → [Product]</span><br><span class="line">   ↑             ↑</span><br><span class="line">[ConcreteBuilder]  [Director]（可选）</span><br></pre></td></tr></table></figure>
+
+<p>在本例中：</p>
+<ul>
+<li><code>Computer</code> 是 <strong>Product</strong></li>
+<li><code>Builder</code> 是 <strong>Concrete Builder</strong></li>
+<li>无 <code>Director</code>（直接由客户端控制）</li>
+</ul>
+<hr>
+<h2 id="四、使用示例（推荐写法）"><a href="#四、使用示例（推荐写法）" class="headerlink" title="四、使用示例（推荐写法）"></a>四、使用示例（推荐写法）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Computer</span> <span class="variable">gamingPC</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Computer</span>.Builder()</span><br><span class="line">            .cpu(<span class="string">&quot;Intel i9-13900K&quot;</span>)</span><br><span class="line">            .memory(<span class="string">&quot;32GB DDR5&quot;</span>)</span><br><span class="line">            .storage(<span class="string">&quot;1TB NVMe SSD&quot;</span>)</span><br><span class="line">            .graphics(<span class="string">&quot;RTX 4090&quot;</span>)</span><br><span class="line">            .build();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 简配办公电脑</span></span><br><span class="line">        <span class="type">Computer</span> <span class="variable">officePC</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Computer</span>.Builder()</span><br><span class="line">            .cpu(<span class="string">&quot;Intel i5&quot;</span>)</span><br><span class="line">            .memory(<span class="string">&quot;16GB&quot;</span>)</span><br><span class="line">            .build();  <span class="comment">// storage 和 graphics 可选不填</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>参数顺序随意</li>
+<li>可选参数清晰</li>
+<li>代码可读性强</li>
+<li>支持链式调用</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="五、为什么用-私有构造器-Builder？"><a href="#五、为什么用-私有构造器-Builder？" class="headerlink" title="五、为什么用 私有构造器 + Builder？"></a>五、为什么用 <strong>私有构造器 + Builder</strong>？</h2><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>传统构造器</th>
+<th>Builder 模式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>参数太多</td>
+<td><code>new Computer(a,b,c,d)</code></td>
+<td>链式设置</td>
+</tr>
+<tr>
+<td>可选参数</td>
+<td>多个重载构造器</td>
+<td>统一一个 Builder</td>
+</tr>
+<tr>
+<td>不可变对象</td>
+<td>难保证</td>
+<td>所有字段 <code>final</code> + Builder 构造</td>
+</tr>
+<tr>
+<td>可读性</td>
+<td>差</td>
+<td>极佳</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="六、进阶：让-Computer-成为不可变类"><a href="#六、进阶：让-Computer-成为不可变类" class="headerlink" title="六、进阶：让 Computer 成为不可变类"></a>六、进阶：让 <code>Computer</code> 成为不可变类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Computer</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String cpu;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String memory;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String storage;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String graphics;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">Computer</span><span class="params">(Builder builder)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.cpu = builder.cpu;</span><br><span class="line">        <span class="built_in">this</span>.memory = builder.memory;</span><br><span class="line">        <span class="built_in">this</span>.storage = builder.storage;</span><br><span class="line">        <span class="built_in">this</span>.graphics = builder.graphics;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 只提供 getter，无 setter</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getCpu</span><span class="params">()</span> &#123; <span class="keyword">return</span> cpu; &#125;</span><br><span class="line">    <span class="comment">// ... 其他 getter</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>线程安全 + 防御性编程首选</strong></p>
+</blockquote>
+<hr>
+<h2 id="七、常见面试题"><a href="#七、常见面试题" class="headerlink" title="七、常见面试题"></a>七、常见面试题</h2><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>答案要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>什么是建造者模式？</td>
+<td>分离构造与表示，支持复杂对象灵活创建</td>
+</tr>
+<tr>
+<td>为什么构造器是 <code>private</code>？</td>
+<td>强制使用 <code>Builder</code>，控制对象创建方式</td>
+</tr>
+<tr>
+<td>为什么 <code>Builder</code> 是静态内部类？</td>
+<td>可访问外部类私有构造器，且不依赖外部类实例</td>
+</tr>
+<tr>
+<td>与工厂模式的区别？</td>
+<td>建造者关注<strong>构造过程</strong>，工厂关注<strong>返回产品</strong></td>
+</tr>
+<tr>
+<td>Lombok <code>@Builder</code> 能替代吗？</td>
+<td>可以，但理解手写原理更重要</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="八、一句话总结"><a href="#八、一句话总结" class="headerlink" title="八、一句话总结"></a>八、一句话总结</h2><blockquote>
+<p><strong>建造者模式 &#x3D; 私有构造器 + 静态 Builder 类 + 链式方法 + build() 构建</strong><br>解决：<strong>参数多、可选、顺序乱、不可变</strong> 等构造函数痛点。</p>
+</blockquote>
+<hr>
+<p><strong>建议背诵口诀</strong>：</p>
+<blockquote>
+<p><strong>“对象复杂别硬造，Builder 一步步来搞；<br>私有构造不让 new，链式调用真优雅！”</strong></p>
+</blockquote>
+<hr>
+
+    </div>
+    <footer class="article-footer">
+      
+    </footer>
+  </div>
+    <nav id="article-nav" aria-label="Article navigation" data-aos="fade-up">
+      <div class="article-nav-link-wrap left">
+          <img data-src="https://image.acg.lol/file/2025/11/09/reimu-2.jpg" data-sizes="auto" alt="访问修饰符的最佳实践" class="lazyload">
+        <a href="/2025/11/15/%E8%AE%BF%E9%97%AE%E4%BF%AE%E9%A5%B0%E7%AC%A6%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/" aria-label="前一篇: 访问修饰符的最佳实践" title="前一篇: 访问修饰符的最佳实践"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+            访问修饰符的最佳实践
+        </h3>
+      </div>
+    <div class="article-nav-link-wrap right">
+        <img data-src="https://image.acg.lol/file/2025/11/15/reimu-12.jpg" data-sizes="auto" alt="XSS 攻击与防御" class="lazyload">
+      <a href="/2025/11/13/XSS%20%E6%94%BB%E5%87%BB%E4%B8%8E%E9%98%B2%E5%BE%A1/" aria-label="后一篇: XSS 攻击与防御"  title="后一篇: XSS 攻击与防御"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+          XSS 攻击与防御
+      </h3>
+    </div>
+  </nav>
+
+</article>
+
+
+</section>
+        </div>
+        <footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    <div>
+      <span class="icon-copyright"></span>
+        2025
+      <span class="footer-info-sep rotate"></span>
+      Zero02
+    </div>
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+      <div>
+        <span class="icon-brush"></span>
+        38.9k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        03:19
+      </div>
+  </div>
+</footer>
+
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap">
+        <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java-%E6%9E%84%E9%80%A0%E5%99%A8%E4%B8%8E%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F%E5%A4%8D%E4%B9%A0%E6%96%87%E6%A1%A3"><span class="toc-number">1.</span> <span class="toc-text">Java 构造器与建造者模式复习文档</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9%E5%9B%9E%E9%A1%BE"><span class="toc-number">1.1.</span> <span class="toc-text">一、核心知识点回顾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90%EF%BC%9AComputer-%E7%B1%BB"><span class="toc-number">1.2.</span> <span class="toc-text">二、代码解析：Computer 类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88Builder-Pattern%EF%BC%89%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.3.</span> <span class="toc-text">三、建造者模式（Builder Pattern）详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%9A%E4%B9%89"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. 适用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F%E7%BB%93%E6%9E%84%E5%9B%BE%EF%BC%88%E7%AE%80%E5%8C%96%E7%89%88%EF%BC%89"><span class="toc-number">1.3.3.</span> <span class="toc-text">3. 建造者模式结构图（简化版）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B%EF%BC%88%E6%8E%A8%E8%8D%90%E5%86%99%E6%B3%95%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">四、使用示例（推荐写法）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8-%E7%A7%81%E6%9C%89%E6%9E%84%E9%80%A0%E5%99%A8-Builder%EF%BC%9F"><span class="toc-number">1.5.</span> <span class="toc-text">五、为什么用 私有构造器 + Builder？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E8%BF%9B%E9%98%B6%EF%BC%9A%E8%AE%A9-Computer-%E6%88%90%E4%B8%BA%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%B1%BB"><span class="toc-number">1.6.</span> <span class="toc-text">六、进阶：让 Computer 成为不可变类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="toc-number">1.7.</span> <span class="toc-text">七、常见面试题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%80%BB%E7%BB%93"><span class="toc-number">1.8.</span> <span class="toc-text">八、一句话总结</span></a></li></ol></li></ol>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Zero02" class="lazyload">
+  <div class="sidebar-author-name">Zero02</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">20</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">8</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social">
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/music" aria-label="music"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">music</div>
+      </div>
+</div>
+</div>
+  </div>
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+</nav>
+
+    </div>
+      <div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png"/>
+        </div>
+      </div>
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+  
+<script src="/js/generator_search.js" defer></script>
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js" integrity="sha384-8LyaidD9GPxQQgLJO&#x2F;WRw&#x2F;O2h3BoNq&#x2F;ApI&#x2F;ecpvM6RsrCz2qP2ppBXUKihP4V&#x2F;2d" crossorigin="anonymous"></script>
+
+  <script>
+    if (! || !window.matchMedia('(max-width: 768px)').matches) {
+      window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'));
+    }
+  </script>
+
+
+
+  
+<script src="https://npm.webcache.cn/live2d-widgets@0.9.0/autoload.js" integrity="sha384-poTN7wN&#x2F;SqNhQqo3jdFeX20ikddWeFGkUkDEzsKjgH&#x2F;ez8aQLn81oI0Cw6q5xNyB" crossorigin="anonymous"></script>
+
+
+
+<div id="lazy-script">
+  <div>
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Zero02",
+          title: "关于构造器和建造者模式",
+          url: "http://example.com/2025/11/15/%E5%85%B3%E4%BA%8E%E6%9E%84%E9%80%A0%E5%99%A8%E5%92%8C%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/",
+          excerpt: "基于代码：`Computer` 类 + 内部 `Builder` 静态类，一句话优雅的构建对象，提升可读性和编码效率。",
+          description: "",
+          stripContent: "Java 构造器与建造者模式复习文档基于代码：Computer 类 + 内部 Builder 静态类  一、核心知识点回顾   知识点 说明    构造器（Constructor） 用于创建对象并初始化实例变量   私有构造器 防止外部直接 new，强制通过特定方式创建对象   静态内部类 Builder 是 Computer 的静态内部类，可独立使用   建造者模式（Builder Pattern） 一种创建型设计模式，用于构造复杂对象    二、代码解析：Computer 类12345678",
+          date: "Sat Nov 15 2025 16:20:00 GMT+0800",
+          updated: "Sat Nov 15 2025 17:03:45 GMT+0800",
+          cover: "https://image.acg.lol/file/2025/11/09/reimu-4.jpg",
+        };
+      </script>
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        const initPswp = (gallery, children) => {
+          if (_$$(`${gallery} ${children}`).length > 0) {
+            new PhotoSwipeLightbox({
+              gallery,
+              children,
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+        }
+        const pswp = () => {
+          initPswp('.article-entry', 'a.article-gallery-item');
+          initPswp('.article-gallery', 'a.article-gallery-item');
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+        
+
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.10.3' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+  
+<script src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js" integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr+h5UfruuRL&#x2F;aORyw+5+HZoU6e" crossorigin="anonymous"></script>
+
+    <script>
+      if (! || !window.matchMedia('(max-width: 768px)').matches) {
+        if (window.matchMedia('(max-width: 959px)').matches) {
+          const aplayer = _$('#aplayer');
+          if (aplayer) {
+            const aside = aplayer.parentNode?.parentNode;
+            if (aside?.tagName === 'ASIDE') {
+              aplayer.removeAttribute('data-aos');
+              aplayer.parentNode.removeChild(aplayer);
+              document.body.appendChild(aplayer);
+            }
+          }
+        }
+        const ap = new APlayer({
+          theme: "var(--color-link)",
+          container: document.getElementById('aplayer'),
+          audio: [] || [],
+          fixed: isMobile ? true : (null || false),
+          autoplay: null || false,
+          loop: '' || 'all',
+          order: '' || 'list',
+          preload: '' || 'auto',
+          volume: null || 0.7,
+          mutex: null || true,
+          listFolded: null || false,
+          lrcType: null || 0,
+        });
+      }
+    </script>
+
+
+
+  </body>
+  <script src="https://unpkg.com/mermaid@9.4.3/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({startOnLoad: true});</script>
+  </html>

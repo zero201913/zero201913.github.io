@@ -1,0 +1,597 @@
+  <!DOCTYPE html>
+  <html lang="zh-CN"  
+      data-theme-mode="auto"
+  >
+  <head>
+  <meta charset="utf-8">
+  
+  
+  
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_4k4bc36ef96';window.REIMU_CONFIG.clipboard_tips = {"success":{"zh-CN":"复制成功 (*^▽^*)"},"fail":{"zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":50};window.REIMU_CONFIG.base = 'http://example.com';</script>
+  <title>
+    复习jsp的系统设计 | Zero02 Blog
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+    <meta name="description" content="使用jsp+javaee开发规范，来开发一个小型管理系统，拥有两种身份">
+<meta property="og:type" content="article">
+<meta property="og:title" content="复习jsp的系统设计">
+<meta property="og:url" content="http://example.com/2025/11/02/%E4%BB%A3%E7%A0%81%E5%A4%8D%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Zero02 Blog">
+<meta property="og:description" content="使用jsp+javaee开发规范，来开发一个小型管理系统，拥有两种身份">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-11-02T11:30:00.000Z">
+<meta property="article:modified_time" content="2025-11-15T09:03:31.664Z">
+<meta property="article:author" content="Zero02">
+<meta name="twitter:card" content="summary">
+    <link rel="alternate" href="/atom.xml" title="Zero02 Blog" type="application/atom+xml">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL&#x2F;toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx&#x2F;1oA&#x2F;0l8ysE" crossorigin="anonymous">
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css" integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous">
+
+    <link rel="preload" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;" href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css" integrity="sha384-tLMkTWh2pfXNWGFlUS0w1TFtRG5xZ9lPWFOooj+vDDLIL+xBGQU&#x2F;voDBY5XE2lVh" crossorigin="anonymous">
+<meta name="generator" content="Hexo 8.1.0"></head>
+
+  <body>
+      <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate">
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script>
+<div id="copy-tooltip"></div>
+<div id="heatmap-tooltip"></div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation">
+        <a class="main-nav-link-wrap" href="/">
+          <div class="main-nav-icon icon rotate">
+              &#xe62b;
+          </div>
+          <span class="main-nav-link">首页</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/archives">
+          <div class="main-nav-icon icon rotate">
+              &#xe62b;
+          </div>
+          <span class="main-nav-link">归档</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/about">
+          <div class="main-nav-icon icon rotate">
+              &#xe62b;
+          </div>
+          <span class="main-nav-link">关于</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/music">
+          <div class="main-nav-icon icon rotate">
+              &#xe62b;
+          </div>
+          <span class="main-nav-link">music</span>
+        </span>
+    <a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation">
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" aria-label="RSS 订阅" target="_blank"></a>
+      <a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a>
+  </nav>
+</div>
+<header id="header" aria-label="Site header">
+    <picture></picture>
+    <img  fetchpriority="high" src="https://image.acg.lol/file/2025/11/15/reimu-13.jpg" alt="复习jsp的系统设计">
+  <div id="header-outer">
+    <div id="header-title">
+          <span id="logo">
+            <h1 data-aos="slide-up">复习jsp的系统设计</h1>
+          </span>
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+        </h2>
+    </div>
+  </div>
+</header>
+
+        <div id="content" aria-label="Page content"  class="sidebar-right" >
+          <aside id="sidebar" aria-label="Sidebar">
+  <div class="sidebar-wrapper-container sticky">
+      <div id="aplayer" theme="var(--color-link)" data-aos="fade-up"></div>
+  <div class="sidebar-wrapper">
+    <div class="sidebar-wrap" data-aos="fade-up">
+          <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93-init-sql"><span class="toc-number">1.1.</span> <span class="toc-text">创建数据库 init.sql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BD%93%E7%B1%BB-entity-java"><span class="toc-number">1.2.</span> <span class="toc-text">创建实体类 entity.java</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E5%8A%9F%E8%83%BD"><span class="toc-number">2.</span> <span class="toc-text">登录功能</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2-login-jsp"><span class="toc-number">2.1.</span> <span class="toc-text">创建登录页面 login.jsp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E9%AA%8C%E8%AF%81-login-jsp"><span class="toc-number">2.2.</span> <span class="toc-text">登录验证 login.jsp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E9%80%BB%E8%BE%91-entity-java"><span class="toc-number">2.3.</span> <span class="toc-text">登录逻辑 entity.java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E7%99%BB%E5%BD%95-checklogin-jsp"><span class="toc-number">2.4.</span> <span class="toc-text">检查登录 checklogin.jsp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E7%99%BB%E5%BD%95%E8%B7%B3%E8%BD%AC-Servlet-java"><span class="toc-number">2.5.</span> <span class="toc-text">编写登录跳转 Servlet.java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E4%BF%A1%E6%81%AF%E5%9B%9E%E6%98%BE-login-jsp"><span class="toc-number">2.6.</span> <span class="toc-text">登录信息回显 login.jsp</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%BB%E9%A1%B5%E9%9D%A2-admin-jsp"><span class="toc-number">3.</span> <span class="toc-text">主页面 admin.jsp</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%96%B9%E6%B3%95-entity-java"><span class="toc-number">3.1.</span> <span class="toc-text">查询方法 entity.java</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%90%E9%A1%B5%E9%9D%A2-user-jsp"><span class="toc-number">4.</span> <span class="toc-text">子页面 user.jsp</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%8A%9F%E8%83%BD-add-jsp"><span class="toc-number">5.</span> <span class="toc-text">添加功能 add.jsp</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E6%96%B0%E5%A2%9E-checkadd-jsp"><span class="toc-number">5.1.</span> <span class="toc-text">检查新增 checkadd.jsp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95-entity-java"><span class="toc-number">5.2.</span> <span class="toc-text">新增方法 entity.java</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%8A%9F%E8%83%BD-delete-jsp"><span class="toc-number">6.</span> <span class="toc-text">删除功能 delete.jsp</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%96%B9%E6%B3%95-entity-java"><span class="toc-number">6.1.</span> <span class="toc-text">删除方法 entity.java</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E9%A1%B5%E9%9D%A2-update-jsp"><span class="toc-number">7.</span> <span class="toc-text">更新页面 update.jsp</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E6%9B%B4%E6%96%B0-updatecheck-jsp"><span class="toc-number">7.1.</span> <span class="toc-text">检查更新 updatecheck.jsp</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#XML%E9%85%8D%E7%BD%AE"><span class="toc-number">8.</span> <span class="toc-text">XML配置</span></a></li></ol>
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Zero02" class="lazyload">
+  <div class="sidebar-author-name">Zero02</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">20</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">8</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social">
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/music" aria-label="music"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">music</div>
+      </div>
+</div>
+</div>
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
+    </div>
+  </div>
+  <div class="sidebar-widget">
+  </div>
+  </div>
+</aside>
+
+          <section id="main" aria-label="Main content"><article id="post-代码复习" class="h-entry article" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <span class="article-date-link icon-calendar" data-aos="zoom-in">
+    <time datetime="2025-11-02T11:30:00.000Z" itemprop="datePublished">2025-11-02</time>
+    <time style="display: none;" id="post-update-time">2025-11-15</time>
+  </span>
+</div>
+
+        <div class="article-category">
+    <a class="article-category-link" href="/categories/Java%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" title="Java编程语言">Java编程语言</a>
+  </div>
+
+    </div>
+    
+    <div class="hr-line"></div>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+        <h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><h2 id="创建数据库-init-sql"><a href="#创建数据库-init-sql" class="headerlink" title="创建数据库 init.sql"></a>创建数据库 init.sql</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> database nlgamedb;</span><br><span class="line">use nlgamedb;</span><br><span class="line"><span class="keyword">create table</span> <span class="keyword">user</span>(</span><br><span class="line">account <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">primary key</span>,</span><br><span class="line">certificate <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">not null</span>,</span><br><span class="line">authority <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">not null</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">create table</span> session</span><br><span class="line">(</span><br><span class="line">sessionid <span class="type">int</span> <span class="keyword">primary key</span> auto_increment,</span><br><span class="line">item <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">not null</span>,</span><br><span class="line">ground <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">not null</span>,</span><br><span class="line"><span class="type">date</span> <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">not null</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert into</span> <span class="keyword">user</span> <span class="keyword">values</span>(<span class="string">&#x27;aaa&#x27;</span>,<span class="string">&#x27;111&#x27;</span>,<span class="string">&#x27;admin&#x27;</span>);</span><br><span class="line"><span class="keyword">insert into</span> <span class="keyword">user</span> <span class="keyword">values</span>(<span class="string">&#x27;bbb&#x27;</span>,<span class="string">&#x27;222&#x27;</span>,<span class="string">&#x27;user&#x27;</span>);</span><br><span class="line"><span class="keyword">insert into</span> session(item,ground,<span class="type">date</span>) <span class="keyword">values</span>(<span class="string">&#x27;篮球&#x27;</span>,<span class="string">&#x27;珠海市金湾区公路&#x27;</span>,<span class="string">&#x27;11月12日&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> session;</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建实体类-entity-java"><a href="#创建实体类-entity-java" class="headerlink" title="创建实体类 entity.java"></a>创建实体类 entity.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Nationalgame</span> &#123;</span><br><span class="line">    String account;</span><br><span class="line">    String certificate;</span><br><span class="line">    String authority;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getAccount</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> account;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAccount</span><span class="params">(String account)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.account = account;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getCertificate</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> certificate;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setCertificate</span><span class="params">(String certificate)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.certificate = certificate;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getAuthority</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> authority;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAuthority</span><span class="params">(String authority)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.authority = authority;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="登录功能"><a href="#登录功能" class="headerlink" title="登录功能"></a>登录功能</h1><h2 id="创建登录页面-login-jsp"><a href="#创建登录页面-login-jsp" class="headerlink" title="创建登录页面 login.jsp"></a>创建登录页面 login.jsp</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">登录页面<span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;checklogin.jsp&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span> <span class="attr">name</span>=<span class="string">&quot;login&quot;</span>&gt;</span></span><br><span class="line">请输入用户名：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;account&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">请输入密码：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">name</span>=<span class="string">&quot;certificate&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">请选择权限：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;authority&quot;</span> <span class="attr">value</span>=<span class="string">&quot;admin&quot;</span> <span class="attr">checked</span>&gt;</span>组委会</span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;authority&quot;</span> <span class="attr">value</span>=<span class="string">&quot;user&quot;</span>&gt;</span>观众<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;登录&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;return validate();&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="登录验证-login-jsp"><a href="#登录验证-login-jsp" class="headerlink" title="登录验证 login.jsp"></a>登录验证 login.jsp</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">validate</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">document</span>.<span class="property">login</span>.<span class="property">account</span>.<span class="property">value</span> == <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">        <span class="title function_">alert</span>(<span class="string">&quot;用户名不能为空！&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">document</span>.<span class="property">login</span>.<span class="property">certificate</span>.<span class="property">value</span> == <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">        <span class="title function_">alert</span>(<span class="string">&quot;密码不能为空！&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="登录逻辑-entity-java"><a href="#登录逻辑-entity-java" class="headerlink" title="登录逻辑 entity.java"></a>登录逻辑 entity.java</h2><p>在实体类中编写</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Connection <span class="title function_">getConn</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">Connection</span> <span class="variable">cn</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Class.forName(<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>);</span><br><span class="line">        cn = DriverManager.getConnection(<span class="string">&quot;jdbc:mysql://127.0.0.1:3306/nlgamedb&quot;</span>, <span class="string">&quot;root&quot;</span>, <span class="string">&quot;123456&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cn;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">login</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">boolean</span> <span class="variable">flag</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line">    Statement st;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        st = getConn().createStatement();</span><br><span class="line">        <span class="type">ResultSet</span> <span class="variable">rs</span> <span class="operator">=</span> st.executeQuery(<span class="string">&quot;select * from user where account=&#x27;&quot;</span> + account + <span class="string">&quot;&#x27; and certificate=&#x27;&quot;</span> + certificate + <span class="string">&quot;&#x27; and authority=&#x27;&quot;</span> + authority + <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (rs.next()) &#123;</span><br><span class="line">            flag = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> flag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="检查登录-checklogin-jsp"><a href="#检查登录-checklogin-jsp" class="headerlink" title="检查登录 checklogin.jsp"></a>检查登录 checklogin.jsp</h2><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;jsp:useBean id=<span class="string">&quot;login&quot;</span> class=<span class="string">&quot;com.nationalgame&quot;</span>&gt;&lt;/jsp:useBean&gt;</span><br><span class="line"> &lt;jsp:setProperty property=<span class="string">&quot;*&quot;</span> name=<span class="string">&quot;login&quot;</span>/&gt;</span><br><span class="line"> &lt;html&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">&lt;%</span><br><span class="line">request.setCharacterEncoding(<span class="string">&quot;gbk&quot;</span>);</span><br><span class="line"><span class="type">String</span> <span class="variable">authority</span> <span class="operator">=</span> request.getParameter(<span class="string">&quot;authority&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (login.login()) &#123;</span><br><span class="line">%&gt;</span><br><span class="line">&lt;jsp:forward page=<span class="string">&quot;Servlet&quot;</span>&gt;</span><br><span class="line">    &lt;jsp:param value=<span class="string">&quot;&lt;%=authority%&gt;&quot;</span> name=<span class="string">&quot;authority&quot;</span>/&gt;</span><br><span class="line">&lt;/jsp:forward&gt;</span><br><span class="line">&lt;%</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">%&gt;</span><br><span class="line">&lt;jsp:forward page=<span class="string">&quot;Login.jsp&quot;</span>&gt;</span><br><span class="line">    &lt;jsp:param value=<span class="string">&quot;用户名或者密码错误&quot;</span> name=<span class="string">&quot;msg&quot;</span>/&gt;</span><br><span class="line">&lt;/jsp:forward&gt;</span><br><span class="line">&lt;%</span><br><span class="line">&#125;</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="编写登录跳转-Servlet-java"><a href="#编写登录跳转-Servlet-java" class="headerlink" title="编写登录跳转 Servlet.java"></a>编写登录跳转 Servlet.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//doGet方法</span></span><br><span class="line">request.setCharacterEncoding(<span class="string">&quot;gbk&quot;</span>);</span><br><span class="line">response.setContentType(<span class="string">&quot;text/html;charset=gbk&quot;</span>);</span><br><span class="line"><span class="type">PrintWriter</span> <span class="variable">out</span> <span class="operator">=</span> response.getWriter();</span><br><span class="line"><span class="type">String</span> <span class="variable">authority</span> <span class="operator">=</span> response.getParameter(<span class="string">&quot;authority&quot;</span>);</span><br><span class="line"><span class="keyword">if</span>(authority.equals(<span class="string">&quot;admin&quot;</span>))</span><br><span class="line">getServletConfig().getServletContext()</span><br><span class="line">.getRequestDispatcher(<span class="string">&quot;/admin,jsp&quot;</span>).forward(request,response);</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">getServletConfig().getServletContexxt()</span><br><span class="line">.getRequestDispatcher(<span class="string">&quot;/user.jsp&quot;</span>).forward(request,response);</span><br><span class="line">out.flush();</span><br><span class="line">out.close();</span><br></pre></td></tr></table></figure>
+
+<h2 id="登录信息回显-login-jsp"><a href="#登录信息回显-login-jsp" class="headerlink" title="登录信息回显 login.jsp"></a>登录信息回显 login.jsp</h2><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">request.setCharacterEncoding(<span class="string">&quot;gbk&quot;</span>);</span><br><span class="line"><span class="keyword">if</span>(request.getParameter(<span class="string">&quot;msg&quot;</span>)!=<span class="literal">null</span>)</span><br><span class="line">out.print(request.getParameter(<span class="string">&quot;msg&quot;</span>));</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="主页面-admin-jsp"><a href="#主页面-admin-jsp" class="headerlink" title="主页面 admin.jsp"></a>主页面 admin.jsp</h1><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> <span class="keyword">import</span>=<span class="string">&quot;java.util.*&quot;</span> pageEncoding=<span class="string">&quot;gbk&quot;</span>%&gt;</span><br><span class="line">&lt;%<span class="meta">@page</span> <span class="keyword">import</span>=<span class="string">&quot;java.sql.ResultSet&quot;</span>%&gt;</span><br><span class="line">&lt;jsp:useBean id=<span class="string">&quot;login&quot;</span> class=<span class="string">&quot;com.nationalgame&quot;</span>&gt;&lt;/jsp:useBean&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;%</span><br><span class="line">        request.setChatacterEncoding(<span class="string">&quot;gbk&quot;</span>);</span><br><span class="line">        ResultSet rs=login.Query(<span class="number">0</span>);</span><br><span class="line">    %&gt;</span><br><span class="line">    &lt;a href=<span class="string">&quot;add.jsp&quot;</span>&gt;新增比赛信息&lt;/a&gt;&lt;br&gt;</span><br><span class="line">    &lt;table border=<span class="string">&quot;1&quot;</span>&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;th&gt;场次编号&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;比赛项目&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;比赛场地&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;比赛日期&lt;/th&gt;</span><br><span class="line">            &lt;th colspan=<span class="string">&quot;2&quot;</span>&gt;操作&lt;/th&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;% <span class="keyword">while</span>(rs.next())&#123; %&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td&gt;&lt;%=rs.getString(<span class="number">1</span>)%&gt;&lt;/td&gt;</span><br><span class="line">            &lt;td&gt;&lt;%=rs.getString(<span class="number">2</span>)%&gt;&lt;/td&gt;</span><br><span class="line">            &lt;td&gt;&lt;%=rs.getString(<span class="number">3</span>)%&gt;&lt;/td&gt;</span><br><span class="line">            &lt;td&gt;&lt;%=rs.getString(<span class="number">4</span>)%&gt;&lt;/td&gt;</span><br><span class="line">            &lt;td&gt;&lt;a href=<span class="string">&quot;delete.jsp?id=&lt;%=rs.getString(1)%&gt;&quot;</span>&gt;删除&lt;/a&gt;&lt;/td&gt;</span><br><span class="line">            &lt;td&gt;&lt;a href=<span class="string">&quot;update.jsp?id=&lt;%=rs.getString(2)%&gt;&quot;</span>&gt;修改&lt;/a&gt;&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;% &#125; %&gt;</span><br><span class="line">    &lt;/table&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询方法-entity-java"><a href="#查询方法-entity-java" class="headerlink" title="查询方法 entity.java"></a>查询方法 entity.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> ResultSet <span class="title function_">Query</span><span class="params">(<span class="type">int</span> id)</span>&#123;</span><br><span class="line">    ResultSet rs=<span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        Statement st=getConn().createStatement();</span><br><span class="line">        <span class="keyword">if</span>(id==<span class="number">0</span>)</span><br><span class="line">            rs=st.executeQuery(<span class="string">&quot;select*from session&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            rs=st.executeQuery(<span class="string">&quot;select*from session where sessionid=&quot;</span>+id);</span><br><span class="line">    &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> rs;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="子页面-user-jsp"><a href="#子页面-user-jsp" class="headerlink" title="子页面 user.jsp"></a>子页面 user.jsp</h1><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> <span class="keyword">import</span>=<span class="string">&quot;java.util.*&quot;</span> pageEncoding=<span class="string">&quot;gbk&quot;</span>%&gt;</span><br><span class="line">&lt;%<span class="meta">@page</span> <span class="keyword">import</span>=<span class="string">&quot;java.sql.ResultSet&quot;</span>%&gt;</span><br><span class="line">&lt;jsp:useBean id=<span class="string">&quot;login&quot;</span> class=<span class="string">&quot;com.nationalgame&quot;</span>&gt;&lt;/jsp:useBean&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;%</span><br><span class="line">        request.setChatacterEncoding(<span class="string">&quot;gbk&quot;</span>);</span><br><span class="line">        ResultSet rs=login.Query(<span class="number">0</span>);</span><br><span class="line">    %&gt;</span><br><span class="line">    &lt;table border=<span class="string">&quot;1&quot;</span>&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;th&gt;场次编号&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;比赛项目&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;比赛场地&lt;/th&gt;</span><br><span class="line">            &lt;th&gt;比赛日期&lt;/th&gt;</span><br><span class="line">            &lt;th colspan=<span class="string">&quot;2&quot;</span>&gt;操作&lt;/th&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;% <span class="keyword">while</span>(rs.next())&#123; %&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td&gt;&lt;%=rs.getString(<span class="number">1</span>) %&gt;&lt;/td&gt;</span><br><span class="line">            &lt;td&gt;&lt;%=rs.getString(<span class="number">2</span>) %&gt;&lt;/td&gt;</span><br><span class="line">            &lt;td&gt;&lt;%=rs.getString(<span class="number">3</span>) %&gt;&lt;/td&gt;</span><br><span class="line">            &lt;td&gt;&lt;%=rs.getString(<span class="number">4</span>) %&gt;&lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;% &#125; %&gt;</span><br><span class="line">    &lt;/table&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="添加功能-add-jsp"><a href="#添加功能-add-jsp" class="headerlink" title="添加功能 add.jsp"></a>添加功能 add.jsp</h1><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> <span class="keyword">import</span>=<span class="string">&quot;java.util.*&quot;</span> pageEncoding=<span class="string">&quot;gbk&quot;</span>%&gt;</span><br><span class="line">&lt;jsp:useBean id=<span class="string">&quot;login&quot;</span> class=<span class="string">&quot;com.nationalgame&quot;</span>&gt;&lt;/jsp:useBean&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    新增比赛信息&lt;br&gt;</span><br><span class="line">    &lt;form action=<span class="string">&quot;checkadd.jsp&quot;</span> method=<span class="string">&quot;post&quot;</span>&gt;</span><br><span class="line">        请输入比赛项目：&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;item&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">        请输入比赛场地：&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;ground&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">        请输入比赛日期：&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;date&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">        &lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;添加&quot;</span>&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="检查新增-checkadd-jsp"><a href="#检查新增-checkadd-jsp" class="headerlink" title="检查新增 checkadd.jsp"></a>检查新增 checkadd.jsp</h2><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> &lt;% </span><br><span class="line">    request.setCharacterEncoding(<span class="string">&quot;gbk&quot;</span>);</span><br><span class="line">    String item=request.getParameter(<span class="string">&quot;item&quot;</span>);</span><br><span class="line">    String ground=request.getParameter(<span class="string">&quot;ground&quot;</span>);</span><br><span class="line">    String date=request.getParameter(<span class="string">&quot;date&quot;</span>);</span><br><span class="line">    ArrayList list=<span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">    list.add(item);</span><br><span class="line">    list.add(ground);</span><br><span class="line">    list.add(date);</span><br><span class="line">    login.Insert(list);</span><br><span class="line">    response.sendRedirect(<span class="string">&quot;admin.jsp&quot;</span>);</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="新增方法-entity-java"><a href="#新增方法-entity-java" class="headerlink" title="新增方法 entity.java"></a>新增方法 entity.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">Insert</span><span class="params">(ArrayList list)</span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        Statement st=getConn().createStatement();</span><br><span class="line">        st.executeUpdate(<span class="string">&quot;insert into session(item,groud,date) </span></span><br><span class="line"><span class="string">                         </span></span><br><span class="line"><span class="string">value(&#x27;&quot;</span>+list.get(<span class="number">0</span>)+<span class="string">&quot;&#x27;,&#x27;&quot;</span>+list.get(<span class="number">1</span>)+<span class="string">&quot;&#x27;,&#x27;&quot;</span>+list.get(<span class="number">2</span>)+<span class="string">&quot;&#x27;)&quot;</span>);</span><br><span class="line">    &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="删除功能-delete-jsp"><a href="#删除功能-delete-jsp" class="headerlink" title="删除功能 delete.jsp"></a>删除功能 delete.jsp</h1><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">request.setCharacterEncoding(<span class="string">&quot;gbk&quot;</span>);</span><br><span class="line"><span class="type">int</span> <span class="variable">id</span> <span class="operator">=</span> Integer.parseInt(request.getParameter(<span class="string">&quot;id&quot;</span>));</span><br><span class="line">login.Delete(id);</span><br><span class="line">response.sendRedirect(<span class="string">&quot;admin.jsp&quot;</span>);</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="删除方法-entity-java"><a href="#删除方法-entity-java" class="headerlink" title="删除方法 entity.java"></a>删除方法 entity.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">Delete</span><span class="params">(<span class="type">int</span> id)</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="type">Statement</span> <span class="variable">st</span> <span class="operator">=</span> getConn().createStatement();</span><br><span class="line">        st.executeUpdate(<span class="string">&quot;delete from session where sessionid=&quot;</span> + id);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="更新页面-update-jsp"><a href="#更新页面-update-jsp" class="headerlink" title="更新页面 update.jsp"></a>更新页面 update.jsp</h1><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">&lt;%</span><br><span class="line">request.setCharacterEncoding(<span class="string">&quot;gbk&quot;</span>);</span><br><span class="line"><span class="type">int</span> <span class="variable">id</span> <span class="operator">=</span> Integer.parseInt(request.getParameter(<span class="string">&quot;id&quot;</span>));</span><br><span class="line"><span class="type">ResultSet</span> <span class="variable">rs</span> <span class="operator">=</span> login.Query(id);</span><br><span class="line"><span class="keyword">if</span>(rs.next())&#123;</span><br><span class="line">%&gt;</span><br><span class="line">修改比赛信息&lt;br/&gt;&lt;br/&gt;</span><br><span class="line">&lt;form action=<span class="string">&quot;checkupdate.jsp&quot;</span> method=<span class="string">&quot;post&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;hidden&quot;</span> name=<span class="string">&quot;id&quot;</span> value=<span class="string">&quot;&lt;%=rs.getString(1)%&gt;&quot;</span>&gt;</span><br><span class="line">    请输入比赛项目：&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;item&quot;</span> value=<span class="string">&quot;&lt;%=rs.getString(2)%&gt;&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">    请输入比赛场地：&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;ground&quot;</span> value=<span class="string">&quot;&lt;%=rs.getString(3)%&gt;&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">    请输入比赛日期：&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;date&quot;</span> value=<span class="string">&quot;&lt;%=rs.getString(4)%&gt;&quot;</span>&gt;&lt;br&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;修改&quot;</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;%</span><br><span class="line">&#125;</span><br><span class="line">%&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="检查更新-updatecheck-jsp"><a href="#检查更新-updatecheck-jsp" class="headerlink" title="检查更新 updatecheck.jsp"></a>检查更新 updatecheck.jsp</h2><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">request.setCharacterEncoding(<span class="string">&quot;gbk&quot;</span>);</span><br><span class="line"><span class="type">int</span> <span class="variable">id</span> <span class="operator">=</span> Integer.parseInt(request.getParameter(<span class="string">&quot;id&quot;</span>));</span><br><span class="line"><span class="type">String</span> <span class="variable">item</span> <span class="operator">=</span> request.getParameter(<span class="string">&quot;item&quot;</span>);</span><br><span class="line"><span class="type">String</span> <span class="variable">ground</span> <span class="operator">=</span> request.getParameter(<span class="string">&quot;ground&quot;</span>);</span><br><span class="line"><span class="type">String</span> <span class="variable">date</span> <span class="operator">=</span> request.getParameter(<span class="string">&quot;date&quot;</span>);</span><br><span class="line"><span class="type">ArrayList</span> <span class="variable">list</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">list.add(id);</span><br><span class="line">list.add(item);</span><br><span class="line">list.add(ground);</span><br><span class="line">list.add(date);</span><br><span class="line">login.Update(list);</span><br><span class="line">response.sendRedirect(<span class="string">&quot;admin.jsp&quot;</span>);</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<p>##更新方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">Update</span><span class="params">(ArrayList list)</span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        Statement st=getConn().createStatement();</span><br><span class="line">        st.executeUpdate(<span class="string">&quot;update session set item=&#x27;&quot;</span>+list.get(<span class="number">1</span>)+<span class="string">&quot;&#x27;,</span></span><br><span class="line"><span class="string">                        ground=&#x27;&quot;</span>+list.get(<span class="number">2</span>)+<span class="string">&quot;&#x27;,date=&#x27;&quot;</span>+list.get(<span class="number">3</span>)+<span class="string">&quot;&#x27;</span></span><br><span class="line"><span class="string">                        where sessionid=&quot;</span>+list.get(<span class="number">0</span>));</span><br><span class="line">    &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="XML配置"><a href="#XML配置" class="headerlink" title="XML配置"></a>XML配置</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>HelloServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>cn.zero.jspproject.HelloServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>HelloServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+    <footer class="article-footer">
+      
+    </footer>
+  </div>
+    <nav id="article-nav" aria-label="Article navigation" data-aos="fade-up">
+      <div class="article-nav-link-wrap left">
+          <img data-src="https://image.acg.lol/file/2025/11/09/reimu-7.jpg" data-sizes="auto" alt="手写模拟 Lombok @Builder" class="lazyload">
+        <a href="/2025/11/07/%E6%89%8B%E5%86%99%E6%A8%A1%E6%8B%9F%20Lombok%20@Builder/" aria-label="前一篇: 手写模拟 Lombok @Builder" title="前一篇: 手写模拟 Lombok @Builder"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+            手写模拟 Lombok @Builder
+        </h3>
+      </div>
+    <div class="article-nav-link-wrap right">
+        <img data-src="https://image.acg.lol/file/2025/11/09/reimu-3.jpg" data-sizes="auto" alt="Spring XML 注入的系统复习" class="lazyload">
+      <a href="/2025/11/02/%E5%85%B3%E4%BA%8Espring%E7%9A%84xml%E6%B3%A8%E5%85%A5%E5%A4%8D%E4%B9%A0/" aria-label="后一篇: Spring XML 注入的系统复习"  title="后一篇: Spring XML 注入的系统复习"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+          Spring XML 注入的系统复习
+      </h3>
+    </div>
+  </nav>
+
+</article>
+
+
+</section>
+        </div>
+        <footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    <div>
+      <span class="icon-copyright"></span>
+        2025
+      <span class="footer-info-sep rotate"></span>
+      Zero02
+    </div>
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+      <div>
+        <span class="icon-brush"></span>
+        38.9k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        03:19
+      </div>
+  </div>
+</footer>
+
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap">
+        <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93-init-sql"><span class="toc-number">1.1.</span> <span class="toc-text">创建数据库 init.sql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BD%93%E7%B1%BB-entity-java"><span class="toc-number">1.2.</span> <span class="toc-text">创建实体类 entity.java</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E5%8A%9F%E8%83%BD"><span class="toc-number">2.</span> <span class="toc-text">登录功能</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2-login-jsp"><span class="toc-number">2.1.</span> <span class="toc-text">创建登录页面 login.jsp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E9%AA%8C%E8%AF%81-login-jsp"><span class="toc-number">2.2.</span> <span class="toc-text">登录验证 login.jsp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E9%80%BB%E8%BE%91-entity-java"><span class="toc-number">2.3.</span> <span class="toc-text">登录逻辑 entity.java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E7%99%BB%E5%BD%95-checklogin-jsp"><span class="toc-number">2.4.</span> <span class="toc-text">检查登录 checklogin.jsp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E7%99%BB%E5%BD%95%E8%B7%B3%E8%BD%AC-Servlet-java"><span class="toc-number">2.5.</span> <span class="toc-text">编写登录跳转 Servlet.java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E4%BF%A1%E6%81%AF%E5%9B%9E%E6%98%BE-login-jsp"><span class="toc-number">2.6.</span> <span class="toc-text">登录信息回显 login.jsp</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%BB%E9%A1%B5%E9%9D%A2-admin-jsp"><span class="toc-number">3.</span> <span class="toc-text">主页面 admin.jsp</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%96%B9%E6%B3%95-entity-java"><span class="toc-number">3.1.</span> <span class="toc-text">查询方法 entity.java</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%90%E9%A1%B5%E9%9D%A2-user-jsp"><span class="toc-number">4.</span> <span class="toc-text">子页面 user.jsp</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%8A%9F%E8%83%BD-add-jsp"><span class="toc-number">5.</span> <span class="toc-text">添加功能 add.jsp</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E6%96%B0%E5%A2%9E-checkadd-jsp"><span class="toc-number">5.1.</span> <span class="toc-text">检查新增 checkadd.jsp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95-entity-java"><span class="toc-number">5.2.</span> <span class="toc-text">新增方法 entity.java</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%8A%9F%E8%83%BD-delete-jsp"><span class="toc-number">6.</span> <span class="toc-text">删除功能 delete.jsp</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%96%B9%E6%B3%95-entity-java"><span class="toc-number">6.1.</span> <span class="toc-text">删除方法 entity.java</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E9%A1%B5%E9%9D%A2-update-jsp"><span class="toc-number">7.</span> <span class="toc-text">更新页面 update.jsp</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E6%9B%B4%E6%96%B0-updatecheck-jsp"><span class="toc-number">7.1.</span> <span class="toc-text">检查更新 updatecheck.jsp</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#XML%E9%85%8D%E7%BD%AE"><span class="toc-number">8.</span> <span class="toc-text">XML配置</span></a></li></ol>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Zero02" class="lazyload">
+  <div class="sidebar-author-name">Zero02</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">20</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">8</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social">
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/music" aria-label="music"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">music</div>
+      </div>
+</div>
+</div>
+  </div>
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+</nav>
+
+    </div>
+      <div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png"/>
+        </div>
+      </div>
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+  
+<script src="/js/generator_search.js" defer></script>
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js" integrity="sha384-8LyaidD9GPxQQgLJO&#x2F;WRw&#x2F;O2h3BoNq&#x2F;ApI&#x2F;ecpvM6RsrCz2qP2ppBXUKihP4V&#x2F;2d" crossorigin="anonymous"></script>
+
+  <script>
+    if (! || !window.matchMedia('(max-width: 768px)').matches) {
+      window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'));
+    }
+  </script>
+
+
+
+  
+<script src="https://npm.webcache.cn/live2d-widgets@0.9.0/autoload.js" integrity="sha384-poTN7wN&#x2F;SqNhQqo3jdFeX20ikddWeFGkUkDEzsKjgH&#x2F;ez8aQLn81oI0Cw6q5xNyB" crossorigin="anonymous"></script>
+
+
+
+<div id="lazy-script">
+  <div>
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Zero02",
+          title: "复习jsp的系统设计",
+          url: "http://example.com/2025/11/02/%E4%BB%A3%E7%A0%81%E5%A4%8D%E4%B9%A0/",
+          excerpt: "使用jsp+javaee开发规范，来开发一个小型管理系统，拥有两种身份",
+          description: "",
+          stripContent: "准备工作创建数据库 init.sql123456789101112131415161718192021create database nlgamedb;use nlgamedb;create table user(account varchar(20) primary key,certificate varchar(20) not null,authority varchar(20) not null);create table session(sessionid int primary key",
+          date: "Sun Nov 02 2025 19:30:00 GMT+0800",
+          updated: "Sat Nov 15 2025 17:03:31 GMT+0800",
+          cover: "https://image.acg.lol/file/2025/11/15/reimu-13.jpg",
+        };
+      </script>
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        const initPswp = (gallery, children) => {
+          if (_$$(`${gallery} ${children}`).length > 0) {
+            new PhotoSwipeLightbox({
+              gallery,
+              children,
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+        }
+        const pswp = () => {
+          initPswp('.article-entry', 'a.article-gallery-item');
+          initPswp('.article-gallery', 'a.article-gallery-item');
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+        
+
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.10.3' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+  
+<script src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js" integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr+h5UfruuRL&#x2F;aORyw+5+HZoU6e" crossorigin="anonymous"></script>
+
+    <script>
+      if (! || !window.matchMedia('(max-width: 768px)').matches) {
+        if (window.matchMedia('(max-width: 959px)').matches) {
+          const aplayer = _$('#aplayer');
+          if (aplayer) {
+            const aside = aplayer.parentNode?.parentNode;
+            if (aside?.tagName === 'ASIDE') {
+              aplayer.removeAttribute('data-aos');
+              aplayer.parentNode.removeChild(aplayer);
+              document.body.appendChild(aplayer);
+            }
+          }
+        }
+        const ap = new APlayer({
+          theme: "var(--color-link)",
+          container: document.getElementById('aplayer'),
+          audio: [] || [],
+          fixed: isMobile ? true : (null || false),
+          autoplay: null || false,
+          loop: '' || 'all',
+          order: '' || 'list',
+          preload: '' || 'auto',
+          volume: null || 0.7,
+          mutex: null || true,
+          listFolded: null || false,
+          lrcType: null || 0,
+        });
+      }
+    </script>
+
+
+
+  </body>
+  <script src="https://unpkg.com/mermaid@9.4.3/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({startOnLoad: true});</script>
+  </html>

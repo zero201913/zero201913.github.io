@@ -1,0 +1,1487 @@
+  <!DOCTYPE html>
+  <html lang="zh-CN"  
+      data-theme-mode="auto"
+  >
+  <head>
+  <meta charset="utf-8">
+  
+  
+  
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_4k4bc36ef96';window.REIMU_CONFIG.clipboard_tips = {"success":{"zh-CN":"复制成功 (*^▽^*)"},"fail":{"zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":50};window.REIMU_CONFIG.base = 'http://example.com';</script>
+  <title>
+    对于乐淘后台商城的系统设计 | Zero02 Blog
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+    <meta name="description" content="使用mermaid来编写系统设计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对于乐淘后台商城的系统设计">
+<meta property="og:url" content="http://example.com/2025/11/07/%E4%B9%90%E6%B7%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:site_name" content="Zero02 Blog">
+<meta property="og:description" content="使用mermaid来编写系统设计">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-11-07T00:30:00.000Z">
+<meta property="article:modified_time" content="2025-11-15T09:03:52.661Z">
+<meta property="article:author" content="Zero02">
+<meta name="twitter:card" content="summary">
+    <link rel="alternate" href="/atom.xml" title="Zero02 Blog" type="application/atom+xml">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL&#x2F;toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx&#x2F;1oA&#x2F;0l8ysE" crossorigin="anonymous">
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css" integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous">
+
+    <link rel="preload" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;" href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css" integrity="sha384-tLMkTWh2pfXNWGFlUS0w1TFtRG5xZ9lPWFOooj+vDDLIL+xBGQU&#x2F;voDBY5XE2lVh" crossorigin="anonymous">
+<meta name="generator" content="Hexo 8.1.0"></head>
+
+  <body>
+      <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate">
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script>
+<div id="copy-tooltip"></div>
+<div id="heatmap-tooltip"></div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation">
+        <a class="main-nav-link-wrap" href="/">
+          <div class="main-nav-icon icon rotate">
+              &#xe62b;
+          </div>
+          <span class="main-nav-link">首页</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/archives">
+          <div class="main-nav-icon icon rotate">
+              &#xe62b;
+          </div>
+          <span class="main-nav-link">归档</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/about">
+          <div class="main-nav-icon icon rotate">
+              &#xe62b;
+          </div>
+          <span class="main-nav-link">关于</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/music">
+          <div class="main-nav-icon icon rotate">
+              &#xe62b;
+          </div>
+          <span class="main-nav-link">music</span>
+        </span>
+    <a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation">
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" aria-label="RSS 订阅" target="_blank"></a>
+      <a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a>
+  </nav>
+</div>
+<header id="header" aria-label="Site header">
+    <picture></picture>
+    <img  fetchpriority="high" src="https://image.acg.lol/file/2025/11/09/reimu-6.jpg" alt="对于乐淘后台商城的系统设计">
+  <div id="header-outer">
+    <div id="header-title">
+          <span id="logo">
+            <h1 data-aos="slide-up">对于乐淘后台商城的系统设计</h1>
+          </span>
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+        </h2>
+    </div>
+  </div>
+</header>
+
+        <div id="content" aria-label="Page content"  class="sidebar-right" >
+          <aside id="sidebar" aria-label="Sidebar">
+  <div class="sidebar-wrapper-container sticky">
+      <div id="aplayer" theme="var(--color-link)" data-aos="fade-up"></div>
+  <div class="sidebar-wrapper">
+    <div class="sidebar-wrap" data-aos="fade-up">
+          <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%B3%BB%E7%BB%9F%E6%95%B4%E4%BD%93%E5%8A%9F%E8%83%BD%E5%88%86%E6%9E%90%EF%BC%88%E5%9F%BA%E4%BA%8E%E7%94%A8%E4%BE%8B%E5%9B%BE%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">一、系统整体功能分析（基于用例图）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81MySQL-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.</span> <span class="toc-text">二、MySQL 数据库表设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#users-%E7%94%A8%E6%88%B7%E8%A1%A8"><span class="toc-number">3.</span> <span class="toc-text">users - 用户表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#user-login-logs-%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%97%A5%E5%BF%97%E8%A1%A8"><span class="toc-number">4.</span> <span class="toc-text">user_login_logs - 用户登录日志表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#categories-%E5%95%86%E5%93%81%E5%88%86%E7%B1%BB%E8%A1%A8"><span class="toc-number">5.</span> <span class="toc-text">categories - 商品分类表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#goods-%E5%95%86%E5%93%81%E4%B8%BB%E8%A1%A8"><span class="toc-number">6.</span> <span class="toc-text">goods - 商品主表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#goods-images-%E5%95%86%E5%93%81%E5%9B%BE%E7%89%87%E8%A1%A8"><span class="toc-number">7.</span> <span class="toc-text">goods_images - 商品图片表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#goods-category-%E5%95%86%E5%93%81%E5%88%86%E7%B1%BB%E5%85%B3%E8%81%94%E8%A1%A8%EF%BC%88%E5%A4%9A%E5%AF%B9%E5%A4%9A%EF%BC%89"><span class="toc-number">8.</span> <span class="toc-text">goods_category - 商品分类关联表（多对多）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#goods-inventory-%E5%95%86%E5%93%81%E5%BA%93%E5%AD%98%E8%A1%A8"><span class="toc-number">9.</span> <span class="toc-text">goods_inventory - 商品库存表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#orders-%E8%AE%A2%E5%8D%95%E4%B8%BB%E8%A1%A8"><span class="toc-number">10.</span> <span class="toc-text">orders - 订单主表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#order-items-%E8%AE%A2%E5%8D%95%E5%95%86%E5%93%81%E6%98%8E%E7%BB%86%E8%A1%A8"><span class="toc-number">11.</span> <span class="toc-text">order_items - 订单商品明细表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#refunds-%E9%80%80%E6%AC%BE%E7%94%B3%E8%AF%B7%E8%A1%A8"><span class="toc-number">12.</span> <span class="toc-text">refunds - 退款申请表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#operation-logs-%E6%93%8D%E4%BD%9C%E6%97%A5%E5%BF%97%E8%A1%A8"><span class="toc-number">13.</span> <span class="toc-text">operation_logs - 操作日志表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sales-statistics-%E9%94%80%E5%94%AE%E7%BB%9F%E8%AE%A1%E8%A1%A8%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%8C%E4%BE%9B%E6%95%B0%E6%8D%AE%E7%9B%91%E6%8E%A7%EF%BC%89"><span class="toc-number">14.</span> <span class="toc-text">sales_statistics - 销售统计表（可选，供数据监控）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A%E8%A1%A8%E5%85%B3%E7%B3%BB%EF%BC%88ER%E5%85%B3%E7%B3%BB%EF%BC%89"><span class="toc-number">14.1.</span> <span class="toc-text">总结：表关系（ER关系）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A5%E5%85%85%E5%BB%BA%E8%AE%AE"><span class="toc-number">14.2.</span> <span class="toc-text">补充建议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%BA%E8%A1%A8%E8%AF%AD%E5%8F%A5"><span class="toc-number">15.</span> <span class="toc-text">建表语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%95%86%E5%9F%8E%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F-%E7%B3%BB%E7%BB%9F%E5%B1%82%E6%AC%A1%E6%9E%B6%E6%9E%84%E5%9B%BE%EF%BC%88Mermaid-%E5%AE%9E%E7%8E%B0%EF%BC%89"><span class="toc-number">16.</span> <span class="toc-text">商城管理系统 - 系统层次架构图（Mermaid 实现）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84%E8%AF%B4%E6%98%8E%EF%BC%88%E4%B8%8E-12-%E5%BC%A0%E8%A1%A8%E6%98%A0%E5%B0%84%EF%BC%89"><span class="toc-number">17.</span> <span class="toc-text">层次结构说明（与 12 张表映射）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E5%BB%BA%E8%AE%AE%EF%BC%88%E5%88%86%E5%B1%82%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF%EF%BC%89"><span class="toc-number">18.</span> <span class="toc-text">系统构建建议（分层开发路线）</span></a></li></ol>
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Zero02" class="lazyload">
+  <div class="sidebar-author-name">Zero02</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">20</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">8</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social">
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/music" aria-label="music"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">music</div>
+      </div>
+</div>
+</div>
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
+    </div>
+  </div>
+  <div class="sidebar-widget">
+  </div>
+  </div>
+</aside>
+
+          <section id="main" aria-label="Main content"><article id="post-乐淘管理系统设计" class="h-entry article" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <span class="article-date-link icon-calendar" data-aos="zoom-in">
+    <time datetime="2025-11-07T00:30:00.000Z" itemprop="datePublished">2025-11-07</time>
+    <time style="display: none;" id="post-update-time">2025-11-15</time>
+  </span>
+</div>
+
+        <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" title="系统设计">系统设计</a>
+  </div>
+
+    </div>
+    
+    <div class="hr-line"></div>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+        <p>根据您提供的三张用例图，我们可以分析出一个典型的<strong>商城管理系统</strong>，涉及三个主要角色：</p>
+<p> <strong>用户（普通用户）</strong><br> <strong>商品管理员</strong><br> <strong>超级管理员</strong></p>
+<p>系统功能模块包括：  </p>
+<ul>
+<li>用户：账号管理、商品浏览、下单、退款等  </li>
+<li>商品管理员：商品上架、下架、分类管理、库存管理等  </li>
+<li>超级管理员：账号管理、注销账号、操作日志等</li>
+</ul>
+<hr>
+<h3 id="一、系统整体功能分析（基于用例图）"><a href="#一、系统整体功能分析（基于用例图）" class="headerlink" title="一、系统整体功能分析（基于用例图）"></a>一、系统整体功能分析（基于用例图）</h3><table>
+<thead>
+<tr>
+<th>角色</th>
+<th>用例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>用户</strong></td>
+<td>登录账号、注销账号、账号管理、浏览商品、商品消费（下单、查看订单、退款）</td>
+</tr>
+<tr>
+<td><strong>商品管理员</strong></td>
+<td>录入商品信息、编辑商品信息、设置商品分类标签、执行上架下架、数据监控、查看商品销量&#x2F;库存</td>
+</tr>
+<tr>
+<td><strong>超级管理员</strong></td>
+<td>管理信息、查看操作日志、数据概览</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="二、MySQL-数据库表设计"><a href="#二、MySQL-数据库表设计" class="headerlink" title="二、MySQL 数据库表设计"></a>二、MySQL 数据库表设计</h3><p>以下是根据用例图推导出的 <strong>核心数据表</strong>，共 <strong>12 张表</strong>，覆盖用户、商品、订单、分类、库存、日志等功能。</p>
+<hr>
+<h2 id="users-用户表"><a href="#users-用户表" class="headerlink" title="users - 用户表"></a><code>users</code> - 用户表</h2><p><strong>作用</strong>：存储所有系统用户（包括普通用户、商品管理员、超级管理员）的基础信息。</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>类型</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>user_id</code></td>
+<td>BIGINT</td>
+<td>PK, AUTO_INCREMENT</td>
+<td>用户ID</td>
+</tr>
+<tr>
+<td><code>username</code></td>
+<td>VARCHAR(50)</td>
+<td>UNIQUE, NOT NULL</td>
+<td>用户名</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>VARCHAR(255)</td>
+<td>NOT NULL</td>
+<td>加密后的密码</td>
+</tr>
+<tr>
+<td><code>nickname</code></td>
+<td>VARCHAR(50)</td>
+<td></td>
+<td>昵称</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>VARCHAR(100)</td>
+<td>UNIQUE</td>
+<td>邮箱</td>
+</tr>
+<tr>
+<td><code>phone</code></td>
+<td>VARCHAR(20)</td>
+<td></td>
+<td>手机号</td>
+</tr>
+<tr>
+<td><code>role</code></td>
+<td>ENUM(‘user’, ‘goods_admin’, ‘super_admin’)</td>
+<td>NOT NULL</td>
+<td>角色：普通用户 &#x2F; 商品管理员 &#x2F; 超级管理员</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>TINYINT</td>
+<td>DEFAULT 1</td>
+<td>状态：1启用，0禁用</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>DATETIME</td>
+<td>DEFAULT CURRENT_TIMESTAMP</td>
+<td>注册时间</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>DATETIME</td>
+<td>ON UPDATE CURRENT_TIMESTAMP</td>
+<td>更新时间</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="user-login-logs-用户登录日志表"><a href="#user-login-logs-用户登录日志表" class="headerlink" title="user_login_logs - 用户登录日志表"></a><code>user_login_logs</code> - 用户登录日志表</h2><p><strong>作用</strong>：记录用户登录行为（超级管理员可查看）。</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>类型</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>log_id</code></td>
+<td>BIGINT</td>
+<td>PK, AUTO_INCREMENT</td>
+<td>日志ID</td>
+</tr>
+<tr>
+<td><code>user_id</code></td>
+<td>BIGINT</td>
+<td>FK → users.user_id</td>
+<td>用户ID</td>
+</tr>
+<tr>
+<td><code>login_time</code></td>
+<td>DATETIME</td>
+<td>NOT NULL</td>
+<td>登录时间</td>
+</tr>
+<tr>
+<td><code>ip_address</code></td>
+<td>VARCHAR(45)</td>
+<td></td>
+<td>IP地址</td>
+</tr>
+<tr>
+<td><code>device</code></td>
+<td>VARCHAR(100)</td>
+<td></td>
+<td>设备信息</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="categories-商品分类表"><a href="#categories-商品分类表" class="headerlink" title="categories - 商品分类表"></a><code>categories</code> - 商品分类表</h2><p><strong>作用</strong>：存储商品分类（如电子产品、服装等），支持多级分类。</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>类型</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>category_id</code></td>
+<td>INT</td>
+<td>PK, AUTO_INCREMENT</td>
+<td>分类ID</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>VARCHAR(50)</td>
+<td>NOT NULL</td>
+<td>分类名称</td>
+</tr>
+<tr>
+<td><code>parent_id</code></td>
+<td>INT</td>
+<td>FK → categories.category_id</td>
+<td>父分类ID（0为一级分类）</td>
+</tr>
+<tr>
+<td><code>level</code></td>
+<td>TINYINT</td>
+<td>NOT NULL</td>
+<td>层级（1,2,..）</td>
+</tr>
+<tr>
+<td><code>sort_order</code></td>
+<td>INT</td>
+<td>DEFAULT 0</td>
+<td>排序权重</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="goods-商品主表"><a href="#goods-商品主表" class="headerlink" title="goods - 商品主表"></a><code>goods</code> - 商品主表</h2><p><strong>作用</strong>：存储商品基本信息。</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>类型</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>goods_id</code></td>
+<td>BIGINT</td>
+<td>PK, AUTO_INCREMENT</td>
+<td>商品ID</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>VARCHAR(200)</td>
+<td>NOT NULL</td>
+<td>商品标题</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>TEXT</td>
+<td></td>
+<td>商品描述</td>
+</tr>
+<tr>
+<td><code>main_image</code></td>
+<td>VARCHAR(255)</td>
+<td></td>
+<td>主图URL</td>
+</tr>
+<tr>
+<td><code>price</code></td>
+<td>DECIMAL(10,2)</td>
+<td>NOT NULL</td>
+<td>售价</td>
+</tr>
+<tr>
+<td><code>original_price</code></td>
+<td>DECIMAL(10,2)</td>
+<td></td>
+<td>原价</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>ENUM(‘on_sale’, ‘off_sale’, ‘deleted’)</td>
+<td>DEFAULT ‘off_sale’</td>
+<td>状态：上架&#x2F;下架&#x2F;删除</td>
+</tr>
+<tr>
+<td><code>admin_id</code></td>
+<td>BIGINT</td>
+<td>FK → users.user_id</td>
+<td>录入管理员ID</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>DATETIME</td>
+<td>DEFAULT CURRENT_TIMESTAMP</td>
+<td>创建时间</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>DATETIME</td>
+<td>ON UPDATE CURRENT_TIMESTAMP</td>
+<td>更新时间</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="goods-images-商品图片表"><a href="#goods-images-商品图片表" class="headerlink" title="goods_images - 商品图片表"></a><code>goods_images</code> - 商品图片表</h2><p><strong>作用</strong>：存储商品多张图片（轮播图等）。</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>类型</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>image_id</code></td>
+<td>BIGINT</td>
+<td>PK, AUTO_INCREMENT</td>
+<td>图片ID</td>
+</tr>
+<tr>
+<td><code>goods_id</code></td>
+<td>BIGINT</td>
+<td>FK → goods.goods_id</td>
+<td>商品ID</td>
+</tr>
+<tr>
+<td><code>image_url</code></td>
+<td>VARCHAR(255)</td>
+<td>NOT NULL</td>
+<td>图片链接</td>
+</tr>
+<tr>
+<td><code>sort_order</code></td>
+<td>INT</td>
+<td>DEFAULT 0</td>
+<td>排序</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="goods-category-商品分类关联表（多对多）"><a href="#goods-category-商品分类关联表（多对多）" class="headerlink" title="goods_category - 商品分类关联表（多对多）"></a><code>goods_category</code> - 商品分类关联表（多对多）</h2><p><strong>作用</strong>：一个商品可属于多个分类。</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>类型</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>goods_id</code></td>
+<td>BIGINT</td>
+<td>FK → goods.goods_id</td>
+<td>商品ID</td>
+</tr>
+<tr>
+<td><code>category_id</code></td>
+<td>INT</td>
+<td>FK → categories.category_id</td>
+<td>分类ID</td>
+</tr>
+<tr>
+<td>PRIMARY KEY (<code>goods_id</code>, <code>category_id</code>)</td>
+<td></td>
+<td>联合主键</td>
+<td></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="goods-inventory-商品库存表"><a href="#goods-inventory-商品库存表" class="headerlink" title="goods_inventory - 商品库存表"></a><code>goods_inventory</code> - 商品库存表</h2><p><strong>作用</strong>：管理商品库存，支持多规格（后续可扩展为SKU表）。</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>类型</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>inventory_id</code></td>
+<td>BIGINT</td>
+<td>PK, AUTO_INCREMENT</td>
+<td>库存ID</td>
+</tr>
+<tr>
+<td><code>goods_id</code></td>
+<td>BIGINT</td>
+<td>FK → goods.goods_id</td>
+<td>商品ID</td>
+</tr>
+<tr>
+<td><code>sku</code></td>
+<td>VARCHAR(100)</td>
+<td>UNIQUE</td>
+<td>规格编码（如颜色+尺寸）</td>
+</tr>
+<tr>
+<td><code>stock</code></td>
+<td>INT</td>
+<td>DEFAULT 0</td>
+<td>库存数量</td>
+</tr>
+<tr>
+<td><code>spec_detail</code></td>
+<td>JSON</td>
+<td></td>
+<td>规格详情（如 {“color”: “红”, “size”: “XL”}）</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>注：若需复杂SKU，可拆分为 <code>goods_sku</code> + <code>sku_spec</code> 表，此处简化。</p>
+</blockquote>
+<hr>
+<h2 id="orders-订单主表"><a href="#orders-订单主表" class="headerlink" title="orders - 订单主表"></a><code>orders</code> - 订单主表</h2><p><strong>作用</strong>：存储用户下单信息。</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>类型</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>order_id</code></td>
+<td>BIGINT</td>
+<td>PK, AUTO_INCREMENT</td>
+<td>订单ID</td>
+</tr>
+<tr>
+<td><code>user_id</code></td>
+<td>BIGINT</td>
+<td>FK → users.user_id</td>
+<td>下单用户</td>
+</tr>
+<tr>
+<td><code>order_no</code></td>
+<td>VARCHAR(50)</td>
+<td>UNIQUE, NOT NULL</td>
+<td>订单编号</td>
+</tr>
+<tr>
+<td><code>total_amount</code></td>
+<td>DECIMAL(10,2)</td>
+<td>NOT NULL</td>
+<td>总金额</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>ENUM(‘pending’, ‘paid’, ‘shipped’, ‘completed’, ‘refunded’, ‘canceled’)</td>
+<td>DEFAULT ‘pending’</td>
+<td>订单状态</td>
+</tr>
+<tr>
+<td><code>address</code></td>
+<td>VARCHAR(255)</td>
+<td></td>
+<td>收货地址</td>
+</tr>
+<tr>
+<td><code>receiver</code></td>
+<td>VARCHAR(50)</td>
+<td></td>
+<td>收货人</td>
+</tr>
+<tr>
+<td><code>phone</code></td>
+<td>VARCHAR(20)</td>
+<td></td>
+<td>联系电话</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>DATETIME</td>
+<td>DEFAULT CURRENT_TIMESTAMP</td>
+<td>下单时间</td>
+</tr>
+<tr>
+<td><code>paid_at</code></td>
+<td>DATETIME</td>
+<td></td>
+<td>支付时间</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="order-items-订单商品明细表"><a href="#order-items-订单商品明细表" class="headerlink" title="order_items - 订单商品明细表"></a><code>order_items</code> - 订单商品明细表</h2><p><strong>作用</strong>：记录订单中购买的每个商品。</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>类型</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>item_id</code></td>
+<td>BIGINT</td>
+<td>PK, AUTO_INCREMENT</td>
+<td>明细ID</td>
+</tr>
+<tr>
+<td><code>order_id</code></td>
+<td>BIGINT</td>
+<td>FK → orders.order_id</td>
+<td>订单ID</td>
+</tr>
+<tr>
+<td><code>goods_id</code></td>
+<td>BIGINT</td>
+<td>FK → goods.goods_id</td>
+<td>商品ID</td>
+</tr>
+<tr>
+<td><code>sku</code></td>
+<td>VARCHAR(100)</td>
+<td></td>
+<td>购买的规格</td>
+</tr>
+<tr>
+<td><code>quantity</code></td>
+<td>INT</td>
+<td>NOT NULL</td>
+<td>购买数量</td>
+</tr>
+<tr>
+<td><code>price</code></td>
+<td>DECIMAL(10,2)</td>
+<td>NOT NULL</td>
+<td>成交单价</td>
+</tr>
+<tr>
+<td><code>goods_title</code></td>
+<td>VARCHAR(200)</td>
+<td></td>
+<td>快照：下单时商品名称</td>
+</tr>
+<tr>
+<td><code>goods_image</code></td>
+<td>VARCHAR(255)</td>
+<td></td>
+<td>快照：主图</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="refunds-退款申请表"><a href="#refunds-退款申请表" class="headerlink" title="refunds - 退款申请表"></a><code>refunds</code> - 退款申请表</h2><p><strong>作用</strong>：处理用户退款请求。</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>类型</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>refund_id</code></td>
+<td>BIGINT</td>
+<td>PK, AUTO_INCREMENT</td>
+<td>退款ID</td>
+</tr>
+<tr>
+<td><code>order_id</code></td>
+<td>BIGINT</td>
+<td>FK → orders.order_id</td>
+<td>订单ID</td>
+</tr>
+<tr>
+<td><code>user_id</code></td>
+<td>BIGINT</td>
+<td>FK → users.user_id</td>
+<td>申请人</td>
+</tr>
+<tr>
+<td><code>reason</code></td>
+<td>VARCHAR(255)</td>
+<td></td>
+<td>退款原因</td>
+</tr>
+<tr>
+<td><code>amount</code></td>
+<td>DECIMAL(10,2)</td>
+<td>NOT NULL</td>
+<td>退款金额</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>ENUM(‘pending’, ‘approved’, ‘rejected’, ‘completed’)</td>
+<td>DEFAULT ‘pending’</td>
+<td>状态</td>
+</tr>
+<tr>
+<td><code>applied_at</code></td>
+<td>DATETIME</td>
+<td>DEFAULT CURRENT_TIMESTAMP</td>
+<td>申请时间</td>
+</tr>
+<tr>
+<td><code>processed_at</code></td>
+<td>DATETIME</td>
+<td></td>
+<td>处理时间</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="operation-logs-操作日志表"><a href="#operation-logs-操作日志表" class="headerlink" title="operation_logs - 操作日志表"></a><code>operation_logs</code> - 操作日志表</h2><p><strong>作用</strong>：超级管理员可查看所有管理员的操作记录（商品上下架、账号注销等）。</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>类型</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>log_id</code></td>
+<td>BIGINT</td>
+<td>PK, AUTO_INCREMENT</td>
+<td>日志ID</td>
+</tr>
+<tr>
+<td><code>admin_id</code></td>
+<td>BIGINT</td>
+<td>FK → users.user_id</td>
+<td>操作管理员</td>
+</tr>
+<tr>
+<td><code>action</code></td>
+<td>VARCHAR(100)</td>
+<td>NOT NULL</td>
+<td>操作类型（如：上架商品、注销账号）</td>
+</tr>
+<tr>
+<td><code>target_id</code></td>
+<td>BIGINT</td>
+<td></td>
+<td>目标ID（如商品ID、用户ID）</td>
+</tr>
+<tr>
+<td><code>target_type</code></td>
+<td>VARCHAR(50)</td>
+<td></td>
+<td>目标类型（goods&#x2F;user）</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>TEXT</td>
+<td></td>
+<td>操作详情</td>
+</tr>
+<tr>
+<td><code>ip_address</code></td>
+<td>VARCHAR(45)</td>
+<td></td>
+<td>操作IP</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>DATETIME</td>
+<td>DEFAULT CURRENT_TIMESTAMP</td>
+<td>操作时间</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="sales-statistics-销售统计表（可选，供数据监控）"><a href="#sales-statistics-销售统计表（可选，供数据监控）" class="headerlink" title="sales_statistics - 销售统计表（可选，供数据监控）"></a><code>sales_statistics</code> - 销售统计表（可选，供数据监控）</h2><p><strong>作用</strong>：商品管理员查看销量、库存等统计数据。</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>类型</th>
+<th>约束</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>stat_id</code></td>
+<td>BIGINT</td>
+<td>PK, AUTO_INCREMENT</td>
+<td>统计ID</td>
+</tr>
+<tr>
+<td><code>goods_id</code></td>
+<td>BIGINT</td>
+<td>FK → goods.goods_id</td>
+<td>商品ID</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>DATE</td>
+<td>NOT NULL</td>
+<td>统计日期</td>
+</tr>
+<tr>
+<td><code>sales_count</code></td>
+<td>INT</td>
+<td>DEFAULT 0</td>
+<td>当日销量</td>
+</tr>
+<tr>
+<td><code>view_count</code></td>
+<td>INT</td>
+<td>DEFAULT 0</td>
+<td>浏览量（可通过埋点）</td>
+</tr>
+<tr>
+<td><code>stock_remaining</code></td>
+<td>INT</td>
+<td></td>
+<td>剩余库存快照</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>可通过定时任务每日更新，或触发器维护。</p>
+</blockquote>
+<hr>
+<h3 id="总结：表关系（ER关系）"><a href="#总结：表关系（ER关系）" class="headerlink" title="总结：表关系（ER关系）"></a>总结：表关系（ER关系）</h3><pre class="mermaid">graph TD;
+    %% 用户相关
+    users[users<br/>用户表] --> |1:N| user_login_logs[user_login_logs<br/>登录日志]
+    users --> |1:N| orders[orders<br/>订单主表]
+    users --> |1:N| refunds[refunds<br/>退款申请]
+    users --> |1:N| operation_logs[operation_logs<br/>操作日志]
+
+    %% 商品管理员操作商品
+    users --> |1:N| goods[goods<br/>商品主表]:::goods
+
+    %% 商品相关
+    goods --> |1:N| goods_images[goods_images<br/>商品图片]
+    goods --> |1:N| goods_inventory[goods_inventory<br/>商品库存]
+    goods --> |1:N| order_items[order_items<br/>订单明细]
+    goods --> |1:N| sales_statistics[sales_statistics<br/>销售统计]
+
+    %% 商品与分类：多对多
+    goods -.-> |N:N| goods_category[goods_category<br/>商品分类关联]
+    categories[categories<br/>商品分类] -.-> |N:N| goods_category
+
+    %% 订单相关
+    orders --> |1:N| order_items
+    orders --> |1:N| refunds
+
+    %% 样式定义
+    classDef goods fill:#e1f5fe,stroke:#333,stroke-width:1px;
+    classDef order fill:#f9f,stroke:#333,stroke-width:1px;
+    classDef user fill:#fff2e8,stroke:#333,stroke-width:1px;</pre>
+
+<hr>
+<h3 id="补充建议"><a href="#补充建议" class="headerlink" title="补充建议"></a>补充建议</h3><p> <strong>索引优化</strong>：</p>
+<ul>
+<li><code>goods(status, created_at)</code>：快速查询上架商品</li>
+<li><code>orders(user_id, status)</code>：用户查订单</li>
+<li><code>operation_logs(admin_id, created_at)</code>：日志查询</li>
+</ul>
+<p> <strong>密码加密</strong>：使用 <code>bcrypt</code> 或 <code>argon2</code> 存储 <code>password</code></p>
+<p> <strong>软删除</strong>：<code>goods</code> 和 <code>users</code> 使用 <code>status</code> 字段而非物理删除</p>
+<p> <strong>事务控制</strong>：下单扣库存、退款加库存需事务保证一致性</p>
+<hr>
+<h2 id="建表语句"><a href="#建表语句" class="headerlink" title="建表语句"></a>建表语句</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 设置字符集和存储引擎</span></span><br><span class="line"><span class="keyword">SET</span> NAMES utf8mb4;</span><br><span class="line"><span class="keyword">SET</span> FOREIGN_KEY_CHECKS <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="comment">-- 1. 用户表</span></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `users`;</span><br><span class="line"><span class="keyword">CREATE TABLE</span> `users` (</span><br><span class="line">  `user_id` <span class="type">BIGINT</span> UNSIGNED <span class="keyword">NOT NULL</span> AUTO_INCREMENT COMMENT <span class="string">&#x27;用户ID&#x27;</span>,</span><br><span class="line">  `username` <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT NULL</span> <span class="keyword">UNIQUE</span> COMMENT <span class="string">&#x27;用户名&#x27;</span>,</span><br><span class="line">  `password` <span class="type">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;加密密码&#x27;</span>,</span><br><span class="line">  `nickname` <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;昵称&#x27;</span>,</span><br><span class="line">  `email` <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> <span class="keyword">UNIQUE</span> COMMENT <span class="string">&#x27;邮箱&#x27;</span>,</span><br><span class="line">  `phone` <span class="type">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;手机号&#x27;</span>,</span><br><span class="line">  `role` ENUM(<span class="string">&#x27;user&#x27;</span>, <span class="string">&#x27;goods_admin&#x27;</span>, <span class="string">&#x27;super_admin&#x27;</span>) <span class="keyword">NOT NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;user&#x27;</span> COMMENT <span class="string">&#x27;角色&#x27;</span>,</span><br><span class="line">  `status` TINYINT <span class="keyword">NOT NULL</span> <span class="keyword">DEFAULT</span> <span class="number">1</span> COMMENT <span class="string">&#x27;状态：1启用，0禁用&#x27;</span>,</span><br><span class="line">  `created_at` DATETIME <span class="keyword">NOT NULL</span> <span class="keyword">DEFAULT</span> <span class="built_in">CURRENT_TIMESTAMP</span> COMMENT <span class="string">&#x27;注册时间&#x27;</span>,</span><br><span class="line">  `updated_at` DATETIME <span class="keyword">NOT NULL</span> <span class="keyword">DEFAULT</span> <span class="built_in">CURRENT_TIMESTAMP</span> <span class="keyword">ON</span> <span class="keyword">UPDATE</span> <span class="built_in">CURRENT_TIMESTAMP</span> COMMENT <span class="string">&#x27;更新时间&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY KEY</span> (`user_id`),</span><br><span class="line">  INDEX `idx_username` (`username`),</span><br><span class="line">  INDEX `idx_role_status` (`role`, `status`)</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;用户表&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="comment">-- 2. 用户登录日志表</span></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `user_login_logs`;</span><br><span class="line"><span class="keyword">CREATE TABLE</span> `user_login_logs` (</span><br><span class="line">  `log_id` <span class="type">BIGINT</span> UNSIGNED <span class="keyword">NOT NULL</span> AUTO_INCREMENT COMMENT <span class="string">&#x27;日志ID&#x27;</span>,</span><br><span class="line">  `user_id` <span class="type">BIGINT</span> UNSIGNED <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;用户ID&#x27;</span>,</span><br><span class="line">  `login_time` DATETIME <span class="keyword">NOT NULL</span> <span class="keyword">DEFAULT</span> <span class="built_in">CURRENT_TIMESTAMP</span> COMMENT <span class="string">&#x27;登录时间&#x27;</span>,</span><br><span class="line">  `ip_address` <span class="type">VARCHAR</span>(<span class="number">45</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;IP地址&#x27;</span>,</span><br><span class="line">  `device` <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;设备信息&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY KEY</span> (`log_id`),</span><br><span class="line">  INDEX `idx_user_time` (`user_id`, `login_time`),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> `fk_login_user` <span class="keyword">FOREIGN KEY</span> (`user_id`) <span class="keyword">REFERENCES</span> `users`(`user_id`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;用户登录日志&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="comment">-- 3. 商品分类表（支持多级）</span></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `categories`;</span><br><span class="line"><span class="keyword">CREATE TABLE</span> `categories` (</span><br><span class="line">  `category_id` <span class="type">INT</span> UNSIGNED <span class="keyword">NOT NULL</span> AUTO_INCREMENT COMMENT <span class="string">&#x27;分类ID&#x27;</span>,</span><br><span class="line">  `name` <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;分类名称&#x27;</span>,</span><br><span class="line">  `parent_id` <span class="type">INT</span> UNSIGNED <span class="keyword">DEFAULT</span> <span class="number">0</span> COMMENT <span class="string">&#x27;父分类ID，0为一级分类&#x27;</span>,</span><br><span class="line">  `level` TINYINT <span class="keyword">NOT NULL</span> <span class="keyword">DEFAULT</span> <span class="number">1</span> COMMENT <span class="string">&#x27;层级&#x27;</span>,</span><br><span class="line">  `sort_order` <span class="type">INT</span> <span class="keyword">NOT NULL</span> <span class="keyword">DEFAULT</span> <span class="number">0</span> COMMENT <span class="string">&#x27;排序权重&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY KEY</span> (`category_id`),</span><br><span class="line">  INDEX `idx_parent` (`parent_id`),</span><br><span class="line">  INDEX `idx_level_sort` (`level`, `sort_order`)</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;商品分类表&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="comment">-- 4. 商品主表</span></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `goods`;</span><br><span class="line"><span class="keyword">CREATE TABLE</span> `goods` (</span><br><span class="line">  `goods_id` <span class="type">BIGINT</span> UNSIGNED <span class="keyword">NOT NULL</span> AUTO_INCREMENT COMMENT <span class="string">&#x27;商品ID&#x27;</span>,</span><br><span class="line">  `title` <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;商品标题&#x27;</span>,</span><br><span class="line">  `description` TEXT COMMENT <span class="string">&#x27;商品描述&#x27;</span>,</span><br><span class="line">  `main_image` <span class="type">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;主图URL&#x27;</span>,</span><br><span class="line">  `price` <span class="type">DECIMAL</span>(<span class="number">10</span>,<span class="number">2</span>) <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;售价&#x27;</span>,</span><br><span class="line">  `original_price` <span class="type">DECIMAL</span>(<span class="number">10</span>,<span class="number">2</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;原价&#x27;</span>,</span><br><span class="line">  `status` ENUM(<span class="string">&#x27;on_sale&#x27;</span>, <span class="string">&#x27;off_sale&#x27;</span>, <span class="string">&#x27;deleted&#x27;</span>) <span class="keyword">NOT NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;off_sale&#x27;</span> COMMENT <span class="string">&#x27;状态&#x27;</span>,</span><br><span class="line">  `admin_id` <span class="type">BIGINT</span> UNSIGNED <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;录入管理员ID&#x27;</span>,</span><br><span class="line">  `created_at` DATETIME <span class="keyword">NOT NULL</span> <span class="keyword">DEFAULT</span> <span class="built_in">CURRENT_TIMESTAMP</span> COMMENT <span class="string">&#x27;创建时间&#x27;</span>,</span><br><span class="line">  `updated_at` DATETIME <span class="keyword">NOT NULL</span> <span class="keyword">DEFAULT</span> <span class="built_in">CURRENT_TIMESTAMP</span> <span class="keyword">ON</span> <span class="keyword">UPDATE</span> <span class="built_in">CURRENT_TIMESTAMP</span> COMMENT <span class="string">&#x27;更新时间&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY KEY</span> (`goods_id`),</span><br><span class="line">  INDEX `idx_status` (`status`),</span><br><span class="line">  INDEX `idx_admin` (`admin_id`),</span><br><span class="line">  INDEX `idx_price` (`price`),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> `fk_goods_admin` <span class="keyword">FOREIGN KEY</span> (`admin_id`) <span class="keyword">REFERENCES</span> `users`(`user_id`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> RESTRICT</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;商品主表&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="comment">-- 5. 商品图片表</span></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `goods_images`;</span><br><span class="line"><span class="keyword">CREATE TABLE</span> `goods_images` (</span><br><span class="line">  `image_id` <span class="type">BIGINT</span> UNSIGNED <span class="keyword">NOT NULL</span> AUTO_INCREMENT COMMENT <span class="string">&#x27;图片ID&#x27;</span>,</span><br><span class="line">  `goods_id` <span class="type">BIGINT</span> UNSIGNED <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;商品ID&#x27;</span>,</span><br><span class="line">  `image_url` <span class="type">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;图片链接&#x27;</span>,</span><br><span class="line">  `sort_order` <span class="type">INT</span> <span class="keyword">NOT NULL</span> <span class="keyword">DEFAULT</span> <span class="number">0</span> COMMENT <span class="string">&#x27;排序&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY KEY</span> (`image_id`),</span><br><span class="line">  INDEX `idx_goods` (`goods_id`),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> `fk_image_goods` <span class="keyword">FOREIGN KEY</span> (`goods_id`) <span class="keyword">REFERENCES</span> `goods`(`goods_id`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;商品图片表&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="comment">-- 6. 商品分类关联表（多对多）</span></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `goods_category`;</span><br><span class="line"><span class="keyword">CREATE TABLE</span> `goods_category` (</span><br><span class="line">  `goods_id` <span class="type">BIGINT</span> UNSIGNED <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;商品ID&#x27;</span>,</span><br><span class="line">  `category_id` <span class="type">INT</span> UNSIGNED <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;分类ID&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY KEY</span> (`goods_id`, `category_id`),</span><br><span class="line">  INDEX `idx_category` (`category_id`),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> `fk_gc_goods` <span class="keyword">FOREIGN KEY</span> (`goods_id`) <span class="keyword">REFERENCES</span> `goods`(`goods_id`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE,</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> `fk_gc_category` <span class="keyword">FOREIGN KEY</span> (`category_id`) <span class="keyword">REFERENCES</span> `categories`(`category_id`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;商品分类关联表&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="comment">-- 7. 商品库存表（支持SKU）</span></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `goods_inventory`;</span><br><span class="line"><span class="keyword">CREATE TABLE</span> `goods_inventory` (</span><br><span class="line">  `inventory_id` <span class="type">BIGINT</span> UNSIGNED <span class="keyword">NOT NULL</span> AUTO_INCREMENT COMMENT <span class="string">&#x27;库存ID&#x27;</span>,</span><br><span class="line">  `goods_id` <span class="type">BIGINT</span> UNSIGNED <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;商品ID&#x27;</span>,</span><br><span class="line">  `sku` <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT NULL</span> <span class="keyword">UNIQUE</span> COMMENT <span class="string">&#x27;规格编码&#x27;</span>,</span><br><span class="line">  `stock` <span class="type">INT</span> <span class="keyword">NOT NULL</span> <span class="keyword">DEFAULT</span> <span class="number">0</span> COMMENT <span class="string">&#x27;库存数量&#x27;</span>,</span><br><span class="line">  `spec_detail` JSON <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;规格详情，如：&#123;&quot;color&quot;:&quot;红&quot;,&quot;size&quot;:&quot;XL&quot;&#125;&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY KEY</span> (`inventory_id`),</span><br><span class="line">  INDEX `idx_goods_sku` (`goods_id`, `sku`),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> `fk_inventory_goods` <span class="keyword">FOREIGN KEY</span> (`goods_id`) <span class="keyword">REFERENCES</span> `goods`(`goods_id`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;商品库存表&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="comment">-- 8. 订单主表</span></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `orders`;</span><br><span class="line"><span class="keyword">CREATE TABLE</span> `orders` (</span><br><span class="line">  `order_id` <span class="type">BIGINT</span> UNSIGNED <span class="keyword">NOT NULL</span> AUTO_INCREMENT COMMENT <span class="string">&#x27;订单ID&#x27;</span>,</span><br><span class="line">  `user_id` <span class="type">BIGINT</span> UNSIGNED <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;下单用户ID&#x27;</span>,</span><br><span class="line">  `order_no` <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT NULL</span> <span class="keyword">UNIQUE</span> COMMENT <span class="string">&#x27;订单编号&#x27;</span>,</span><br><span class="line">  `total_amount` <span class="type">DECIMAL</span>(<span class="number">10</span>,<span class="number">2</span>) <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;订单总金额&#x27;</span>,</span><br><span class="line">  `status` ENUM(<span class="string">&#x27;pending&#x27;</span>,<span class="string">&#x27;paid&#x27;</span>,<span class="string">&#x27;shipped&#x27;</span>,<span class="string">&#x27;completed&#x27;</span>,<span class="string">&#x27;refunded&#x27;</span>,<span class="string">&#x27;canceled&#x27;</span>) <span class="keyword">NOT NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;pending&#x27;</span> COMMENT <span class="string">&#x27;订单状态&#x27;</span>,</span><br><span class="line">  `address` <span class="type">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;收货地址&#x27;</span>,</span><br><span class="line">  `receiver` <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;收货人&#x27;</span>,</span><br><span class="line">  `phone` <span class="type">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;联系电话&#x27;</span>,</span><br><span class="line">  `created_at` DATETIME <span class="keyword">NOT NULL</span> <span class="keyword">DEFAULT</span> <span class="built_in">CURRENT_TIMESTAMP</span> COMMENT <span class="string">&#x27;下单时间&#x27;</span>,</span><br><span class="line">  `paid_at` DATETIME <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;支付时间&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY KEY</span> (`order_id`),</span><br><span class="line">  INDEX `idx_user_status` (`user_id`, `status`),</span><br><span class="line">  INDEX `idx_order_no` (`order_no`),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> `fk_order_user` <span class="keyword">FOREIGN KEY</span> (`user_id`) <span class="keyword">REFERENCES</span> `users`(`user_id`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> RESTRICT</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;订单主表&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="comment">-- 9. 订单商品明细表</span></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `order_items`;</span><br><span class="line"><span class="keyword">CREATE TABLE</span> `order_items` (</span><br><span class="line">  `item_id` <span class="type">BIGINT</span> UNSIGNED <span class="keyword">NOT NULL</span> AUTO_INCREMENT COMMENT <span class="string">&#x27;明细ID&#x27;</span>,</span><br><span class="line">  `order_id` <span class="type">BIGINT</span> UNSIGNED <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;订单ID&#x27;</span>,</span><br><span class="line">  `goods_id` <span class="type">BIGINT</span> UNSIGNED <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;商品ID&#x27;</span>,</span><br><span class="line">  `sku` <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;购买规格&#x27;</span>,</span><br><span class="line">  `quantity` <span class="type">INT</span> <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;购买数量&#x27;</span>,</span><br><span class="line">  `price` <span class="type">DECIMAL</span>(<span class="number">10</span>,<span class="number">2</span>) <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;成交单价&#x27;</span>,</span><br><span class="line">  `goods_title` <span class="type">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;下单时商品标题（快照）&#x27;</span>,</span><br><span class="line">  `goods_image` <span class="type">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;下单时主图（快照）&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY KEY</span> (`item_id`),</span><br><span class="line">  INDEX `idx_order` (`order_id`),</span><br><span class="line">  INDEX `idx_goods` (`goods_id`),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> `fk_item_order` <span class="keyword">FOREIGN KEY</span> (`order_id`) <span class="keyword">REFERENCES</span> `orders`(`order_id`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE,</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> `fk_item_goods` <span class="keyword">FOREIGN KEY</span> (`goods_id`) <span class="keyword">REFERENCES</span> `goods`(`goods_id`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> <span class="keyword">SET</span> <span class="keyword">NULL</span></span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;订单商品明细表&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="comment">-- 10. 退款申请表</span></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `refunds`;</span><br><span class="line"><span class="keyword">CREATE TABLE</span> `refunds` (</span><br><span class="line">  `refund_id` <span class="type">BIGINT</span> UNSIGNED <span class="keyword">NOT NULL</span> AUTO_INCREMENT COMMENT <span class="string">&#x27;退款ID&#x27;</span>,</span><br><span class="line">  `order_id` <span class="type">BIGINT</span> UNSIGNED <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;订单ID&#x27;</span>,</span><br><span class="line">  `user_id` <span class="type">BIGINT</span> UNSIGNED <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;申请人ID&#x27;</span>,</span><br><span class="line">  `reason` <span class="type">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;退款原因&#x27;</span>,</span><br><span class="line">  `amount` <span class="type">DECIMAL</span>(<span class="number">10</span>,<span class="number">2</span>) <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;退款金额&#x27;</span>,</span><br><span class="line">  `status` ENUM(<span class="string">&#x27;pending&#x27;</span>,<span class="string">&#x27;approved&#x27;</span>,<span class="string">&#x27;rejected&#x27;</span>,<span class="string">&#x27;completed&#x27;</span>) <span class="keyword">NOT NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;pending&#x27;</span> COMMENT <span class="string">&#x27;退款状态&#x27;</span>,</span><br><span class="line">  `applied_at` DATETIME <span class="keyword">NOT NULL</span> <span class="keyword">DEFAULT</span> <span class="built_in">CURRENT_TIMESTAMP</span> COMMENT <span class="string">&#x27;申请时间&#x27;</span>,</span><br><span class="line">  `processed_at` DATETIME <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;处理时间&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY KEY</span> (`refund_id`),</span><br><span class="line">  INDEX `idx_order_user` (`order_id`, `user_id`),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> `fk_refund_order` <span class="keyword">FOREIGN KEY</span> (`order_id`) <span class="keyword">REFERENCES</span> `orders`(`order_id`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE,</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> `fk_refund_user` <span class="keyword">FOREIGN KEY</span> (`user_id`) <span class="keyword">REFERENCES</span> `users`(`user_id`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> RESTRICT</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;退款申请表&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="comment">-- 11. 操作日志表</span></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `operation_logs`;</span><br><span class="line"><span class="keyword">CREATE TABLE</span> `operation_logs` (</span><br><span class="line">  `log_id` <span class="type">BIGINT</span> UNSIGNED <span class="keyword">NOT NULL</span> AUTO_INCREMENT COMMENT <span class="string">&#x27;日志ID&#x27;</span>,</span><br><span class="line">  `admin_id` <span class="type">BIGINT</span> UNSIGNED <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;操作管理员ID&#x27;</span>,</span><br><span class="line">  `action` <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;操作类型&#x27;</span>,</span><br><span class="line">  `target_id` <span class="type">BIGINT</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;目标ID（如商品ID）&#x27;</span>,</span><br><span class="line">  `target_type` <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;目标类型（goods/user）&#x27;</span>,</span><br><span class="line">  `description` TEXT COMMENT <span class="string">&#x27;操作详情&#x27;</span>,</span><br><span class="line">  `ip_address` <span class="type">VARCHAR</span>(<span class="number">45</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;操作IP&#x27;</span>,</span><br><span class="line">  `created_at` DATETIME <span class="keyword">NOT NULL</span> <span class="keyword">DEFAULT</span> <span class="built_in">CURRENT_TIMESTAMP</span> COMMENT <span class="string">&#x27;操作时间&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY KEY</span> (`log_id`),</span><br><span class="line">  INDEX `idx_admin_time` (`admin_id`, `created_at`),</span><br><span class="line">  INDEX `idx_action` (`action`),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> `fk_log_admin` <span class="keyword">FOREIGN KEY</span> (`admin_id`) <span class="keyword">REFERENCES</span> `users`(`user_id`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> RESTRICT</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;操作日志表&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="comment">-- 12. 销售统计表（可选，定时任务填充）</span></span><br><span class="line"><span class="comment">-- ==============================</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `sales_statistics`;</span><br><span class="line"><span class="keyword">CREATE TABLE</span> `sales_statistics` (</span><br><span class="line">  `stat_id` <span class="type">BIGINT</span> UNSIGNED <span class="keyword">NOT NULL</span> AUTO_INCREMENT COMMENT <span class="string">&#x27;统计ID&#x27;</span>,</span><br><span class="line">  `goods_id` <span class="type">BIGINT</span> UNSIGNED <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;商品ID&#x27;</span>,</span><br><span class="line">  `<span class="type">date</span>` <span class="type">DATE</span> <span class="keyword">NOT NULL</span> COMMENT <span class="string">&#x27;统计日期&#x27;</span>,</span><br><span class="line">  `sales_count` <span class="type">INT</span> <span class="keyword">NOT NULL</span> <span class="keyword">DEFAULT</span> <span class="number">0</span> COMMENT <span class="string">&#x27;当日销量&#x27;</span>,</span><br><span class="line">  `view_count` <span class="type">INT</span> <span class="keyword">NOT NULL</span> <span class="keyword">DEFAULT</span> <span class="number">0</span> COMMENT <span class="string">&#x27;浏览量&#x27;</span>,</span><br><span class="line">  `stock_remaining` <span class="type">INT</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;当日剩余库存快照&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY KEY</span> (`stat_id`),</span><br><span class="line">  <span class="keyword">UNIQUE</span> KEY `uniq_goods_date` (`goods_id`, `<span class="type">date</span>`),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> `fk_stat_goods` <span class="keyword">FOREIGN KEY</span> (`goods_id`) <span class="keyword">REFERENCES</span> `goods`(`goods_id`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4 COMMENT<span class="operator">=</span><span class="string">&#x27;销售统计表&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SET</span> FOREIGN_KEY_CHECKS <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="商城管理系统-系统层次架构图（Mermaid-实现）"><a href="#商城管理系统-系统层次架构图（Mermaid-实现）" class="headerlink" title="商城管理系统 - 系统层次架构图（Mermaid 实现）"></a>商城管理系统 - 系统层次架构图（Mermaid 实现）</h2><pre class="mermaid">graph TD
+    %% ============ 主系统 ============
+    A[商城管理系统] 
+
+    %% ============ 子系统 ============
+    A --> B[用户子系统]
+    A --> C[商品子系统]
+    A --> D[订单子系统]
+    A --> E[运营管理子系统]
+
+    %% ============ 用户子系统 ============
+    B --> B1[账号管理]
+    B --> B2[信息交流]
+    B --> B3[公告查询]
+    B --> B4[项目管理]
+
+    %% ============ 商品子系统 ============
+    C --> C1[商品管理]
+    C --> C2[分类管理]
+    C --> C3[库存管理]
+    C --> C4[图片管理]
+
+    %% ============ 订单子系统 ============
+    D --> D1[订单管理]
+    D --> D2[明细管理]
+    D --> D3[退款管理]
+
+    %% ============ 运营管理子系统 ============
+    E --> E1[广告管理]
+    E --> E2[评价管理]
+    E --> E3[项目管理]
+    E --> E4[汇总查询]
+    E --> E5[信息交流]
+    E --> E6[账号管理]
+
+    %% ============ 样式美化 ============
+    classDef system fill:#4CAF50,stroke:#388E3C,color:white,rx:10px,ry:10px;
+    classDef subsystem fill:#2196F3,stroke:#1976D2,color:white,rx:8px,ry:8px;
+    classDef module fill:#FF9800,stroke:#F57C00,color:white,rx:6px,ry:6px;
+
+    class A system
+    class B,C,D,E subsystem
+    class B1,B2,B3,B4,C1,C2,C3,C4,D1,D2,D3,E1,E2,E3,E4,E5,E6 module</pre>
+
+<hr>
+<h2 id="层次结构说明（与-12-张表映射）"><a href="#层次结构说明（与-12-张表映射）" class="headerlink" title="层次结构说明（与 12 张表映射）"></a>层次结构说明（与 12 张表映射）</h2><table>
+<thead>
+<tr>
+<th>层级</th>
+<th>模块</th>
+<th>对应数据库表</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>总系统</strong></td>
+<td>商城管理系统</td>
+<td>—</td>
+<td>顶层入口</td>
+</tr>
+<tr>
+<td><strong>子系统 1</strong></td>
+<td>用户子系统</td>
+<td><code>users</code>, <code>user_login_logs</code></td>
+<td>用户注册、登录、角色管理</td>
+</tr>
+<tr>
+<td></td>
+<td>账号管理</td>
+<td><code>users</code></td>
+<td>登录、注册、注销、个人信息</td>
+</tr>
+<tr>
+<td></td>
+<td>信息交流</td>
+<td><code>user_login_logs</code></td>
+<td>登录日志、消息通知</td>
+</tr>
+<tr>
+<td></td>
+<td>公告查询</td>
+<td>—（可扩展）</td>
+<td>系统公告</td>
+</tr>
+<tr>
+<td></td>
+<td>项目管理</td>
+<td>—（可扩展）</td>
+<td>个人订单、收藏</td>
+</tr>
+<tr>
+<td><strong>子系统 2</strong></td>
+<td>商品子系统</td>
+<td><code>goods</code>, <code>categories</code>, <code>goods_category</code>, <code>goods_images</code>, <code>goods_inventory</code></td>
+<td>商品全生命周期</td>
+</tr>
+<tr>
+<td></td>
+<td>商品管理</td>
+<td><code>goods</code></td>
+<td>上架、下架、编辑</td>
+</tr>
+<tr>
+<td></td>
+<td>分类管理</td>
+<td><code>categories</code>, <code>goods_category</code></td>
+<td>多级分类、商品归类</td>
+</tr>
+<tr>
+<td></td>
+<td>库存管理</td>
+<td><code>goods_inventory</code></td>
+<td>SKU、库存预警</td>
+</tr>
+<tr>
+<td></td>
+<td>图片管理</td>
+<td><code>goods_images</code></td>
+<td>多图上传、排序</td>
+</tr>
+<tr>
+<td><strong>子系统 3</strong></td>
+<td>订单子系统</td>
+<td><code>orders</code>, <code>order_items</code>, <code>refunds</code></td>
+<td>交易闭环</td>
+</tr>
+<tr>
+<td></td>
+<td>订单管理</td>
+<td><code>orders</code></td>
+<td>下单、支付、发货</td>
+</tr>
+<tr>
+<td></td>
+<td>明细管理</td>
+<td><code>order_items</code></td>
+<td>商品快照、规格</td>
+</tr>
+<tr>
+<td></td>
+<td>退款管理</td>
+<td><code>refunds</code></td>
+<td>退款申请、处理</td>
+</tr>
+<tr>
+<td><strong>子系统 4</strong></td>
+<td>运营管理子系统</td>
+<td><code>operation_logs</code>, <code>sales_statistics</code></td>
+<td>后台运营支撑</td>
+</tr>
+<tr>
+<td></td>
+<td>广告管理</td>
+<td>—（可扩展）</td>
+<td>轮播图、推荐位</td>
+</tr>
+<tr>
+<td></td>
+<td>评价管理</td>
+<td>—（可扩展）</td>
+<td>商品评价</td>
+</tr>
+<tr>
+<td></td>
+<td>项目管理</td>
+<td><code>goods</code></td>
+<td>商品审核</td>
+</tr>
+<tr>
+<td></td>
+<td>汇总查询</td>
+<td><code>sales_statistics</code></td>
+<td>销量、库存报表</td>
+</tr>
+<tr>
+<td></td>
+<td>信息交流</td>
+<td><code>operation_logs</code></td>
+<td>操作日志</td>
+</tr>
+<tr>
+<td></td>
+<td>账号管理</td>
+<td><code>users</code></td>
+<td>管理员权限、禁用用户</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="系统构建建议（分层开发路线）"><a href="#系统构建建议（分层开发路线）" class="headerlink" title="系统构建建议（分层开发路线）"></a>系统构建建议（分层开发路线）</h2><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>目标</th>
+<th>核心表</th>
+<th>建议技术栈</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Phase 1：用户认证</strong></td>
+<td>注册登录、权限控制</td>
+<td><code>users</code>, <code>user_login_logs</code></td>
+<td>Spring Security &#x2F; JWT</td>
+</tr>
+<tr>
+<td><strong>Phase 2：商品管理</strong></td>
+<td>商品CRUD、分类、库存</td>
+<td><code>goods</code>, <code>categories</code>, <code>goods_inventory</code></td>
+<td>MyBatis Plus + OSS</td>
+</tr>
+<tr>
+<td><strong>Phase 3：订单交易</strong></td>
+<td>下单、支付、退款</td>
+<td><code>orders</code>, <code>order_items</code>, <code>refunds</code></td>
+<td>事务 + 消息队列</td>
+</tr>
+<tr>
+<td><strong>Phase 4：运营后台</strong></td>
+<td>日志、统计、权限</td>
+<td><code>operation_logs</code>, <code>sales_statistics</code></td>
+<td>Elasticsearch + ECharts</td>
+</tr>
+</tbody></table>
+
+    </div>
+    <footer class="article-footer">
+      
+    </footer>
+  </div>
+    <nav id="article-nav" aria-label="Article navigation" data-aos="fade-up">
+      <div class="article-nav-link-wrap left">
+          <img data-src="https://image.acg.lol/file/2025/11/09/reimu-6.jpg" data-sizes="auto" alt="Java 泛型" class="lazyload">
+        <a href="/2025/11/07/Java%E6%B3%9B%E5%9E%8B%EF%BC%88Generics%EF%BC%89%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9%E5%A4%8D%E4%B9%A0%E6%96%87%E6%A1%A3/" aria-label="前一篇: Java 泛型" title="前一篇: Java 泛型"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+            Java 泛型
+        </h3>
+      </div>
+    <div class="article-nav-link-wrap right">
+        <img data-src="https://image.acg.lol/file/2025/11/09/reimu-7.jpg" data-sizes="auto" alt="手写模拟 Lombok @Builder" class="lazyload">
+      <a href="/2025/11/07/%E6%89%8B%E5%86%99%E6%A8%A1%E6%8B%9F%20Lombok%20@Builder/" aria-label="后一篇: 手写模拟 Lombok @Builder"  title="后一篇: 手写模拟 Lombok @Builder"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+          手写模拟 Lombok @Builder
+      </h3>
+    </div>
+  </nav>
+
+</article>
+
+
+</section>
+        </div>
+        <footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    <div>
+      <span class="icon-copyright"></span>
+        2025
+      <span class="footer-info-sep rotate"></span>
+      Zero02
+    </div>
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+      <div>
+        <span class="icon-brush"></span>
+        38.9k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        03:19
+      </div>
+  </div>
+</footer>
+
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap">
+        <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%B3%BB%E7%BB%9F%E6%95%B4%E4%BD%93%E5%8A%9F%E8%83%BD%E5%88%86%E6%9E%90%EF%BC%88%E5%9F%BA%E4%BA%8E%E7%94%A8%E4%BE%8B%E5%9B%BE%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">一、系统整体功能分析（基于用例图）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81MySQL-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.</span> <span class="toc-text">二、MySQL 数据库表设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#users-%E7%94%A8%E6%88%B7%E8%A1%A8"><span class="toc-number">3.</span> <span class="toc-text">users - 用户表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#user-login-logs-%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%97%A5%E5%BF%97%E8%A1%A8"><span class="toc-number">4.</span> <span class="toc-text">user_login_logs - 用户登录日志表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#categories-%E5%95%86%E5%93%81%E5%88%86%E7%B1%BB%E8%A1%A8"><span class="toc-number">5.</span> <span class="toc-text">categories - 商品分类表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#goods-%E5%95%86%E5%93%81%E4%B8%BB%E8%A1%A8"><span class="toc-number">6.</span> <span class="toc-text">goods - 商品主表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#goods-images-%E5%95%86%E5%93%81%E5%9B%BE%E7%89%87%E8%A1%A8"><span class="toc-number">7.</span> <span class="toc-text">goods_images - 商品图片表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#goods-category-%E5%95%86%E5%93%81%E5%88%86%E7%B1%BB%E5%85%B3%E8%81%94%E8%A1%A8%EF%BC%88%E5%A4%9A%E5%AF%B9%E5%A4%9A%EF%BC%89"><span class="toc-number">8.</span> <span class="toc-text">goods_category - 商品分类关联表（多对多）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#goods-inventory-%E5%95%86%E5%93%81%E5%BA%93%E5%AD%98%E8%A1%A8"><span class="toc-number">9.</span> <span class="toc-text">goods_inventory - 商品库存表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#orders-%E8%AE%A2%E5%8D%95%E4%B8%BB%E8%A1%A8"><span class="toc-number">10.</span> <span class="toc-text">orders - 订单主表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#order-items-%E8%AE%A2%E5%8D%95%E5%95%86%E5%93%81%E6%98%8E%E7%BB%86%E8%A1%A8"><span class="toc-number">11.</span> <span class="toc-text">order_items - 订单商品明细表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#refunds-%E9%80%80%E6%AC%BE%E7%94%B3%E8%AF%B7%E8%A1%A8"><span class="toc-number">12.</span> <span class="toc-text">refunds - 退款申请表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#operation-logs-%E6%93%8D%E4%BD%9C%E6%97%A5%E5%BF%97%E8%A1%A8"><span class="toc-number">13.</span> <span class="toc-text">operation_logs - 操作日志表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sales-statistics-%E9%94%80%E5%94%AE%E7%BB%9F%E8%AE%A1%E8%A1%A8%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%8C%E4%BE%9B%E6%95%B0%E6%8D%AE%E7%9B%91%E6%8E%A7%EF%BC%89"><span class="toc-number">14.</span> <span class="toc-text">sales_statistics - 销售统计表（可选，供数据监控）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A%E8%A1%A8%E5%85%B3%E7%B3%BB%EF%BC%88ER%E5%85%B3%E7%B3%BB%EF%BC%89"><span class="toc-number">14.1.</span> <span class="toc-text">总结：表关系（ER关系）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A5%E5%85%85%E5%BB%BA%E8%AE%AE"><span class="toc-number">14.2.</span> <span class="toc-text">补充建议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%BA%E8%A1%A8%E8%AF%AD%E5%8F%A5"><span class="toc-number">15.</span> <span class="toc-text">建表语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%95%86%E5%9F%8E%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F-%E7%B3%BB%E7%BB%9F%E5%B1%82%E6%AC%A1%E6%9E%B6%E6%9E%84%E5%9B%BE%EF%BC%88Mermaid-%E5%AE%9E%E7%8E%B0%EF%BC%89"><span class="toc-number">16.</span> <span class="toc-text">商城管理系统 - 系统层次架构图（Mermaid 实现）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84%E8%AF%B4%E6%98%8E%EF%BC%88%E4%B8%8E-12-%E5%BC%A0%E8%A1%A8%E6%98%A0%E5%B0%84%EF%BC%89"><span class="toc-number">17.</span> <span class="toc-text">层次结构说明（与 12 张表映射）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA%E5%BB%BA%E8%AE%AE%EF%BC%88%E5%88%86%E5%B1%82%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF%EF%BC%89"><span class="toc-number">18.</span> <span class="toc-text">系统构建建议（分层开发路线）</span></a></li></ol>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Zero02" class="lazyload">
+  <div class="sidebar-author-name">Zero02</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">20</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">8</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social">
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/music" aria-label="music"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">music</div>
+      </div>
+</div>
+</div>
+  </div>
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+</nav>
+
+    </div>
+      <div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png"/>
+        </div>
+      </div>
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+  
+<script src="/js/generator_search.js" defer></script>
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js" integrity="sha384-8LyaidD9GPxQQgLJO&#x2F;WRw&#x2F;O2h3BoNq&#x2F;ApI&#x2F;ecpvM6RsrCz2qP2ppBXUKihP4V&#x2F;2d" crossorigin="anonymous"></script>
+
+  <script>
+    if (! || !window.matchMedia('(max-width: 768px)').matches) {
+      window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'));
+    }
+  </script>
+
+
+
+  
+<script src="https://npm.webcache.cn/live2d-widgets@0.9.0/autoload.js" integrity="sha384-poTN7wN&#x2F;SqNhQqo3jdFeX20ikddWeFGkUkDEzsKjgH&#x2F;ez8aQLn81oI0Cw6q5xNyB" crossorigin="anonymous"></script>
+
+
+
+<div id="lazy-script">
+  <div>
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Zero02",
+          title: "对于乐淘后台商城的系统设计",
+          url: "http://example.com/2025/11/07/%E4%B9%90%E6%B7%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/",
+          excerpt: "使用mermaid来编写系统设计",
+          description: "",
+          stripContent: "根据您提供的三张用例图，我们可以分析出一个典型的商城管理系统，涉及三个主要角色：  用户（普通用户） 商品管理员 超级管理员 系统功能模块包括：    用户：账号管理、商品浏览、下单、退款等   商品管理员：商品上架、下架、分类管理、库存管理等   超级管理员：账号管理、注销账号、操作日志等   一、系统整体功能分析（基于用例图）   角色 用例    用户 登录账号、注销账号、账号管理、浏览商品、商品消费（下单、查看订单、退款）   商品管理员 录入商品信息、编辑商品信息、设置商品分类标签、执",
+          date: "Fri Nov 07 2025 08:30:00 GMT+0800",
+          updated: "Sat Nov 15 2025 17:03:52 GMT+0800",
+          cover: "https://image.acg.lol/file/2025/11/09/reimu-6.jpg",
+        };
+      </script>
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+      <script type="module" data-pjax>
+        const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+        const initPswp = (gallery, children) => {
+          if (_$$(`${gallery} ${children}`).length > 0) {
+            new PhotoSwipeLightbox({
+              gallery,
+              children,
+              pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+            }).init();
+          }
+        }
+        const pswp = () => {
+          initPswp('.article-entry', 'a.article-gallery-item');
+          initPswp('.article-gallery', 'a.article-gallery-item');
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script>
+        
+
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.10.3' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+  
+<script src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js" integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr+h5UfruuRL&#x2F;aORyw+5+HZoU6e" crossorigin="anonymous"></script>
+
+    <script>
+      if (! || !window.matchMedia('(max-width: 768px)').matches) {
+        if (window.matchMedia('(max-width: 959px)').matches) {
+          const aplayer = _$('#aplayer');
+          if (aplayer) {
+            const aside = aplayer.parentNode?.parentNode;
+            if (aside?.tagName === 'ASIDE') {
+              aplayer.removeAttribute('data-aos');
+              aplayer.parentNode.removeChild(aplayer);
+              document.body.appendChild(aplayer);
+            }
+          }
+        }
+        const ap = new APlayer({
+          theme: "var(--color-link)",
+          container: document.getElementById('aplayer'),
+          audio: [] || [],
+          fixed: isMobile ? true : (null || false),
+          autoplay: null || false,
+          loop: '' || 'all',
+          order: '' || 'list',
+          preload: '' || 'auto',
+          volume: null || 0.7,
+          mutex: null || true,
+          listFolded: null || false,
+          lrcType: null || 0,
+        });
+      }
+    </script>
+
+
+
+  </body>
+  <script src="https://unpkg.com/mermaid@9.4.3/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({startOnLoad: true});</script>
+  </html>
