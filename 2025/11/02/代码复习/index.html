@@ -40,7 +40,6 @@
     
 <link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css" integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous">
 
-    <link rel="preload" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;" href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css" integrity="sha384-tLMkTWh2pfXNWGFlUS0w1TFtRG5xZ9lPWFOooj+vDDLIL+xBGQU&#x2F;voDBY5XE2lVh" crossorigin="anonymous">
 <meta name="generator" content="Hexo 8.1.0"></head>
 
   <body>
@@ -113,12 +112,6 @@
           </div>
           <span class="main-nav-link">关于</span>
         </span>
-        <a class="main-nav-link-wrap" href="/music">
-          <div class="main-nav-icon icon rotate">
-              &#xe62b;
-          </div>
-          <span class="main-nav-link">music</span>
-        </span>
     <a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
   </nav>
   <nav id="sub-nav" aria-label="Secondary navigation">
@@ -143,7 +136,6 @@
         <div id="content" aria-label="Page content"  class="sidebar-right" >
           <aside id="sidebar" aria-label="Sidebar">
   <div class="sidebar-wrapper-container sticky">
-      <div id="aplayer" theme="var(--color-link)" data-aos="fade-up"></div>
   <div class="sidebar-wrapper">
     <div class="sidebar-wrap" data-aos="fade-up">
           <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
@@ -159,11 +151,11 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">20</div>
+    <div class="sidebar-state-number">22</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
-    <div class="sidebar-state-number">8</div>
+    <div class="sidebar-state-number">9</div>
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
@@ -193,13 +185,6 @@
             &#xe62b;
         </div>
         <div class="sidebar-menu-link">关于</div>
-      </div>
-      <div class="sidebar-menu-link-wrap">
-        <a class="sidebar-menu-link-dummy" href="/music" aria-label="music"></a>
-        <div class="sidebar-menu-icon icon rotate">
-            &#xe62b;
-        </div>
-        <div class="sidebar-menu-link">music</div>
       </div>
 </div>
 </div>
@@ -329,10 +314,10 @@
       </div>
       <div>
         <span class="icon-brush"></span>
-        38.9k
+        45.6k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        03:19
+        03:48
       </div>
   </div>
 </footer>
@@ -358,11 +343,11 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">20</div>
+    <div class="sidebar-state-number">22</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
-    <div class="sidebar-state-number">8</div>
+    <div class="sidebar-state-number">9</div>
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
@@ -392,13 +377,6 @@
             &#xe62b;
         </div>
         <div class="sidebar-menu-link">关于</div>
-      </div>
-      <div class="sidebar-menu-link-wrap">
-        <a class="sidebar-menu-link-dummy" href="/music" aria-label="music"></a>
-        <div class="sidebar-menu-icon icon rotate">
-            &#xe62b;
-        </div>
-        <div class="sidebar-menu-link">music</div>
       </div>
 </div>
 </div>
@@ -556,38 +534,6 @@
 </script>
 
 
-  
-<script src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js" integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr+h5UfruuRL&#x2F;aORyw+5+HZoU6e" crossorigin="anonymous"></script>
-
-    <script>
-      if (! || !window.matchMedia('(max-width: 768px)').matches) {
-        if (window.matchMedia('(max-width: 959px)').matches) {
-          const aplayer = _$('#aplayer');
-          if (aplayer) {
-            const aside = aplayer.parentNode?.parentNode;
-            if (aside?.tagName === 'ASIDE') {
-              aplayer.removeAttribute('data-aos');
-              aplayer.parentNode.removeChild(aplayer);
-              document.body.appendChild(aplayer);
-            }
-          }
-        }
-        const ap = new APlayer({
-          theme: "var(--color-link)",
-          container: document.getElementById('aplayer'),
-          audio: [] || [],
-          fixed: isMobile ? true : (null || false),
-          autoplay: null || false,
-          loop: '' || 'all',
-          order: '' || 'list',
-          preload: '' || 'auto',
-          volume: null || 0.7,
-          mutex: null || true,
-          listFolded: null || false,
-          lrcType: null || 0,
-        });
-      }
-    </script>
 
 
 
