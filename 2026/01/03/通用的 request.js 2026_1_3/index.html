@@ -1,0 +1,590 @@
+  <!DOCTYPE html>
+  <html lang="zh-CN"  
+      data-theme-mode="auto"
+  >
+  <head>
+  <meta charset="utf-8">
+  
+  
+  
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_4k4bc36ef96';window.REIMU_CONFIG.clipboard_tips = {"success":{"zh-CN":"复制成功 (*^▽^*)"},"fail":{"zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'http://example.com';</script>
+  <title>
+    前端通用axios封装：request.js最佳实践 | Zero02 Blog
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media='all'">
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+    <meta name="description" content="本文详细介绍了一个功能完善的axios通用封装（request.js），包括请求&#x2F;响应拦截、错误统一处理、重复请求取消、请求配置扩展等核心功能，帮助开发者构建统一、可扩展、鲁棒性强的前端请求层。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端通用axios封装：request.js最佳实践">
+<meta property="og:url" content="http://example.com/2026/01/03/%E9%80%9A%E7%94%A8%E7%9A%84%20request.js%202026_1_3/index.html">
+<meta property="og:site_name" content="Zero02 Blog">
+<meta property="og:description" content="本文详细介绍了一个功能完善的axios通用封装（request.js），包括请求&#x2F;响应拦截、错误统一处理、重复请求取消、请求配置扩展等核心功能，帮助开发者构建统一、可扩展、鲁棒性强的前端请求层。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-01-03T01:30:00.000Z">
+<meta property="article:modified_time" content="2026-02-03T14:39:21.140Z">
+<meta property="article:author" content="Zero02">
+<meta name="twitter:card" content="summary">
+    <link rel="alternate" href="/atom.xml" title="Zero02 Blog" type="application/atom+xml">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx/1oA/0l8ysE" crossorigin="anonymous">
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css" integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous">
+
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css" integrity="sha384-tLMkTWh2pfXNWGFlUS0w1TFtRG5xZ9lPWFOooj+vDDLIL+xBGQU/voDBY5XE2lVh" crossorigin="anonymous">
+<meta name="generator" content="Hexo 8.1.0"></head>
+
+  <body>
+      <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate">
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script>
+<div id="copy-tooltip"></div>
+<div id="heatmap-tooltip"></div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation">
+        <a class="main-nav-link-wrap" href="/">
+            <div class="main-nav-icon icon rotate">
+                &#xe62b;
+            </div>
+          <span class="main-nav-link">首页</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/archives">
+            <div class="main-nav-icon icon rotate">
+                &#xe62b;
+            </div>
+          <span class="main-nav-link">归档</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/about">
+            <div class="main-nav-icon icon rotate">
+                &#xe62b;
+            </div>
+          <span class="main-nav-link">关于</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/friend">
+            <div class="main-nav-icon icon rotate">
+                &#xe62b;
+            </div>
+          <span class="main-nav-link">友链</span>
+        </span>
+    <a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation">
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" aria-label="RSS 订阅" target="_blank"></a>
+  </nav>
+</div>
+<header id="header" aria-label="Site header">
+    <picture></picture>
+    <img  fetchpriority="high" src="https://image.acg.lol/file/2025/11/09/reimu-12.jpg" alt="前端通用axios封装：request.js最佳实践">
+  <div id="header-outer">
+    <div id="header-title">
+          <span id="logo">
+            <h1 data-aos="slide-up">前端通用axios封装：request.js最佳实践</h1>
+          </span>
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+        </h2>
+    </div>
+  </div>
+</header>
+
+        <div id="content" aria-label="Page content"  class="sidebar-right" >
+          <aside id="sidebar" aria-label="Sidebar">
+  <div class="sidebar-wrapper-container sticky">
+  <div class="sidebar-wrapper">
+    <div class="sidebar-wrap" data-aos="fade-up">
+          <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E4%BB%A3%E7%A0%81%EF%BC%88request-js%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">最终代码（request.js）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E"><span class="toc-number">2.</span> <span class="toc-text">核心功能说明</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE"><span class="toc-number">2.1.</span> <span class="toc-text">1. 基础配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%87%8D%E5%A4%8D%E8%AF%B7%E6%B1%82%E5%8F%96%E6%B6%88"><span class="toc-number">2.2.</span> <span class="toc-text">2. 重复请求取消</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E8%AF%B7%E6%B1%82%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="toc-number">2.3.</span> <span class="toc-text">3. 请求拦截器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%93%8D%E5%BA%94%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="toc-number">2.4.</span> <span class="toc-text">4. 响应拦截器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95%E5%B0%81%E8%A3%85"><span class="toc-number">2.5.</span> <span class="toc-text">5. 通用方法封装</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-number">3.</span> <span class="toc-text">使用示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E4%B8%8E%E9%80%82%E9%85%8D"><span class="toc-number">4.</span> <span class="toc-text">扩展与适配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8E%9F%E5%88%99"><span class="toc-number">5.</span> <span class="toc-text">核心原则</span></a></li></ol>
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Zero02" class="lazyload">
+  <div class="sidebar-author-name">Zero02</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">15</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">8</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social" >
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+</div>
+</div>
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
+    </div>
+  </div>
+  <div class="sidebar-widget">
+  </div>
+  </div>
+</aside>
+
+          <section id="main" aria-label="Main content"><article id="post-通用的 request.js 2026_1_3" class="h-entry article" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <span class="article-date-link icon-calendar" data-aos="zoom-in">
+    <time datetime="2026-01-03T01:30:00.000Z" itemprop="datePublished">2026-01-03</time>
+    <time style="display: none;" id="post-update-time">2026-02-03</time>
+  </span>
+</div>
+
+    </div>
+    
+    <div class="hr-line"></div>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+        <p>以下是一个<strong>功能完善、可扩展、鲁棒性强</strong>的 axios 通用封装（request.js），涵盖请求&#x2F;响应拦截、错误统一处理、重复请求取消、请求配置扩展、常用请求方法封装等核心能力，适配大部分前端项目场景。</p>
+<h3 id="最终代码（request-js）"><a href="#最终代码（request-js）" class="headerlink" title="最终代码（request.js）"></a>最终代码（request.js）</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">ElMessage</span>, <span class="title class_">ElMessageBox</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;element-plus&#x27;</span>; <span class="comment">// 适配Vue3+Element Plus，可替换为其他UI库</span></span><br><span class="line"><span class="keyword">import</span> &#123; useUserStore &#125; <span class="keyword">from</span> <span class="string">&#x27;@/stores/user&#x27;</span>; <span class="comment">// 示例：Vue3 Pinia用户状态，可替换为Vuex/本地存储</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ===================== 核心配置 =====================</span></span><br><span class="line"><span class="comment">// 创建axios实例</span></span><br><span class="line"><span class="keyword">const</span> service = axios.<span class="title function_">create</span>(&#123;</span><br><span class="line">  <span class="attr">baseURL</span>: <span class="keyword">import</span>.<span class="property">meta</span>.<span class="property">env</span>.<span class="property">VITE_API_BASE_URL</span>, <span class="comment">// 环境变量配置接口前缀（Vite）</span></span><br><span class="line">  <span class="attr">timeout</span>: <span class="number">10000</span>, <span class="comment">// 请求超时时间</span></span><br><span class="line">  <span class="attr">headers</span>: &#123;</span><br><span class="line">    <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json;charset=utf-8&#x27;</span> <span class="comment">// 默认请求头</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ===================== 重复请求取消机制 =====================</span></span><br><span class="line"><span class="comment">// 存储正在进行的请求 &#123; url: CancelTokenSource &#125;</span></span><br><span class="line"><span class="keyword">const</span> pendingRequests = <span class="keyword">new</span> <span class="title class_">Map</span>();</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 生成请求唯一标识（method + url + 参数）</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Object</span>&#125; config axios配置</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns</span> &#123;<span class="type">String</span>&#125; 请求标识</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">getRequestKey</span> = (<span class="params">config</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; method, url, params, data &#125; = config;</span><br><span class="line">  <span class="keyword">return</span> [method, url, <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(params), <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(data)].<span class="title function_">join</span>(<span class="string">&#x27;&amp;&#x27;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 添加待取消的请求</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Object</span>&#125; config axios配置</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">addPendingRequest</span> = (<span class="params">config</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> requestKey = <span class="title function_">getRequestKey</span>(config);</span><br><span class="line">  <span class="comment">// 若已有相同请求，先取消再重新添加</span></span><br><span class="line">  <span class="keyword">if</span> (pendingRequests.<span class="title function_">has</span>(requestKey)) &#123;</span><br><span class="line">    pendingRequests.<span class="title function_">get</span>(requestKey).<span class="title function_">cancel</span>(<span class="string">&#x27;重复请求已取消&#x27;</span>);</span><br><span class="line">    pendingRequests.<span class="title function_">delete</span>(requestKey);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> source = axios.<span class="property">CancelToken</span>.<span class="title function_">source</span>();</span><br><span class="line">  config.<span class="property">cancelToken</span> = source.<span class="property">token</span>;</span><br><span class="line">  pendingRequests.<span class="title function_">set</span>(requestKey, source);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 移除已完成/取消的请求</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Object</span>&#125; config axios配置</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">removePendingRequest</span> = (<span class="params">config</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> requestKey = <span class="title function_">getRequestKey</span>(config);</span><br><span class="line">  <span class="keyword">if</span> (pendingRequests.<span class="title function_">has</span>(requestKey)) &#123;</span><br><span class="line">    pendingRequests.<span class="title function_">delete</span>(requestKey);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ===================== 请求拦截器 =====================</span></span><br><span class="line">service.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">use</span>(</span><br><span class="line">  <span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 1. 添加取消请求标识</span></span><br><span class="line">    <span class="title function_">addPendingRequest</span>(config);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 注入token（根据项目实际存储位置调整）</span></span><br><span class="line">    <span class="keyword">const</span> userStore = <span class="title function_">useUserStore</span>();</span><br><span class="line">    <span class="keyword">if</span> (userStore.<span class="property">token</span>) &#123;</span><br><span class="line">      config.<span class="property">headers</span>.<span class="property">Authorization</span> = <span class="string">`Bearer <span class="subst">$&#123;userStore.token&#125;</span>`</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. GET请求参数处理（可选：防止参数为undefined导致请求异常）</span></span><br><span class="line">    <span class="keyword">if</span> (config.<span class="property">method</span> === <span class="string">&#x27;get&#x27;</span> &amp;&amp; config.<span class="property">params</span>) &#123;</span><br><span class="line">      <span class="title class_">Object</span>.<span class="title function_">entries</span>(config.<span class="property">params</span>).<span class="title function_">forEach</span>(<span class="function">(<span class="params">[key, value]</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (value === <span class="literal">undefined</span>) &#123;</span><br><span class="line">          <span class="keyword">delete</span> config.<span class="property">params</span>[key];</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 4. 自定义请求配置扩展（如是否显示加载中）</span></span><br><span class="line">    config.<span class="property">loading</span> ??= <span class="literal">true</span>; <span class="comment">// 默认显示加载中，可通过请求配置覆盖</span></span><br><span class="line">    <span class="keyword">if</span> (config.<span class="property">loading</span>) &#123;</span><br><span class="line">      <span class="comment">// 示例：可在此处调用UI库的加载中组件（如ElLoading）</span></span><br><span class="line">      <span class="comment">// ElLoading.service(&#123; lock: true, text: &#x27;请求中...&#x27; &#125;);</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> config;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="title class_">ElMessage</span>.<span class="title function_">error</span>(<span class="string">&#x27;请求参数异常，请检查！&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(error);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ===================== 响应拦截器 =====================</span></span><br><span class="line">service.<span class="property">interceptors</span>.<span class="property">response</span>.<span class="title function_">use</span>(</span><br><span class="line">  <span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 1. 移除取消请求标识</span></span><br><span class="line">    <span class="title function_">removePendingRequest</span>(response.<span class="property">config</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 关闭加载中（若开启）</span></span><br><span class="line">    <span class="keyword">if</span> (response.<span class="property">config</span>.<span class="property">loading</span>) &#123;</span><br><span class="line">      <span class="comment">// ElLoading.service().close(); // 关闭加载中</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. 解构响应数据（适配后端通用返回格式：&#123; code, msg, data &#125;）</span></span><br><span class="line">    <span class="keyword">const</span> &#123; code, msg, data &#125; = response.<span class="property">data</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 4. 业务逻辑判断（根据后端约定调整）</span></span><br><span class="line">    <span class="keyword">if</span> (code === <span class="number">200</span>) &#123;</span><br><span class="line">      <span class="comment">// 成功：返回核心业务数据，简化上层调用</span></span><br><span class="line">      <span class="keyword">return</span> data;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (code === <span class="number">401</span>) &#123;</span><br><span class="line">      <span class="comment">// 未登录/Token过期：统一处理登出逻辑</span></span><br><span class="line">      <span class="title class_">ElMessageBox</span>.<span class="title function_">confirm</span>(<span class="string">&#x27;登录状态已过期，请重新登录&#x27;</span>, <span class="string">&#x27;提示&#x27;</span>, &#123;</span><br><span class="line">        <span class="attr">confirmButtonText</span>: <span class="string">&#x27;重新登录&#x27;</span>,</span><br><span class="line">        <span class="attr">cancelButtonText</span>: <span class="string">&#x27;取消&#x27;</span>,</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;warning&#x27;</span></span><br><span class="line">      &#125;).<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> userStore = <span class="title function_">useUserStore</span>();</span><br><span class="line">        userStore.<span class="title function_">logout</span>(); <span class="comment">// 清空token、跳转登录页</span></span><br><span class="line">        <span class="variable language_">window</span>.<span class="property">location</span>.<span class="title function_">reload</span>();</span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(<span class="keyword">new</span> <span class="title class_">Error</span>(msg || <span class="string">&#x27;登录过期&#x27;</span>));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 其他业务错误：统一提示</span></span><br><span class="line">      <span class="title class_">ElMessage</span>.<span class="title function_">error</span>(msg || <span class="string">&#x27;请求失败&#x27;</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(<span class="keyword">new</span> <span class="title class_">Error</span>(msg || <span class="string">&#x27;请求失败&#x27;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 1. 移除取消请求标识</span></span><br><span class="line">    <span class="keyword">if</span> (error.<span class="property">config</span>) &#123;</span><br><span class="line">      <span class="title function_">removePendingRequest</span>(error.<span class="property">config</span>);</span><br><span class="line">      <span class="comment">// 关闭加载中</span></span><br><span class="line">      <span class="keyword">if</span> (error.<span class="property">config</span>.<span class="property">loading</span>) &#123;</span><br><span class="line">        <span class="comment">// ElLoading.service().close();</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 错误分类处理</span></span><br><span class="line">    <span class="keyword">let</span> errorMsg = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (axios.<span class="title function_">isCancel</span>(error)) &#123;</span><br><span class="line">      <span class="comment">// 取消请求（重复请求）</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;请求已取消：&#x27;</span>, error.<span class="property">message</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(error);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (error.<span class="property">message</span>.<span class="title function_">includes</span>(<span class="string">&#x27;timeout&#x27;</span>)) &#123;</span><br><span class="line">      <span class="comment">// 超时错误</span></span><br><span class="line">      errorMsg = <span class="string">&#x27;请求超时，请检查网络！&#x27;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (error.<span class="property">response</span>) &#123;</span><br><span class="line">      <span class="comment">// HTTP状态码错误（4xx/5xx）</span></span><br><span class="line">      <span class="keyword">const</span> status = error.<span class="property">response</span>.<span class="property">status</span>;</span><br><span class="line">      <span class="keyword">switch</span> (status) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">400</span>:</span><br><span class="line">          errorMsg = <span class="string">&#x27;请求参数错误！&#x27;</span>;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">403</span>:</span><br><span class="line">          errorMsg = <span class="string">&#x27;权限不足，无法访问！&#x27;</span>;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">404</span>:</span><br><span class="line">          errorMsg = <span class="string">&#x27;请求接口不存在！&#x27;</span>;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">500</span>:</span><br><span class="line">          errorMsg = <span class="string">&#x27;服务器内部错误，请稍后重试！&#x27;</span>;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="attr">default</span>:</span><br><span class="line">          errorMsg = <span class="string">`请求失败（<span class="subst">$&#123;status&#125;</span>）：<span class="subst">$&#123;error.response.data?.msg || <span class="string">&#x27;未知错误&#x27;</span>&#125;</span>`</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 网络错误（无响应）</span></span><br><span class="line">      errorMsg = <span class="string">&#x27;网络异常，请检查网络连接！&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. 统一错误提示</span></span><br><span class="line">    <span class="title class_">ElMessage</span>.<span class="title function_">error</span>(errorMsg);</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">reject</span>(error);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ===================== 封装通用请求方法 =====================</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * GET请求</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">String</span>&#125; url 接口地址</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Object</span>&#125; params 请求参数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Object</span>&#125; config 自定义配置（如loading: false）</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns</span> &#123;<span class="type">Promise</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">get</span> = (<span class="params">url, params = &#123;&#125;, config = &#123;&#125;</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> service.<span class="title function_">get</span>(url, &#123; params, ...config &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * POST请求</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">String</span>&#125; url 接口地址</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Object</span>&#125; data 请求体数据</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Object</span>&#125; config 自定义配置</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns</span> &#123;<span class="type">Promise</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">post</span> = (<span class="params">url, data = &#123;&#125;, config = &#123;&#125;</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> service.<span class="title function_">post</span>(url, data, config);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * PUT请求</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">String</span>&#125; url 接口地址</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Object</span>&#125; data 请求体数据</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Object</span>&#125; config 自定义配置</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns</span> &#123;<span class="type">Promise</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">put</span> = (<span class="params">url, data = &#123;&#125;, config = &#123;&#125;</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> service.<span class="title function_">put</span>(url, data, config);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * DELETE请求</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">String</span>&#125; url 接口地址</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Object</span>&#125; params 请求参数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Object</span>&#125; config 自定义配置</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns</span> &#123;<span class="type">Promise</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">del</span> = (<span class="params">url, params = &#123;&#125;, config = &#123;&#125;</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> service.<span class="title function_">delete</span>(url, &#123; params, ...config &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 上传文件（FormData）</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">String</span>&#125; url 接口地址</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">FormData</span>&#125; formData 表单数据（含文件）</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Object</span>&#125; config 自定义配置（如进度回调）</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns</span> &#123;<span class="type">Promise</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">upload</span> = (<span class="params">url, formData, config = &#123;&#125;</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> service.<span class="title function_">post</span>(url, formData, &#123;</span><br><span class="line">    <span class="attr">headers</span>: &#123; <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;multipart/form-data&#x27;</span> &#125;,</span><br><span class="line">    <span class="attr">timeout</span>: <span class="number">60000</span>, <span class="comment">// 上传超时时间延长</span></span><br><span class="line">    ...config</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导出默认实例（保留原生能力，按需使用）</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> service;</span><br></pre></td></tr></table></figure>
+
+<h3 id="核心功能说明"><a href="#核心功能说明" class="headerlink" title="核心功能说明"></a>核心功能说明</h3><h4 id="1-基础配置"><a href="#1-基础配置" class="headerlink" title="1. 基础配置"></a>1. 基础配置</h4><ul>
+<li>基于环境变量配置 <code>baseURL</code>（适配 Vite 项目，Webpack 可替换为 <code>process.env.VUE_APP_API_BASE_URL</code>）；</li>
+<li>默认超时时间 10s，可通过请求配置覆盖；</li>
+<li>统一设置 <code>Content-Type</code> 为 JSON 格式。</li>
+</ul>
+<h4 id="2-重复请求取消"><a href="#2-重复请求取消" class="headerlink" title="2. 重复请求取消"></a>2. 重复请求取消</h4><ul>
+<li>用 <code>Map</code> 存储请求标识和取消令牌，避免同一时间重复发起相同请求；</li>
+<li>请求发起前检查是否已有相同请求，有则取消旧请求，保证请求唯一性。</li>
+</ul>
+<h4 id="3-请求拦截器"><a href="#3-请求拦截器" class="headerlink" title="3. 请求拦截器"></a>3. 请求拦截器</h4><ul>
+<li>自动注入 Token（适配 Vue3 Pinia，可替换为 Vuex&#x2F;<code>localStorage</code>）；</li>
+<li>处理 GET 请求参数（移除 <code>undefined</code> 参数，避免请求异常）；</li>
+<li>支持自定义加载中状态（默认开启，可通过请求配置关闭）。</li>
+</ul>
+<h4 id="4-响应拦截器"><a href="#4-响应拦截器" class="headerlink" title="4. 响应拦截器"></a>4. 响应拦截器</h4><ul>
+<li>统一解析后端返回格式（<code>{ code, msg, data }</code>），成功时直接返回 <code>data</code>，简化上层调用；</li>
+<li>针对 401（登录过期）做统一登出处理；</li>
+<li>分类处理错误：取消请求、超时、HTTP 状态码、网络异常，给出精准提示。</li>
+</ul>
+<h4 id="5-通用方法封装"><a href="#5-通用方法封装" class="headerlink" title="5. 通用方法封装"></a>5. 通用方法封装</h4><ul>
+<li>封装 <code>get/post/put/del</code> 常用方法，简化调用；</li>
+<li>单独封装 <code>upload</code> 方法，适配文件上传（调整请求头、延长超时时间）。</li>
+</ul>
+<h3 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; get, post, upload &#125; <span class="keyword">from</span> <span class="string">&#x27;@/utils/request&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. GET请求</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">getUserList</span> = <span class="keyword">async</span> (<span class="params">page, size</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> data = <span class="keyword">await</span> <span class="title function_">get</span>(<span class="string">&#x27;/user/list&#x27;</span>, &#123; page, size &#125;, &#123; <span class="attr">loading</span>: <span class="literal">false</span> &#125;);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;用户列表：&#x27;</span>, data);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;请求失败：&#x27;</span>, error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. POST请求</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">addUser</span> = <span class="keyword">async</span> (<span class="params">userInfo</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> data = <span class="keyword">await</span> <span class="title function_">post</span>(<span class="string">&#x27;/user/add&#x27;</span>, userInfo);</span><br><span class="line">    <span class="title class_">ElMessage</span>.<span class="title function_">success</span>(<span class="string">&#x27;添加成功&#x27;</span>);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">    <span class="comment">// 无需手动提示，request.js已统一处理</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 文件上传</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">uploadFile</span> = <span class="keyword">async</span> (<span class="params">file</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> formData = <span class="keyword">new</span> <span class="title class_">FormData</span>();</span><br><span class="line">  formData.<span class="title function_">append</span>(<span class="string">&#x27;file&#x27;</span>, file);</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> data = <span class="keyword">await</span> <span class="title function_">upload</span>(<span class="string">&#x27;/file/upload&#x27;</span>, formData, &#123;</span><br><span class="line">      <span class="attr">onUploadProgress</span>: <span class="function">(<span class="params">progressEvent</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> progress = (progressEvent.<span class="property">loaded</span> / progressEvent.<span class="property">total</span>) * <span class="number">100</span>;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;上传进度：&#x27;</span>, progress);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="title class_">ElMessage</span>.<span class="title function_">success</span>(<span class="string">&#x27;上传成功&#x27;</span>);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">    <span class="comment">// 异常处理</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="扩展与适配"><a href="#扩展与适配" class="headerlink" title="扩展与适配"></a>扩展与适配</h3><ol>
+<li><strong>UI 库替换</strong>：若不用 Element Plus，可将 <code>ElMessage/ElMessageBox</code> 替换为其他 UI 库的提示组件（如 Ant Design Vue 的 <code>message/modal</code>），或自定义提示函数。</li>
+<li><strong>状态管理适配</strong>：Token 存储若用 Vuex，替换 <code>useUserStore</code> 为 <code>store.dispatch/store.getters</code>；若用本地存储，直接读取 <code>localStorage.getItem(&#39;token&#39;)</code>。</li>
+<li><strong>后端返回格式调整</strong>：若后端返回格式不是 <code>{ code, msg, data }</code>，修改响应拦截器中的解析逻辑即可。</li>
+<li><strong>请求加载中</strong>：可集成 <code>ElLoading</code>（Element Plus）或自定义加载组件，在请求拦截器开启、响应拦截器关闭。</li>
+<li><strong>更多配置</strong>：可扩展请求头、代理、SSL 验证等，直接在 <code>axios.create</code> 或请求配置中添加。</li>
+</ol>
+<h3 id="核心原则"><a href="#核心原则" class="headerlink" title="核心原则"></a>核心原则</h3><ul>
+<li><strong>统一化</strong>：请求&#x2F;响应拦截统一处理通用逻辑（Token、错误、加载中），减少重复代码；</li>
+<li><strong>可扩展</strong>：保留自定义配置入口，支持覆盖默认行为；</li>
+<li><strong>鲁棒性</strong>：处理各类异常场景（重复请求、超时、网络错误、业务错误），避免页面崩溃；</li>
+<li><strong>易用性</strong>：封装通用方法，上层调用只需关注接口地址和参数，无需关心底层逻辑。</li>
+</ul>
+
+    </div>
+    <footer class="article-footer">
+        <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/" title="前端技术" data-aos="zoom-in">前端技术</a>
+
+      
+    </footer>
+  </div>
+    <nav id="article-nav" aria-label="Article navigation" data-aos="fade-up">
+      <div class="article-nav-link-wrap left">
+          <img data-src="https://image.acg.lol/file/2025/11/09/reimu-8.jpg" data-sizes="auto" alt="Sa-Token鉴权学习：Vue结合SpringBoot实现角色权限控制" class="lazyload">
+        <a href="/2026/01/03/sa-token%20%E9%89%B4%E6%9D%83%E5%AD%A6%E4%B9%A0%202026_1_3/" aria-label="前一篇: Sa-Token鉴权学习：Vue结合SpringBoot实现角色权限控制" title="前一篇: Sa-Token鉴权学习：Vue结合SpringBoot实现角色权限控制"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+            Sa-Token鉴权学习：Vue结合SpringBoot实现角色权限控制
+        </h3>
+      </div>
+    <div class="article-nav-link-wrap right">
+        <img data-src="https://image.acg.lol/file/2025/11/09/reimu-10.jpg" data-sizes="auto" alt="Spring Boot文件上传下载接口实现" class="lazyload">
+      <a href="/2026/01/02/IO%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%202026_1_2/" aria-label="后一篇: Spring Boot文件上传下载接口实现"  title="后一篇: Spring Boot文件上传下载接口实现"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+          Spring Boot文件上传下载接口实现
+      </h3>
+    </div>
+  </nav>
+
+</article>
+
+
+</section>
+        </div>
+        <footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    <div>
+      <span class="icon-copyright"></span>
+        2020-2026
+        <span class="footer-info-sep rotate"></span>
+      Zero02
+    </div>
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+      <div>
+        <span class="icon-brush"></span>
+        28.8k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        02:18
+      </div>
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+  </div>
+</footer>
+
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap">
+        <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E4%BB%A3%E7%A0%81%EF%BC%88request-js%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">最终代码（request.js）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E"><span class="toc-number">2.</span> <span class="toc-text">核心功能说明</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE"><span class="toc-number">2.1.</span> <span class="toc-text">1. 基础配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%87%8D%E5%A4%8D%E8%AF%B7%E6%B1%82%E5%8F%96%E6%B6%88"><span class="toc-number">2.2.</span> <span class="toc-text">2. 重复请求取消</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E8%AF%B7%E6%B1%82%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="toc-number">2.3.</span> <span class="toc-text">3. 请求拦截器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%93%8D%E5%BA%94%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="toc-number">2.4.</span> <span class="toc-text">4. 响应拦截器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E9%80%9A%E7%94%A8%E6%96%B9%E6%B3%95%E5%B0%81%E8%A3%85"><span class="toc-number">2.5.</span> <span class="toc-text">5. 通用方法封装</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-number">3.</span> <span class="toc-text">使用示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E4%B8%8E%E9%80%82%E9%85%8D"><span class="toc-number">4.</span> <span class="toc-text">扩展与适配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8E%9F%E5%88%99"><span class="toc-number">5.</span> <span class="toc-text">核心原则</span></a></li></ol>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Zero02" class="lazyload">
+  <div class="sidebar-author-name">Zero02</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">15</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">8</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social" >
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+</div>
+</div>
+  </div>
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+</nav>
+
+    </div>
+      <div id="aplayer" theme="var(--color-link)"></div>
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+  <script>
+    var setupFirework = () => {
+      if (!false || !window.matchMedia('(max-width: 768px)').matches) {
+        window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'));
+      }
+    }
+  </script>
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.2.0/dist/index.umd.js" integrity="sha384-qi9WggRt19tv8Vc7pCHW3ulMNLwrn515zaLEWZjl1px07vz8+pUoWX8n1rgq282T" crossorigin="anonymous" onload="setupFirework()" defer></script>
+
+
+  
+<script src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js" integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE&#x2F;jMSCxD+jAPU55x&#x2F;jj3wlf" crossorigin="anonymous"></script>
+
+  
+<script src="/js/pjax.js"></script>
+
+
+  <script>
+    var setupLive2d = () => {
+      live2d.init("https://fastly.jsdelivr.net/gh/D-Sketon/plugin-live2d/", {themeTipsPath: ""});
+    }
+  </script>
+  
+<script src="https://fastly.jsdelivr.net/gh/D-Sketon/plugin-live2d/js/live2d-autoload.js" onload="setupLive2d()" async></script>
+
+
+
+
+<div id="lazy-script">
+  <div>
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Zero02",
+          title: "前端通用axios封装：request.js最佳实践",
+          url: "http://example.com/2026/01/03/%E9%80%9A%E7%94%A8%E7%9A%84%20request.js%202026_1_3/",
+          excerpt: "本文详细介绍了一个功能完善的axios通用封装（request.js），包括请求/响应拦截、错误统一处理、重复请求取消、请求配置扩展等核心功能，帮助开发者构建统一、可扩展、鲁棒性强的前端请求层。",
+          description: "",
+          stripContent: "以下是一个功能完善、可扩展、鲁棒性强的 axios 通用封装（request.js），涵盖请求&amp;#x2F;响应拦截、错误统一处理、重复请求取消、请求配置扩展、常用请求方法封装等核心能力，适配大部分前端项目场景。 最终代码（request.js）12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686",
+          date: "Sat Jan 03 2026 09:30:00 GMT+0800",
+          updated: "Tue Feb 03 2026 22:39:21 GMT+0800",
+          cover: "https://image.acg.lol/file/2025/11/09/reimu-12.jpg",
+        };
+      </script>
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+      
+<script src="/js/tabs.js" data-pjax defer></script>
+
+      <script type="module" data-pjax>
+        (async () => {
+          const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+          const initPswp = (gallery, children) => {
+            if (_$$(`${gallery} ${children}`).length > 0) {
+              new PhotoSwipeLightbox({
+                gallery,
+                children,
+                pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+              }).init();
+            }
+          }
+          const pswp = () => {
+            initPswp('.article-entry', 'a.article-gallery-item');
+            initPswp('.article-gallery', 'a.article-gallery-item');
+          }
+          pswp();
+        })();
+      </script>
+        
+
+
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.12.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+    <script>
+    var setupAPlayer = () => {
+      if (!false || !window.matchMedia('(max-width: 768px)').matches) {
+        if (window.matchMedia('(max-width: 959px)').matches) {
+          const aplayer = _$('#aplayer');
+          if (aplayer) {
+            const aside = aplayer.parentNode?.parentNode;
+            if (aside?.tagName === 'ASIDE') {
+              aplayer.removeAttribute('data-aos');
+              aplayer.parentNode.removeChild(aplayer);
+              document.body.appendChild(aplayer);
+            }
+          }
+        }
+        new APlayer({
+          theme: "var(--color-link)",
+          container: document.getElementById('aplayer'),
+          audio: [{"name":"To the South","artist":"Kirara Magic","url":"/music/Kirara Magic.mp3","cover":"/music/Kirara Magic.jpg"}] || [],
+          fixed: window.matchMedia('(max-width: 768px)').matches ? true : (true || false),
+          autoplay: false || false,
+          loop: 'all' || 'all',
+          order: 'random' || 'list',
+          preload: 'auto' || 'auto',
+          volume: 0.6 || 0.7,
+          mutex: true || true,
+          listFolded: true || false,
+          lrcType: 0 || 0,
+        });
+      }
+    }
+    </script>
+  
+<script src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js" integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr+h5UfruuRL&#x2F;aORyw+5+HZoU6e" crossorigin="anonymous" defer onload="setupAPlayer()"></script>
+
+
+
+  </body>
+  </html>

@@ -1,0 +1,614 @@
+  <!DOCTYPE html>
+  <html lang="zh-CN"  
+      data-theme-mode="auto"
+  >
+  <head>
+  <meta charset="utf-8">
+  
+  
+  
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_4k4bc36ef96';window.REIMU_CONFIG.clipboard_tips = {"success":{"zh-CN":"复制成功 (*^▽^*)"},"fail":{"zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'http://example.com';</script>
+  <title>
+    里氏替换原则与依赖倒置原则在Spring中的应用 | Zero02 Blog
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media='all'">
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+    <meta name="description" content="本文详细介绍了里氏替换原则(LSP)和依赖倒置原则(DIP)在SpringBoot和SpringCloud中的应用实践，包括继承关系的正确使用、接口契约设计、依赖注入实现、服务间通信抽象等最佳实践，帮助开发者构建稳定、可扩展的系统架构。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="里氏替换原则与依赖倒置原则在Spring中的应用">
+<meta property="og:url" content="http://example.com/2026/02/03/%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2&%E4%BE%9D%E8%B5%96%E5%80%92%E8%BD%AC%202026_2_3/index.html">
+<meta property="og:site_name" content="Zero02 Blog">
+<meta property="og:description" content="本文详细介绍了里氏替换原则(LSP)和依赖倒置原则(DIP)在SpringBoot和SpringCloud中的应用实践，包括继承关系的正确使用、接口契约设计、依赖注入实现、服务间通信抽象等最佳实践，帮助开发者构建稳定、可扩展的系统架构。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-02-03T01:30:00.000Z">
+<meta property="article:modified_time" content="2026-02-03T12:31:14.003Z">
+<meta property="article:author" content="Zero02">
+<meta name="twitter:card" content="summary">
+    <link rel="alternate" href="/atom.xml" title="Zero02 Blog" type="application/atom+xml">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx/1oA/0l8ysE" crossorigin="anonymous">
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css" integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous">
+
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css" integrity="sha384-tLMkTWh2pfXNWGFlUS0w1TFtRG5xZ9lPWFOooj+vDDLIL+xBGQU/voDBY5XE2lVh" crossorigin="anonymous">
+<meta name="generator" content="Hexo 8.1.0"></head>
+
+  <body>
+      <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate">
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script>
+<div id="copy-tooltip"></div>
+<div id="heatmap-tooltip"></div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation">
+        <a class="main-nav-link-wrap" href="/">
+            <div class="main-nav-icon icon rotate">
+                &#xe62b;
+            </div>
+          <span class="main-nav-link">首页</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/archives">
+            <div class="main-nav-icon icon rotate">
+                &#xe62b;
+            </div>
+          <span class="main-nav-link">归档</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/about">
+            <div class="main-nav-icon icon rotate">
+                &#xe62b;
+            </div>
+          <span class="main-nav-link">关于</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/friend">
+            <div class="main-nav-icon icon rotate">
+                &#xe62b;
+            </div>
+          <span class="main-nav-link">友链</span>
+        </span>
+    <a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation">
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" aria-label="RSS 订阅" target="_blank"></a>
+  </nav>
+</div>
+<header id="header" aria-label="Site header">
+    <picture></picture>
+    <img  fetchpriority="high" src="https://image.acg.lol/file/2025/11/09/reimu-4.jpg" alt="里氏替换原则与依赖倒置原则在Spring中的应用">
+  <div id="header-outer">
+    <div id="header-title">
+          <span id="logo">
+            <h1 data-aos="slide-up">里氏替换原则与依赖倒置原则在Spring中的应用</h1>
+          </span>
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+        </h2>
+    </div>
+  </div>
+</header>
+
+        <div id="content" aria-label="Page content"  class="sidebar-right" >
+          <aside id="sidebar" aria-label="Sidebar">
+  <div class="sidebar-wrapper-container sticky">
+  <div class="sidebar-wrapper">
+    <div class="sidebar-wrap" data-aos="fade-up">
+          <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99"><span class="toc-number">1.</span> <span class="toc-text">里氏替换原则</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">核心概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringBoot%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">SpringBoot中的应用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB%E7%9A%84%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8"><span class="toc-number">1.2.1.</span> <span class="toc-text">继承关系的正确使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%A5%91%E7%BA%A6%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.2.2.</span> <span class="toc-text">基于接口的契约设计</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringCloud%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text">SpringCloud中的应用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8E%A5%E5%8F%A3%E5%85%BC%E5%AE%B9%E6%80%A7"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1 微服务接口兼容性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-Feign%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8ELSP"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2 Feign客户端与LSP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E8%BF%9D%E5%8F%8DLSP%E7%9A%84%E5%9C%BA%E6%99%AF%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">1.4.</span> <span class="toc-text">常见违反LSP的场景及解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%AD%A3%E6%96%B9%E5%BD%A2%E4%B8%8D%E6%98%AF%E9%95%BF%E6%96%B9%E5%BD%A2%E9%97%AE%E9%A2%98"><span class="toc-number">1.4.1.</span> <span class="toc-text">4.1 正方形不是长方形问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E5%9C%A8Spring%E4%B8%AD%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">1.4.2.</span> <span class="toc-text">4.2 在Spring中的解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E5%BB%BA%E8%AE%AE"><span class="toc-number">1.5.</span> <span class="toc-text">最佳实践建议</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">依赖倒置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-number">2.1.</span> <span class="toc-text">1. 核心概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-SpringBoot%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">2.2.</span> <span class="toc-text">2. SpringBoot中的应用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E5%AE%9E%E7%8E%B0DIP"><span class="toc-number">2.2.1.</span> <span class="toc-text">2.1 依赖注入实现DIP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%85%8D%E7%BD%AE%E5%8C%96%E9%80%89%E6%8B%A9%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.2 配置化选择实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E4%BD%BF%E7%94%A8-Qualifier%E7%B2%BE%E7%A1%AE%E6%8E%A7%E5%88%B6"><span class="toc-number">2.2.3.</span> <span class="toc-text">2.3 使用@Qualifier精确控制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-SpringCloud%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">2.3.</span> <span class="toc-text">3. SpringCloud中的应用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%9C%8D%E5%8A%A1%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E6%8A%BD%E8%B1%A1"><span class="toc-number">2.3.1.</span> <span class="toc-text">3.1 服务间通信的抽象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E9%9B%86%E6%88%90"><span class="toc-number">2.3.2.</span> <span class="toc-text">3.2 配置中心集成</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E5%9C%BA%E6%99%AF"><span class="toc-number">2.4.</span> <span class="toc-text">4. 最佳实践场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F-%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE"><span class="toc-number">2.4.1.</span> <span class="toc-text">4.1 工厂模式+依赖倒置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%9E%B6%E6%9E%84%E4%B8%AD%E7%9A%84DIP"><span class="toc-number">2.4.2.</span> <span class="toc-text">4.2 事件驱动架构中的DIP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BF%E9%97%AE%E5%B1%82%E7%9A%84%E6%8A%BD%E8%B1%A1"><span class="toc-number">2.4.3.</span> <span class="toc-text">4.3 数据库访问层的抽象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E4%BC%98%E5%8A%BF%E6%80%BB%E7%BB%93"><span class="toc-number">2.5.</span> <span class="toc-text">5. 优势总结</span></a></li></ol></li></ol>
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Zero02" class="lazyload">
+  <div class="sidebar-author-name">Zero02</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">15</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">8</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social" >
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+</div>
+</div>
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
+    </div>
+  </div>
+  <div class="sidebar-widget">
+  </div>
+  </div>
+</aside>
+
+          <section id="main" aria-label="Main content"><article id="post-里氏替换&amp;依赖倒转 2026_2_3" class="h-entry article" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <span class="article-date-link icon-calendar" data-aos="zoom-in">
+    <time datetime="2026-02-03T01:30:00.000Z" itemprop="datePublished">2026-02-03</time>
+    <time style="display: none;" id="post-update-time">2026-02-03</time>
+  </span>
+</div>
+
+    </div>
+    
+    <div class="hr-line"></div>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+        <h1 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h1><p>里氏替换原则(Liskov Substitution Principle, LSP)是SOLID原则中的第三个原则，它由Barbara Liskov提出，规定：所有引用基类的地方必须能透明地使用其子类的对象。</p>
+<h2 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h2><p>里氏替换原则的关键思想：<br>• 子类必须完全实现父类的抽象方法</p>
+<p>• 子类可以有自己的个性，但不得改变父类原有的行为契约</p>
+<p>• 前置条件不能强化，后置条件不能弱化</p>
+<p>• 子类不能抛出比父类更宽泛的异常</p>
+<h2 id="SpringBoot中的应用方式"><a href="#SpringBoot中的应用方式" class="headerlink" title="SpringBoot中的应用方式"></a>SpringBoot中的应用方式</h2><h3 id="继承关系的正确使用"><a href="#继承关系的正确使用" class="headerlink" title="继承关系的正确使用"></a>继承关系的正确使用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 基类定义契约</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">PaymentService</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 支付金额必须大于0</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> PaymentResult <span class="title function_">pay</span><span class="params">(BigDecimal amount)</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 验证支付参数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">validateAmount</span><span class="params">(BigDecimal amount)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (amount == <span class="literal">null</span> || amount.compareTo(BigDecimal.ZERO) &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;支付金额必须大于0&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确实现 - 遵守LSP</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AlipayService</span> <span class="keyword">extends</span> <span class="title class_">PaymentService</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> PaymentResult <span class="title function_">pay</span><span class="params">(BigDecimal amount)</span> &#123;</span><br><span class="line">        validateAmount(amount); <span class="comment">// 调用父类验证</span></span><br><span class="line">        <span class="comment">// 支付宝特定逻辑</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">PaymentResult</span>(<span class="literal">true</span>, <span class="string">&quot;支付宝支付成功&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 错误实现 - 违反LSP（示例）</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WechatPayService</span> <span class="keyword">extends</span> <span class="title class_">PaymentService</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> PaymentResult <span class="title function_">pay</span><span class="params">(BigDecimal amount)</span> &#123;</span><br><span class="line">        <span class="comment">// 违反：没有调用父类验证，允许负金额</span></span><br><span class="line">        <span class="keyword">if</span> (amount == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;金额不能为空&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 微信支付特定逻辑</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">PaymentResult</span>(<span class="literal">true</span>, <span class="string">&quot;微信支付成功&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="基于接口的契约设计"><a href="#基于接口的契约设计" class="headerlink" title="基于接口的契约设计"></a>基于接口的契约设计</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义清晰的接口契约</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建用户</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> userCreateRequest 用户信息，username不能为空，email格式必须正确</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 创建的用户信息</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalArgumentException 当参数不合法时抛出</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    UserDTO <span class="title function_">createUser</span><span class="params">(UserCreateRequest request)</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 符合LSP的实现</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DefaultUserService</span> <span class="keyword">implements</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> UserDTO <span class="title function_">createUser</span><span class="params">(UserCreateRequest request)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (request.getUsername() == <span class="literal">null</span> || request.getUsername().trim().isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;用户名不能为空&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 正常业务逻辑</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">UserDTO</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 不符合LSP的实现（示例）</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LenientUserService</span> <span class="keyword">implements</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> UserDTO <span class="title function_">createUser</span><span class="params">(UserCreateRequest request)</span> &#123;</span><br><span class="line">        <span class="comment">// 违反：允许空用户名，改变了父类契约</span></span><br><span class="line">        <span class="comment">// 如果系统其他部分依赖username不为空，这里会导致问题</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">UserDTO</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="SpringCloud中的应用方式"><a href="#SpringCloud中的应用方式" class="headerlink" title="SpringCloud中的应用方式"></a>SpringCloud中的应用方式</h2><h3 id="3-1-微服务接口兼容性"><a href="#3-1-微服务接口兼容性" class="headerlink" title="3.1 微服务接口兼容性"></a>3.1 微服务接口兼容性</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 订单服务接口定义</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建订单</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> orderCreateCommand 订单创建命令</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 订单ID</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> BusinessException 业务异常，如库存不足、用户不存在等</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    Long <span class="title function_">createOrder</span><span class="params">(OrderCreateCommand orderCreateCommand)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// V1版本实现</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderServiceV1</span> <span class="keyword">implements</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Long <span class="title function_">createOrder</span><span class="params">(OrderCreateCommand command)</span> &#123;</span><br><span class="line">        <span class="comment">// V1逻辑：简单创建订单</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1L</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// V2版本实现（扩展但不破坏原有契约）</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@Primary</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderServiceV2</span> <span class="keyword">implements</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Long <span class="title function_">createOrder</span><span class="params">(OrderCreateCommand command)</span> &#123;</span><br><span class="line">        <span class="comment">// V2逻辑：增加优惠券计算，但仍保持原有契约</span></span><br><span class="line">        <span class="comment">// 仍然返回Long类型的订单ID</span></span><br><span class="line">        <span class="comment">// 仍然在库存不足时抛出BusinessException</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">2L</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-Feign客户端与LSP"><a href="#3-2-Feign客户端与LSP" class="headerlink" title="3.2 Feign客户端与LSP"></a>3.2 Feign客户端与LSP</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 商品服务Feign客户端接口</span></span><br><span class="line"><span class="meta">@FeignClient(name = &quot;product-service&quot;, path = &quot;/api/products&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ProductServiceClient</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@GetMapping(&quot;/&#123;id&#125;&quot;)</span></span><br><span class="line">    ResponseEntity&lt;ProductDTO&gt; <span class="title function_">getProductById</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@PostMapping</span></span><br><span class="line">    ResponseEntity&lt;ProductDTO&gt; <span class="title function_">createProduct</span><span class="params">(<span class="meta">@RequestBody</span> ProductCreateRequest request)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现类必须保持接口契约</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ProductServiceFallback</span> <span class="keyword">implements</span> <span class="title class_">ProductServiceClient</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;ProductDTO&gt; <span class="title function_">getProductById</span><span class="params">(Long id)</span> &#123;</span><br><span class="line">        <span class="comment">// 熔断降级实现，但返回类型必须一致</span></span><br><span class="line">        <span class="type">ProductDTO</span> <span class="variable">fallback</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ProductDTO</span>();</span><br><span class="line">        fallback.setId(id);</span><br><span class="line">        fallback.setName(<span class="string">&quot;商品暂时不可用&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.ok(fallback);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;ProductDTO&gt; <span class="title function_">createProduct</span><span class="params">(ProductCreateRequest request)</span> &#123;</span><br><span class="line">        <span class="comment">// 必须保持相同的参数和返回类型</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(<span class="string">&quot;服务暂时不可用&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="常见违反LSP的场景及解决方案"><a href="#常见违反LSP的场景及解决方案" class="headerlink" title="常见违反LSP的场景及解决方案"></a>常见违反LSP的场景及解决方案</h2><h3 id="4-1-正方形不是长方形问题"><a href="#4-1-正方形不是长方形问题" class="headerlink" title="4.1 正方形不是长方形问题"></a>4.1 正方形不是长方形问题</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误设计</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Rectangle</span> &#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="type">int</span> width, height;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWidth</span><span class="params">(<span class="type">int</span> width)</span> &#123; <span class="built_in">this</span>.width = width; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setHeight</span><span class="params">(<span class="type">int</span> height)</span> &#123; <span class="built_in">this</span>.height = height; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getArea</span><span class="params">()</span> &#123; <span class="keyword">return</span> width * height; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Square</span> <span class="keyword">extends</span> <span class="title class_">Rectangle</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWidth</span><span class="params">(<span class="type">int</span> width)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.setWidth(width);</span><br><span class="line">        <span class="built_in">super</span>.setHeight(width); <span class="comment">// 违反：改变了父类行为</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setHeight</span><span class="params">(<span class="type">int</span> height)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.setWidth(height);</span><br><span class="line">        <span class="built_in">super</span>.setHeight(height); <span class="comment">// 违反：改变了父类行为</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确设计 - 使用组合代替继承</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">getArea</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Rectangle</span> <span class="keyword">implements</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> width, height;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWidth</span><span class="params">(<span class="type">int</span> width)</span> &#123; <span class="built_in">this</span>.width = width; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setHeight</span><span class="params">(<span class="type">int</span> height)</span> &#123; <span class="built_in">this</span>.height = height; &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getArea</span><span class="params">()</span> &#123; <span class="keyword">return</span> width * height; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Square</span> <span class="keyword">implements</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> side;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setSide</span><span class="params">(<span class="type">int</span> side)</span> &#123; <span class="built_in">this</span>.side = side; &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getArea</span><span class="params">()</span> &#123; <span class="keyword">return</span> side * side; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-在Spring中的解决方案"><a href="#4-2-在Spring中的解决方案" class="headerlink" title="4.2 在Spring中的解决方案"></a>4.2 在Spring中的解决方案</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用策略模式替代继承</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ShapeCalculator</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> Map&lt;Class&lt;?&gt;, Function&lt;Object, Integer&gt;&gt; calculators = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ShapeCalculator</span><span class="params">()</span> &#123;</span><br><span class="line">        calculators.put(Rectangle.class, shape -&gt; &#123;</span><br><span class="line">            <span class="type">Rectangle</span> <span class="variable">rect</span> <span class="operator">=</span> (Rectangle) shape;</span><br><span class="line">            <span class="keyword">return</span> rect.getWidth() * rect.getHeight();</span><br><span class="line">        &#125;);</span><br><span class="line">        </span><br><span class="line">        calculators.put(Square.class, shape -&gt; &#123;</span><br><span class="line">            <span class="type">Square</span> <span class="variable">square</span> <span class="operator">=</span> (Square) shape;</span><br><span class="line">            <span class="keyword">return</span> square.getSide() * square.getSide();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">calculateArea</span><span class="params">(Object shape)</span> &#123;</span><br><span class="line">        Function&lt;Object, Integer&gt; calculator = calculators.get(shape.getClass());</span><br><span class="line">        <span class="keyword">if</span> (calculator == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;不支持的图形类型&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> calculator.apply(shape);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="最佳实践建议"><a href="#最佳实践建议" class="headerlink" title="最佳实践建议"></a>最佳实践建议</h2><ol>
+<li><strong>优先使用组合而非继承</strong></li>
+<li><strong>明确定义接口契约和前置&#x2F;后置条件</strong></li>
+<li><strong>使用@FunctionalInterface定义单一职责的函数接口</strong></li>
+<li><strong>在微服务中使用API版本控制保持契约稳定</strong></li>
+<li><strong>编写契约测试确保实现符合预期行为</strong></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 契约测试示例</span></span><br><span class="line"><span class="meta">@TestInstance(TestInstance.Lifecycle.PER_CLASS)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserServiceContractTest</span> <span class="keyword">implements</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> UserService implementation;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@BeforeAll</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">setup</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 注入待测实现</span></span><br><span class="line">        implementation = <span class="keyword">new</span> <span class="title class_">DefaultUserService</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">shouldThrowExceptionWhenUsernameIsEmpty</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">UserCreateRequest</span> <span class="variable">request</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UserCreateRequest</span>();</span><br><span class="line">        request.setUsername(<span class="string">&quot;&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        assertThrows(IllegalArgumentException.class, </span><br><span class="line">            () -&gt; implementation.createUser(request));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在SpringBoot&#x2F;SpringCloud中遵循LSP原则，可以确保系统的稳定性和可扩展性，特别是在微服务这种分布式环境中，接口契约的稳定性至关重要。</p>
+<h1 id="依赖倒置"><a href="#依赖倒置" class="headerlink" title="依赖倒置"></a>依赖倒置</h1><p>依赖倒置原则(Dependency Inversion Principle, DIP)是SOLID原则中的第四个原则，它规定：高层模块不应该依赖低层模块，两者都应该依赖其抽象；抽象不应该依赖细节，细节应该依赖抽象。</p>
+<h2 id="1-核心概念"><a href="#1-核心概念" class="headerlink" title="1. 核心概念"></a>1. 核心概念</h2><p>依赖倒置原则的两个关键表述：</p>
+<ol>
+<li><strong>高层模块不应依赖低层模块，二者都该依赖抽象</strong></li>
+<li><strong>抽象不应依赖细节，细节应依赖抽象</strong></li>
+</ol>
+<p>核心思想：</p>
+<ul>
+<li>面向接口编程而非面向实现编程</li>
+<li>通过依赖注入解耦组件关系</li>
+<li>提高系统的灵活性和可测试性</li>
+</ul>
+<h2 id="2-SpringBoot中的应用方式"><a href="#2-SpringBoot中的应用方式" class="headerlink" title="2. SpringBoot中的应用方式"></a>2. SpringBoot中的应用方式</h2><h3 id="2-1-依赖注入实现DIP"><a href="#2-1-依赖注入实现DIP" class="headerlink" title="2.1 依赖注入实现DIP"></a>2.1 依赖注入实现DIP</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象定义 - 不依赖具体实现</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">NotificationService</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">sendNotification</span><span class="params">(String message, String recipient)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体实现1</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EmailNotificationService</span> <span class="keyword">implements</span> <span class="title class_">NotificationService</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendNotification</span><span class="params">(String message, String recipient)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;发送邮件到: &quot;</span> + recipient + <span class="string">&quot;, 内容: &quot;</span> + message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体实现2</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SmsNotificationService</span> <span class="keyword">implements</span> <span class="title class_">NotificationService</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendNotification</span><span class="params">(String message, String recipient)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;发送短信到: &quot;</span> + recipient + <span class="string">&quot;, 内容: &quot;</span> + message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 高层模块 - 依赖抽象而非具体实现</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> NotificationService notificationService;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 通过构造器注入依赖 - Spring自动装配</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">OrderService</span><span class="params">(NotificationService notificationService)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.notificationService = notificationService;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">createOrder</span><span class="params">(Order order)</span> &#123;</span><br><span class="line">        <span class="comment">// 业务逻辑...</span></span><br><span class="line">        notificationService.sendNotification(<span class="string">&quot;订单创建成功&quot;</span>, order.getCustomerEmail());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-配置化选择实现"><a href="#2-2-配置化选择实现" class="headerlink" title="2.2 配置化选择实现"></a>2.2 配置化选择实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">NotificationConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@Primary</span></span><br><span class="line">    <span class="meta">@ConditionalOnProperty(name = &quot;notification.type&quot;, havingValue = &quot;email&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> NotificationService <span class="title function_">emailNotificationService</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">EmailNotificationService</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ConditionalOnProperty(name = &quot;notification.type&quot;, havingValue = &quot;sms&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> NotificationService <span class="title function_">smsNotificationService</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">SmsNotificationService</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean</span></span><br><span class="line">    <span class="keyword">public</span> NotificationService <span class="title function_">defaultNotificationService</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">EmailNotificationService</span>(); <span class="comment">// 默认实现</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-使用-Qualifier精确控制"><a href="#2-3-使用-Qualifier精确控制" class="headerlink" title="2.3 使用@Qualifier精确控制"></a>2.3 使用@Qualifier精确控制</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MultiChannelNotificationService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> NotificationService emailService;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> NotificationService smsService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MultiChannelNotificationService</span><span class="params">(</span></span><br><span class="line"><span class="params">        <span class="meta">@Qualifier(&quot;emailNotificationService&quot;)</span> NotificationService emailService,</span></span><br><span class="line"><span class="params">        <span class="meta">@Qualifier(&quot;smsNotificationService&quot;)</span> NotificationService smsService)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.emailService = emailService;</span><br><span class="line">        <span class="built_in">this</span>.smsService = smsService;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendOrderConfirmation</span><span class="params">(Order order)</span> &#123;</span><br><span class="line">        emailService.sendNotification(<span class="string">&quot;订单确认&quot;</span>, order.getCustomerEmail());</span><br><span class="line">        smsService.sendNotification(<span class="string">&quot;订单已确认&quot;</span>, order.getCustomerPhone());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-SpringCloud中的应用方式"><a href="#3-SpringCloud中的应用方式" class="headerlink" title="3. SpringCloud中的应用方式"></a>3. SpringCloud中的应用方式</h2><h3 id="3-1-服务间通信的抽象"><a href="#3-1-服务间通信的抽象" class="headerlink" title="3.1 服务间通信的抽象"></a>3.1 服务间通信的抽象</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象定义服务接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserServiceClient</span> &#123;</span><br><span class="line">    UserDTO <span class="title function_">getUserById</span><span class="params">(Long userId)</span>;</span><br><span class="line">    List&lt;UserDTO&gt; <span class="title function_">getUsersByIds</span><span class="params">(List&lt;Long&gt; userIds)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Feign实现</span></span><br><span class="line"><span class="meta">@FeignClient(name = &quot;user-service&quot;, path = &quot;/api/users&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserFeignClient</span> <span class="keyword">extends</span> <span class="title class_">UserServiceClient</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@GetMapping(&quot;/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    UserDTO <span class="title function_">getUserById</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@GetMapping</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    List&lt;UserDTO&gt; <span class="title function_">getUsersByIds</span><span class="params">(<span class="meta">@RequestParam</span> List&lt;Long&gt; ids)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 熔断降级实现</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserServiceFallback</span> <span class="keyword">implements</span> <span class="title class_">UserServiceClient</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> UserDTO <span class="title function_">getUserById</span><span class="params">(Long userId)</span> &#123;</span><br><span class="line">        <span class="comment">// 返回兜底数据或抛出异常</span></span><br><span class="line">        <span class="keyword">return</span> UserDTO.builder()</span><br><span class="line">                .id(userId)</span><br><span class="line">                .name(<span class="string">&quot;未知用户&quot;</span>)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;UserDTO&gt; <span class="title function_">getUsersByIds</span><span class="params">(List&lt;Long&gt; userIds)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> userIds.stream()</span><br><span class="line">                .map(<span class="built_in">this</span>::getUserById)</span><br><span class="line">                .collect(Collectors.toList());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 高层服务 - 依赖抽象</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> UserServiceClient userServiceClient;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">OrderService</span><span class="params">(UserServiceClient userServiceClient)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.userServiceClient = userServiceClient;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> OrderDTO <span class="title function_">createOrder</span><span class="params">(OrderCreateRequest request)</span> &#123;</span><br><span class="line">        <span class="type">UserDTO</span> <span class="variable">user</span> <span class="operator">=</span> userServiceClient.getUserById(request.getUserId());</span><br><span class="line">        <span class="comment">// 业务逻辑...</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">OrderDTO</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-配置中心集成"><a href="#3-2-配置中心集成" class="headerlink" title="3.2 配置中心集成"></a>3.2 配置中心集成</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象配置服务</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ConfigService</span> &#123;</span><br><span class="line">    String <span class="title function_">getString</span><span class="params">(String key)</span>;</span><br><span class="line">    Integer <span class="title function_">getInt</span><span class="params">(String key)</span>;</span><br><span class="line">    Boolean <span class="title function_">getBoolean</span><span class="params">(String key)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Nacos实现</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@RefreshScope</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">NacosConfigService</span> <span class="keyword">implements</span> <span class="title class_">ConfigService</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ConfigService nacosConfigManager;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getString</span><span class="params">(String key)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> nacosConfigManager.getProperty(key, String.class);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 其他方法实现...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Apollo实现</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ApolloConfigService</span> <span class="keyword">implements</span> <span class="title class_">ConfigService</span> &#123;</span><br><span class="line">    <span class="comment">// Apollo特定实现</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用配置的组件</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PaymentConfigService</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ConfigService configService;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">PaymentConfigService</span><span class="params">(ConfigService configService)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.configService = configService;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> PaymentMethod <span class="title function_">getDefaultPaymentMethod</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">method</span> <span class="operator">=</span> configService.getString(<span class="string">&quot;payment.default.method&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> PaymentMethod.valueOf(method);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-最佳实践场景"><a href="#4-最佳实践场景" class="headerlink" title="4. 最佳实践场景"></a>4. 最佳实践场景</h2><h3 id="4-1-工厂模式-依赖倒置"><a href="#4-1-工厂模式-依赖倒置" class="headerlink" title="4.1 工厂模式+依赖倒置"></a>4.1 工厂模式+依赖倒置</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象工厂</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">NotificationFactory</span> &#123;</span><br><span class="line">    NotificationService <span class="title function_">createNotificationService</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体工厂</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EmailNotificationFactory</span> <span class="keyword">implements</span> <span class="title class_">NotificationFactory</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> NotificationService <span class="title function_">createNotificationService</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">EmailNotificationService</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SmsNotificationFactory</span> <span class="keyword">implements</span> <span class="title class_">NotificationFactory</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> NotificationService <span class="title function_">createNotificationService</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">SmsNotificationService</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 工厂提供者</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">NotificationFactoryProvider</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, NotificationFactory&gt; factories;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">NotificationFactoryProvider</span><span class="params">(List&lt;NotificationFactory&gt; factoryList)</span> &#123;</span><br><span class="line">        factories = factoryList.stream()</span><br><span class="line">                .collect(Collectors.toMap(</span><br><span class="line">                    factory -&gt; factory.getClass().getSimpleName()</span><br><span class="line">                        .replace(<span class="string">&quot;NotificationFactory&quot;</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line">                        .toLowerCase(),</span><br><span class="line">                    Function.identity()</span><br><span class="line">                ));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> NotificationService <span class="title function_">getNotificationService</span><span class="params">(String type)</span> &#123;</span><br><span class="line">        <span class="type">NotificationFactory</span> <span class="variable">factory</span> <span class="operator">=</span> factories.get(type.toLowerCase());</span><br><span class="line">        <span class="keyword">if</span> (factory == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;不支持的通知类型: &quot;</span> + type);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> factory.createNotificationService();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-事件驱动架构中的DIP"><a href="#4-2-事件驱动架构中的DIP" class="headerlink" title="4.2 事件驱动架构中的DIP"></a>4.2 事件驱动架构中的DIP</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象事件</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">DomainEvent</span> &#123;</span><br><span class="line">    LocalDateTime <span class="title function_">getOccurredOn</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体事件</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderCreatedEvent</span> <span class="keyword">implements</span> <span class="title class_">DomainEvent</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Long orderId;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> LocalDateTime occurredOn;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">OrderCreatedEvent</span><span class="params">(Long orderId)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.orderId = orderId;</span><br><span class="line">        <span class="built_in">this</span>.occurredOn = LocalDateTime.now();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> LocalDateTime <span class="title function_">getOccurredOn</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> occurredOn;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> Long <span class="title function_">getOrderId</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> orderId;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 抽象事件处理器</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">EventHandler</span>&lt;T <span class="keyword">extends</span> <span class="title class_">DomainEvent</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">handle</span><span class="params">(T event)</span>;</span><br><span class="line">    Class&lt;T&gt; <span class="title function_">getEventType</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体事件处理器</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderCreatedEventHandler</span> <span class="keyword">implements</span> <span class="title class_">EventHandler</span>&lt;OrderCreatedEvent&gt; &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handle</span><span class="params">(OrderCreatedEvent event)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;处理订单创建事件: &quot;</span> + event.getOrderId());</span><br><span class="line">        <span class="comment">// 发送通知、更新统计等业务逻辑</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Class&lt;OrderCreatedEvent&gt; <span class="title function_">getEventType</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> OrderCreatedEvent.class;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 事件分发器 - 高层模块依赖抽象</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EventDispatcher</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;Class&lt;?&gt;, List&lt;EventHandler&lt;?&gt;&gt;&gt; handlers = <span class="keyword">new</span> <span class="title class_">ConcurrentHashMap</span>&lt;&gt;();</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">EventDispatcher</span><span class="params">(List&lt;EventHandler&lt;?&gt;&gt; eventHandlers)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (EventHandler&lt;?&gt; handler : eventHandlers) &#123;</span><br><span class="line">            Class&lt;?&gt; eventType = handler.getEventType();</span><br><span class="line">            handlers.computeIfAbsent(eventType, k -&gt; <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;()).add(handler);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> &lt;T <span class="keyword">extends</span> <span class="title class_">DomainEvent</span>&gt; <span class="keyword">void</span> <span class="title function_">dispatch</span><span class="params">(T event)</span> &#123;</span><br><span class="line">        List&lt;EventHandler&lt;?&gt;&gt; eventHandlers = handlers.getOrDefault(event.getClass(), Collections.emptyList());</span><br><span class="line">        <span class="keyword">for</span> (EventHandler handler : eventHandlers) &#123;</span><br><span class="line">            ((EventHandler&lt;T&gt;) handler).handle(event);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-数据库访问层的抽象"><a href="#4-3-数据库访问层的抽象" class="headerlink" title="4.3 数据库访问层的抽象"></a>4.3 数据库访问层的抽象</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象Repository</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserRepository</span> &#123;</span><br><span class="line">    Optional&lt;User&gt; <span class="title function_">findById</span><span class="params">(Long id)</span>;</span><br><span class="line">    User <span class="title function_">save</span><span class="params">(User user)</span>;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">deleteById</span><span class="params">(Long id)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// JPA实现</span></span><br><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JpaUserRepository</span> <span class="keyword">implements</span> <span class="title class_">UserRepository</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@PersistenceContext</span></span><br><span class="line">    <span class="keyword">private</span> EntityManager entityManager;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Optional&lt;User&gt; <span class="title function_">findById</span><span class="params">(Long id)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Optional.ofNullable(entityManager.find(User.class, id));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 其他方法实现...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// MyBatis实现</span></span><br><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyBatisUserRepository</span> <span class="keyword">implements</span> <span class="title class_">UserRepository</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserMapper userMapper;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Optional&lt;User&gt; <span class="title function_">findById</span><span class="params">(Long id)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Optional.ofNullable(userMapper.selectById(id));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 其他方法实现...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 服务层依赖抽象</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> UserRepository userRepository;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">UserService</span><span class="params">(UserRepository userRepository)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.userRepository = userRepository;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> UserDTO <span class="title function_">getUserProfile</span><span class="params">(Long userId)</span> &#123;</span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> userRepository.findById(userId)</span><br><span class="line">                .orElseThrow(() -&gt; <span class="keyword">new</span> <span class="title class_">UserNotFoundException</span>(<span class="string">&quot;用户不存在&quot;</span>));</span><br><span class="line">        <span class="keyword">return</span> convertToDTO(user);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-优势总结"><a href="#5-优势总结" class="headerlink" title="5. 优势总结"></a>5. 优势总结</h2><ol>
+<li><strong>松耦合</strong>：高层模块与低层模块解耦，便于独立演化</li>
+<li><strong>可测试性</strong>：容易进行单元测试，可以注入Mock对象</li>
+<li><strong>可扩展性</strong>：新增实现无需修改现有代码</li>
+<li><strong>可维护性</strong>：依赖关系清晰，代码结构稳定</li>
+<li><strong>符合开闭原则</strong>：通过新增实现扩展功能，无需修改抽象</li>
+</ol>
+<p>在SpringBoot&#x2F;SpringCloud中，依赖倒置原则通过Spring框架的依赖注入机制得到完美支持，使得构建灵活、可维护的微服务架构成为可能。Spring的IoC容器本身就是依赖倒置原则的经典实践。</p>
+
+    </div>
+    <footer class="article-footer">
+        <a class="article-category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="设计模式" data-aos="zoom-in">设计模式</a>
+
+      
+    </footer>
+  </div>
+    <nav id="article-nav" aria-label="Article navigation" data-aos="fade-up">
+      <div class="article-nav-link-wrap left">
+          <img data-src="https://image.acg.lol/file/2025/11/09/reimu-2.jpg" data-sizes="auto" alt="迪米特原则在SpringBoot/SpringCloud中的应用" class="lazyload">
+        <a href="/2026/02/03/%E8%BF%AA%E7%B1%B3%E7%89%B9%E5%8E%9F%E5%88%99%202026_2_3/" aria-label="前一篇: 迪米特原则在SpringBoot/SpringCloud中的应用" title="前一篇: 迪米特原则在SpringBoot/SpringCloud中的应用"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+            迪米特原则在SpringBoot/SpringCloud中的应用
+        </h3>
+      </div>
+    <div class="article-nav-link-wrap right">
+        <img data-src="https://image.acg.lol/file/2025/11/09/reimu-6.jpg" data-sizes="auto" alt="Spring Cloud Gateway配置详解" class="lazyload">
+      <a href="/2026/01/27/SpringCloud%20GateWay%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3%202026_1_27/" aria-label="后一篇: Spring Cloud Gateway配置详解"  title="后一篇: Spring Cloud Gateway配置详解"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+          Spring Cloud Gateway配置详解
+      </h3>
+    </div>
+  </nav>
+
+</article>
+
+
+</section>
+        </div>
+        <footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    <div>
+      <span class="icon-copyright"></span>
+        2020-2026
+        <span class="footer-info-sep rotate"></span>
+      Zero02
+    </div>
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+      <div>
+        <span class="icon-brush"></span>
+        28.8k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        02:18
+      </div>
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+  </div>
+</footer>
+
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap">
+        <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99"><span class="toc-number">1.</span> <span class="toc-text">里氏替换原则</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">核心概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringBoot%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">SpringBoot中的应用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB%E7%9A%84%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8"><span class="toc-number">1.2.1.</span> <span class="toc-text">继承关系的正确使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%A5%91%E7%BA%A6%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.2.2.</span> <span class="toc-text">基于接口的契约设计</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringCloud%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text">SpringCloud中的应用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8E%A5%E5%8F%A3%E5%85%BC%E5%AE%B9%E6%80%A7"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1 微服务接口兼容性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-Feign%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8ELSP"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2 Feign客户端与LSP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E8%BF%9D%E5%8F%8DLSP%E7%9A%84%E5%9C%BA%E6%99%AF%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">1.4.</span> <span class="toc-text">常见违反LSP的场景及解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%AD%A3%E6%96%B9%E5%BD%A2%E4%B8%8D%E6%98%AF%E9%95%BF%E6%96%B9%E5%BD%A2%E9%97%AE%E9%A2%98"><span class="toc-number">1.4.1.</span> <span class="toc-text">4.1 正方形不是长方形问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E5%9C%A8Spring%E4%B8%AD%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">1.4.2.</span> <span class="toc-text">4.2 在Spring中的解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E5%BB%BA%E8%AE%AE"><span class="toc-number">1.5.</span> <span class="toc-text">最佳实践建议</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">依赖倒置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-number">2.1.</span> <span class="toc-text">1. 核心概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-SpringBoot%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">2.2.</span> <span class="toc-text">2. SpringBoot中的应用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E5%AE%9E%E7%8E%B0DIP"><span class="toc-number">2.2.1.</span> <span class="toc-text">2.1 依赖注入实现DIP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%85%8D%E7%BD%AE%E5%8C%96%E9%80%89%E6%8B%A9%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.2 配置化选择实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E4%BD%BF%E7%94%A8-Qualifier%E7%B2%BE%E7%A1%AE%E6%8E%A7%E5%88%B6"><span class="toc-number">2.2.3.</span> <span class="toc-text">2.3 使用@Qualifier精确控制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-SpringCloud%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">2.3.</span> <span class="toc-text">3. SpringCloud中的应用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%9C%8D%E5%8A%A1%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E6%8A%BD%E8%B1%A1"><span class="toc-number">2.3.1.</span> <span class="toc-text">3.1 服务间通信的抽象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E9%9B%86%E6%88%90"><span class="toc-number">2.3.2.</span> <span class="toc-text">3.2 配置中心集成</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E5%9C%BA%E6%99%AF"><span class="toc-number">2.4.</span> <span class="toc-text">4. 最佳实践场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F-%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE"><span class="toc-number">2.4.1.</span> <span class="toc-text">4.1 工厂模式+依赖倒置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%9E%B6%E6%9E%84%E4%B8%AD%E7%9A%84DIP"><span class="toc-number">2.4.2.</span> <span class="toc-text">4.2 事件驱动架构中的DIP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BF%E9%97%AE%E5%B1%82%E7%9A%84%E6%8A%BD%E8%B1%A1"><span class="toc-number">2.4.3.</span> <span class="toc-text">4.3 数据库访问层的抽象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E4%BC%98%E5%8A%BF%E6%80%BB%E7%BB%93"><span class="toc-number">2.5.</span> <span class="toc-text">5. 优势总结</span></a></li></ol></li></ol>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Zero02" class="lazyload">
+  <div class="sidebar-author-name">Zero02</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">15</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">8</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social" >
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+</div>
+</div>
+  </div>
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+</nav>
+
+    </div>
+      <div id="aplayer" theme="var(--color-link)"></div>
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+  <script>
+    var setupFirework = () => {
+      if (!false || !window.matchMedia('(max-width: 768px)').matches) {
+        window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'));
+      }
+    }
+  </script>
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.2.0/dist/index.umd.js" integrity="sha384-qi9WggRt19tv8Vc7pCHW3ulMNLwrn515zaLEWZjl1px07vz8+pUoWX8n1rgq282T" crossorigin="anonymous" onload="setupFirework()" defer></script>
+
+
+  
+<script src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js" integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE&#x2F;jMSCxD+jAPU55x&#x2F;jj3wlf" crossorigin="anonymous"></script>
+
+  
+<script src="/js/pjax.js"></script>
+
+
+  <script>
+    var setupLive2d = () => {
+      live2d.init("https://fastly.jsdelivr.net/gh/D-Sketon/plugin-live2d/", {themeTipsPath: ""});
+    }
+  </script>
+  
+<script src="https://fastly.jsdelivr.net/gh/D-Sketon/plugin-live2d/js/live2d-autoload.js" onload="setupLive2d()" async></script>
+
+
+
+
+<div id="lazy-script">
+  <div>
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Zero02",
+          title: "里氏替换原则与依赖倒置原则在Spring中的应用",
+          url: "http://example.com/2026/02/03/%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2&amp;%E4%BE%9D%E8%B5%96%E5%80%92%E8%BD%AC%202026_2_3/",
+          excerpt: "本文详细介绍了里氏替换原则(LSP)和依赖倒置原则(DIP)在SpringBoot和SpringCloud中的应用实践，包括继承关系的正确使用、接口契约设计、依赖注入实现、服务间通信抽象等最佳实践，帮助开发者构建稳定、可扩展的系统架构。",
+          description: "",
+          stripContent: "里氏替换原则里氏替换原则(Liskov Substitution Principle, LSP)是SOLID原则中的第三个原则，它由Barbara Liskov提出，规定：所有引用基类的地方必须能透明地使用其子类的对象。 核心概念里氏替换原则的关键思想：• 子类必须完全实现父类的抽象方法 • 子类可以有自己的个性，但不得改变父类原有的行为契约 • 前置条件不能强化，后置条件不能弱化 • 子类不能抛出比父类更宽泛的异常 SpringBoot中的应用方式继承关系的正确使用12345678910111",
+          date: "Tue Feb 03 2026 09:30:00 GMT+0800",
+          updated: "Tue Feb 03 2026 20:31:14 GMT+0800",
+          cover: "https://image.acg.lol/file/2025/11/09/reimu-4.jpg",
+        };
+      </script>
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+      
+<script src="/js/tabs.js" data-pjax defer></script>
+
+      <script type="module" data-pjax>
+        (async () => {
+          const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+          const initPswp = (gallery, children) => {
+            if (_$$(`${gallery} ${children}`).length > 0) {
+              new PhotoSwipeLightbox({
+                gallery,
+                children,
+                pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+              }).init();
+            }
+          }
+          const pswp = () => {
+            initPswp('.article-entry', 'a.article-gallery-item');
+            initPswp('.article-gallery', 'a.article-gallery-item');
+          }
+          pswp();
+        })();
+      </script>
+        
+
+
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.12.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+    <script>
+    var setupAPlayer = () => {
+      if (!false || !window.matchMedia('(max-width: 768px)').matches) {
+        if (window.matchMedia('(max-width: 959px)').matches) {
+          const aplayer = _$('#aplayer');
+          if (aplayer) {
+            const aside = aplayer.parentNode?.parentNode;
+            if (aside?.tagName === 'ASIDE') {
+              aplayer.removeAttribute('data-aos');
+              aplayer.parentNode.removeChild(aplayer);
+              document.body.appendChild(aplayer);
+            }
+          }
+        }
+        new APlayer({
+          theme: "var(--color-link)",
+          container: document.getElementById('aplayer'),
+          audio: [{"name":"To the South","artist":"Kirara Magic","url":"/music/Kirara Magic.mp3","cover":"/music/Kirara Magic.jpg"}] || [],
+          fixed: window.matchMedia('(max-width: 768px)').matches ? true : (true || false),
+          autoplay: false || false,
+          loop: 'all' || 'all',
+          order: 'random' || 'list',
+          preload: 'auto' || 'auto',
+          volume: 0.6 || 0.7,
+          mutex: true || true,
+          listFolded: true || false,
+          lrcType: 0 || 0,
+        });
+      }
+    }
+    </script>
+  
+<script src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js" integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr+h5UfruuRL&#x2F;aORyw+5+HZoU6e" crossorigin="anonymous" defer onload="setupAPlayer()"></script>
+
+
+
+  </body>
+  </html>

@@ -1,0 +1,728 @@
+  <!DOCTYPE html>
+  <html lang="zh-CN"  
+      data-theme-mode="auto"
+  >
+  <head>
+  <meta charset="utf-8">
+  
+  
+  
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_4k4bc36ef96';window.REIMU_CONFIG.clipboard_tips = {"success":{"zh-CN":"复制成功 (*^▽^*)"},"fail":{"zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'http://example.com';</script>
+  <title>
+    SOLID原则与设计模式应用分类表 | Zero02 Blog
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media='all'">
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+    <meta name="description" content="本文提供了SOLID原则在代码落地中的模式应用分类表，详细展示了创建型、结构型、行为型设计模式在各SOLID原则中的最佳适用场景及SpringBoot&#x2F;SpringCloud中的具体实现，帮助开发者选择合适的设计模式实现高质量软件架构。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SOLID原则与设计模式应用分类表">
+<meta property="og:url" content="http://example.com/2026/02/03/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%BA%94%E7%94%A8%E5%88%86%E7%B1%BB%E8%A1%A8%202026_2_3/index.html">
+<meta property="og:site_name" content="Zero02 Blog">
+<meta property="og:description" content="本文提供了SOLID原则在代码落地中的模式应用分类表，详细展示了创建型、结构型、行为型设计模式在各SOLID原则中的最佳适用场景及SpringBoot&#x2F;SpringCloud中的具体实现，帮助开发者选择合适的设计模式实现高质量软件架构。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-02-03T01:30:00.000Z">
+<meta property="article:modified_time" content="2026-02-03T13:20:58.749Z">
+<meta property="article:author" content="Zero02">
+<meta name="twitter:card" content="summary">
+    <link rel="alternate" href="/atom.xml" title="Zero02 Blog" type="application/atom+xml">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx/1oA/0l8ysE" crossorigin="anonymous">
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css" integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous">
+
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css" integrity="sha384-tLMkTWh2pfXNWGFlUS0w1TFtRG5xZ9lPWFOooj+vDDLIL+xBGQU/voDBY5XE2lVh" crossorigin="anonymous">
+<meta name="generator" content="Hexo 8.1.0"></head>
+
+  <body>
+      <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate">
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script>
+<div id="copy-tooltip"></div>
+<div id="heatmap-tooltip"></div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation">
+        <a class="main-nav-link-wrap" href="/">
+            <div class="main-nav-icon icon rotate">
+                &#xe62b;
+            </div>
+          <span class="main-nav-link">首页</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/archives">
+            <div class="main-nav-icon icon rotate">
+                &#xe62b;
+            </div>
+          <span class="main-nav-link">归档</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/about">
+            <div class="main-nav-icon icon rotate">
+                &#xe62b;
+            </div>
+          <span class="main-nav-link">关于</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/friend">
+            <div class="main-nav-icon icon rotate">
+                &#xe62b;
+            </div>
+          <span class="main-nav-link">友链</span>
+        </span>
+    <a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation">
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" aria-label="RSS 订阅" target="_blank"></a>
+  </nav>
+</div>
+<header id="header" aria-label="Site header">
+    <picture></picture>
+    <img  fetchpriority="high" src="https://image.acg.lol/file/2025/11/09/reimu-1.jpg" alt="SOLID原则与设计模式应用分类表">
+  <div id="header-outer">
+    <div id="header-title">
+          <span id="logo">
+            <h1 data-aos="slide-up">SOLID原则与设计模式应用分类表</h1>
+          </span>
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+        </h2>
+    </div>
+  </div>
+</header>
+
+        <div id="content" aria-label="Page content"  class="sidebar-right" >
+          <aside id="sidebar" aria-label="Sidebar">
+  <div class="sidebar-wrapper-container sticky">
+  <div class="sidebar-wrapper">
+    <div class="sidebar-wrap" data-aos="fade-up">
+          <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SOLID%E5%8E%9F%E5%88%99%E5%9C%A8%E4%BB%A3%E7%A0%81%E8%90%BD%E5%9C%B0%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%BC%8F%E5%BA%94%E7%94%A8%E5%88%86%E7%B1%BB%E8%A1%A8"><span class="toc-number">1.</span> <span class="toc-text">SOLID原则在代码落地中的模式应用分类表</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E6%A0%BC%E8%AF%B4%E6%98%8E"><span class="toc-number">1.1.</span> <span class="toc-text">表格说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F%E5%BA%94%E7%94%A8%E7%9A%84%E6%A0%B8%E5%BF%83%E8%A6%81%E7%82%B9"><span class="toc-number">1.2.</span> <span class="toc-text">模式应用的核心要点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%9C%A8SOLID%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E9%87%8D%E7%82%B9"><span class="toc-number">1.2.1.</span> <span class="toc-text">创建型模式在SOLID中的应用重点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%9C%A8SOLID%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E9%87%8D%E7%82%B9"><span class="toc-number">1.2.2.</span> <span class="toc-text">结构型模式在SOLID中的应用重点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%9C%A8SOLID%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E9%87%8D%E7%82%B9"><span class="toc-number">1.2.3.</span> <span class="toc-text">行为型模式在SOLID中的应用重点</span></a></li></ol></li></ol></li></ol>
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Zero02" class="lazyload">
+  <div class="sidebar-author-name">Zero02</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">15</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">8</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social" >
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+</div>
+</div>
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
+    </div>
+  </div>
+  <div class="sidebar-widget">
+  </div>
+  </div>
+</aside>
+
+          <section id="main" aria-label="Main content"><article id="post-设计模式应用分类表 2026_2_3" class="h-entry article" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <span class="article-date-link icon-calendar" data-aos="zoom-in">
+    <time datetime="2026-02-03T01:30:00.000Z" itemprop="datePublished">2026-02-03</time>
+    <time style="display: none;" id="post-update-time">2026-02-03</time>
+  </span>
+</div>
+
+    </div>
+    
+    <div class="hr-line"></div>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+        <h1 id="SOLID原则在代码落地中的模式应用分类表"><a href="#SOLID原则在代码落地中的模式应用分类表" class="headerlink" title="SOLID原则在代码落地中的模式应用分类表"></a>SOLID原则在代码落地中的模式应用分类表</h1><h2 id="表格说明"><a href="#表格说明" class="headerlink" title="表格说明"></a>表格说明</h2><ul>
+<li><strong>创建型模式</strong>：关注对象创建机制，增加创建对象的灵活性和复用性</li>
+<li><strong>结构型模式</strong>：关注类和对象的组合，优化类之间的关系</li>
+<li><strong>行为型模式</strong>：关注对象间的职责分配和通信机制</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>SOLID原则</th>
+<th>模式类别</th>
+<th>最佳适用模式</th>
+<th>模式应用场景</th>
+<th>SpringBoot&#x2F;SpringCloud中的具体应用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>单一职责原则(SRP)</strong></td>
+<td>创建型</td>
+<td>单例模式   工厂方法模式</td>
+<td>• 确保每个类&#x2F;组件只负责单一功能   • 创建独立的业务处理器实例</td>
+<td>• <code>@Service</code>、<code>@Component</code>注解实现单例   • <code>@Configuration</code>类中定义专用Bean工厂   • 为每个微服务职责创建独立配置类</td>
+</tr>
+<tr>
+<td></td>
+<td>结构型</td>
+<td>外观模式   代理模式</td>
+<td>• 为复杂子系统提供统一接口   • 为单一职责的类添加访问控制</td>
+<td>• <code>@FeignClient</code>接口作为服务外观   • Spring AOP实现方法级职责隔离   • API网关路由到专门控制器</td>
+</tr>
+<tr>
+<td></td>
+<td>行为型</td>
+<td>策略模式   责任链模式</td>
+<td>• 将不同算法封装为独立策略   • 将处理流程分解为单一职责的处理器</td>
+<td>• 支付方式、验证策略的独立实现   • 请求处理管道中的过滤器链   • 事件监听器的职责分离</td>
+</tr>
+<tr>
+<td><strong>开闭原则(OCP)</strong></td>
+<td>创建型</td>
+<td>抽象工厂模式   建造者模式</td>
+<td>• 通过抽象创建不同类型对象   • 灵活构建复杂对象而不修改代码</td>
+<td>• <code>JpaRepositoryFactoryBean</code>创建不同数据源仓库   • <code>@Builder</code>注解构建复杂DTO   • 多环境配置的不同Bean创建</td>
+</tr>
+<tr>
+<td></td>
+<td>结构型</td>
+<td>装饰器模式   适配器模式</td>
+<td>• 动态扩展对象功能   • 适配不同接口实现统一扩展点</td>
+<td>• Spring Security过滤器链装饰   • <code>HttpMessageConverter</code>适配不同数据格式   • <code>@Transactional</code>注解的事务装饰</td>
+</tr>
+<tr>
+<td></td>
+<td>行为型</td>
+<td>策略模式   观察者模式</td>
+<td>• 新增策略不影响现有代码   • 扩展事件处理器不影响发布者</td>
+<td>• 新的业务规则通过策略模式加入   • 微服务事件驱动的扩展机制   • <code>@EventListener</code>注册新事件处理器</td>
+</tr>
+<tr>
+<td><strong>里氏替换原则(LSP)</strong></td>
+<td>创建型</td>
+<td>原型模式   工厂模式</td>
+<td>• 确保子类实例可替换父类   • 通过工厂保证创建正确的子类</td>
+<td>• 深拷贝Bean进行安全修改   • 工厂方法验证子类契约符合性   • 配置化的实现类实例化</td>
+</tr>
+<tr>
+<td></td>
+<td>结构型</td>
+<td>桥接模式   组合模式</td>
+<td>• 分离抽象与实现保证可替换性   • 树形结构中的一致性替换</td>
+<td>• 不同存储策略的桥接实现   • 菜单权限的树形组合结构   • 微服务接口的版本桥接</td>
+</tr>
+<tr>
+<td></td>
+<td>行为型</td>
+<td>模板方法模式   状态模式</td>
+<td>• 子类重写步骤不改变算法结构   • 状态转换保持父类契约</td>
+<td>• JdbcTemplate的固定执行流程   • 订单状态机的统一接口   • 工作流引擎的步骤执行</td>
+</tr>
+<tr>
+<td><strong>依赖倒置原则(DIP)</strong></td>
+<td>创建型</td>
+<td>依赖注入(DI)   控制反转(IoC)</td>
+<td>• 通过容器注入抽象实现   • 反转控制权获得灵活性</td>
+<td>• Spring IoC容器管理Bean生命周期   • <code>@Autowired</code>实现依赖注入   • <code>@Qualifier</code>精确控制实现选择</td>
+</tr>
+<tr>
+<td></td>
+<td>结构型</td>
+<td>桥接模式   适配器模式</td>
+<td>• 抽象与实现分离   • 不同实现适配统一接口</td>
+<td>• 数据库访问的多种技术桥接   • 第三方API的适配器封装   • 消息队列的多实现适配</td>
+</tr>
+<tr>
+<td></td>
+<td>行为型</td>
+<td>策略模式   模板方法模式</td>
+<td>• 基于抽象策略执行   • 固定流程调用抽象操作</td>
+<td>• 多种算法策略的统一调用   • 业务流程模板调用抽象服务   • 规则引擎的策略执行</td>
+</tr>
+<tr>
+<td><strong>接口隔离原则(ISP)</strong></td>
+<td>创建型</td>
+<td>工厂方法模式   原型模式</td>
+<td>• 为不同客户端创建专用接口实例   • 克隆特定接口功能的对象</td>
+<td>• 为不同角色创建专用服务实例   • 特定功能模块的独立工厂   • 接口特定实现的原型复制</td>
+</tr>
+<tr>
+<td></td>
+<td>结构型</td>
+<td>适配器模式   装饰器模式</td>
+<td>• 将胖接口拆分为专用接口   • 为接口添加特定功能</td>
+<td>• 将通用接口适配为专用接口   • 为接口添加缓存、日志等功能   • <code>@Validated</code>分组验证接口</td>
+</tr>
+<tr>
+<td></td>
+<td>行为型</td>
+<td>迭代器模式   中介者模式</td>
+<td>• 提供专用遍历接口   • 通过中介减少接口依赖</td>
+<td>• 分页查询的专用迭代器   • 微服务间通过网关中介通信   • 事件总线的专用监听器接口</td>
+</tr>
+<tr>
+<td><strong>合成复用原则(CRP)</strong></td>
+<td>创建型</td>
+<td>组合模式   享元模式</td>
+<td>• 通过对象组合复用功能   • 共享细粒度对象减少创建开销</td>
+<td>• 权限树的节点组合   • 数据库连接池的享元复用   • 微服务客户端的连接复用</td>
+</tr>
+<tr>
+<td></td>
+<td>结构型</td>
+<td>组合模式   装饰器模式   代理模式</td>
+<td>• 对象包含其他对象实现复用   • 包装对象添加职责   • 控制对象访问实现复用</td>
+<td>• 业务对象的组件组合   • Spring AOP方法拦截装饰   • <code>@Cacheable</code>代理实现缓存复用</td>
+</tr>
+<tr>
+<td></td>
+<td>行为型</td>
+<td>责任链模式   观察者模式   策略模式</td>
+<td>• 对象链传递请求复用处理能力   • 一对多通知复用事件处理   • 算法封装复用决策逻辑</td>
+<td>• 过滤器链的请求处理   • <code>@EventListener</code>的事件广播   • 多种业务策略的组合使用</td>
+</tr>
+<tr>
+<td><strong>迪米特原则(LoD)</strong></td>
+<td>创建型</td>
+<td>建造者模式   工厂模式</td>
+<td>• 封装复杂对象创建过程   • 隐藏创建细节减少知识暴露</td>
+<td>• 复杂查询条件的建造器   • DTO转换的工厂封装   • 配置对象的构建器模式</td>
+</tr>
+<tr>
+<td></td>
+<td>结构型</td>
+<td>外观模式   代理模式</td>
+<td>• 提供统一简单接口   • 控制访问减少直接依赖</td>
+<td>• BFF层的外观封装   • API网关的路由代理   • <code>@Transactional</code>的事务边界代理</td>
+</tr>
+<tr>
+<td></td>
+<td>行为型</td>
+<td>中介者模式   命令模式</td>
+<td>• 集中协调减少直接通信   • 封装请求减少调用者知识</td>
+<td>• 微服务编排的中介者   • 异步任务执行的命令封装   • 工作流引擎的命令模式</td>
+</tr>
+</tbody></table>
+<h2 id="模式应用的核心要点"><a href="#模式应用的核心要点" class="headerlink" title="模式应用的核心要点"></a>模式应用的核心要点</h2><h3 id="创建型模式在SOLID中的应用重点"><a href="#创建型模式在SOLID中的应用重点" class="headerlink" title="创建型模式在SOLID中的应用重点"></a>创建型模式在SOLID中的应用重点</h3><ul>
+<li><strong>解决对象创建的问题</strong>，确保在遵循SOLID原则的同时灵活创建对象</li>
+<li>重点关注<strong>依赖注入</strong>、<strong>工厂模式</strong>、<strong>建造者模式</strong>的使用</li>
+<li>在SpringBoot中充分利用<code>@Configuration</code>、<code>@Bean</code>等注解</li>
+</ul>
+<h3 id="结构型模式在SOLID中的应用重点"><a href="#结构型模式在SOLID中的应用重点" class="headerlink" title="结构型模式在SOLID中的应用重点"></a>结构型模式在SOLID中的应用重点</h3><ul>
+<li><strong>优化类和对象的结构关系</strong>，支持低耦合高内聚的设计</li>
+<li>重点关注<strong>装饰器</strong>、<strong>代理</strong>、<strong>外观</strong>、<strong>适配器</strong>模式</li>
+<li>在SpringCloud中通过网关、服务发现等机制实现</li>
+</ul>
+<h3 id="行为型模式在SOLID中的应用重点"><a href="#行为型模式在SOLID中的应用重点" class="headerlink" title="行为型模式在SOLID中的应用重点"></a>行为型模式在SOLID中的应用重点</h3><ul>
+<li><strong>规范对象间的交互行为</strong>，确保职责清晰、协作灵活</li>
+<li>重点关注<strong>策略</strong>、<strong>观察者</strong>、<strong>责任链</strong>、<strong>模板方法</strong>模式</li>
+<li>在微服务架构中通过事件驱动、消息队列等实现</li>
+</ul>
+<p>这个表格提供了在实际项目中应用SOLID原则的模式选择指南，帮助开发者根据具体场景选择最合适的设计模式来实现高质量的软件架构。</p>
+
+    </div>
+    <footer class="article-footer">
+        <a class="article-category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="设计模式" data-aos="zoom-in">设计模式</a>
+
+      
+    </footer>
+  </div>
+    <nav id="article-nav" aria-label="Article navigation" data-aos="fade-up">
+      <div class="article-nav-link-wrap left">
+          <img data-src="https://image.acg.lol/file/2025/11/09/reimu-3.jpg" data-sizes="auto" alt="接口隔离原则与合成复用原则在Spring中的应用" class="lazyload">
+        <a href="/2026/02/03/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB&%E5%90%88%E6%88%90%E5%A4%8D%E7%94%A8%202026_2_3/" aria-label="前一篇: 接口隔离原则与合成复用原则在Spring中的应用" title="前一篇: 接口隔离原则与合成复用原则在Spring中的应用"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+            接口隔离原则与合成复用原则在Spring中的应用
+        </h3>
+      </div>
+    <div class="article-nav-link-wrap right">
+        <img data-src="https://image.acg.lol/file/2025/11/09/reimu-2.jpg" data-sizes="auto" alt="迪米特原则在SpringBoot/SpringCloud中的应用" class="lazyload">
+      <a href="/2026/02/03/%E8%BF%AA%E7%B1%B3%E7%89%B9%E5%8E%9F%E5%88%99%202026_2_3/" aria-label="后一篇: 迪米特原则在SpringBoot/SpringCloud中的应用"  title="后一篇: 迪米特原则在SpringBoot/SpringCloud中的应用"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+          迪米特原则在SpringBoot/SpringCloud中的应用
+      </h3>
+    </div>
+  </nav>
+
+</article>
+
+
+</section>
+        </div>
+        <footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    <div>
+      <span class="icon-copyright"></span>
+        2020-2026
+        <span class="footer-info-sep rotate"></span>
+      Zero02
+    </div>
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+      <div>
+        <span class="icon-brush"></span>
+        28.8k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        02:18
+      </div>
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+  </div>
+</footer>
+
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap">
+        <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SOLID%E5%8E%9F%E5%88%99%E5%9C%A8%E4%BB%A3%E7%A0%81%E8%90%BD%E5%9C%B0%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%BC%8F%E5%BA%94%E7%94%A8%E5%88%86%E7%B1%BB%E8%A1%A8"><span class="toc-number">1.</span> <span class="toc-text">SOLID原则在代码落地中的模式应用分类表</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E6%A0%BC%E8%AF%B4%E6%98%8E"><span class="toc-number">1.1.</span> <span class="toc-text">表格说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F%E5%BA%94%E7%94%A8%E7%9A%84%E6%A0%B8%E5%BF%83%E8%A6%81%E7%82%B9"><span class="toc-number">1.2.</span> <span class="toc-text">模式应用的核心要点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%9C%A8SOLID%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E9%87%8D%E7%82%B9"><span class="toc-number">1.2.1.</span> <span class="toc-text">创建型模式在SOLID中的应用重点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%9C%A8SOLID%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E9%87%8D%E7%82%B9"><span class="toc-number">1.2.2.</span> <span class="toc-text">结构型模式在SOLID中的应用重点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F%E5%9C%A8SOLID%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E9%87%8D%E7%82%B9"><span class="toc-number">1.2.3.</span> <span class="toc-text">行为型模式在SOLID中的应用重点</span></a></li></ol></li></ol></li></ol>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Zero02" class="lazyload">
+  <div class="sidebar-author-name">Zero02</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">15</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">8</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social" >
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+</div>
+</div>
+  </div>
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+</nav>
+
+    </div>
+      <div id="aplayer" theme="var(--color-link)"></div>
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+  <script>
+    var setupFirework = () => {
+      if (!false || !window.matchMedia('(max-width: 768px)').matches) {
+        window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'));
+      }
+    }
+  </script>
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.2.0/dist/index.umd.js" integrity="sha384-qi9WggRt19tv8Vc7pCHW3ulMNLwrn515zaLEWZjl1px07vz8+pUoWX8n1rgq282T" crossorigin="anonymous" onload="setupFirework()" defer></script>
+
+
+  
+<script src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js" integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE&#x2F;jMSCxD+jAPU55x&#x2F;jj3wlf" crossorigin="anonymous"></script>
+
+  
+<script src="/js/pjax.js"></script>
+
+
+  <script>
+    var setupLive2d = () => {
+      live2d.init("https://fastly.jsdelivr.net/gh/D-Sketon/plugin-live2d/", {themeTipsPath: ""});
+    }
+  </script>
+  
+<script src="https://fastly.jsdelivr.net/gh/D-Sketon/plugin-live2d/js/live2d-autoload.js" onload="setupLive2d()" async></script>
+
+
+
+
+<div id="lazy-script">
+  <div>
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Zero02",
+          title: "SOLID原则与设计模式应用分类表",
+          url: "http://example.com/2026/02/03/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%BA%94%E7%94%A8%E5%88%86%E7%B1%BB%E8%A1%A8%202026_2_3/",
+          excerpt: "本文提供了SOLID原则在代码落地中的模式应用分类表，详细展示了创建型、结构型、行为型设计模式在各SOLID原则中的最佳适用场景及SpringBoot/SpringCloud中的具体实现，帮助开发者选择合适的设计模式实现高质量软件架构。",
+          description: "",
+          stripContent: "SOLID原则在代码落地中的模式应用分类表表格说明 创建型模式：关注对象创建机制，增加创建对象的灵活性和复用性 结构型模式：关注类和对象的组合，优化类之间的关系 行为型模式：关注对象间的职责分配和通信机制     SOLID原则 模式类别 最佳适用模式 模式应用场景 SpringBoot&amp;#x2F;SpringCloud中的具体应用    单一职责原则(SRP) 创建型 单例模式   工厂方法模式 • 确保每个类&amp;#x2F;组件只负责单一功能   • 创建独立的业务处理器实例 • @Servic",
+          date: "Tue Feb 03 2026 09:30:00 GMT+0800",
+          updated: "Tue Feb 03 2026 21:20:58 GMT+0800",
+          cover: "https://image.acg.lol/file/2025/11/09/reimu-1.jpg",
+        };
+      </script>
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+      
+<script src="/js/tabs.js" data-pjax defer></script>
+
+      <script type="module" data-pjax>
+        (async () => {
+          const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+          const initPswp = (gallery, children) => {
+            if (_$$(`${gallery} ${children}`).length > 0) {
+              new PhotoSwipeLightbox({
+                gallery,
+                children,
+                pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+              }).init();
+            }
+          }
+          const pswp = () => {
+            initPswp('.article-entry', 'a.article-gallery-item');
+            initPswp('.article-gallery', 'a.article-gallery-item');
+          }
+          pswp();
+        })();
+      </script>
+        
+
+
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.12.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+    <script>
+    var setupAPlayer = () => {
+      if (!false || !window.matchMedia('(max-width: 768px)').matches) {
+        if (window.matchMedia('(max-width: 959px)').matches) {
+          const aplayer = _$('#aplayer');
+          if (aplayer) {
+            const aside = aplayer.parentNode?.parentNode;
+            if (aside?.tagName === 'ASIDE') {
+              aplayer.removeAttribute('data-aos');
+              aplayer.parentNode.removeChild(aplayer);
+              document.body.appendChild(aplayer);
+            }
+          }
+        }
+        new APlayer({
+          theme: "var(--color-link)",
+          container: document.getElementById('aplayer'),
+          audio: [{"name":"To the South","artist":"Kirara Magic","url":"/music/Kirara Magic.mp3","cover":"/music/Kirara Magic.jpg"}] || [],
+          fixed: window.matchMedia('(max-width: 768px)').matches ? true : (true || false),
+          autoplay: false || false,
+          loop: 'all' || 'all',
+          order: 'random' || 'list',
+          preload: 'auto' || 'auto',
+          volume: 0.6 || 0.7,
+          mutex: true || true,
+          listFolded: true || false,
+          lrcType: 0 || 0,
+        });
+      }
+    }
+    </script>
+  
+<script src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js" integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr+h5UfruuRL&#x2F;aORyw+5+HZoU6e" crossorigin="anonymous" defer onload="setupAPlayer()"></script>
+
+
+
+  </body>
+  </html>

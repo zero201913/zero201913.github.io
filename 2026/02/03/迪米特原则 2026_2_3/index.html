@@ -1,0 +1,588 @@
+  <!DOCTYPE html>
+  <html lang="zh-CN"  
+      data-theme-mode="auto"
+  >
+  <head>
+  <meta charset="utf-8">
+  
+  
+  
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_4k4bc36ef96';window.REIMU_CONFIG.clipboard_tips = {"success":{"zh-CN":"复制成功 (*^▽^*)"},"fail":{"zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'http://example.com';</script>
+  <title>
+    迪米特原则在SpringBoot/SpringCloud中的应用 | Zero02 Blog
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media='all'">
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+    <meta name="description" content="本文详细介绍了迪米特原则(LoD)在SpringBoot和SpringCloud中的应用实践，包括避免链式调用、使用DTO减少知识暴露、门面模式简化接口、微服务间通信隔离等最佳实践，帮助开发者构建低耦合、高内聚的系统架构。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="迪米特原则在SpringBoot&#x2F;SpringCloud中的应用">
+<meta property="og:url" content="http://example.com/2026/02/03/%E8%BF%AA%E7%B1%B3%E7%89%B9%E5%8E%9F%E5%88%99%202026_2_3/index.html">
+<meta property="og:site_name" content="Zero02 Blog">
+<meta property="og:description" content="本文详细介绍了迪米特原则(LoD)在SpringBoot和SpringCloud中的应用实践，包括避免链式调用、使用DTO减少知识暴露、门面模式简化接口、微服务间通信隔离等最佳实践，帮助开发者构建低耦合、高内聚的系统架构。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-02-03T01:30:00.000Z">
+<meta property="article:modified_time" content="2026-02-03T12:25:19.690Z">
+<meta property="article:author" content="Zero02">
+<meta name="twitter:card" content="summary">
+    <link rel="alternate" href="/atom.xml" title="Zero02 Blog" type="application/atom+xml">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx/1oA/0l8ysE" crossorigin="anonymous">
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css" integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous">
+
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css" integrity="sha384-tLMkTWh2pfXNWGFlUS0w1TFtRG5xZ9lPWFOooj+vDDLIL+xBGQU/voDBY5XE2lVh" crossorigin="anonymous">
+<meta name="generator" content="Hexo 8.1.0"></head>
+
+  <body>
+      <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate">
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script>
+<div id="copy-tooltip"></div>
+<div id="heatmap-tooltip"></div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation">
+        <a class="main-nav-link-wrap" href="/">
+            <div class="main-nav-icon icon rotate">
+                &#xe62b;
+            </div>
+          <span class="main-nav-link">首页</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/archives">
+            <div class="main-nav-icon icon rotate">
+                &#xe62b;
+            </div>
+          <span class="main-nav-link">归档</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/about">
+            <div class="main-nav-icon icon rotate">
+                &#xe62b;
+            </div>
+          <span class="main-nav-link">关于</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/friend">
+            <div class="main-nav-icon icon rotate">
+                &#xe62b;
+            </div>
+          <span class="main-nav-link">友链</span>
+        </span>
+    <a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation">
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" aria-label="RSS 订阅" target="_blank"></a>
+  </nav>
+</div>
+<header id="header" aria-label="Site header">
+    <picture></picture>
+    <img  fetchpriority="high" src="https://image.acg.lol/file/2025/11/09/reimu-2.jpg" alt="迪米特原则在SpringBoot/SpringCloud中的应用">
+  <div id="header-outer">
+    <div id="header-title">
+          <span id="logo">
+            <h1 data-aos="slide-up">迪米特原则在SpringBoot/SpringCloud中的应用</h1>
+          </span>
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+        </h2>
+    </div>
+  </div>
+</header>
+
+        <div id="content" aria-label="Page content"  class="sidebar-right" >
+          <aside id="sidebar" aria-label="Sidebar">
+  <div class="sidebar-wrapper-container sticky">
+  <div class="sidebar-wrapper">
+    <div class="sidebar-wrap" data-aos="fade-up">
+          <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%AA%E7%B1%B3%E7%89%B9%E5%8E%9F%E5%88%99-LoD-%E5%9C%A8SpringBoot-SpringCloud%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">迪米特原则(LoD)在SpringBoot&#x2F;SpringCloud中的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">1. 核心概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-SpringBoot%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">2. SpringBoot中的应用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E9%81%BF%E5%85%8D%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 避免链式调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E4%BD%BF%E7%94%A8DTO%E5%87%8F%E5%B0%91%E7%9F%A5%E8%AF%86%E6%9A%B4%E9%9C%B2"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 使用DTO减少知识暴露</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E4%BD%BF%E7%94%A8%E9%97%A8%E9%9D%A2%E6%A8%A1%E5%BC%8F%E7%AE%80%E5%8C%96%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.2.3.</span> <span class="toc-text">2.3 使用门面模式简化接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-SpringCloud%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text">3. SpringCloud中的应用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E9%97%A8%E9%9D%A2%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1 微服务间通信的门面模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-API%E7%BD%91%E5%85%B3%E7%9A%84%E8%B7%AF%E7%94%B1%E9%9A%94%E7%A6%BB"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2 API网关的路由隔离</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E5%9C%BA%E6%99%AF"><span class="toc-number">1.4.</span> <span class="toc-text">4. 最佳实践场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E4%BD%BF%E7%94%A8%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F%E5%B0%81%E8%A3%85%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA"><span class="toc-number">1.4.1.</span> <span class="toc-text">4.1 使用建造者模式封装对象创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E4%BD%BF%E7%94%A8%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E5%87%8F%E5%B0%91%E7%9B%B4%E6%8E%A5%E9%80%9A%E4%BF%A1"><span class="toc-number">1.4.2.</span> <span class="toc-text">4.2 使用中介者模式减少直接通信</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E4%BC%98%E5%8A%BF%E6%80%BB%E7%BB%93"><span class="toc-number">1.5.</span> <span class="toc-text">5. 优势总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%AE%9E%E8%B7%B5%E5%BB%BA%E8%AE%AE"><span class="toc-number">1.6.</span> <span class="toc-text">6. 实践建议</span></a></li></ol></li></ol>
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Zero02" class="lazyload">
+  <div class="sidebar-author-name">Zero02</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">15</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">8</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social" >
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+</div>
+</div>
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
+    </div>
+  </div>
+  <div class="sidebar-widget">
+  </div>
+  </div>
+</aside>
+
+          <section id="main" aria-label="Main content"><article id="post-迪米特原则 2026_2_3" class="h-entry article" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <span class="article-date-link icon-calendar" data-aos="zoom-in">
+    <time datetime="2026-02-03T01:30:00.000Z" itemprop="datePublished">2026-02-03</time>
+    <time style="display: none;" id="post-update-time">2026-02-03</time>
+  </span>
+</div>
+
+    </div>
+    
+    <div class="hr-line"></div>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+        <h1 id="迪米特原则-LoD-在SpringBoot-SpringCloud中的应用"><a href="#迪米特原则-LoD-在SpringBoot-SpringCloud中的应用" class="headerlink" title="迪米特原则(LoD)在SpringBoot&#x2F;SpringCloud中的应用"></a>迪米特原则(LoD)在SpringBoot&#x2F;SpringCloud中的应用</h1><p>迪米特原则(Law of Demeter, LoD)，也称为最少知识原则(Least Knowledge Principle)，它规定：一个对象应当对其他对象有最少的了解，只与直接的朋友通信。</p>
+<h2 id="1-核心概念"><a href="#1-核心概念" class="headerlink" title="1. 核心概念"></a>1. 核心概念</h2><p>迪米特原则的关键思想：</p>
+<ul>
+<li><strong>只与直接朋友通信</strong>：不要跟”陌生人”说话</li>
+<li><strong>降低类之间的耦合度</strong>：减少对象间的依赖关系</li>
+<li><strong>“朋友”包括</strong>：当前对象本身、成员对象、方法参数对象、方法返回值对象</li>
+<li><strong>避免链式调用</strong>：如 <code>a.getB().getC().doSomething()</code></li>
+</ul>
+<h2 id="2-SpringBoot中的应用方式"><a href="#2-SpringBoot中的应用方式" class="headerlink" title="2. SpringBoot中的应用方式"></a>2. SpringBoot中的应用方式</h2><h3 id="2-1-避免链式调用"><a href="#2-1-避免链式调用" class="headerlink" title="2.1 避免链式调用"></a>2.1 避免链式调用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 违反LoD的反例 - 链式调用</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">processOrder</span><span class="params">(Long orderId)</span> &#123;</span><br><span class="line">        <span class="comment">// 违反LoD：OrderService不应该知道User的内部结构</span></span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> orderRepository.findById(orderId).getUser();</span><br><span class="line">        <span class="type">Address</span> <span class="variable">address</span> <span class="operator">=</span> user.getProfile().getAddress();</span><br><span class="line">        <span class="type">City</span> <span class="variable">city</span> <span class="operator">=</span> address.getCity();</span><br><span class="line">        <span class="type">String</span> <span class="variable">cityCode</span> <span class="operator">=</span> city.getCode();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 使用城市代码进行业务逻辑处理</span></span><br><span class="line">        logisticsService.calculateShipping(cityCode);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 符合LoD的正确设计 - 引入中间层</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">processOrder</span><span class="params">(Long orderId)</span> &#123;</span><br><span class="line">        <span class="comment">// 通过Order对象直接获取所需信息</span></span><br><span class="line">        <span class="type">Order</span> <span class="variable">order</span> <span class="operator">=</span> orderRepository.findById(orderId);</span><br><span class="line">        <span class="type">ShippingInfo</span> <span class="variable">shippingInfo</span> <span class="operator">=</span> order.getShippingInfo();</span><br><span class="line"></span><br><span class="line">        logisticsService.calculateShipping(shippingInfo);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Order类封装内部细节</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Order</span> &#123;</span><br><span class="line">    <span class="meta">@ManyToOne</span></span><br><span class="line">    <span class="keyword">private</span> User user;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 封装对用户内部结构的访问</span></span><br><span class="line">    <span class="keyword">public</span> ShippingInfo <span class="title function_">getShippingInfo</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">Address</span> <span class="variable">address</span> <span class="operator">=</span> user.getProfile().getAddress();</span><br><span class="line">        <span class="type">City</span> <span class="variable">city</span> <span class="operator">=</span> address.getCity();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ShippingInfo</span>(city.getCode(), city.getName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 值对象封装相关信息</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ShippingInfo</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String cityCode;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String cityName;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ShippingInfo</span><span class="params">(String cityCode, String cityName)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.cityCode = cityCode;</span><br><span class="line">        <span class="built_in">this</span>.cityName = cityName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// getters...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-使用DTO减少知识暴露"><a href="#2-2-使用DTO减少知识暴露" class="headerlink" title="2.2 使用DTO减少知识暴露"></a>2.2 使用DTO减少知识暴露</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 违反LoD的反例 - 暴露领域模型内部结构</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserService userService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/users/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;?&gt; getUserDetails(<span class="meta">@PathVariable</span> Long id) &#123;</span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> userService.getUserById(id);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 违反LoD：Controller不应该知道User的内部结构</span></span><br><span class="line">        Map&lt;String, Object&gt; details = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        details.put(<span class="string">&quot;name&quot;</span>, user.getProfile().getName());</span><br><span class="line">        details.put(<span class="string">&quot;email&quot;</span>, user.getAccount().getEmail());</span><br><span class="line">        details.put(<span class="string">&quot;department&quot;</span>, user.getDepartment().getName());</span><br><span class="line">        details.put(<span class="string">&quot;manager&quot;</span>, user.getDepartment().getManager().getName());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.ok(details);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 符合LoD的正确设计 - 使用DTO</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserService userService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/users/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;UserDTO&gt; <span class="title function_">getUserDetails</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span> &#123;</span><br><span class="line">        <span class="type">UserDTO</span> <span class="variable">userDTO</span> <span class="operator">=</span> userService.getUserDetails(id);</span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.ok(userDTO);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 服务层封装转换逻辑</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserRepository userRepository;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> UserDTO <span class="title function_">getUserDetails</span><span class="params">(Long id)</span> &#123;</span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> userRepository.findById(id)</span><br><span class="line">        .orElseThrow(() -&gt; <span class="keyword">new</span> <span class="title class_">UserNotFoundException</span>(<span class="string">&quot;User not found&quot;</span>));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> UserDTO.from(user);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// DTO封装所需展示的信息</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDTO</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String email;</span><br><span class="line">    <span class="keyword">private</span> String departmentName;</span><br><span class="line">    <span class="keyword">private</span> String managerName;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 静态工厂方法封装转换逻辑</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> UserDTO <span class="title function_">from</span><span class="params">(User user)</span> &#123;</span><br><span class="line">        <span class="type">UserDTO</span> <span class="variable">dto</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UserDTO</span>();</span><br><span class="line">        dto.name = user.getProfile().getName();</span><br><span class="line">        dto.email = user.getAccount().getEmail();</span><br><span class="line">        dto.departmentName = user.getDepartment().getName();</span><br><span class="line">        dto.managerName = user.getDepartment().getManager().getName();</span><br><span class="line">        <span class="keyword">return</span> dto;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// getters...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-使用门面模式简化接口"><a href="#2-3-使用门面模式简化接口" class="headerlink" title="2.3 使用门面模式简化接口"></a>2.3 使用门面模式简化接口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 复杂子系统</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderSubsystem</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> Order <span class="title function_">findOrder</span><span class="params">(Long id)</span> &#123; <span class="comment">/* ... */</span> <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Order</span>(); &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">validateOrder</span><span class="params">(Order order)</span> &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">    <span class="keyword">public</span> BigDecimal <span class="title function_">calculateTotal</span><span class="params">(Order order)</span> &#123; <span class="comment">/* ... */</span> <span class="keyword">return</span> BigDecimal.ZERO; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PaymentSubsystem</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> PaymentResult <span class="title function_">processPayment</span><span class="params">(Order order)</span> &#123; <span class="comment">/* ... */</span> <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">PaymentResult</span>(); &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">refundPayment</span><span class="params">(Long paymentId)</span> &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InventorySubsystem</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">checkAvailability</span><span class="params">(Order order)</span> &#123; <span class="comment">/* ... */</span> <span class="keyword">return</span> <span class="literal">true</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">reserveItems</span><span class="params">(Order order)</span> &#123; <span class="comment">/* ... */</span> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 违反LoD的反例 - 客户端需要知道所有子系统</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ComplexOrderService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> OrderSubsystem orderSubsystem;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> PaymentSubsystem paymentSubsystem;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> InventorySubsystem inventorySubsystem;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">processCompleteOrder</span><span class="params">(OrderRequest request)</span> &#123;</span><br><span class="line">        <span class="comment">// 违反LoD：客户端需要知道太多子系统的细节</span></span><br><span class="line">        <span class="type">Order</span> <span class="variable">order</span> <span class="operator">=</span> orderSubsystem.findOrder(request.getOrderId());</span><br><span class="line">        orderSubsystem.validateOrder(order);</span><br><span class="line"></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">available</span> <span class="operator">=</span> inventorySubsystem.checkAvailability(order);</span><br><span class="line">        <span class="keyword">if</span> (!available) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">InsufficientInventoryException</span>(<span class="string">&quot;Insufficient inventory&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        inventorySubsystem.reserveItems(order);</span><br><span class="line"></span><br><span class="line">        <span class="type">BigDecimal</span> <span class="variable">total</span> <span class="operator">=</span> orderSubsystem.calculateTotal(order);</span><br><span class="line">        <span class="type">PaymentResult</span> <span class="variable">payment</span> <span class="operator">=</span> paymentSubsystem.processPayment(order);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!payment.isSuccess()) &#123;</span><br><span class="line">            inventorySubsystem.releaseReservation(order); <span class="comment">// 回滚库存</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">PaymentFailedException</span>(<span class="string">&quot;Payment failed&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 符合LoD的正确设计 - 使用门面模式</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderFacade</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> OrderSubsystem orderSubsystem;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> PaymentSubsystem paymentSubsystem;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> InventorySubsystem inventorySubsystem;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> CompleteOrderResult <span class="title function_">processCompleteOrder</span><span class="params">(OrderRequest request)</span> &#123;</span><br><span class="line">        <span class="comment">// 门面封装所有子系统的复杂性</span></span><br><span class="line">        <span class="keyword">return</span> CompleteOrderResult.success();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">simpleProcessOrder</span><span class="params">(Long orderId)</span> &#123;</span><br><span class="line">        <span class="comment">// 提供简化的接口</span></span><br><span class="line">        <span class="type">Order</span> <span class="variable">order</span> <span class="operator">=</span> orderSubsystem.findOrder(orderId);</span><br><span class="line">        orderSubsystem.validateOrder(order);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 内部处理所有复杂性</span></span><br><span class="line">        internalProcessOrder(order);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">internalProcessOrder</span><span class="params">(Order order)</span> &#123;</span><br><span class="line">        <span class="comment">// 内部实现，对外隐藏复杂性</span></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">available</span> <span class="operator">=</span> inventorySubsystem.checkAvailability(order);</span><br><span class="line">        <span class="keyword">if</span> (!available) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">InsufficientInventoryException</span>(<span class="string">&quot;Insufficient inventory&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        inventorySubsystem.reserveItems(order);</span><br><span class="line"></span><br><span class="line">        <span class="type">BigDecimal</span> <span class="variable">total</span> <span class="operator">=</span> orderSubsystem.calculateTotal(order);</span><br><span class="line">        <span class="type">PaymentResult</span> <span class="variable">payment</span> <span class="operator">=</span> paymentSubsystem.processPayment(order);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!payment.isSuccess()) &#123;</span><br><span class="line">            inventorySubsystem.releaseReservation(order);</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">PaymentFailedException</span>(<span class="string">&quot;Payment failed&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 客户端只需要与门面交互</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SimpleOrderService</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> OrderFacade orderFacade;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">processOrder</span><span class="params">(Long orderId)</span> &#123;</span><br><span class="line">        <span class="comment">// 符合LoD：只需要知道OrderFacade这一个&quot;朋友&quot;</span></span><br><span class="line">        orderFacade.simpleProcessOrder(orderId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-SpringCloud中的应用方式"><a href="#3-SpringCloud中的应用方式" class="headerlink" title="3. SpringCloud中的应用方式"></a>3. SpringCloud中的应用方式</h2><h3 id="3-1-微服务间通信的门面模式"><a href="#3-1-微服务间通信的门面模式" class="headerlink" title="3.1 微服务间通信的门面模式"></a>3.1 微服务间通信的门面模式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用户服务内部的复杂结构</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserServiceInternal</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> User <span class="title function_">findUser</span><span class="params">(Long id)</span> &#123; <span class="comment">/* ... */</span> <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">User</span>(); &#125;</span><br><span class="line">    <span class="keyword">public</span> Profile <span class="title function_">getProfile</span><span class="params">(User user)</span> &#123; <span class="comment">/* ... */</span> <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Profile</span>(); &#125;</span><br><span class="line">    <span class="keyword">public</span> Department <span class="title function_">getDepartment</span><span class="params">(User user)</span> &#123; <span class="comment">/* ... */</span> <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Department</span>(); &#125;</span><br><span class="line">    <span class="keyword">public</span> List&lt;Permission&gt; <span class="title function_">getPermissions</span><span class="params">(User user)</span> &#123; <span class="comment">/* ... */</span> <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(); &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 违反LoD的反例 - 网关或BFF知道太多内部细节</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/api/user-details&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDetailsController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserServiceClient userServiceClient;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/&#123;userId&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;Map&lt;String, Object&gt;&gt; <span class="title function_">getUserComplexDetails</span><span class="params">(<span class="meta">@PathVariable</span> Long userId)</span> &#123;</span><br><span class="line">        <span class="comment">// 违反LoD：BFF不应该知道用户服务的内部数据结构</span></span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> userServiceClient.getUser(userId);</span><br><span class="line">        <span class="type">Profile</span> <span class="variable">profile</span> <span class="operator">=</span> userServiceClient.getUserProfile(userId);</span><br><span class="line">        <span class="type">Department</span> <span class="variable">dept</span> <span class="operator">=</span> userServiceClient.getUserDepartment(userId);</span><br><span class="line">        List&lt;Permission&gt; permissions = userServiceClient.getUserPermissions(userId);</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Object&gt; details = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        details.put(<span class="string">&quot;basic&quot;</span>, user);</span><br><span class="line">        details.put(<span class="string">&quot;profile&quot;</span>, profile);</span><br><span class="line">        details.put(<span class="string">&quot;department&quot;</span>, dept);</span><br><span class="line">        details.put(<span class="string">&quot;permissions&quot;</span>, permissions);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.ok(details);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 符合LoD的正确设计 - BFF提供简洁接口</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/api/user-details&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDetailsController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserDetailsFacade userDetailsFacade;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/&#123;userId&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;UserDetailsDTO&gt; <span class="title function_">getUserDetails</span><span class="params">(<span class="meta">@PathVariable</span> Long userId)</span> &#123;</span><br><span class="line">        <span class="comment">// 符合LoD：只需要与UserDetailsFacade通信</span></span><br><span class="line">        <span class="type">UserDetailsDTO</span> <span class="variable">details</span> <span class="operator">=</span> userDetailsFacade.getUserDetails(userId);</span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.ok(details);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// BFF中的门面封装微服务复杂性</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDetailsFacade</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserServiceClient userServiceClient;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> UserDetailsDTO <span class="title function_">getUserDetails</span><span class="params">(Long userId)</span> &#123;</span><br><span class="line">        <span class="comment">// 内部调用多个微服务，但对外部隐藏复杂性</span></span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> userServiceClient.getUser(userId);</span><br><span class="line">        <span class="type">Profile</span> <span class="variable">profile</span> <span class="operator">=</span> userServiceClient.getUserProfile(userId);</span><br><span class="line">        <span class="type">Department</span> <span class="variable">dept</span> <span class="operator">=</span> userServiceClient.getUserDepartment(userId);</span><br><span class="line">        List&lt;Permission&gt; permissions = userServiceClient.getUserPermissions(userId);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> UserDetailsDTO.builder()</span><br><span class="line">        .userId(user.getId())</span><br><span class="line">        .fullName(profile.getFirstName() + <span class="string">&quot; &quot;</span> + profile.getLastName())</span><br><span class="line">        .email(user.getEmail())</span><br><span class="line">        .departmentName(dept.getName())</span><br><span class="line">        .position(profile.getPosition())</span><br><span class="line">        .permissionCodes(permissions.stream()</span><br><span class="line">                         .map(Permission::getCode)</span><br><span class="line">                         .collect(Collectors.toList()))</span><br><span class="line">        .build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-API网关的路由隔离"><a href="#3-2-API网关的路由隔离" class="headerlink" title="3.2 API网关的路由隔离"></a>3.2 API网关的路由隔离</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 违反LoD的反例 - 网关直接暴露所有微服务细节</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ComplexGatewayConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> RouteLocator <span class="title function_">complexRoutes</span><span class="params">(RouteLocatorBuilder builder)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> builder.routes()</span><br><span class="line">        .route(<span class="string">&quot;user-route&quot;</span>, r -&gt; r.path(<span class="string">&quot;/users/**&quot;</span>)</span><br><span class="line">               .filters(f -&gt; f.stripPrefix(<span class="number">1</span>)</span><br><span class="line">                        .requestHeaderToRequestUri(<span class="string">&quot;X-Forward-To&quot;</span>, <span class="string">&quot;http://user-service:8080&quot;</span>)</span><br><span class="line">                        .setPath(<span class="string">&quot;/internal/**&quot;</span>)) <span class="comment">// 暴露内部路径</span></span><br><span class="line">               .uri(<span class="string">&quot;lb://user-service&quot;</span>))</span><br><span class="line">        .route(<span class="string">&quot;order-route&quot;</span>, r -&gt; r.path(<span class="string">&quot;/orders/**&quot;</span>)</span><br><span class="line">               .filters(f -&gt; f.stripPrefix(<span class="number">1</span>)</span><br><span class="line">                        .setPath(<span class="string">&quot;/api/v2/**&quot;</span>)) <span class="comment">// 暴露API版本</span></span><br><span class="line">               .uri(<span class="string">&quot;lb://order-service&quot;</span>))</span><br><span class="line">        .build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 符合LoD的正确设计 - 网关提供统一的外部接口</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SimpleGatewayConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> RouteLocator <span class="title function_">simpleRoutes</span><span class="params">(RouteLocatorBuilder builder)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> builder.routes()</span><br><span class="line">        .route(<span class="string">&quot;user-info&quot;</span>, r -&gt; r.path(<span class="string">&quot;/user-info/**&quot;</span>)</span><br><span class="line">               .filters(f -&gt; f.stripPrefix(<span class="number">1</span>)</span><br><span class="line">                        .setPath(<span class="string">&quot;/public-api/users/**&quot;</span>)) <span class="comment">// 统一外部API路径</span></span><br><span class="line">               .uri(<span class="string">&quot;lb://user-service&quot;</span>))</span><br><span class="line">        .route(<span class="string">&quot;order-management&quot;</span>, r -&gt; r.path(<span class="string">&quot;/orders/**&quot;</span>)</span><br><span class="line">               .filters(f -&gt; f.stripPrefix(<span class="number">1</span>)</span><br><span class="line">                        .setPath(<span class="string">&quot;/public-api/orders/**&quot;</span>)) <span class="comment">// 隐藏内部版本</span></span><br><span class="line">               .uri(<span class="string">&quot;lb://order-service&quot;</span>))</span><br><span class="line">        .build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-最佳实践场景"><a href="#4-最佳实践场景" class="headerlink" title="4. 最佳实践场景"></a>4. 最佳实践场景</h2><h3 id="4-1-使用建造者模式封装对象创建"><a href="#4-1-使用建造者模式封装对象创建" class="headerlink" title="4.1 使用建造者模式封装对象创建"></a>4.1 使用建造者模式封装对象创建</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 违反LoD的反例 - 客户端需要知道对象创建的复杂过程</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReportService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">generateMonthlyReport</span><span class="params">(Long departmentId)</span> &#123;</span><br><span class="line">        <span class="comment">// 违反LoD：客户端不应该知道Report对象的复杂构建过程</span></span><br><span class="line">        <span class="type">Report</span> <span class="variable">report</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Report</span>();</span><br><span class="line">        report.setTitle(<span class="string">&quot;Monthly Report&quot;</span>);</span><br><span class="line">        report.setDepartmentId(departmentId);</span><br><span class="line">        report.setStartDate(LocalDate.now().minusMonths(<span class="number">1</span>));</span><br><span class="line">        report.setEndDate(LocalDate.now());</span><br><span class="line"></span><br><span class="line">        <span class="type">Department</span> <span class="variable">dept</span> <span class="operator">=</span> departmentRepository.findById(departmentId);</span><br><span class="line">        List&lt;User&gt; users = userRepository.findByDepartment(dept);</span><br><span class="line">        report.setEmployeeCount(users.size());</span><br><span class="line"></span><br><span class="line">        <span class="type">PerformanceCalculator</span> <span class="variable">calculator</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PerformanceCalculator</span>();</span><br><span class="line">        <span class="type">BigDecimal</span> <span class="variable">avgPerformance</span> <span class="operator">=</span> calculator.calculateAveragePerformance(users);</span><br><span class="line">        report.setAveragePerformance(avgPerformance);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 设置更多属性...</span></span><br><span class="line"></span><br><span class="line">        reportRepository.save(report);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 符合LoD的正确设计 - 使用建造者模式</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReportService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">generateMonthlyReport</span><span class="params">(Long departmentId)</span> &#123;</span><br><span class="line">        <span class="comment">// 符合LoD：通过建造者封装复杂创建过程</span></span><br><span class="line">        <span class="type">MonthlyReportBuilder</span> <span class="variable">builder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MonthlyReportBuilder</span>(departmentId);</span><br><span class="line">        <span class="type">Report</span> <span class="variable">report</span> <span class="operator">=</span> builder</span><br><span class="line">        .forPeriod(MonthlyPeriod.lastMonth())</span><br><span class="line">        .includeEmployeeStats()</span><br><span class="line">        .includePerformanceMetrics()</span><br><span class="line">        .includeDepartmentInfo()</span><br><span class="line">        .build();</span><br><span class="line"></span><br><span class="line">        reportRepository.save(report);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 建造者封装创建细节</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MonthlyReportBuilder</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Long departmentId;</span><br><span class="line">    <span class="keyword">private</span> Period period;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> <span class="variable">includeEmployeeStats</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> <span class="variable">includePerformanceMetrics</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> <span class="variable">includeDepartmentInfo</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MonthlyReportBuilder</span><span class="params">(Long departmentId)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.departmentId = departmentId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> MonthlyReportBuilder <span class="title function_">forPeriod</span><span class="params">(Period period)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.period = period;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> MonthlyReportBuilder <span class="title function_">includeEmployeeStats</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.includeEmployeeStats = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> MonthlyReportBuilder <span class="title function_">includePerformanceMetrics</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.includePerformanceMetrics = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> MonthlyReportBuilder <span class="title function_">includeDepartmentInfo</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.includeDepartmentInfo = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Report <span class="title function_">build</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">Report</span> <span class="variable">report</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Report</span>();</span><br><span class="line">        report.setDepartmentId(departmentId);</span><br><span class="line">        report.setPeriod(period);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (includeEmployeeStats) &#123;</span><br><span class="line">            enrichWithEmployeeStats(report);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (includePerformanceMetrics) &#123;</span><br><span class="line">            enrichWithPerformanceMetrics(report);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (includeDepartmentInfo) &#123;</span><br><span class="line">            enrichWithDepartmentInfo(report);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> report;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">enrichWithEmployeeStats</span><span class="params">(Report report)</span> &#123;</span><br><span class="line">        <span class="comment">// 内部实现细节，对外隐藏</span></span><br><span class="line">        <span class="type">Department</span> <span class="variable">dept</span> <span class="operator">=</span> departmentRepository.findById(departmentId);</span><br><span class="line">        List&lt;User&gt; users = userRepository.findByDepartment(dept);</span><br><span class="line">        report.setEmployeeCount(users.size());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">enrichWithPerformanceMetrics</span><span class="params">(Report report)</span> &#123;</span><br><span class="line">        <span class="comment">// 内部实现细节，对外隐藏</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">enrichWithDepartmentInfo</span><span class="params">(Report report)</span> &#123;</span><br><span class="line">        <span class="comment">// 内部实现细节，对外隐藏</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-使用中介者模式减少直接通信"><a href="#4-2-使用中介者模式减少直接通信" class="headerlink" title="4.2 使用中介者模式减少直接通信"></a>4.2 使用中介者模式减少直接通信</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 多个组件直接相互通信 - 违反LoD</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ComplexWorkflow</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> OrderService orderService;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> PaymentService paymentService;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> InventoryService inventoryService;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> NotificationService notificationService;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">processOrder</span><span class="params">(Order order)</span> &#123;</span><br><span class="line">        <span class="comment">// 违反LoD：多个组件直接相互了解</span></span><br><span class="line">        orderService.validate(order);</span><br><span class="line"></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">available</span> <span class="operator">=</span> inventoryService.checkAvailability(order);</span><br><span class="line">        <span class="keyword">if</span> (!available) &#123;</span><br><span class="line">            notificationService.notifyAdmin(<span class="string">&quot;Inventory issue for order: &quot;</span> + order.getId());</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        inventoryService.reserveItems(order);</span><br><span class="line"></span><br><span class="line">        <span class="type">PaymentResult</span> <span class="variable">payment</span> <span class="operator">=</span> paymentService.processPayment(order);</span><br><span class="line">        <span class="keyword">if</span> (!payment.isSuccess()) &#123;</span><br><span class="line">            inventoryService.releaseReservation(order);</span><br><span class="line">            notificationService.notifyCustomer(<span class="string">&quot;Payment failed for order: &quot;</span> + order.getId());</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        orderService.confirm(order);</span><br><span class="line">        notificationService.notifyCustomer(<span class="string">&quot;Order confirmed: &quot;</span> + order.getId());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 符合LoD的正确设计 - 使用中介者模式</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderProcessingMediator</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> OrderService orderService;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> PaymentService paymentService;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> InventoryService inventoryService;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> NotificationService notificationService;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">processOrder</span><span class="params">(Order order)</span> &#123;</span><br><span class="line">        <span class="comment">// 中介者封装所有协调逻辑</span></span><br><span class="line">        <span class="type">ProcessContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ProcessContext</span>(order);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            orderService.validate(context);</span><br><span class="line">            inventoryService.checkAndReserve(context);</span><br><span class="line">            paymentService.process(context);</span><br><span class="line">            orderService.confirm(context);</span><br><span class="line">            notificationService.notifySuccess(context);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ProcessingException e) &#123;</span><br><span class="line">            handleFailure(context, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">handleFailure</span><span class="params">(ProcessContext context, ProcessingException e)</span> &#123;</span><br><span class="line">        <span class="comment">// 统一的失败处理逻辑</span></span><br><span class="line">        <span class="keyword">if</span> (context.isInventoryReserved()) &#123;</span><br><span class="line">            inventoryService.releaseReservation(context.getOrder());</span><br><span class="line">        &#125;</span><br><span class="line">        notificationService.notifyFailure(context.getOrder(), e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 上下文对象传递状态</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ProcessContext</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Order order;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> <span class="variable">inventoryReserved</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">private</span> PaymentResult paymentResult;</span><br><span class="line">    <span class="keyword">private</span> List&lt;String&gt; processingSteps = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ProcessContext</span><span class="params">(Order order)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.order = order;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// getters and setters...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 服务组件通过上下文协作，而不是直接相互调用</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InventoryService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">checkAndReserve</span><span class="params">(ProcessContext context)</span> &#123;</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">available</span> <span class="operator">=</span> checkAvailability(context.getOrder());</span><br><span class="line">        <span class="keyword">if</span> (!available) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ProcessingException</span>(<span class="string">&quot;Insufficient inventory&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        reserveItems(context.getOrder());</span><br><span class="line">        context.setInventoryReserved(<span class="literal">true</span>);</span><br><span class="line">        context.addStep(<span class="string">&quot;INVENTORY_RESERVED&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-优势总结"><a href="#5-优势总结" class="headerlink" title="5. 优势总结"></a>5. 优势总结</h2><ol>
+<li><strong>降低耦合</strong>：对象之间依赖关系最小化</li>
+<li><strong>提高模块化</strong>：系统更容易理解和维护</li>
+<li><strong>增强安全性</strong>：减少意外访问内部状态的风险</li>
+<li><strong>改善可测试性</strong>：依赖关系简单，容易模拟</li>
+<li><strong>提高灵活性</strong>：内部实现变化不影响外部调用者</li>
+</ol>
+<h2 id="6-实践建议"><a href="#6-实践建议" class="headerlink" title="6. 实践建议"></a>6. 实践建议</h2><ol>
+<li><strong>识别并消除链式调用</strong>：<code>a.getB().getC().doSomething()</code></li>
+<li><strong>使用DTO封装数据传输</strong>：避免暴露领域模型</li>
+<li><strong>采用门面模式</strong>：为复杂子系统提供简洁接口</li>
+<li><strong>合理使用中介者模式</strong>：减少对象间的直接通信</li>
+<li><strong>利用Spring的依赖注入</strong>：通过容器管理对象关系</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用Spring的@ConfigurationProperties减少配置知识的暴露</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;app.shipping&quot;)</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ShippingProperties</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String defaultProvider;</span><br><span class="line">    <span class="keyword">private</span> Map&lt;String, ProviderConfig&gt; providers;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 提供业务友好的方法，隐藏配置细节</span></span><br><span class="line">    <span class="keyword">public</span> ProviderConfig <span class="title function_">getActiveProvider</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> providers.get(defaultProvider);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// getters and setters...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 服务层使用封装后的配置</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ShippingService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ShippingProperties shippingProperties;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> ShippingCost <span class="title function_">calculateCost</span><span class="params">(Order order)</span> &#123;</span><br><span class="line">        <span class="comment">// 符合LoD：只需要知道ShippingProperties提供的业务方法</span></span><br><span class="line">        <span class="type">ProviderConfig</span> <span class="variable">provider</span> <span class="operator">=</span> shippingProperties.getActiveProvider();</span><br><span class="line">        <span class="keyword">return</span> provider.calculateCost(order);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在SpringBoot&#x2F;SpringCloud中，迪米特原则是构建松耦合、高内聚微服务架构的重要指导原则。通过合理应用LoD，可以减少服务间的过度依赖，提高系统的可维护性和扩展性。</p>
+
+    </div>
+    <footer class="article-footer">
+        <a class="article-category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="设计模式" data-aos="zoom-in">设计模式</a>
+
+      
+    </footer>
+  </div>
+    <nav id="article-nav" aria-label="Article navigation" data-aos="fade-up">
+      <div class="article-nav-link-wrap left">
+          <img data-src="https://image.acg.lol/file/2025/11/09/reimu-1.jpg" data-sizes="auto" alt="SOLID原则与设计模式应用分类表" class="lazyload">
+        <a href="/2026/02/03/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%BA%94%E7%94%A8%E5%88%86%E7%B1%BB%E8%A1%A8%202026_2_3/" aria-label="前一篇: SOLID原则与设计模式应用分类表" title="前一篇: SOLID原则与设计模式应用分类表"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+            SOLID原则与设计模式应用分类表
+        </h3>
+      </div>
+    <div class="article-nav-link-wrap right">
+        <img data-src="https://image.acg.lol/file/2025/11/09/reimu-4.jpg" data-sizes="auto" alt="里氏替换原则与依赖倒置原则在Spring中的应用" class="lazyload">
+      <a href="/2026/02/03/%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2&%E4%BE%9D%E8%B5%96%E5%80%92%E8%BD%AC%202026_2_3/" aria-label="后一篇: 里氏替换原则与依赖倒置原则在Spring中的应用"  title="后一篇: 里氏替换原则与依赖倒置原则在Spring中的应用"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+          里氏替换原则与依赖倒置原则在Spring中的应用
+      </h3>
+    </div>
+  </nav>
+
+</article>
+
+
+</section>
+        </div>
+        <footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    <div>
+      <span class="icon-copyright"></span>
+        2020-2026
+        <span class="footer-info-sep rotate"></span>
+      Zero02
+    </div>
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+      <div>
+        <span class="icon-brush"></span>
+        28.8k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        02:18
+      </div>
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+  </div>
+</footer>
+
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap">
+        <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%AA%E7%B1%B3%E7%89%B9%E5%8E%9F%E5%88%99-LoD-%E5%9C%A8SpringBoot-SpringCloud%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">迪米特原则(LoD)在SpringBoot&#x2F;SpringCloud中的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">1. 核心概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-SpringBoot%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">2. SpringBoot中的应用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E9%81%BF%E5%85%8D%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 避免链式调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E4%BD%BF%E7%94%A8DTO%E5%87%8F%E5%B0%91%E7%9F%A5%E8%AF%86%E6%9A%B4%E9%9C%B2"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 使用DTO减少知识暴露</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E4%BD%BF%E7%94%A8%E9%97%A8%E9%9D%A2%E6%A8%A1%E5%BC%8F%E7%AE%80%E5%8C%96%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.2.3.</span> <span class="toc-text">2.3 使用门面模式简化接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-SpringCloud%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text">3. SpringCloud中的应用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E9%97%A8%E9%9D%A2%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1 微服务间通信的门面模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-API%E7%BD%91%E5%85%B3%E7%9A%84%E8%B7%AF%E7%94%B1%E9%9A%94%E7%A6%BB"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2 API网关的路由隔离</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E5%9C%BA%E6%99%AF"><span class="toc-number">1.4.</span> <span class="toc-text">4. 最佳实践场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E4%BD%BF%E7%94%A8%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F%E5%B0%81%E8%A3%85%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA"><span class="toc-number">1.4.1.</span> <span class="toc-text">4.1 使用建造者模式封装对象创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E4%BD%BF%E7%94%A8%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E5%87%8F%E5%B0%91%E7%9B%B4%E6%8E%A5%E9%80%9A%E4%BF%A1"><span class="toc-number">1.4.2.</span> <span class="toc-text">4.2 使用中介者模式减少直接通信</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E4%BC%98%E5%8A%BF%E6%80%BB%E7%BB%93"><span class="toc-number">1.5.</span> <span class="toc-text">5. 优势总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%AE%9E%E8%B7%B5%E5%BB%BA%E8%AE%AE"><span class="toc-number">1.6.</span> <span class="toc-text">6. 实践建议</span></a></li></ol></li></ol>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Zero02" class="lazyload">
+  <div class="sidebar-author-name">Zero02</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">15</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">8</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social" >
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+</div>
+</div>
+  </div>
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+</nav>
+
+    </div>
+      <div id="aplayer" theme="var(--color-link)"></div>
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+  <script>
+    var setupFirework = () => {
+      if (!false || !window.matchMedia('(max-width: 768px)').matches) {
+        window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'));
+      }
+    }
+  </script>
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.2.0/dist/index.umd.js" integrity="sha384-qi9WggRt19tv8Vc7pCHW3ulMNLwrn515zaLEWZjl1px07vz8+pUoWX8n1rgq282T" crossorigin="anonymous" onload="setupFirework()" defer></script>
+
+
+  
+<script src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js" integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE&#x2F;jMSCxD+jAPU55x&#x2F;jj3wlf" crossorigin="anonymous"></script>
+
+  
+<script src="/js/pjax.js"></script>
+
+
+  <script>
+    var setupLive2d = () => {
+      live2d.init("https://fastly.jsdelivr.net/gh/D-Sketon/plugin-live2d/", {themeTipsPath: ""});
+    }
+  </script>
+  
+<script src="https://fastly.jsdelivr.net/gh/D-Sketon/plugin-live2d/js/live2d-autoload.js" onload="setupLive2d()" async></script>
+
+
+
+
+<div id="lazy-script">
+  <div>
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Zero02",
+          title: "迪米特原则在SpringBoot/SpringCloud中的应用",
+          url: "http://example.com/2026/02/03/%E8%BF%AA%E7%B1%B3%E7%89%B9%E5%8E%9F%E5%88%99%202026_2_3/",
+          excerpt: "本文详细介绍了迪米特原则(LoD)在SpringBoot和SpringCloud中的应用实践，包括避免链式调用、使用DTO减少知识暴露、门面模式简化接口、微服务间通信隔离等最佳实践，帮助开发者构建低耦合、高内聚的系统架构。",
+          description: "",
+          stripContent: "迪米特原则(LoD)在SpringBoot&amp;#x2F;SpringCloud中的应用迪米特原则(Law of Demeter, LoD)，也称为最少知识原则(Least Knowledge Principle)，它规定：一个对象应当对其他对象有最少的了解，只与直接的朋友通信。 1. 核心概念迪米特原则的关键思想：  只与直接朋友通信：不要跟”陌生人”说话 降低类之间的耦合度：减少对象间的依赖关系 “朋友”包括：当前对象本身、成员对象、方法参数对象、方法返回值对象 避免链式调用：如 a.getB(",
+          date: "Tue Feb 03 2026 09:30:00 GMT+0800",
+          updated: "Tue Feb 03 2026 20:25:19 GMT+0800",
+          cover: "https://image.acg.lol/file/2025/11/09/reimu-2.jpg",
+        };
+      </script>
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+      
+<script src="/js/tabs.js" data-pjax defer></script>
+
+      <script type="module" data-pjax>
+        (async () => {
+          const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+          const initPswp = (gallery, children) => {
+            if (_$$(`${gallery} ${children}`).length > 0) {
+              new PhotoSwipeLightbox({
+                gallery,
+                children,
+                pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+              }).init();
+            }
+          }
+          const pswp = () => {
+            initPswp('.article-entry', 'a.article-gallery-item');
+            initPswp('.article-gallery', 'a.article-gallery-item');
+          }
+          pswp();
+        })();
+      </script>
+        
+
+
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.12.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+    <script>
+    var setupAPlayer = () => {
+      if (!false || !window.matchMedia('(max-width: 768px)').matches) {
+        if (window.matchMedia('(max-width: 959px)').matches) {
+          const aplayer = _$('#aplayer');
+          if (aplayer) {
+            const aside = aplayer.parentNode?.parentNode;
+            if (aside?.tagName === 'ASIDE') {
+              aplayer.removeAttribute('data-aos');
+              aplayer.parentNode.removeChild(aplayer);
+              document.body.appendChild(aplayer);
+            }
+          }
+        }
+        new APlayer({
+          theme: "var(--color-link)",
+          container: document.getElementById('aplayer'),
+          audio: [{"name":"To the South","artist":"Kirara Magic","url":"/music/Kirara Magic.mp3","cover":"/music/Kirara Magic.jpg"}] || [],
+          fixed: window.matchMedia('(max-width: 768px)').matches ? true : (true || false),
+          autoplay: false || false,
+          loop: 'all' || 'all',
+          order: 'random' || 'list',
+          preload: 'auto' || 'auto',
+          volume: 0.6 || 0.7,
+          mutex: true || true,
+          listFolded: true || false,
+          lrcType: 0 || 0,
+        });
+      }
+    }
+    </script>
+  
+<script src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js" integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr+h5UfruuRL&#x2F;aORyw+5+HZoU6e" crossorigin="anonymous" defer onload="setupAPlayer()"></script>
+
+
+
+  </body>
+  </html>

@@ -1,0 +1,908 @@
+  <!DOCTYPE html>
+  <html lang="zh-CN"  
+      data-theme-mode="auto"
+  >
+  <head>
+  <meta charset="utf-8">
+  
+  
+  
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_4k4bc36ef96';window.REIMU_CONFIG.clipboard_tips = {"success":{"zh-CN":"复制成功 (*^▽^*)"},"fail":{"zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = '本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'http://example.com';</script>
+  <title>
+    SpringBoot常用注解总结 | Zero02 Blog
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic|Noto Serif SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media='all'">
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+    <meta name="description" content="本文详细总结了SpringBoot开发中最常用的注解，按核心启动、Web开发、配置、依赖注入、事务、数据访问、AOP、参数校验等维度分类详解，包含作用、核心属性、使用示例和注意事项，帮助开发者快速掌握注解驱动开发技巧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot常用注解总结">
+<meta property="og:url" content="http://example.com/2026/01/03/SpringBoot%20%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3%E6%80%BB%E7%BB%93%202026_1_3/index.html">
+<meta property="og:site_name" content="Zero02 Blog">
+<meta property="og:description" content="本文详细总结了SpringBoot开发中最常用的注解，按核心启动、Web开发、配置、依赖注入、事务、数据访问、AOP、参数校验等维度分类详解，包含作用、核心属性、使用示例和注意事项，帮助开发者快速掌握注解驱动开发技巧。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-01-03T01:30:00.000Z">
+<meta property="article:modified_time" content="2026-02-03T13:08:42.665Z">
+<meta property="article:author" content="Zero02">
+<meta name="twitter:card" content="summary">
+    <link rel="alternate" href="/atom.xml" title="Zero02 Blog" type="application/atom+xml">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei+Zx/1oA/0l8ysE" crossorigin="anonymous">
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script>
+
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css" integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous">
+
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.css" integrity="sha384-tLMkTWh2pfXNWGFlUS0w1TFtRG5xZ9lPWFOooj+vDDLIL+xBGQU/voDBY5XE2lVh" crossorigin="anonymous">
+<meta name="generator" content="Hexo 8.1.0"></head>
+
+  <body>
+      <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate">
+          <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+           M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg>
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script>
+<div id="copy-tooltip"></div>
+<div id="heatmap-tooltip"></div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation">
+        <a class="main-nav-link-wrap" href="/">
+            <div class="main-nav-icon icon rotate">
+                &#xe62b;
+            </div>
+          <span class="main-nav-link">首页</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/archives">
+            <div class="main-nav-icon icon rotate">
+                &#xe62b;
+            </div>
+          <span class="main-nav-link">归档</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/about">
+            <div class="main-nav-icon icon rotate">
+                &#xe62b;
+            </div>
+          <span class="main-nav-link">关于</span>
+        </span>
+        <a class="main-nav-link-wrap" href="/friend">
+            <div class="main-nav-icon icon rotate">
+                &#xe62b;
+            </div>
+          <span class="main-nav-link">友链</span>
+        </span>
+    <a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation">
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" aria-label="RSS 订阅" target="_blank"></a>
+  </nav>
+</div>
+<header id="header" aria-label="Site header">
+    <picture></picture>
+    <img  fetchpriority="high" src="https://image.acg.lol/file/2025/11/09/reimu-7.jpg" alt="SpringBoot常用注解总结">
+  <div id="header-outer">
+    <div id="header-title">
+          <span id="logo">
+            <h1 data-aos="slide-up">SpringBoot常用注解总结</h1>
+          </span>
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+        </h2>
+    </div>
+  </div>
+</header>
+
+        <div id="content" aria-label="Page content"  class="sidebar-right" >
+          <aside id="sidebar" aria-label="Sidebar">
+  <div class="sidebar-wrapper-container sticky">
+  <div class="sidebar-wrapper">
+    <div class="sidebar-wrap" data-aos="fade-up">
+          <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%A0%B8%E5%BF%83%E5%90%AF%E5%8A%A8%E6%B3%A8%E8%A7%A3%EF%BC%88%E5%BF%85%E7%94%A8%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">一、核心启动注解（必用）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-SpringBootApplication"><span class="toc-number">1.1.</span> <span class="toc-text">1. @SpringBootApplication</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Web%E5%BC%80%E5%8F%91%E6%A0%B8%E5%BF%83%E6%B3%A8%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text">二、Web开发核心注解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Controller-RestController"><span class="toc-number">2.1.</span> <span class="toc-text">1. @Controller &amp; @RestController</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-RequestMapping%EF%BC%88%E5%8F%8A%E5%8F%98%E4%BD%93%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">2. @RequestMapping（及变体）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E7%BB%91%E5%AE%9A%E6%B3%A8%E8%A7%A3"><span class="toc-number">2.3.</span> <span class="toc-text">3. 请求参数绑定注解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-CrossOrigin"><span class="toc-number">2.4.</span> <span class="toc-text">4. @CrossOrigin</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3"><span class="toc-number">3.</span> <span class="toc-text">三、配置相关注解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Configuration-Bean"><span class="toc-number">3.1.</span> <span class="toc-text">1. @Configuration &amp; @Bean</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Value"><span class="toc-number">3.2.</span> <span class="toc-text">2. @Value</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-ConfigurationProperties"><span class="toc-number">3.3.</span> <span class="toc-text">3. @ConfigurationProperties</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-PropertySource"><span class="toc-number">3.4.</span> <span class="toc-text">4. @PropertySource</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E6%B3%A8%E8%A7%A3"><span class="toc-number">4.</span> <span class="toc-text">四、依赖注入注解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Autowired"><span class="toc-number">4.1.</span> <span class="toc-text">1. @Autowired</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Resource"><span class="toc-number">4.2.</span> <span class="toc-text">2. @Resource</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Primary"><span class="toc-number">4.3.</span> <span class="toc-text">3. @Primary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Scope"><span class="toc-number">4.4.</span> <span class="toc-text">4. @Scope</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E6%B3%A8%E8%A7%A3"><span class="toc-number">5.</span> <span class="toc-text">五、事务管理注解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Transactional"><span class="toc-number">5.1.</span> <span class="toc-text">@Transactional</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E6%B3%A8%E8%A7%A3"><span class="toc-number">6.</span> <span class="toc-text">六、数据访问注解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-MyBatis%E7%9B%B8%E5%85%B3"><span class="toc-number">6.1.</span> <span class="toc-text">1. MyBatis相关</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Spring-Data-JPA%E7%9B%B8%E5%85%B3"><span class="toc-number">6.2.</span> <span class="toc-text">2. Spring Data JPA相关</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%83%E3%80%81AOP%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3"><span class="toc-number">7.</span> <span class="toc-text">七、AOP相关注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E5%8F%82%E6%95%B0%E6%A0%A1%E9%AA%8C%E6%B3%A8%E8%A7%A3"><span class="toc-number">8.</span> <span class="toc-text">八、参数校验注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E5%85%B6%E4%BB%96%E9%AB%98%E9%A2%91%E6%B3%A8%E8%A7%A3"><span class="toc-number">9.</span> <span class="toc-text">九、其他高频注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">10.</span> <span class="toc-text">总结</span></a></li></ol>
+</div>
+</div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Zero02" class="lazyload">
+  <div class="sidebar-author-name">Zero02</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">15</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">8</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social" >
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+</div>
+</div>
+          <div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div>
+    </div>
+  </div>
+  <div class="sidebar-widget">
+  </div>
+  </div>
+</aside>
+
+          <section id="main" aria-label="Main content"><article id="post-SpringBoot 常用注解总结 2026_1_3" class="h-entry article" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <span class="article-date-link icon-calendar" data-aos="zoom-in">
+    <time datetime="2026-01-03T01:30:00.000Z" itemprop="datePublished">2026-01-03</time>
+    <time style="display: none;" id="post-update-time">2026-02-03</time>
+  </span>
+</div>
+
+    </div>
+    
+    <div class="hr-line"></div>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+        <p>SpringBoot的核心优势之一是<strong>注解驱动开发</strong>，通过注解替代传统XML配置，大幅简化开发流程。以下是Web开发中SpringBoot最常用的注解，按「核心&#x2F;Web&#x2F;配置&#x2F;依赖注入&#x2F;事务&#x2F;数据访问&#x2F;AOP&#x2F;校验&#x2F;其他」维度分类详解，包含<strong>作用、核心属性、使用示例、注意事项</strong>，覆盖90%以上的开发场景。</p>
+<h3 id="一、核心启动注解（必用）"><a href="#一、核心启动注解（必用）" class="headerlink" title="一、核心启动注解（必用）"></a>一、核心启动注解（必用）</h3><h4 id="1-SpringBootApplication"><a href="#1-SpringBootApplication" class="headerlink" title="1. @SpringBootApplication"></a>1. @SpringBootApplication</h4><p><strong>核心作用</strong>：SpringBoot应用的入口注解，用于标记主类，整合了3个核心注解的功能，是启动类的标配。<br><strong>底层组成</strong>：  </p>
+<ul>
+<li><code>@SpringBootConfiguration</code>：替代<code>@Configuration</code>，标记当前类为配置类；  </li>
+<li><code>@EnableAutoConfiguration</code>：核心！开启自动配置（SpringBoot根据依赖自动配置Bean，如引入spring-boot-starter-web则自动配置Tomcat、SpringMVC）；  </li>
+<li><code>@ComponentScan</code>：扫描当前包及其子包下的@Component、@Service、@Controller等注解，将类注册为Bean。</li>
+</ul>
+<p><strong>使用示例</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="comment">// 可选：排除特定自动配置类（如排除数据源自动配置）</span></span><br><span class="line"><span class="comment">// @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DemoApplication</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(DemoApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：  </p>
+<ul>
+<li>启动类需放在<strong>根包下</strong>（如<code>com.demo</code>），否则<code>@ComponentScan</code>无法扫描子包的Bean；  </li>
+<li>如需自定义扫描包，可加<code>@ComponentScan(basePackages = &quot;com.xxx&quot;)</code>。</li>
+</ul>
+<h3 id="二、Web开发核心注解"><a href="#二、Web开发核心注解" class="headerlink" title="二、Web开发核心注解"></a>二、Web开发核心注解</h3><h4 id="1-Controller-RestController"><a href="#1-Controller-RestController" class="headerlink" title="1. @Controller &amp; @RestController"></a>1. @Controller &amp; @RestController</h4><table>
+<thead>
+<tr>
+<th>注解</th>
+<th>作用</th>
+<th>区别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@Controller</td>
+<td>标记类为SpringMVC的控制器，处理HTTP请求，需配合<code>@ResponseBody</code>返回JSON</td>
+<td>默认返回视图（如jsp&#x2F;html）</td>
+</tr>
+<tr>
+<td>@RestController</td>
+<td>组合注解（<code>@Controller + @ResponseBody</code>），直接返回JSON&#x2F;XML等数据</td>
+<td>无需额外加<code>@ResponseBody</code></td>
+</tr>
+</tbody></table>
+<p><strong>使用示例</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传统控制器（返回视图）</span></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/page&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PageController</span> &#123;</span><br><span class="line">    <span class="meta">@GetMapping(&quot;/index&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">index</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;index&quot;</span>; <span class="comment">// 返回templates/index.html（Thymeleaf）</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// RESTful控制器（返回JSON）</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/api/user&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserController</span> &#123;</span><br><span class="line">    <span class="meta">@GetMapping(&quot;/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> User <span class="title function_">getUser</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">User</span>(id, <span class="string">&quot;张三&quot;</span>); <span class="comment">// 直接返回JSON</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-RequestMapping（及变体）"><a href="#2-RequestMapping（及变体）" class="headerlink" title="2. @RequestMapping（及变体）"></a>2. @RequestMapping（及变体）</h4><p><strong>核心作用</strong>：映射HTTP请求到控制器方法，支持指定URL、请求方法、请求头、参数等。<br><strong>常用变体（简化版）</strong>：  </p>
+<ul>
+<li><code>@GetMapping</code>：仅处理GET请求（<code>method = RequestMethod.GET</code>）；  </li>
+<li><code>@PostMapping</code>：仅处理POST请求；  </li>
+<li><code>@PutMapping</code>&#x2F;<code>@DeleteMapping</code>&#x2F;<code>@PatchMapping</code>：对应PUT&#x2F;DELETE&#x2F;PATCH请求。</li>
+</ul>
+<p><strong>核心属性</strong>：  </p>
+<ul>
+<li><code>value/path</code>：请求URL（如<code>/user</code>）；  </li>
+<li><code>method</code>：请求方法（GET&#x2F;POST等）；  </li>
+<li><code>params</code>：限定请求参数（如<code>params = &quot;id&quot;</code>，仅含id参数时匹配）；  </li>
+<li><code>headers</code>：限定请求头（如<code>headers = &quot;Content-Type=application/json&quot;</code>）；  </li>
+<li><code>produces</code>：指定响应类型（如<code>produces = &quot;application/json;charset=UTF-8&quot;</code>）。</li>
+</ul>
+<p><strong>使用示例</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/api/user&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserController</span> &#123;</span><br><span class="line">    <span class="comment">// 匹配GET /api/user?id=1</span></span><br><span class="line">    <span class="meta">@GetMapping(params = &quot;id&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getUserById</span><span class="params">(<span class="meta">@RequestParam</span> Long id)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;用户ID：&quot;</span> + id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 匹配POST /api/user，且请求头为JSON</span></span><br><span class="line">    <span class="meta">@PostMapping(headers = &quot;Content-Type=application/json&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> User <span class="title function_">addUser</span><span class="params">(<span class="meta">@RequestBody</span> User user)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> user;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-请求参数绑定注解"><a href="#3-请求参数绑定注解" class="headerlink" title="3. 请求参数绑定注解"></a>3. 请求参数绑定注解</h4><table>
+<thead>
+<tr>
+<th>注解</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@RequestParam</td>
+<td>绑定URL请求参数（如<code>/user?id=1</code>）到方法参数</td>
+<td><code>@RequestParam Long id</code></td>
+</tr>
+<tr>
+<td>@PathVariable</td>
+<td>绑定URL路径变量（如<code>/user/1</code>）到方法参数</td>
+<td><code>@PathVariable Long id</code></td>
+</tr>
+<tr>
+<td>@RequestBody</td>
+<td>绑定HTTP请求体（JSON&#x2F;XML）到Java对象（POST&#x2F;PUT请求常用）</td>
+<td><code>@RequestBody User user</code></td>
+</tr>
+<tr>
+<td>@RequestHeader</td>
+<td>绑定请求头参数到方法参数</td>
+<td><code>@RequestHeader String token</code></td>
+</tr>
+<tr>
+<td>@CookieValue</td>
+<td>绑定Cookie值到方法参数</td>
+<td><code>@CookieValue String JSESSIONID</code></td>
+</tr>
+</tbody></table>
+<p><strong>关键注意</strong>：  </p>
+<ul>
+<li><code>@RequestParam</code>可加<code>required = false</code>（非必传）、<code>defaultValue = &quot;0&quot;</code>（默认值）；  </li>
+<li><code>@RequestBody</code>仅能绑定<strong>一个</strong>请求体，且请求头需为<code>Content-Type: application/json</code>；  </li>
+<li><code>@PathVariable</code>需保证URL中的变量名与参数名一致，不一致则加<code>@PathVariable(&quot;uid&quot;) Long id</code>。</li>
+</ul>
+<h4 id="4-CrossOrigin"><a href="#4-CrossOrigin" class="headerlink" title="4. @CrossOrigin"></a>4. @CrossOrigin</h4><p><strong>作用</strong>：解决跨域问题（前后端分离场景必备），标记在类&#x2F;方法上，允许指定源的跨域请求。<br><strong>核心属性</strong>：  </p>
+<ul>
+<li><code>origins</code>：允许的跨域源（如<code>&quot;http://localhost:8080&quot;</code>，<code>&quot;*&quot;</code>表示所有）；  </li>
+<li><code>maxAge</code>：预检请求（OPTIONS）的缓存时间（秒）；  </li>
+<li><code>allowedHeaders</code>：允许的请求头；  </li>
+<li><code>methods</code>：允许的请求方法。</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 类级别：所有方法允许跨域</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/api&quot;)</span></span><br><span class="line"><span class="meta">@CrossOrigin(origins = &quot;http://localhost:3000&quot;, maxAge = 3600)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ApiController</span> &#123;</span><br><span class="line">    <span class="comment">// 方法级别：覆盖类配置</span></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/test&quot;)</span></span><br><span class="line">    <span class="meta">@CrossOrigin(origins = &quot;*&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">test</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;跨域成功&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、配置相关注解"><a href="#三、配置相关注解" class="headerlink" title="三、配置相关注解"></a>三、配置相关注解</h3><h4 id="1-Configuration-Bean"><a href="#1-Configuration-Bean" class="headerlink" title="1. @Configuration &amp; @Bean"></a>1. @Configuration &amp; @Bean</h4><p><strong>@Configuration</strong>：标记类为配置类，替代传统XML配置文件（如<code>applicationContext.xml</code>）。<br><strong>@Bean</strong>：标记方法，返回值将注册为Spring容器中的Bean，默认名称为方法名，可通过<code>name/value</code>指定。  </p>
+<p><strong>使用示例</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 配置类</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyConfig</span> &#123;</span><br><span class="line">    <span class="comment">// 注册一个Bean，名称为&quot;myHttpClient&quot;</span></span><br><span class="line">    <span class="meta">@Bean(name = &quot;myHttpClient&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> CloseableHttpClient <span class="title function_">httpClient</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> HttpClientBuilder.create().build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 依赖其他Bean（自动注入）</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> UserService <span class="title function_">userService</span><span class="params">(UserMapper userMapper)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">UserServiceImpl</span>(userMapper);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：<code>@Bean</code>方法默认是单例的，如需多例，配合<code>@Scope(&quot;prototype&quot;)</code>。</p>
+<h4 id="2-Value"><a href="#2-Value" class="headerlink" title="2. @Value"></a>2. @Value</h4><p><strong>作用</strong>：读取配置文件（如<code>application.yml/application.properties</code>）中的值，注入到字段&#x2F;方法参数。<br><strong>语法</strong>：  </p>
+<ul>
+<li>直接取值：<code>@Value(&quot;${app.name}&quot;)</code>；  </li>
+<li>默认值：<code>@Value(&quot;${app.port:8080}&quot;)</code>（配置不存在时用8080）；  </li>
+<li>SpEL表达式：<code>@Value(&quot;#{10+20}&quot;)</code>（计算值30）。</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AppConfig</span> &#123;</span><br><span class="line">    <span class="comment">// 读取application.yml中的app.name</span></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;app.name&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String appName;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 读取端口，默认8080</span></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;app.port:8080&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Integer appPort;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打印配置</span></span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">printConfig</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;应用名称：&quot;</span> + appName + <span class="string">&quot;，端口：&quot;</span> + appPort);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-ConfigurationProperties"><a href="#3-ConfigurationProperties" class="headerlink" title="3. @ConfigurationProperties"></a>3. @ConfigurationProperties</h4><p><strong>作用</strong>：批量绑定配置文件中的属性到Java类（比<code>@Value</code>更适合复杂配置），常用前缀统一管理。<br><strong>使用步骤</strong>：  </p>
+<ol>
+<li>加注解指定前缀；  </li>
+<li>类需有<code>setter</code>方法（或用Lombok的<code>@Data</code>）；  </li>
+<li>加<code>@Component</code>（或在配置类加<code>@EnableConfigurationProperties</code>）注册为Bean。</li>
+</ol>
+<p><strong>示例</strong>：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># application.yml</span></span><br><span class="line"><span class="attr">app:</span></span><br><span class="line">  <span class="attr">server:</span></span><br><span class="line">    <span class="attr">host:</span> <span class="string">localhost</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">9090</span></span><br><span class="line">    <span class="attr">timeout:</span> <span class="number">3000</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span> <span class="comment">// Lombok，自动生成setter/getter</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;app.server&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ServerConfig</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String host;</span><br><span class="line">    <span class="keyword">private</span> Integer port;</span><br><span class="line">    <span class="keyword">private</span> Integer timeout;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用配置</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConfigController</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ServerConfig serverConfig;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/config&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ServerConfig <span class="title function_">getConfig</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> serverConfig; <span class="comment">// 返回&#123;&quot;host&quot;:&quot;localhost&quot;,&quot;port&quot;:9090,&quot;timeout&quot;:3000&#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-PropertySource"><a href="#4-PropertySource" class="headerlink" title="4. @PropertySource"></a>4. @PropertySource</h4><p><strong>作用</strong>：加载自定义配置文件（非默认的application.yml&#x2F;properties），如<code>config/db.properties</code>。<br><strong>示例</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@PropertySource(value = &quot;classpath:config/db.properties&quot;, encoding = &quot;UTF-8&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DbConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;db.url&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String dbUrl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="四、依赖注入注解"><a href="#四、依赖注入注解" class="headerlink" title="四、依赖注入注解"></a>四、依赖注入注解</h3><h4 id="1-Autowired"><a href="#1-Autowired" class="headerlink" title="1. @Autowired"></a>1. @Autowired</h4><p><strong>核心作用</strong>：自动注入Spring容器中的Bean，按<strong>类型</strong>匹配（默认必须存在，否则报错）。<br><strong>核心属性</strong>：  </p>
+<ul>
+<li><code>required = false</code>：允许Bean不存在，注入null；  </li>
+<li>配合<code>@Qualifier</code>：按<strong>名称</strong>匹配（解决同类型多Bean问题）。</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">createOrder</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现类1</span></span><br><span class="line"><span class="meta">@Service(&quot;alipayOrderService&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AlipayOrderService</span> <span class="keyword">implements</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">createOrder</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;支付宝下单&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现类2</span></span><br><span class="line"><span class="meta">@Service(&quot;wechatOrderService&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WechatOrderService</span> <span class="keyword">implements</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">createOrder</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;微信下单&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderManager</span> &#123;</span><br><span class="line">    <span class="comment">// 按类型匹配（报错，因为有2个OrderService实现）</span></span><br><span class="line">    <span class="comment">// @Autowired</span></span><br><span class="line">    <span class="comment">// private OrderService orderService;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 方案1：@Qualifier指定名称</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="meta">@Qualifier(&quot;alipayOrderService&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> OrderService orderService;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 方案2：@Primary（标记其中一个实现为优先）</span></span><br><span class="line">    <span class="comment">// @Service</span></span><br><span class="line">    <span class="comment">// @Primary</span></span><br><span class="line">    <span class="comment">// public class AlipayOrderService implements OrderService &#123;...&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-Resource"><a href="#2-Resource" class="headerlink" title="2. @Resource"></a>2. @Resource</h4><p><strong>作用</strong>：JDK自带的注入注解（非Spring），默认按<strong>名称</strong>匹配，无匹配则按类型。<br><strong>区别于@Autowired</strong>：  </p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>@Autowired</th>
+<th>@Resource</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>来源</td>
+<td>Spring注解</td>
+<td>JDK javax.annotation</td>
+</tr>
+<tr>
+<td>匹配规则</td>
+<td>默认按类型</td>
+<td>默认按名称（name属性）</td>
+</tr>
+<tr>
+<td>依赖配置</td>
+<td>需配合@Qualifier指定名称</td>
+<td>直接用name属性指定名称</td>
+</tr>
+</tbody></table>
+<p><strong>示例</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderManager</span> &#123;</span><br><span class="line">    <span class="comment">// 按名称&quot;wechatOrderService&quot;注入</span></span><br><span class="line">    <span class="meta">@Resource(name = &quot;wechatOrderService&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> OrderService orderService;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-Primary"><a href="#3-Primary" class="headerlink" title="3. @Primary"></a>3. @Primary</h4><p><strong>作用</strong>：标记Bean为「优先候选」，当同类型多Bean时，<code>@Autowired</code>会优先注入标记的Bean。  </p>
+<h4 id="4-Scope"><a href="#4-Scope" class="headerlink" title="4. @Scope"></a>4. @Scope</h4><p><strong>作用</strong>：指定Bean的作用域，默认<code>singleton</code>（单例）。<br><strong>常用值</strong>：  </p>
+<ul>
+<li><code>singleton</code>：单例（默认），容器中仅一个实例；  </li>
+<li><code>prototype</code>：多例，每次获取创建新实例；  </li>
+<li><code>request</code>：每个HTTP请求创建一个实例；  </li>
+<li><code>session</code>：每个HTTP会话创建一个实例。</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ScopeConfig</span> &#123;</span><br><span class="line">    <span class="comment">// 多例Bean</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@Scope(&quot;prototype&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> User <span class="title function_">user</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="五、事务管理注解"><a href="#五、事务管理注解" class="headerlink" title="五、事务管理注解"></a>五、事务管理注解</h3><h4 id="Transactional"><a href="#Transactional" class="headerlink" title="@Transactional"></a>@Transactional</h4><p><strong>核心作用</strong>：声明式事务管理，标记在类&#x2F;方法上，Spring自动管理事务（提交&#x2F;回滚）。<br><strong>核心属性</strong>：  </p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>作用</th>
+<th>常用值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>propagation</td>
+<td>事务传播行为（嵌套事务规则）</td>
+<td>REQUIRED（默认）、REQUIRES_NEW等</td>
+</tr>
+<tr>
+<td>isolation</td>
+<td>事务隔离级别</td>
+<td>READ_COMMITTED（默认）、REPEATABLE_READ等</td>
+</tr>
+<tr>
+<td>rollbackFor</td>
+<td>指定触发回滚的异常类型（默认仅运行时异常回滚）</td>
+<td>Exception.class、RuntimeException.class</td>
+</tr>
+<tr>
+<td>noRollbackFor</td>
+<td>指定不回滚的异常类型</td>
+<td>IllegalArgumentException.class</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>事务超时时间（秒），超时则回滚</td>
+<td>30（默认-1，无超时）</td>
+</tr>
+<tr>
+<td>readOnly</td>
+<td>是否只读事务（优化性能，仅查询时用）</td>
+<td>true&#x2F;false（默认false）</td>
+</tr>
+</tbody></table>
+<p><strong>使用示例</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="comment">// 类级别：所有方法应用事务（可被方法级别覆盖）</span></span><br><span class="line"><span class="meta">@Transactional(rollbackFor = Exception.class, timeout = 30)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserMapper userMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="comment">// 方法级别：覆盖类配置（只读）</span></span><br><span class="line">    <span class="meta">@Transactional(readOnly = true)</span></span><br><span class="line">    <span class="keyword">public</span> User <span class="title function_">getUserById</span><span class="params">(Long id)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> userMapper.selectById(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="comment">// 增删改：读写事务</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addUser</span><span class="params">(User user)</span> &#123;</span><br><span class="line">        userMapper.insert(user);</span><br><span class="line">        <span class="comment">// 抛异常则回滚</span></span><br><span class="line">        <span class="keyword">if</span> (user.getId() == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(<span class="string">&quot;用户ID为空&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：  </p>
+<ul>
+<li>事务仅对<strong>public方法</strong>生效（Spring AOP限制）；  </li>
+<li>自调用（如方法A调用本类方法B）事务不生效（需通过Spring代理调用）；  </li>
+<li>需确保数据源配置正确，且SpringBoot已引入<code>spring-boot-starter-jdbc</code>&#x2F;<code>spring-boot-starter-data-jpa</code>。</li>
+</ul>
+<h3 id="六、数据访问注解"><a href="#六、数据访问注解" class="headerlink" title="六、数据访问注解"></a>六、数据访问注解</h3><h4 id="1-MyBatis相关"><a href="#1-MyBatis相关" class="headerlink" title="1. MyBatis相关"></a>1. MyBatis相关</h4><ul>
+<li><code>@Mapper</code>：标记接口为MyBatis的Mapper接口，SpringBoot自动扫描并创建代理对象；  </li>
+<li><code>@MapperScan</code>：批量扫描Mapper接口（替代每个接口加<code>@Mapper</code>），通常加在启动类。</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方式1：单个Mapper加@Mapper</span></span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserMapper</span> &#123;</span><br><span class="line">    <span class="meta">@Select(&quot;SELECT * FROM user WHERE id = #&#123;id&#125;&quot;)</span></span><br><span class="line">    User <span class="title function_">selectById</span><span class="params">(Long id)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式2：启动类批量扫描</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@MapperScan(basePackages = &quot;com.demo.mapper&quot;)</span> <span class="comment">// 扫描com.demo.mapper下所有Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DemoApplication</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(DemoApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-Spring-Data-JPA相关"><a href="#2-Spring-Data-JPA相关" class="headerlink" title="2. Spring Data JPA相关"></a>2. Spring Data JPA相关</h4><ul>
+<li><code>@Repository</code>：标记类为数据访问层（DAO），Spring自动捕获持久化异常并转换为Spring统一的DataAccessException；  </li>
+<li><code>@Entity</code>：标记类为JPA实体类，映射数据库表；  </li>
+<li><code>@Table</code>：指定实体类对应的数据库表名（默认类名小写）；  </li>
+<li><code>@Id</code>：标记字段为主键；  </li>
+<li><code>@GeneratedValue</code>：指定主键生成策略（如AUTO、IDENTITY）。</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Table(name = &quot;t_user&quot;)</span> <span class="comment">// 对应数据库t_user表</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue(strategy = GenerationType.IDENTITY)</span> <span class="comment">// 自增主键</span></span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="comment">// getter/setter</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// DAO层</span></span><br><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserRepository</span> <span class="keyword">extends</span> <span class="title class_">JpaRepository</span>&lt;User, Long&gt; &#123;</span><br><span class="line">    <span class="comment">// 自动生成SQL：SELECT * FROM t_user WHERE name = ?</span></span><br><span class="line">    List&lt;User&gt; <span class="title function_">findByName</span><span class="params">(String name)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="七、AOP相关注解"><a href="#七、AOP相关注解" class="headerlink" title="七、AOP相关注解"></a>七、AOP相关注解</h3><p>AOP（面向切面编程）用于日志、权限、性能监控等横切逻辑，核心注解如下：  </p>
+<ul>
+<li><code>@Aspect</code>：标记类为切面类；  </li>
+<li><code>@Pointcut</code>：定义切入点（需指定表达式，如匹配某个包下的所有方法）；  </li>
+<li>通知注解：  <ul>
+<li><code>@Before</code>：切入点方法执行前执行；  </li>
+<li><code>@After</code>：切入点方法执行后执行（无论是否异常）；  </li>
+<li><code>@AfterReturning</code>：切入点方法正常返回后执行；  </li>
+<li><code>@AfterThrowing</code>：切入点方法抛出异常后执行；  </li>
+<li><code>@Around</code>：环绕通知（最强大，可控制切入点方法的执行）。</li>
+</ul>
+</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 切面类</span></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span> <span class="comment">// 必须注册为Spring Bean</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LogAspect</span> &#123;</span><br><span class="line">    <span class="comment">// 定义切入点：匹配com.demo.service包下所有public方法</span></span><br><span class="line">    <span class="meta">@Pointcut(&quot;execution(public * com.demo.service..*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">servicePointcut</span><span class="params">()</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 前置通知：方法执行前打印日志</span></span><br><span class="line">    <span class="meta">@Before(&quot;servicePointcut()&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">before</span><span class="params">(JoinPoint joinPoint)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">methodName</span> <span class="operator">=</span> joinPoint.getSignature().getName();</span><br><span class="line">        System.out.println(<span class="string">&quot;方法&quot;</span> + methodName + <span class="string">&quot;开始执行&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 环绕通知：统计方法执行时间</span></span><br><span class="line">    <span class="meta">@Around(&quot;servicePointcut()&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">around</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        <span class="type">long</span> <span class="variable">start</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> joinPoint.proceed(); <span class="comment">// 执行原方法</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">end</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        System.out.println(<span class="string">&quot;方法执行耗时：&quot;</span> + (end - start) + <span class="string">&quot;ms&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="八、参数校验注解"><a href="#八、参数校验注解" class="headerlink" title="八、参数校验注解"></a>八、参数校验注解</h3><p>基于JSR303&#x2F;JSR380，配合<code>@Valid</code>&#x2F;<code>@Validated</code>实现请求参数校验，常用注解：  </p>
+<table>
+<thead>
+<tr>
+<th>注解</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@NotNull</td>
+<td>字段不能为null</td>
+<td><code>@NotNull(message = &quot;ID不能为空&quot;)</code></td>
+</tr>
+<tr>
+<td>@NotBlank</td>
+<td>字符串不能为null&#x2F;空串&#x2F;全空格</td>
+<td><code>@NotBlank(message = &quot;姓名不能为空&quot;)</code></td>
+</tr>
+<tr>
+<td>@NotEmpty</td>
+<td>集合&#x2F;数组不能为null&#x2F;空</td>
+<td><code>@NotEmpty(message = &quot;列表不能为空&quot;)</code></td>
+</tr>
+<tr>
+<td>@Size</td>
+<td>字符串&#x2F;集合长度范围</td>
+<td><code>@Size(min = 6, max = 20, message = &quot;密码长度6-20位&quot;)</code></td>
+</tr>
+<tr>
+<td>@Email</td>
+<td>字符串需符合邮箱格式</td>
+<td><code>@Email(message = &quot;邮箱格式错误&quot;)</code></td>
+</tr>
+<tr>
+<td>@Pattern</td>
+<td>字符串匹配正则表达式</td>
+<td><code>@Pattern(regexp = &quot;^\\d{11}$&quot;, message = &quot;手机号格式错误&quot;)</code></td>
+</tr>
+</tbody></table>
+<p><strong>使用示例</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实体类</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDTO</span> &#123;</span><br><span class="line">    <span class="meta">@NotNull(message = &quot;ID不能为空&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotBlank(message = &quot;姓名不能为空&quot;)</span></span><br><span class="line">    <span class="meta">@Size(min = 2, max = 10, message = &quot;姓名长度2-10位&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Pattern(regexp = &quot;^\\d&#123;11&#125;$&quot;, message = &quot;手机号格式错误&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String phone;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 控制器</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/api/user&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserController</span> &#123;</span><br><span class="line">    <span class="comment">// @Valid：校验请求体参数</span></span><br><span class="line">    <span class="meta">@PostMapping</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">addUser</span><span class="params">(<span class="meta">@Valid</span> <span class="meta">@RequestBody</span> UserDTO userDTO, BindingResult result)</span> &#123;</span><br><span class="line">        <span class="comment">// 处理校验结果</span></span><br><span class="line">        <span class="keyword">if</span> (result.hasErrors()) &#123;</span><br><span class="line">            <span class="keyword">return</span> result.getFieldError().getDefaultMessage();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;添加成功&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：  </p>
+<ul>
+<li><code>@Valid</code>是JSR303注解，<code>@Validated</code>是Spring扩展（支持分组校验）；  </li>
+<li>需引入依赖<code>spring-boot-starter-validation</code>（SpringBoot 2.3+需手动引入）。</li>
+</ul>
+<h3 id="九、其他高频注解"><a href="#九、其他高频注解" class="headerlink" title="九、其他高频注解"></a>九、其他高频注解</h3><table>
+<thead>
+<tr>
+<th>注解</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@Component</td>
+<td>通用Bean注解，标记类为Spring组件（@Service&#x2F;@Repository&#x2F;@Controller都是其派生）</td>
+</tr>
+<tr>
+<td>@Service</td>
+<td>标记类为业务层（Service）Bean，语义更清晰</td>
+</tr>
+<tr>
+<td>@PostConstruct</td>
+<td>标记方法在Bean初始化后执行（构造方法之后，init-method之前）</td>
+</tr>
+<tr>
+<td>@PreDestroy</td>
+<td>标记方法在Bean销毁前执行</td>
+</tr>
+<tr>
+<td>@Profile</td>
+<td>按环境加载Bean（如dev&#x2F;test&#x2F;prod）</td>
+</tr>
+<tr>
+<td>@Async</td>
+<td>标记方法为异步执行（需配合<code>@EnableAsync</code>在启动类）</td>
+</tr>
+<tr>
+<td>@Scheduled</td>
+<td>标记方法为定时任务（需配合<code>@EnableScheduling</code>在启动类）</td>
+</tr>
+</tbody></table>
+<p><strong>示例（定时任务）</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableScheduling</span> <span class="comment">// 开启定时任务</span></span><br><span class="line"><span class="meta">@EnableAsync</span> <span class="comment">// 开启异步</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DemoApplication</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(DemoApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TaskService</span> &#123;</span><br><span class="line">    <span class="comment">// 每5秒执行一次</span></span><br><span class="line">    <span class="meta">@Scheduled(fixedRate = 5000)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">fixedRateTask</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;定时任务执行：&quot;</span> + LocalDateTime.now());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 异步方法</span></span><br><span class="line">    <span class="meta">@Async</span></span><br><span class="line">    <span class="keyword">public</span> CompletableFuture&lt;String&gt; <span class="title function_">asyncTask</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> CompletableFuture.supplyAsync(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;异步任务完成&quot;</span>;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>SpringBoot注解的核心逻辑是「约定大于配置」，以上注解覆盖了<strong>启动配置、Web开发、依赖注入、事务、数据访问、AOP、校验、定时任务</strong>等核心场景。实际开发中：  </p>
+<ol>
+<li>启动类必加<code>@SpringBootApplication</code>；  </li>
+<li>Web层用<code>@RestController + @GetMapping/@PostMapping</code>；  </li>
+<li>配置用<code>@Configuration + @Bean</code>或<code>@ConfigurationProperties</code>；  </li>
+<li>依赖注入优先用<code>@Autowired + @Qualifier</code>或<code>@Resource</code>；  </li>
+<li>事务用<code>@Transactional</code>；  </li>
+<li>通用横切逻辑用AOP注解；  </li>
+<li>参数校验用<code>@Valid + JSR303注解</code>。</li>
+</ol>
+<p>掌握这些注解，就能高效完成SpringBoot Web开发的绝大部分场景。</p>
+
+    </div>
+    <footer class="article-footer">
+        <a class="article-category-link" href="/categories/Spring-Boot/" title="Spring Boot" data-aos="zoom-in">Spring Boot</a>
+
+      
+    </footer>
+  </div>
+    <nav id="article-nav" aria-label="Article navigation" data-aos="fade-up">
+      <div class="article-nav-link-wrap left">
+          <img data-src="https://image.acg.lol/file/2025/11/09/reimu-9.jpg" data-sizes="auto" alt="DTO、VO、POJO、DAO详解：企业级应用分层架构的数据对象" class="lazyload">
+        <a href="/2026/01/03/DTO,VO,POJO,DAO%E8%AF%A6%E8%A7%A3%202026_1_3/" aria-label="前一篇: DTO、VO、POJO、DAO详解：企业级应用分层架构的数据对象" title="前一篇: DTO、VO、POJO、DAO详解：企业级应用分层架构的数据对象"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+            DTO、VO、POJO、DAO详解：企业级应用分层架构的数据对象
+        </h3>
+      </div>
+    <div class="article-nav-link-wrap right">
+        <img data-src="https://image.acg.lol/file/2025/11/09/reimu-8.jpg" data-sizes="auto" alt="Sa-Token鉴权学习：Vue结合SpringBoot实现角色权限控制" class="lazyload">
+      <a href="/2026/01/03/sa-token%20%E9%89%B4%E6%9D%83%E5%AD%A6%E4%B9%A0%202026_1_3/" aria-label="后一篇: Sa-Token鉴权学习：Vue结合SpringBoot实现角色权限控制"  title="后一篇: Sa-Token鉴权学习：Vue结合SpringBoot实现角色权限控制"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+          Sa-Token鉴权学习：Vue结合SpringBoot实现角色权限控制
+      </h3>
+    </div>
+  </nav>
+
+</article>
+
+
+</section>
+        </div>
+        <footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    <div>
+      <span class="icon-copyright"></span>
+        2020-2026
+        <span class="footer-info-sep rotate"></span>
+      Zero02
+    </div>
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener nofollow noreferrer" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener nofollow noreferrer" target="_blank">Reimu</a>
+      </div>
+      <div>
+        <span class="icon-brush"></span>
+        28.8k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        02:18
+      </div>
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+  </div>
+</footer>
+
+          <div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div>
+        <div id="mask" class="hide"></div>
+      </div>
+      <nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap">
+        <div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class" >
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%A0%B8%E5%BF%83%E5%90%AF%E5%8A%A8%E6%B3%A8%E8%A7%A3%EF%BC%88%E5%BF%85%E7%94%A8%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">一、核心启动注解（必用）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-SpringBootApplication"><span class="toc-number">1.1.</span> <span class="toc-text">1. @SpringBootApplication</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Web%E5%BC%80%E5%8F%91%E6%A0%B8%E5%BF%83%E6%B3%A8%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text">二、Web开发核心注解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Controller-RestController"><span class="toc-number">2.1.</span> <span class="toc-text">1. @Controller &amp; @RestController</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-RequestMapping%EF%BC%88%E5%8F%8A%E5%8F%98%E4%BD%93%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">2. @RequestMapping（及变体）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E7%BB%91%E5%AE%9A%E6%B3%A8%E8%A7%A3"><span class="toc-number">2.3.</span> <span class="toc-text">3. 请求参数绑定注解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-CrossOrigin"><span class="toc-number">2.4.</span> <span class="toc-text">4. @CrossOrigin</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3"><span class="toc-number">3.</span> <span class="toc-text">三、配置相关注解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Configuration-Bean"><span class="toc-number">3.1.</span> <span class="toc-text">1. @Configuration &amp; @Bean</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Value"><span class="toc-number">3.2.</span> <span class="toc-text">2. @Value</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-ConfigurationProperties"><span class="toc-number">3.3.</span> <span class="toc-text">3. @ConfigurationProperties</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-PropertySource"><span class="toc-number">3.4.</span> <span class="toc-text">4. @PropertySource</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E6%B3%A8%E8%A7%A3"><span class="toc-number">4.</span> <span class="toc-text">四、依赖注入注解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Autowired"><span class="toc-number">4.1.</span> <span class="toc-text">1. @Autowired</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Resource"><span class="toc-number">4.2.</span> <span class="toc-text">2. @Resource</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Primary"><span class="toc-number">4.3.</span> <span class="toc-text">3. @Primary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Scope"><span class="toc-number">4.4.</span> <span class="toc-text">4. @Scope</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E6%B3%A8%E8%A7%A3"><span class="toc-number">5.</span> <span class="toc-text">五、事务管理注解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Transactional"><span class="toc-number">5.1.</span> <span class="toc-text">@Transactional</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E6%B3%A8%E8%A7%A3"><span class="toc-number">6.</span> <span class="toc-text">六、数据访问注解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-MyBatis%E7%9B%B8%E5%85%B3"><span class="toc-number">6.1.</span> <span class="toc-text">1. MyBatis相关</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Spring-Data-JPA%E7%9B%B8%E5%85%B3"><span class="toc-number">6.2.</span> <span class="toc-text">2. Spring Data JPA相关</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%83%E3%80%81AOP%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3"><span class="toc-number">7.</span> <span class="toc-text">七、AOP相关注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E5%8F%82%E6%95%B0%E6%A0%A1%E9%AA%8C%E6%B3%A8%E8%A7%A3"><span class="toc-number">8.</span> <span class="toc-text">八、参数校验注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E5%85%B6%E4%BB%96%E9%AB%98%E9%A2%91%E6%B3%A8%E8%A7%A3"><span class="toc-number">9.</span> <span class="toc-text">九、其他高频注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">10.</span> <span class="toc-text">总结</span></a></li></ol>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="Zero02" class="lazyload">
+  <div class="sidebar-author-name">Zero02</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">15</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">8</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">0</div>
+  </div>
+</div>
+<div class="sidebar-social" >
+</div>
+<div class="sidebar-menu">
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">首页</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">归档</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">关于</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+          <div class="sidebar-menu-icon icon rotate">
+              &#xe62b;
+          </div>
+        <div class="sidebar-menu-link">友链</div>
+      </div>
+</div>
+</div>
+  </div>
+      <div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+</nav>
+
+    </div>
+      <div id="aplayer" theme="var(--color-link)"></div>
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js" integrity="sha384-3gT&#x2F;vsepWkfz&#x2F;ff7PpWNUeMzeWoH3cDhm&#x2F;A8jM7ouoAK0&#x2F;fP&#x2F;9bcHHR5kHq2nf+e" crossorigin="anonymous"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An&#x2F;QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+  <script>
+    var setupFirework = () => {
+      if (!false || !window.matchMedia('(max-width: 768px)').matches) {
+        window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["var(--red-1)","var(--red-2)","var(--red-3)","var(--red-4)"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["var(--red-0)"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'));
+      }
+    }
+  </script>
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.2.0/dist/index.umd.js" integrity="sha384-qi9WggRt19tv8Vc7pCHW3ulMNLwrn515zaLEWZjl1px07vz8+pUoWX8n1rgq282T" crossorigin="anonymous" onload="setupFirework()" defer></script>
+
+
+  
+<script src="https://npm.webcache.cn/theme-shokax-pjax@0.0.3/dist/index.umd.js" integrity="sha384-xneY1WY8hOfUzswrE4CrYq35N4BdVcxqxwHPr9zawE&#x2F;jMSCxD+jAPU55x&#x2F;jj3wlf" crossorigin="anonymous"></script>
+
+  
+<script src="/js/pjax.js"></script>
+
+
+  <script>
+    var setupLive2d = () => {
+      live2d.init("https://fastly.jsdelivr.net/gh/D-Sketon/plugin-live2d/", {themeTipsPath: ""});
+    }
+  </script>
+  
+<script src="https://fastly.jsdelivr.net/gh/D-Sketon/plugin-live2d/js/live2d-autoload.js" onload="setupLive2d()" async></script>
+
+
+
+
+<div id="lazy-script">
+  <div>
+      
+      
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "Zero02",
+          title: "SpringBoot常用注解总结",
+          url: "http://example.com/2026/01/03/SpringBoot%20%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3%E6%80%BB%E7%BB%93%202026_1_3/",
+          excerpt: "本文详细总结了SpringBoot开发中最常用的注解，按核心启动、Web开发、配置、依赖注入、事务、数据访问、AOP、参数校验等维度分类详解，包含作用、核心属性、使用示例和注意事项，帮助开发者快速掌握注解驱动开发技巧。",
+          description: "",
+          stripContent: "SpringBoot的核心优势之一是注解驱动开发，通过注解替代传统XML配置，大幅简化开发流程。以下是Web开发中SpringBoot最常用的注解，按「核心&amp;#x2F;Web&amp;#x2F;配置&amp;#x2F;依赖注入&amp;#x2F;事务&amp;#x2F;数据访问&amp;#x2F;AOP&amp;#x2F;校验&amp;#x2F;其他」维度分类详解，包含作用、核心属性、使用示例、注意事项，覆盖90%以上的开发场景。 一、核心启动注解（必用）1. @SpringBootApplication核心作用：SpringBoot应用的入口注解，",
+          date: "Sat Jan 03 2026 09:30:00 GMT+0800",
+          updated: "Tue Feb 03 2026 21:08:42 GMT+0800",
+          cover: "https://image.acg.lol/file/2025/11/09/reimu-7.jpg",
+        };
+      </script>
+        
+<script src="/js/insert_highlight.js" data-pjax></script>
+
+      
+<script src="/js/tabs.js" data-pjax defer></script>
+
+      <script type="module" data-pjax>
+        (async () => {
+          const PhotoSwipeLightbox = (await safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js", "sha384-DiL6M/gG+wmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF/N6lrZi/")).default;
+          const initPswp = (gallery, children) => {
+            if (_$$(`${gallery} ${children}`).length > 0) {
+              new PhotoSwipeLightbox({
+                gallery,
+                children,
+                pswpModule: () => safeImport("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8+oTJ7m3DfYEWX1fu1scuS4+s")
+              }).init();
+            }
+          }
+          const pswp = () => {
+            initPswp('.article-entry', 'a.article-gallery-item');
+            initPswp('.article-gallery', 'a.article-gallery-item');
+          }
+          pswp();
+        })();
+      </script>
+        
+
+
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '1.12.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" integrity="sha384-0M75wtSkhjIInv4coYlaJU83+OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id+S" crossorigin="anonymous" async></script>
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+
+    <script>
+    var setupAPlayer = () => {
+      if (!false || !window.matchMedia('(max-width: 768px)').matches) {
+        if (window.matchMedia('(max-width: 959px)').matches) {
+          const aplayer = _$('#aplayer');
+          if (aplayer) {
+            const aside = aplayer.parentNode?.parentNode;
+            if (aside?.tagName === 'ASIDE') {
+              aplayer.removeAttribute('data-aos');
+              aplayer.parentNode.removeChild(aplayer);
+              document.body.appendChild(aplayer);
+            }
+          }
+        }
+        new APlayer({
+          theme: "var(--color-link)",
+          container: document.getElementById('aplayer'),
+          audio: [{"name":"To the South","artist":"Kirara Magic","url":"/music/Kirara Magic.mp3","cover":"/music/Kirara Magic.jpg"}] || [],
+          fixed: window.matchMedia('(max-width: 768px)').matches ? true : (true || false),
+          autoplay: false || false,
+          loop: 'all' || 'all',
+          order: 'random' || 'list',
+          preload: 'auto' || 'auto',
+          volume: 0.6 || 0.7,
+          mutex: true || true,
+          listFolded: true || false,
+          lrcType: 0 || 0,
+        });
+      }
+    }
+    </script>
+  
+<script src="https://npm.webcache.cn/aplayer@1.10.1/dist/APlayer.min.js" integrity="sha384-gdGYZwHnfJM54evoZhpO0s6ZF5BQiybkiyW7VXr+h5UfruuRL&#x2F;aORyw+5+HZoU6e" crossorigin="anonymous" defer onload="setupAPlayer()"></script>
+
+
+
+  </body>
+  </html>
