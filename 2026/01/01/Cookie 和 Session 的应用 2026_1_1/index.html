@@ -25,7 +25,7 @@
 <meta property="og:description" content="本文详细介绍了Cookie和Session在Web开发中的应用场景、核心区别、最佳实践以及在Spring Boot中的落地方式，帮助开发者理解这两种状态管理技术的互补关系，实现安全、高效的用户会话管理。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-01-01T01:30:00.000Z">
-<meta property="article:modified_time" content="2026-02-03T13:33:33.202Z">
+<meta property="article:modified_time" content="2026-02-04T04:50:40.125Z">
 <meta property="article:author" content="Zero02">
 <meta name="twitter:card" content="summary">
     <link rel="alternate" href="/atom.xml" title="Zero02 Blog" type="application/atom+xml">
@@ -127,7 +127,7 @@
 </div>
 <header id="header" aria-label="Site header">
     <picture></picture>
-    <img  fetchpriority="high" src="https://image.acg.lol/file/2025/11/09/reimu-12.jpg" alt="Cookie和Session的应用详解：Web状态管理核心技术">
+    <img  fetchpriority="high" src="https://image.acg.lol/file/2025/11/09/reimu-4.jpg" alt="Cookie和Session的应用详解：Web状态管理核心技术">
   <div id="header-outer">
     <div id="header-title">
           <span id="logo">
@@ -218,7 +218,7 @@
       <div class="article-date">
   <span class="article-date-link icon-calendar" data-aos="zoom-in">
     <time datetime="2026-01-01T01:30:00.000Z" itemprop="datePublished">2026-01-01</time>
-    <time style="display: none;" id="post-update-time">2026-02-03</time>
+    <time style="display: none;" id="post-update-time">2026-02-04</time>
   </span>
 </div>
 
@@ -381,19 +381,19 @@
   </div>
     <nav id="article-nav" aria-label="Article navigation" data-aos="fade-up">
       <div class="article-nav-link-wrap left">
-          <img data-src="https://image.acg.lol/file/2025/11/09/reimu-1.jpg" data-sizes="auto" alt="从Ajax到jQuery到Axios：前端HTTP请求技术演变" class="lazyload">
-        <a href="/2026/01/01/Ajax%E5%88%B0Jquery%E5%88%B0Axios%202026_1_1/" aria-label="前一篇: 从Ajax到jQuery到Axios：前端HTTP请求技术演变" title="前一篇: 从Ajax到jQuery到Axios：前端HTTP请求技术演变"></a>
+          <img data-src="https://image.acg.lol/file/2025/11/09/reimu-1.jpg" data-sizes="auto" alt="Spring Boot集成Jasypt加密敏感配置最佳实践" class="lazyload">
+        <a href="/2026/01/01/Jasypt%20%E5%8A%A0%E5%AF%86%E4%BF%A1%E6%81%AF%202026_1_1/" aria-label="前一篇: Spring Boot集成Jasypt加密敏感配置最佳实践" title="前一篇: Spring Boot集成Jasypt加密敏感配置最佳实践"></a>
         <div class="article-nav-caption">前一篇</div>
         <h3 class="article-nav-title">
-            从Ajax到jQuery到Axios：前端HTTP请求技术演变
+            Spring Boot集成Jasypt加密敏感配置最佳实践
         </h3>
       </div>
     <div class="article-nav-link-wrap right">
-        <img data-src="https://image.acg.lol/file/2025/11/09/reimu-11.jpg" data-sizes="auto" alt="Spring Boot集成Jasypt加密敏感配置最佳实践" class="lazyload">
-      <a href="/2026/01/01/Jasypt%20%E5%8A%A0%E5%AF%86%E4%BF%A1%E6%81%AF%202026_1_1/" aria-label="后一篇: Spring Boot集成Jasypt加密敏感配置最佳实践"  title="后一篇: Spring Boot集成Jasypt加密敏感配置最佳实践"></a>
+        <img data-src="https://image.acg.lol/file/2025/11/09/reimu-3.jpg" data-sizes="auto" alt="手写Bean依赖注入容器：模拟Spring IoC核心原理" class="lazyload">
+      <a href="/2026/01/01/%E6%89%8B%E5%86%99%20Bean%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%202026_1_1/" aria-label="后一篇: 手写Bean依赖注入容器：模拟Spring IoC核心原理"  title="后一篇: 手写Bean依赖注入容器：模拟Spring IoC核心原理"></a>
       <div class="article-nav-caption">后一篇</div>
       <h3 class="article-nav-title">
-          Spring Boot集成Jasypt加密敏感配置最佳实践
+          手写Bean依赖注入容器：模拟Spring IoC核心原理
       </h3>
     </div>
   </nav>
@@ -420,10 +420,10 @@
       </div>
       <div>
         <span class="icon-brush"></span>
-        28.8k
+        31.8k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        02:18
+        02:32
       </div>
       <div>
         <span class="icon-eye"></span>
@@ -588,8 +588,8 @@
           description: "",
           stripContent: "Cookie 和 Session 是 Web 开发中状态管理的核心技术（HTTP 协议本身是无状态的），二者互补且常配合使用，以下结合实际项目场景详细说明它们的应用、区别、最佳实践，以及框架（Spring Boot）中的落地方式。 一、核心概念回顾   特性 Cookie Session    存储位置 客户端浏览器（本地文件&amp;#x2F;内存） 服务端（内存&amp;#x2F;Redis&amp;#x2F;Memcached）   存储大小 受限（通常4KB&amp;#x2F;个，总数≤20个） 无大小限制（受服务端资",
           date: "Thu Jan 01 2026 09:30:00 GMT+0800",
-          updated: "Tue Feb 03 2026 21:33:33 GMT+0800",
-          cover: "https://image.acg.lol/file/2025/11/09/reimu-12.jpg",
+          updated: "Wed Feb 04 2026 12:50:40 GMT+0800",
+          cover: "https://image.acg.lol/file/2025/11/09/reimu-4.jpg",
         };
       </script>
         
