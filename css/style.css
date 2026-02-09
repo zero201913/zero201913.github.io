@@ -389,6 +389,18 @@ body [data-aos='zoom-in'] {
 .icon-github:before {
   content: '\e619';
 }
+.icon-pinterest:before {
+  content: '\e61a';
+}
+.icon-bilibili:before {
+  content: '\e603';
+}
+.icon-telegram:before {
+  content: '\e623';
+}
+.icon-email:before {
+  content: '\e63c';
+}
 .sidebar-toc-btn:before {
   font-family: 'iconfont';
   content: '\e633';
@@ -1213,6 +1225,67 @@ button {
 .article-entry ul,
 .article-entry dl {
   word-wrap: break-word;
+}
+.article-entry .chinese-paragraph {
+  position: relative;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.article-entry .chinese-paragraph::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  z-index: 1;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
+  box-shadow: inset 0 0 30px rgba(255,255,255,0.5);
+}
+.article-entry .chinese-paragraph::after {
+  content: '👆 悬停查看译文';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  color: var(--red-1);
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 1px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
+  pointer-events: none;
+  text-shadow: 0 2px 8px rgba(255,255,255,0.8);
+}
+.article-entry .chinese-paragraph:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255,82,82,0.15);
+  border-color: var(--red-3);
+}
+.article-entry .chinese-paragraph:hover::before {
+  opacity: 0;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+}
+.article-entry .chinese-paragraph:hover::after {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+.article-entry .chinese-paragraph > * {
+  position: relative;
+  z-index: 0;
+  transition: filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .article-more-link a {
   display: inline-block;
@@ -2763,6 +2836,24 @@ pre .emphasis {
 }
 .sidebar-social-icon:hover {
   transform: scale(1.2);
+}
+.icon-email {
+  color: var(--red-2);
+}
+.icon-github {
+  color: #191717;
+}
+[data-theme='dark'] .icon-github {
+  color: #bc88ff;
+}
+.icon-pinterest {
+  color: #bd081c;
+}
+.icon-bilibili {
+  color: #00a1d6;
+}
+.icon-telegram {
+  color: #08c;
 }
 .sidebar-menu-icon,
 .sidebar-menu-link {
