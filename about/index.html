@@ -149,7 +149,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">17</div>
+    <div class="sidebar-state-number">20</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -268,7 +268,7 @@
 <li>对于<strong>技术管理者</strong>，我输出系统设计方法论、问题解决框架，如《乐淘管理系统设计全解析》《问题解决五步法》</li>
 </ul>
 <h2 id="📫-联系我"><a href="#📫-联系我" class="headerlink" title="📫 联系我"></a>📫 联系我</h2><ul>
-<li><strong>邮箱</strong>: <a href="mailto:&#x7a;&#101;&#x72;&#111;&#50;&#x30;&#x31;&#57;&#49;&#51;&#x40;&#111;&#x75;&#116;&#108;&#x6f;&#111;&#x6b;&#x2e;&#99;&#x6f;&#109;">zero201913@outlook.com</a></li>
+<li><strong>邮箱</strong>: <a href="mailto:&#122;&#101;&#x72;&#111;&#50;&#x30;&#x31;&#x39;&#49;&#51;&#x40;&#111;&#117;&#x74;&#108;&#111;&#x6f;&#107;&#46;&#99;&#111;&#109;">zero201913@outlook.com</a></li>
 <li><strong>GitHub</strong>: <a target="_blank" rel="noopener" href="https://github.com/zero201913">zero201913</a></li>
 <li><strong>博客</strong>: <a target="_blank" rel="noopener" href="http://zero02.space/">zero02.space</a></li>
 </ul>
@@ -304,10 +304,10 @@
       </div>
       <div>
         <span class="icon-brush"></span>
-        37k
+        39.5k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        02:53
+        03:07
       </div>
       <div>
         <span class="icon-eye"></span>
@@ -335,7 +335,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">17</div>
+    <div class="sidebar-state-number">20</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -447,14 +447,6 @@
 <script src="/js/pjax.js"></script>
 
 
-  <script>
-    var setupLive2d = () => {
-      live2d.init("https://fastly.jsdelivr.net/gh/D-Sketon/plugin-live2d/", {themeTipsPath: ""});
-    }
-  </script>
-  
-<script src="https://fastly.jsdelivr.net/gh/D-Sketon/plugin-live2d/js/live2d-autoload.js" onload="setupLive2d()" async></script>
-
 
 
 
@@ -474,6 +466,100 @@
           updated: "Tue Feb 03 2026 18:41:39 GMT+0800",
           cover: "/images/banner.webp",
         };
+      </script>
+      
+<script src="https://npm.webcache.cn/mermaid@11.12.0/dist/mermaid.min.js" integrity="sha384-o+g&#x2F;BxPwhi0C3RK7oQBxQuNimeafQ3GE&#x2F;ST4iT2BxVI4Wzt60SH4pq9iXVYujjaS" crossorigin="anonymous" data-pjax></script>
+
+      
+<script src="https://npm.webcache.cn/dompurify@3.2.6/dist/purify.min.js" integrity="sha384-JEyTNhjM6R1ElGoJns4U2Ln4ofPcqzSsynQkmEc&#x2F;KGy6336qAZl70tDLufbkla+3" crossorigin="anonymous"></script>
+
+      <script data-pjax>
+        if (window.mermaid) {
+          // https://github.com/mermaid-js/mermaid/issues/1945
+          const elementCode = '.mermaid'
+          const processElements = (callback) => {
+            const els = _$$(elementCode);
+            if (!els.length) return Promise.resolve();
+            
+            return new Promise((resolve, reject) => {
+              try {
+                els.forEach(callback);
+                resolve();
+              } catch (error) {
+                reject(error);
+              }
+            });
+          };
+          const saveOriginalData = () => processElements(el => {
+            if (!el.getAttribute('data-original-code')) {
+              el.setAttribute('data-original-code', el.innerHTML);
+            }
+          });
+
+          const resetProcessed = () => processElements(el => {
+            const originalCode = el.getAttribute('data-original-code');
+            if (originalCode) {
+              el.removeAttribute('data-processed');
+              el.innerHTML = DOMPurify.sanitize(originalCode);
+            }
+          });
+          const loadMermaid = async (theme) => {
+            window.mermaid.initialize({theme, startOnLoad: false})
+            await window.mermaid.run({querySelector: elementCode, suppressErrors: true})
+            if (window.svgPanZoom) {
+              window.__panZoomList?.forEach(panZoom => {try {panZoom.destroy()} catch {}});
+              window.__panZoomList = [];
+              _$$('.mermaid > svg').forEach(el => {
+                const bbox = el.getBBox();
+                el.setAttribute('height', Math.max(bbox.height, 80));
+                window.__panZoomList.push(window.svgPanZoom(el, {
+                  zoomEnabled: true,
+                  controlIconsEnabled: true,
+                  fit: true,
+                  center: true
+                }));
+              });
+              if (window.__resizeMermaidSvg) {
+                window.removeEventListener('resize', window.__resizeMermaidSvg);
+              }
+              window.__resizeMermaidSvg = () => {
+                try {
+                  window.__panZoomList.forEach(panZoom => {
+                    panZoom.resize();
+                    panZoom.fit();
+                    panZoom.center();
+                  });
+                } catch {
+                  window.removeEventListener('resize', window.__resizeMermaidSvg);
+                  window.__panZoomList = [];
+                }
+              }
+              window.addEventListener('resize', window.__resizeMermaidSvg);
+            }
+          }
+          const initMermaid = async (theme) => {
+            try {
+              await saveOriginalData();
+              await resetProcessed();
+              await loadMermaid(theme);
+            } catch (error) {
+              console.error(error);
+            }
+          };
+          
+          document.body.addEventListener('reimu:theme-set', (e) => {
+            const isDark = e.detail.isDark;
+            initMermaid(isDark ? 'dark' : 'default');
+          });
+
+          const mode = localStorage.getItem('dark_mode');
+          if (mode === 'auto') {
+            const osMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            initMermaid(osMode ? 'dark' : 'default');
+          } else {
+            initMermaid(mode === 'true' ? 'dark' : 'default');
+          }
+        }
       </script>
         
 <script src="/js/insert_highlight.js" data-pjax></script>
